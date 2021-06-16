@@ -633,25 +633,22 @@ $reply_dataset['controllers'] = $ctrl_data;
 // Fetch PIREPs
 if(file_exists("data/pirep.dat")) {
 		$pirep_data = file_get_contents("data/pirep.dat");
-//		$pirep_ts = substr($pirep_data,3,strpos($pirep_data,"-*--")-3);
-//		$pirep_data = substr($pirep_data,strpos($pirep_data,"-*--")+4);
-//		$pirep_class = "";
-		if(strlen($pirep_data) < 1) {
-			$pirep_data = "No PIREPs to display";
-		}
-		else {
-//		if($pirep_ts > (time()-120)) { // It's a recent update, so highlight the change to the user
-//			$pirep_class = "newupdate";
-//		}
+		$pirep_timeout = 3600; // Timeout in 1 hour (3,600 seconds)
+		$pirep_display = "";
+		if(strlen($pirep_data) > 0) {
 			$pireps = explode("\r\n",$pirep_data);
-			$pirep_data = "";
 			foreach($pireps as $pirep) {
 				$rep = explode("|",$pirep);
-				$pirep_data .= $rep[1] . "\r\n";
+				if(intval($rep[0]) > (time() - $pirep_timeout)) { // Check if PIREP is still valid
+					$pirep_display .= $rep[1] . "\r\n";
+				}
 			}
 		}
+		if($pirep_display == "") {
+			$pirep_display = "No PIREPs to display";
+		}
 }
-$reply_dataset['pirep'] = str_replace("\n","",$pirep_data);
+$reply_dataset['pirep'] = str_replace("\n","",$pirep_display);
 
 // Fetch Airfield Configuration
 if(file_exists("data/afld.dat")) {
