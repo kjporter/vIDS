@@ -14,25 +14,28 @@
 	*/
 	
 include_once "shared_functions.php";
+include_once "sso_variables.php";
 
-$sso_endpoint = "https://auth-dev.vatsim.net";
-
-if(strpos(fetch_my_url(),"127.0.0.1")!== false) {
-	//Settings for testing on Kyle's local machine
-	$client_id = "153";
-	$client_secret = "YChl2khdeVii0D9nTdJTmFxApHiSkZGMwHxsmBFY";
-	$redirect_uri = "http://127.0.0.1/ids";
+$arr_var = null;
+if(strpos(fetch_my_url(),"www.ztlarcc.org")!== false) {
+	$arr_var = 2;
+}
+elseif(strpos(fetch_my_url(),"127.0.0.1")!== false) {
+	$arr_var = 0;
 }
 else {
-	// Settings for demo on kplink.net server
-	$client_id = "175";
-	$client_secret = "ixw9I1haGipndSO2Q4Qwh7nBuCQKog2XcI5uRjjw";
-	$redirect_uri = "https://kplink.net/ids";
+	$arr_var = 1;
 }
+
+$client_id = $sso_variables[$arr_var][0];
+$client_secret = $sso_variables[$arr_var][1];
+$redirect_uri = $sso_variables[$arr_var][2];
+$sso_endpoint = $sso_variables[$arr_var][3];
 
 //$dump = "";
 $alert_text = "";
 $alert_style = "";
+$full_name = "";
 $valid_auth = false;
 $access_token = null;
 
@@ -64,6 +67,8 @@ elseif(isset($_GET['code'])) { // Need to get a new authentication - session doe
 else {
 	//This should not happen
 }
+$full_name = "";
+$user_rating = "";
 if($access_token != null) {
 	//echo "CHECK TOKEN";
 	$ch = curl_init();
@@ -83,6 +88,10 @@ if($access_token != null) {
 			$alert_text = "Authentication successful - access granted.";
 			$alert_style = "alert alert-success alert-visible";
 			$valid_auth = true;
+			if(isset($userData_json['data']['personal']['name_full'])) { // This shouldn't really be necessary, but it prevents an error when the full name isn't available
+				$full_name = $userData_json['data']['personal']['name_full'];
+			}
+			$user_rating = $userData_json['data']['vatsim']['rating']['short'];
 		}
 		else {
 			$alert_text = "Insufficient privileges to use this system - contact your ARTCC FE.";
