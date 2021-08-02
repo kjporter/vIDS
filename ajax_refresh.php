@@ -69,19 +69,24 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 */
 	// Configuration
 	$ids_type = "B"; // L = local view, C = TRACON/ARTCC view, B = both (demo mode)
-	$airfields = array('KATL','KCLT','KGSO','KAVL','KTYS','KBHM','KPDK','KFTY','KMGE','KRYY','KLZU','KMCN','KWRB','KAHN','KCSG','KLSF'); // Configurable list of airfields (for TRACON/ARTCC view)
+	$airfields = array('KATL','KPDK','KFTY','KMGE','KRYY','KLZU','KMCN','KWRB','KAHN','KCSG'); // Configurable list of airfields (for TRACON/ARTCC view)
 	$icao_id = $airfields[0]; // Primary airfield (for local view)
 	
 	$template = $_REQUEST['template']; // Is user requesting a specific multi-IDS template?
+	//echo "TEMPLATE: $template";
+	$template_airfields_list = null;
 	if(intval($template) > 0) { // Zero is the default airfield template
 		if(file_exists("data/templates/" . $template . ".templ")) { 
 			$templ_data = file_get_contents("data/templates/" . $template . ".templ"); // Fetch the template file
-			$template_airfields = explode("\n",$templ_data);
-			$template_airfields[0] = $airfields[0]; // We don't care about the timestamp, replace it with the default IDS airfield
+			$templ_data = strtoupper($templ_data); // Normalize ICAO IDs to upper case
+			$template_airfields = $template_airfields_list = explode("\n",$templ_data);
+			//$template_airfields = explode("\n",$templ_data);
+			unset($template_airfields_list[0]); // Remove the timestamp
+			unset($template_airfields[0]); // We don't care about the timestamp
 			$airfields = $template_airfields; // Now, overwrite the airfields array
 		}
 	}
-		
+	$reply_dataset['template'] = $template_airfields_list;	
 	$refreshInterval = 15; // How many seconds between requests to pull data from VATSIM data service
 	//$localPath = "http://127.0.0.1/ids/";
 	//$localPath = "https://kplink.net/ids/";
@@ -119,7 +124,7 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	curl_close($cu);
 	file_put_contents("data/vatsim.json",$curl_raw);
 
-
+	//print_r($airfields);
 	// CURL to pull METAR from VATSIM data service
 	foreach($airfields as $afld) {
 	if ($live_network) {
@@ -149,6 +154,7 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 
 	// Create parsed data array
 	$airfield_data = array();
+	//$airfield_data['template'] = $template_airfields_list;
 	foreach($airfields as $afld) {
 		//echo "Evaluating: $afld ";
 		unset($afld_data);
@@ -204,7 +210,7 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 		//echo substr($afld_data['atis_text'],strpos($afld_data['atis_text'],")")+3,strpos($afld_data['atis_text'],"NOTAMS")-strpos($afld_data['atis_text'],")")-5);
 		$atxt = explode(".",$afld_data['atis_text']);
 		//print_r($atxt);
-		$terminal_search = array("APCH","APPR");
+		$terminal_search = array("APCH","APCHS","APPR");
 		$terminal_strings = array();
 		foreach($atxt as $atis_part) {
 			foreach($terminal_search as $search_str) {
@@ -267,7 +273,12 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	preg_match('/\d*\w+(KT)/',$afld_data['metar'],$wind_arr);
 	//$wind = substr($afld_data['metar'],strpos($afld_data['metar'],"KT")-6,6);
 	//$afld_data['winds'] = substr($wind,1,3) . "/" . substr($wind,4); 
-	$afld_data['winds'] = substr($wind_arr[0],0,3) . "/" . substr($wind_arr[0],3,-2);
+	if(isset($wind_arr[0])) {
+		$afld_data['winds'] = substr($wind_arr[0],0,3) . "/" . substr($wind_arr[0],3,-2);
+	}
+	else {
+		$afld_data['winds'] = "Error";
+	}
 	if (!isset($afld_data['apch_type'])) {
 		$afld_data['apch_type'] = "";
 	}
@@ -277,7 +288,9 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	preg_match('/(R\d{2})(\S*)/',$afld_data['metar'],$rvr_strings);
 	foreach($rvr_strings as $rvr_string) {
 		preg_match('/(?<=R)(\d{2})(\w*)/',$rvr_string,$a);
-		$runway = $a[0]; 
+		if(isset($a[0])) {
+			$runway = $a[0];
+		}			
 		/*
 		// Following are not used, but saved just in case I need to pull a variable RVR string apart at some point...
 		preg_match('/([PM]*\d{4})/',$rvr_string,$b);
@@ -286,7 +299,9 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 		$variable = $c[0];
 		*/
 		preg_match('/(?<=\/)(\S*)/',$rvr_string,$d);
-		$rvr[$runway] = $d[0];
+		if(isset($d[0])) {
+			$rvr[$runway] = $d[0];
+		}
 	}
 	$afld_data['rvr'] = $rvr;
 	$rvr_disp = array();
@@ -681,7 +696,7 @@ if(file_exists("data/flow.dat")&&!$reply_dataset['config']['AUTO']) {
 	$flow = fgets($file);
 	$arr = fgetcsv($file,1000,",");
 	$dep = fgetcsv($file,1000,",");
-	$reply_dataset['airfield_data']['KATL']['traffic_flow'] = $flow;
+	$reply_dataset['airfield_data']['KATL']['traffic_flow'] = preg_replace( "/\r|\n/", "", $flow ); //preg_replace removes endline char
 	$reply_dataset['airfield_data']['KATL']['apch_type'] = "";
 	$reply_dataset['airfield_data']['KATL']['apch_rwys'] = $arr;
 	$reply_dataset['airfield_data']['KATL']['dep_type'] = "";
@@ -703,6 +718,21 @@ else {
 }
 $reply_dataset['cic'] = str_replace("\n","",$cic_data); // Remove line breaks
 
+// Fetch A80 CIC Notes
+if(file_exists("data/a80cic.dat")) {
+	$a80cic_data = file_get_contents("data/a80cic.dat");
+	$a80cic_ts = substr($a80cic_data,3,strpos($a80cic_data,"-*--")-3);
+	$a80cic_data = substr($a80cic_data,strpos($a80cic_data,"-*--")+4);
+	$a80cic_class = "";
+	if($a80cic_ts > (time()-120)) { // It's a recent update, so highlight the change to the user
+		$a80cic_class = "newupdate";
+	}
+}
+else {
+	$a80cic_data = "";
+}
+$reply_dataset['a80cic'] = str_replace("\n","",$a80cic_data); // Remove line breaks
+
 // Fetch TMU Information
 if(file_exists("data/tmu.dat")) {
 	$tmu_data = file_get_contents("data/tmu.dat");
@@ -718,6 +748,7 @@ else {
 }
 $reply_dataset['tmu'] = str_replace("\n","",$tmu_data); // Remove line breaks
 
+// Fetch Trips Information
 if(file_exists("data/trips.dat")) {
 	$trips_data = file_get_contents("data/trips.dat");
 	$trips_ts = substr($trips_data,3,strpos($trips_data,"-*--")-3);
@@ -734,6 +765,47 @@ else {
 	$trips_reply["FTA"] = $afld_reply["FTD"] = false;
 }
 $reply_dataset['trips'] = str_replace("\n","",$trips_reply); // Remove line breaks
+
+// Fetch Departure Gate Information
+if(file_exists("data/gates.dat")) {
+	$gates_data = file_get_contents("data/gates.dat");
+	$gates_ts = substr($gates_data,3,strpos($gates_data,"-*--")-3);
+	$gates_data = explode(':',substr($gates_data,strpos($gates_data,"-*--")+4));
+	$gates_arr = array();
+	$gates_arr[] = substr($gates_data[1],0,-1);
+	$gates_arr[] = substr($gates_data[2],0,-1);
+	$gates_arr[] = substr($gates_data[3],0);
+	$gates_class = "";
+	if($gates_ts > (time()-120)) { // It's a recent update, so highlight the change to the user
+		$gates_class = "newupdate";
+	}
+}
+else {
+	$gates_arr = "";
+}
+$reply_dataset['gates'] = str_replace("\n","",$gates_arr); // Remove line breaks
+
+// Fetch Departure Split Information
+if(file_exists("data/splits.dat")) {
+	$splits_data = file_get_contents("data/splits.dat");
+	$splits_ts = substr($splits_data,3,strpos($splits_data,"-*--")-3);
+	$splits_data = substr($splits_data,strpos($splits_data,"-*--")+4);
+	$splits_json = json_decode($splits_data);
+}
+else {
+	$splits_json = "";
+}
+$reply_dataset['splits'] = $splits_json;
+
+// Fetch Override Information
+if(file_exists("data/override.dat")) {
+	$override_data = file_get_contents("data/override.dat");
+	$override_json = json_decode($override_data);
+}
+else {
+	$override_json = "";
+}
+$reply_dataset['override'] = $override_json;
 
 // Load error messages into array
 $reply_dataset['error'] = array($error,$error_msg);

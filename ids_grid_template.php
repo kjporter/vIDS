@@ -22,12 +22,12 @@
 				</div>
 				<div id="row2" class="row rem-bor">
 					<div class="col-lg-3 traffic_flow" id="traffic_flow"></div>
-					<div class="col-lg-4">
+					<div class="col-lg-2">
 						<span class="cell_header">Departure Rwys</span>
 						<div id="local_dep_rwys">
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-2">
 						<span class="cell_header">Arrival Rwys</span>
 						<div id="local_arr_rwys">
 						</div>
@@ -35,6 +35,10 @@
 					<div class="col-lg-2">
 						<span class="cell_header">Trips Config</span>
 						<div id="TRIPS_info" onclick="clearStyle(this);" class=""></div>
+					</div>
+					<div class="col-lg-3">
+						<span class="cell_header" onclick="configDepSplit();">Departure Split</span>
+						<div id="split_dep_rwys" onclick="configDepSplit();"></div>
 					</div>
 				</div>
 			</div>
@@ -91,6 +95,8 @@
 								</select>
 							</div>
 						</div>
+						<br/>
+						<input type="text" class="allblack" size="1" disabled />
 					</div>
 				</div>
 		<div class="row template_local">
@@ -216,7 +222,13 @@
 			<?php echo $clnc_select_options; ?>
 			</select>
 			</div>
-			</div>	
+			</div>
+			<div class="row rem-bor"><div class="col-lg-10">Gates assigned:</div></div>
+			<div class="row combines rem-bor">
+			<div class="col-lg-4"><input type="text" id="dep_gate_n" size="6" onclick="setDepartureGates();" /></div>
+			<div class="col-lg-4"><input type="text" id="dep_gate_s" size="6" onclick="setDepartureGates();" /></div>
+			<div class="col-lg-4"><input type="text" id="dep_gate_i" size="6" onclick="setDepartureGates();" /></div>
+			</div>				
 			</div>
 			</div>
 		<div class="row">
@@ -412,8 +424,10 @@
 	<div class="row template_a80">
 		<div class="col-lg-12">
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-lg-4" onclick="airfieldConfig('KPDK');">
+				<input type="hidden" id="KPDK_override" value="false" />
 				<span class="cell_header">Peachtree-Dekalb (PDK)</span>
+				<span class="op_hours">1130–0400Z‡ Mon–Fri, 1200–0400Z‡ Sat–Sun</span>
 				<div class="row rem-bor">
 					<div id="KPDK_atis_code" class="col-lg-3 rem-bor atis_code"></div>
 					<div class="col-lg-6">
@@ -425,8 +439,10 @@
 					<div id="KPDK_runway" class="col-lg-3 apch_type"></div>
 				</div>
 			</div>	
-			<div class="col-lg-4">
+			<div class="col-lg-4" onclick="airfieldConfig('KFTY');">
+				<input type="hidden" id="KFTY_override" value="false" />
 				<span class="cell_header">Fulton County (FTY)</span>
+				<span class="op_hours">Attended continuously</span>
 				<div class="row rem-bor">
 					<div id="KFTY_atis_code" class="col-lg-3 rem-bor atis_code"></div>
 					<div class="col-lg-6">
@@ -438,8 +454,10 @@
 					<div id="KFTY_runway" class="col-lg-3 apch_type"></div>
 				</div>
 			</div>
-			<div class="col-lg-4">
+			<div class="col-lg-4" onclick="airfieldConfig('KMGE');">
+				<input type="hidden" id="KMGE_override" value="false" />
 				<span class="cell_header">Dobbins ARB (MGE)</span>
+				<span class="op_hours">1200–0400Z‡</span>
 				<div class="row rem-bor">
 					<div id="KMGE_atis_code" class="col-lg-3 rem-bor atis_code"></div>
 					<div class="col-lg-6">
@@ -453,8 +471,10 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-lg-4" onclick="airfieldConfig('KRYY');">
+				<input type="hidden" id="KRYY_override" value="false" />
 				<span class="cell_header">Cobb Co/McCollum (RYY)</span>
+				<span class="op_hours">1200–0400Z‡</span>
 				<div class="row rem-bor">
 					<div id="KRYY_atis_code" class="col-lg-3 rem-bor atis_code"></div>
 					<div class="col-lg-6">
@@ -466,8 +486,10 @@
 					<div id="KRYY_runway" class="col-lg-3 apch_type"></div>
 				</div>
 			</div>
-			<div class="col-lg-4">
+			<div class="col-lg-4" onclick="airfieldConfig('KLZU');">
+				<input type="hidden" id="KLZU_override" value="false" />
 				<span class="cell_header">Gwinnette Co (LZU)</span>
+				<span class="op_hours">1200–0200Z‡</span>
 				<div class="row rem-bor">
 					<div id="KLZU_atis_code" class="col-lg-3 rem-bor atis_code"></div>
 					<div class="col-lg-6">
@@ -479,8 +501,10 @@
 					<div id="KLZU_runway" class="col-lg-3 apch_type"></div>
 				</div>
 			</div>
-			<div class="col-lg-4">
+			<div class="col-lg-4" onclick="airfieldConfig('KAHN');">
+				<input type="hidden" id="KAHN_override" value="false" />
 				<span class="cell_header">Athens (AHN)</span>
+				<span class="op_hours">1300–0100Z‡</span>
 				<div class="row rem-bor">
 					<div id="KAHN_atis_code" class="col-lg-3 rem-bor atis_code"></div>
 					<div class="col-lg-6">
@@ -494,8 +518,10 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-lg-4" onclick="airfieldConfig('KMCN');">
+				<input type="hidden" id="KMCN_override" value="false" />
 				<span class="cell_header">Macon Regional (MCN)</span>
+				<span class="op_hours">1300–0100Z‡</span>
 				<div class="row rem-bor">
 					<div id="KMCN_atis_code" class="col-lg-3 rem-bor atis_code"></div>
 					<div class="col-lg-6">
@@ -507,8 +533,10 @@
 					<div id="KMCN_runway" class="col-lg-3 apch_type"></div>
 				</div>
 			</div>
-			<div class="col-lg-4">
+			<div class="col-lg-4" onclick="airfieldConfig('KWRB');">
+				<input type="hidden" id="KWRB_override" value="false" />
 				<span class="cell_header">Robins AFB (WRB)</span>
+				<span class="op_hours">Attended continuously</span>
 				<div class="row rem-bor">
 					<div id="KWRB_atis_code" class="col-lg-3 rem-bor atis_code"></div>
 					<div class="col-lg-6">
@@ -520,8 +548,10 @@
 					<div id="KWRB_runway" class="col-lg-3 apch_type"></div>
 				</div>
 			</div>
-			<div class="col-lg-4">
+			<div class="col-lg-4" onclick="airfieldConfig('KCSG');">
+				<input type="hidden" id="KCSG_override" value="false" />
 				<span class="cell_header">Columbus (CSG)</span>
+				<span class="op_hours">1400–0200Z‡</span>
 				<div class="row rem-bor">
 					<div id="KCSG_atis_code" class="col-lg-3 rem-bor atis_code"></div>
 					<div class="col-lg-6">
@@ -570,6 +600,8 @@
 		<a href="#CIC" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="fas fa-user-tie fa-lg"></i><br/>CIC</a>
 		<a href="#TMU" class="btn btn-lg btn-primary" data-toggle="modal"><i class="fas fa-traffic-light fa-lg"></i><br/>TMU</a>
 		<a href="#EMER" class="btn btn-lg btn-primary" data-toggle="modal"><i class="fas fa-asterisk fa-lg icon-emergency"></i><br/>EMRG</a>
+		<a href="#HELP" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="far fa-question-circle"></i><br/>HELP</a>
+		<a href="#aHELP" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="far fa-question-circle"></i><br/>HELP</a>
 	</div>
 </div>
 </div>

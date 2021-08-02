@@ -9,6 +9,8 @@
 		Changes: 
 	
 	*/
+	
+	const defaultAirfield = 'KATL'; // I need this to be pulled from the php defines...
 
 	// Code below handles vIDS automatic data refreshes
 	var setRefreshTime = 15; // Defines vIDS refresh rate. Default is 15 (VATSIM JSON updates every 15 seconds)
@@ -44,7 +46,9 @@
 		else {
 			other = "local";
 		}
+		document.getElementById("landing_hdr").style.display = "none";
 		document.getElementById("landing").style.display = "none";
+		//document.getElementById("landing").style.visibility = "hidden";
 		document.getElementById("local_ids").style.display = "block";
 		$('.template_' + template).show();
 		$('.template_' + other).hide();
@@ -58,13 +62,15 @@
 		}
 		else {
 			refreshData(init=false,template=document.getElementById("pickMulti").value)
+			document.getElementById("landing_hdr").style.display = "none";
 			document.getElementById("landing").style.display = "none";
+			//document.getElementById("landing").style.visibility = "hidden";
 			document.getElementById("multi_ids").style.display = "block";
 		}
 	}
 	
-	function launchMulti() { // Don't remember what this does... is it even used?
-		document.getElementById("pickMulti").value = "X";
+	function launchMulti() { 
+		//document.getElementById("pickMulti").value = "X";
 		$('#launch_multi').modal('toggle');
 	}
 	
@@ -91,6 +97,7 @@
 				}
 				saveConfiguration('template',payload);
 				$('#multi_template').modal('toggle');
+				document.getElementById("landing_hdr").style.display = "none";
 				document.getElementById("landing").style.display = "none";
 				document.getElementById("multi_ids").style.display = "block";
 			}
@@ -131,9 +138,26 @@
 		}
 	}
 	
+	function addTemplateItem(json) {
+		json = JSON.parse(json);
+		//alert("attempting to append option to list. Template name: " + json.templ_name + " Filename: " + json.filename);
+		//alert(json);
+		el = document.getElementById('pickMulti');
+		var opt = document.createElement('option');
+		opt.value = json.filename;
+		opt.innerHTML = json.templ_name;
+		el.appendChild(opt);
+		el.value = json.filename;
+	}
+	
 	function returnToLanding(closeDiv) { // Hides an active display and returns to the landing page
 		document.getElementById(closeDiv).style.display = "none";
-		document.getElementById("landing").style.display = "block";
+		document.getElementById("landing_hdr").style.display = "block";
+		document.getElementById("landing").style.display = "table";
+		//document.getElementById("landing").style.visibility = "visible";
+		if(closeDiv == "multi_ids") {
+			document.getElementById("pickMulti").value = "0";
+		}
 	}
 	
 	function setActiveRunways(el) { // When in manual control (CIC mode), sets active runways and approach/departure type
@@ -309,39 +333,6 @@
 				controllers += "|";
 			controllers += document.getElementById(positions[x]).value;
 		}
-/*
-		var controllers = document.getElementById("LC1").value + '|';
-		controllers += document.getElementById("LC2").value + '|';
-		controllers += document.getElementById("LC3").value + '|';
-		controllers += document.getElementById("LC4").value + '|';
-		controllers += document.getElementById("LC5").value + '|';
-		controllers += document.getElementById("GCN").value + '|';
-		controllers += document.getElementById("GCC").value + '|';
-		controllers += document.getElementById("GCS").value + '|';
-		controllers += document.getElementById("GM").value + '|';
-		controllers += document.getElementById("CD1").value + '|';
-		controllers += document.getElementById("CD2").value + '|';
-		controllers += document.getElementById("FD").value + '|';
-		controllers += document.getElementById("N").value + '|';
-		controllers += document.getElementById("S").value + '|';
-		controllers += document.getElementById("I").value + '|';
-		controllers += document.getElementById("P").value + '|';
-		controllers += document.getElementById("F").value + '|';
-		controllers += document.getElementById("X").value + '|';
-		controllers += document.getElementById("G").value + '|';
-		controllers += document.getElementById("Q").value + '|';
-		controllers += document.getElementById("O").value + '|';
-		controllers += document.getElementById("V").value + '|';
-		controllers += document.getElementById("A").value + '|';
-		controllers += document.getElementById("H").value + '|';
-		controllers += document.getElementById("D").value + '|';
-		controllers += document.getElementById("L").value + '|';
-		controllers += document.getElementById("Y").value + '|';
-		controllers += document.getElementById("M").value + '|';
-		controllers += document.getElementById("W").value + '|';
-		controllers += document.getElementById("Z").value + '|';
-		controllers += document.getElementById("R").value;
-*/
 		saveConfiguration('controllers',controllers);
 	}
 	
@@ -363,11 +354,14 @@
 	}
 	
 	function refreshData(init=false,template='0') { // Fetches current dataset from network and server and inits display update
+		//if(!init) { alert("Data refresh requested, template " + template); }
 		var xhttp;
 		xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				//document.getElementById('json_test_dump').innerHTML = xhttp.responseText; // Uncomment this line to dump the full JSON into a div
+				if(!!document.getElementById('json_test_dump')) {
+					document.getElementById('json_test_dump').innerHTML = xhttp.responseText; // Dump the full JSON into a div
+				}
 				updateIDSFields(init,xhttp.responseText); // Send this JSON to another function for parse and display
 			}
 			else {
@@ -379,8 +373,10 @@
 			liveData = document.getElementById('live').checked;
 		}
 		//xhttp.open("GET", "ajax_refresh.php?live=" + liveData, true); 
+		//alert(template);
 		xhttp.open("GET", "ajax_refresh.php?live=" + liveData + "&template=" + template, true); 
 		xhttp.send(); 
+		//if(init) { alert("Initial load data pull complete"); }
 	}
 
 	function updateIDSFields(init,data) { // Called by refreshData() - updates all data fields with info retrieved from AJAX
@@ -402,6 +398,43 @@
 		}
 		//changes = changeDetection(init,changes,document.getElementById("local_dep_rwys").innerHTML,departure_rwys,"local_dep_rwys");
 		document.getElementById("local_dep_rwys").innerHTML = departure_rwys;
+		
+		// Departure splits
+		var origDepSplit = document.getElementById("split_dep_rwys").innerHTML;
+		if(json.airfield_data['KATL']['traffic_flow'] == "EAST") {
+			document.getElementById("splits_rwy_1").innerHTML = document.getElementById("splits_rwy_id_1").value = "8R/L";
+			document.getElementById("splits_rwy_2").innerHTML = document.getElementById("splits_rwy_id_2").value = "9R/L";
+			document.getElementById("splits_rwy_3").innerHTML = document.getElementById("splits_rwy_id_3").value = "10";
+		}
+		else if(json.airfield_data['KATL']['traffic_flow'] == "WEST") {
+			document.getElementById("splits_rwy_1").innerHTML = document.getElementById("splits_rwy_id_1").value = "26R/L";
+			document.getElementById("splits_rwy_2").innerHTML = document.getElementById("splits_rwy_id_2").value = "27R/L";
+			document.getElementById("splits_rwy_3").innerHTML = document.getElementById("splits_rwy_id_3").value = "28";
+		}
+		//alert(json.splits[0][0]);
+		if(!$('#DepartureSplit').is(':visible')) { // This conditional prevents the refresh script from updating data entry fields when a modal is in use
+	
+		for(var i=1; i<4; i++) {
+			document.getElementById("splits_n1_" + i).checked = valueToCheckbox(json.splits[i-1][1]);
+			document.getElementById("splits_n1t_" + i).value = json.splits[i-1][2];
+			document.getElementById("splits_n2_" + i).checked = valueToCheckbox(json.splits[i-1][3]);
+			document.getElementById("splits_n2t_" + i).value = json.splits[i-1][4];
+			document.getElementById("splits_w2_" + i).checked = valueToCheckbox(json.splits[i-1][5]);
+			document.getElementById("splits_w2t_" + i).value = json.splits[i-1][6];
+			document.getElementById("splits_w1_" + i).checked = valueToCheckbox(json.splits[i-1][7]);
+			document.getElementById("splits_w1t_" + i).value = json.splits[i-1][8];
+			document.getElementById("splits_s2_" + i).checked = valueToCheckbox(json.splits[i-1][9]);
+			document.getElementById("splits_s2t_" + i).value = json.splits[i-1][10];
+			document.getElementById("splits_s1_" + i).checked = valueToCheckbox(json.splits[i-1][11]);
+			document.getElementById("splits_s1t_" + i).value = json.splits[i-1][12];
+			document.getElementById("splits_e1_" + i).checked = valueToCheckbox(json.splits[i-1][13]);
+			document.getElementById("splits_e1t_" + i).value = json.splits[i-1][14];
+			document.getElementById("splits_e2_" + i).checked = valueToCheckbox(json.splits[i-1][15]);
+			document.getElementById("splits_e2t_" + i).value = json.splits[i-1][16];
+		}
+		}
+		configDepSplit(false, true); // Recycle the display, but don't save
+		changes = changeDetection(init,changes,origDepSplit,document.getElementById("split_dep_rwys").innerHTML,"split_dep_rwys");
 		
 		var arrival_rwys = "";
 		for(var x=0;x<json.airfield_data['KATL']['apch_rwys'].length;x++) {
@@ -425,20 +458,30 @@
 		document.getElementById("PIREP_info").innerHTML = json.pirep; // Display-only (entries auto-timeout)
 		changes = changeDetection(init,changes,document.getElementById("TMU_info").innerHTML,json.tmu,"TMU_info");
 		document.getElementById("TMU_info").innerHTML = json.tmu; // Display
-		document.getElementById("TMU_text").innerHTML = json.tmu; // Data entry
+		if(!$('#TMU').is(':visible')) { // This conditional prevents the refresh script from updating data entry fields when a modal is in use
+			document.getElementById("TMU_text").innerHTML = json.tmu; // Data entry
+		}
+
+		document.getElementById("A80_CIC_info").innerHTML = json.a80cic;
+		if(!$('#CIC').is(':visible')) { // This conditional prevents the refresh script from updating data entry fields when a modal is in use
+			document.getElementById("A80_CIC_text").value = json.a80cic; // Data entry
+		}		
+		
 		changes = changeDetection(init,changes,document.getElementById("TRIPS_info").innerHTML,json.trips['raw'],"TRIPS_info");
 		document.getElementById("TRIPS_info").innerHTML = json.trips['raw']; // Display
-		document.getElementById("fta").checked = json.trips['FTA']; // Data entry
+		//document.getElementById("fta").checked = json.trips['FTA']; // Data entry
 		//alert("FTA: " + json.trips['FTA'] + "\nFTD: " + json.trips['FTD']);
-		document.getElementById("ftd").checked = json.trips['FTD']; // Data entry
-		document.getElementById("ninelm2").checked = json.config['9L@M2']; // Data entry
-		document.getElementById("lahso").checked = json.config['LAHSO']; // Data entry
-		document.getElementById("AutoIDS").checked = json.config['AUTO']; // Data entry
+		//document.getElementById("ftd").checked = json.trips['FTD']; // Data entry
+		//document.getElementById("ninelm2").checked = json.config['9L@M2']; // Data entry
+		//document.getElementById("lahso").checked = json.config['LAHSO']; // Data entry
+		//document.getElementById("AutoIDS").checked = json.config['AUTO']; // Data entry
+		/*
 		if(!json.config['AUTO']) {
 			document.getElementById("flow").disabled = false;
 			document.getElementById("arr_rwy").disabled = false;
 			document.getElementById("dep_rwy").disabled = false;
 		}
+		*/
 		/*
 		if(json.config['AUTO']) {
 			document.getElementById("flow").disabled = true;
@@ -447,6 +490,7 @@
 		}
 		*/
 		//alert("." + json.airfield_data['KATL']['traffic_flow'].trim() + ".");
+		/*
 		document.getElementById("flow").value = json.airfield_data['KATL']['traffic_flow'].trim();
 		setActiveRunways(document.getElementById("flow"));
 		for (var i = 0; i < document.getElementById("arr_rwy").options.length; i++) {
@@ -455,55 +499,254 @@
 		for (var i = 0; i < document.getElementById("dep_rwy").options.length; i++) {
 			document.getElementById("dep_rwy").options[i].selected = json.airfield_data['KATL']['dep_rwys'].indexOf(document.getElementById("dep_rwy").options[i].value) >= 0;
 		}
+		*/
 		//alert("Current: \"" + document.getElementById("AFLD_info").innerHTML + "\"\nUpdate: \"" + json.config['raw'] + "\"");
 		changes = changeDetection(init,changes,document.getElementById("AFLD_info").innerHTML,json.config['raw'],"AFLD_info");
 		document.getElementById("AFLD_info").innerHTML = json.config['raw']; // Display
 		changes = changeDetection(init,changes,document.getElementById("CIC_info").innerHTML,json.cic,"CIC_info");
 		//alert("CIC Info\nIn DOM: \"" + document.getElementById("CIC_info").innerHTML + "\"\nFrom file: \"" + json.cic.replace(/(\n)/gm,"") + "\"");
 		document.getElementById("CIC_info").innerHTML = json.cic; // Display
-		document.getElementById("CIC_text").innerHTML = json.cic; // Data entry
+		//document.getElementById("CIC_text").innerHTML = json.cic; // Data entry
+		if(!$('#AFLD').is(':visible')) { // This conditional prevents the refresh script from updating data entry fields when a modal is in use
+			document.getElementById("flow").value = json.airfield_data['KATL']['traffic_flow'].trim();
+			setActiveRunways(document.getElementById("flow"));
+			for (var i = 0; i < document.getElementById("arr_rwy").options.length; i++) {
+				document.getElementById("arr_rwy").options[i].selected = json.airfield_data['KATL']['apch_rwys'].indexOf(document.getElementById("arr_rwy").options[i].value) >= 0;
+			}
+			for (var i = 0; i < document.getElementById("dep_rwy").options.length; i++) {
+				document.getElementById("dep_rwy").options[i].selected = json.airfield_data['KATL']['dep_rwys'].indexOf(document.getElementById("dep_rwy").options[i].value) >= 0;
+			}
+			document.getElementById("fta").checked = json.trips['FTA']; // Data entry
+			document.getElementById("ftd").checked = json.trips['FTD']; // Data entry
+			document.getElementById("ninelm2").checked = json.config['9L@M2']; // Data entry
+			document.getElementById("lahso").checked = json.config['LAHSO']; // Data entry
+			document.getElementById("CIC_text").innerHTML = json.cic; // Data entry
+			document.getElementById("AutoIDS").checked = json.config['AUTO']; // Data entry
+		}
+		if(!json.config['AUTO']) {
+			document.getElementById("flow").disabled = false;
+			document.getElementById("arr_rwy").disabled = false;
+			document.getElementById("dep_rwy").disabled = false;
+		}
+		//alert(json.gates);
+		if(json.gates.length == 3) {
+			changes = changeDetection(init,changes,document.getElementById("dep_gate_n").value,json.gates[0],"dep_gate_n");
+			changes = changeDetection(init,changes,document.getElementById("dep_gate_s").value,json.gates[1],"dep_gate_s");
+			changes = changeDetection(init,changes,document.getElementById("dep_gate_i").value,json.gates[2],"dep_gate_i");
+			document.getElementById("dep_gate_n").value = json.gates[0];	
+			document.getElementById("dep_gate_s").value = json.gates[1];
+			document.getElementById("dep_gate_i").value = json.gates[2];
+			if(!$('#DepartureGates').is(':visible')) { // This conditional prevents the refresh script from updating data entry fields when a modal is in use
+				document.getElementById("depGateN").value = json.gates[0];
+				document.getElementById("depGateS").value = json.gates[1];
+				document.getElementById("depGateI").value = json.gates[2];
+			}	
+		}
 
 		// Set A80 satellite and outer field info
 		var underlying_fields = new Array("KPDK","KFTY","KMGE","KRYY","KLZU","KMCN","KWRB","KAHN","KCSG"); // I intentionally left LSF out... we never use it
 		//var underlying_fields = new Array("KPDK"); // For testing only.. real world use the line above to get all of the satellites
 		for(var y=0;y<underlying_fields.length;y++) {
 			var open_closed = "CLOSED";
+			if(underlying_fields[y] in json.airfield_data) {
 			document.getElementById(underlying_fields[y] + "_atis_code").innerHTML = json.airfield_data[underlying_fields[y]].atis_code;
 			if(json.airfield_data[underlying_fields[y]].atis_code != "--") {
 				open_closed = "OPEN";
 			}
 			document.getElementById(underlying_fields[y] + "_open_closed").innerHTML = open_closed;
 			document.getElementById(underlying_fields[y] + "_metar").innerHTML = json.airfield_data[underlying_fields[y]].metar;
+			/*
 			var active_rwys = "--";
 			if(json.airfield_data[underlying_fields[y]].dep_rwys != null) {
 				for(var z=0;z<json.airfield_data[underlying_fields[y]].dep_rwys.length;z++) {
 					active_rwys += json.airfield_data[underlying_fields[y]].dep_rwys[z] + " ";
 				}
 			}
-			document.getElementById(underlying_fields[y] + "_runway").innerHTML = active_rwys;
+			*/
+			// New scheme to display active runways/traffic flow with the option for manual override
+			var active_apch_rwys = "--";
+			var override = false;
+			var afld = underlying_fields[y];
+			if(json.override.hasOwnProperty(afld)) { // An override exists, so display it
+				active_apch_rwys = json.override[afld];
+				override = json.override[afld];
+			}
+			else if(json.airfield_data[afld].apch_rwys != "") { // Display generated active runway and approach type
+				for(var rwy in json.airfield_data[afld]['apch_rwys']) {
+					if(active_apch_rwys.length > 0) {
+						active_apch_rwys += ", ";
+					}
+					active_apch_rwys += json.airfield_data[afld]['apch_rwys'][rwy] + " " + json.airfield_data[afld]['apch_type'];
+				}
+			}
+			document.getElementById(underlying_fields[y] + "_runway").innerHTML = active_apch_rwys;
+			document.getElementById(underlying_fields[y] + "_override").value = override;
+			}
 		}
 		
-		// Set TRACON IDS fields
+		// Set MULTI-IDS fields
 		//var multi_disp_str = '<div class=\"landing_menu\"><a onclick=\"returnToLanding(\'multi_ids\');\"><i class=\"fas fa-bars\"></i></a></div>';
 		var multi_disp_str = '';
-		
+		//alert("KATL approach type: " + json.airfield_data['KATL']['apch_rwys'].join(", "));
+		//alert("Resetting Multi-IDS airfields..." + JSON.stringify(json.template));
+		//var airfield_listing = "";
+		//for(afld in json.airfield_data.template) {
+		if(json.template === null) { // Refresh isn't finished... show a loading message
+			multi_disp_str = "<div class=\"row\"><div class=\"col-lg\"><h3>Multi-IDS display is loading... please wait</h3></div></div>";
+		}
+		else {
+		var defaultAirfieldNoChange = "alert('Configuration for this airfield must be set through the local vIDS display by the tower CIC.');";
 		for(afld in json.airfield_data) {
-			multi_disp_str += "<div class=\"row\">";
+			afld = afld.toUpperCase();
+			if(afld == defaultAirfield) {
+				multi_disp_str += "<div class=\"row\" onclick=\"" + defaultAirfieldNoChange + "\">";
+			}
+			else {
+				multi_disp_str += "<div class=\"row\" onclick=\"airfieldConfig('" + afld + "');\">";
+			}
 			multi_disp_str += "<div class=\"col-lg-1\"><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(1,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(2,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(3,1).toUpperCase() + "</div></div>";
 			multi_disp_str += "<div class=\"col-lg-1 atis_code_m\">" + json.airfield_data[afld].atis_code + "</div>";
-			multi_disp_str += "<div class=\"col-lg-2 arrival_info\"><div class=\"apch_type\">" + json.airfield_data[afld].apch_type + "</div><div></div>";
+			var active_rwy_apch = "";
+			// New scheme to display active runways/traffic flow with the option for manual override
+			var override = false;
+			if(json.override.hasOwnProperty(afld)) { // An override exists, so display it
+				active_rwy_apch = json.override[afld];
+				override = json.override[afld];
+			}
+			else if(json.airfield_data[afld].apch_rwys != "") { // Display generated active runway and approach type
+				for(var rwy in json.airfield_data[afld]['apch_rwys']) {
+					if(active_rwy_apch.length > 0) {
+						active_rwy_apch += ", ";
+					}
+					active_rwy_apch += json.airfield_data[afld]['apch_rwys'][rwy] + " " + json.airfield_data[afld]['apch_type'];
+				}
+			}
+			/*
+			else if((json.airfield_data[afld]['apch_rwys'].length > 0)&&(json.airfield_data[afld].apch_type != "")) { // We need to combine the runway and approach types into a string
+				for(var x=0;x<json.airfield_data[afld]['apch_type'].length;x++) {
+					if(active_rwy_apch.length > 0) {
+						active_rwy_apch += ", ";
+					}
+					active_rwy_apch += json.airfield_data[afld]['apch_rwys'][x] + " " + json.airfield_data[afld]['apch_type'];
+				}
+			}
+			*/
+			else {
+				//active_rwy_apch = json.airfield_data[afld].apch_rwys.join(", ");
+			}
+			multi_disp_str += "<div class=\"col-lg-2 arrival_info\"><div class=\"apch_type\">" + active_rwy_apch + "</div><div></div>";
 			multi_disp_str += "<div class=\"wx\">" + json.airfield_data[afld].winds + "&nbsp;&nbsp;&nbsp;" + json.airfield_data[afld].altimeter + "</div></div>";
 			multi_disp_str += "<div class=\"col-lg-5 metar_m\">" + json.airfield_data[afld].metar + "</div>";
 			multi_disp_str += "<div class=\"col-lg-3 metar_m\">RY RVR<div class=\"rvr\">";
 			for(var x=0; x<json.airfield_data[afld].rvr_display.length; x++) {
 				multi_disp_str += json.airfield_data[afld].rvr_display[x] + "<br/>";
 			}
-		multi_disp_str += "	</div></div></div>";
+		multi_disp_str += "	<input type=\"hidden\" id=\"" + afld + "_override\" value=\"" + override + "\" /></div></div></div>";
+		//airfield_listing += json.airfield_data[afld].icao_id.toUpperCase() + ", ";
 		}
+		}
+		//alert(airfield_listing);
 		document.getElementById('multi_ids_data').innerHTML = multi_disp_str;
 		if(changes) {
 			document.getElementById("acknowledge").style.visibility = "visible";
 		}
+	}
+	
+	function airfieldConfig(afldId) {
+		document.getElementById("override_active").checked = false;
+		document.getElementById("override_rwy_apch").value = "";
+		document.getElementById("ac_afldId").innerHTML = afldId.toUpperCase();
+		document.getElementById("override_afld_id").value = afldId.toUpperCase();
+		if(document.getElementById(afldId.toUpperCase() + "_override").value != 'false') {
+			document.getElementById("override_active").checked = true;
+			document.getElementById("override_rwy_apch").value = document.getElementById(afldId.toUpperCase() + "_override").value;
+		}
+		$('#AirfieldConfig').modal('toggle');
+	}
+	
+	function saveAfldConfigOverride(action) {
+		var override = new Array(document.getElementById("override_afld_id").value);
+		if(action) { // Save a new override
+			override.push(document.getElementById("override_rwy_apch").value);
+		}
+		else { // Remove an existing override 
+			override.push(false);
+		}
+		//alert(JSON.stringify(override));
+		saveConfiguration('override',JSON.stringify(override));
+		$('#AirfieldConfig').modal('toggle');
+	}
+	
+	function setDepartureGates(save = false) {
+		if(save) {
+			// Update fields in IDS and then save the data to file
+			document.getElementById("dep_gate_n").value = document.getElementById("depGateN").value;
+			document.getElementById("dep_gate_s").value = document.getElementById("depGateS").value;
+			document.getElementById("dep_gate_i").value = document.getElementById("depGateI").value;
+			var gateConfig = "N:" + document.getElementById("depGateN").value + "\n";
+			gateConfig += "S:" + document.getElementById("depGateS").value + "\n";
+			gateConfig += "I:" + document.getElementById("depGateI").value;
+			saveConfiguration('gates',gateConfig);
+		}
+		$('#DepartureGates').modal('toggle');
+	}
+	
+	function configDepSplit(save = false, refresh = false) {
+		if(save || refresh) {
+			// Update fields in IDS and then save the data to file
+			// First, build display text
+			//var splits = new Array(); 
+			var saveData = new Array();
+			var splits = "<table id=\"splits\">";
+			var gates = new Array("n1","n2","w2","w1","s2","s1","e1","e2");
+			for(var i=1; i<4 ; i++) {
+				var saveRunway = new Array();
+				//splits[i] = document.getElementById("splits_rwy_id_" + i).value + " " + document.getElementById("splits_n1_" + i).value + " " + document.getElementById("splits_n1t_" + i).value + " " + document.getElementById("splits_n2_" + i).value + " " + document.getElementById("splits_n2t_" + i).value + " " + document.getElementById("splits_w2_" + i).value + " " + document.getElementById("splits_w2t_" + i).value + " " + document.getElementById("splits_w1_" + i).value + " " + document.getElementById("splits_w1t_" + i).value + " " + document.getElementById("splits_s2_" + i).value + " " + document.getElementById("splits_s2t_" + i).value + " " + document.getElementById("splits_s1_" + i).value + " " + document.getElementById("splits_s1t_" + i).value + " " + document.getElementById("splits_e1_" + i).value + " " + document.getElementById("splits_e1t_" + i).value + " " + document.getElementById("splits_e2_" + i).value + " " + document.getElementById("splits_e2t_" + i).value;
+				splits += "<tr><th>" + document.getElementById("splits_rwy_id_" + i).value + "</th>";
+				saveRunway.push(document.getElementById("splits_rwy_id_" + i).value);
+				for(var j=0; j<gates.length; j++) {
+					var gate = "&nbsp;&nbsp;&nbsp;";
+					var dir = checkboxToName(document.getElementById("splits_" + gates[j] + "_" + i));
+					var fix = document.getElementById("splits_" + gates[j] + "t_" + i).value;
+					saveRunway.push(dir);
+					saveRunway.push(fix);
+					if((dir.length > 0)&&(fix.length > 0)) {
+						gate = dir + "+" + fix;
+					}
+					else {
+						gate = dir + fix;
+					}
+					splits += "<td>" + gate + "</td>";
+				}
+				splits += "</tr>";
+				saveData.push(saveRunway);
+			}
+			splits += "</table>";
+			document.getElementById("split_dep_rwys").innerHTML = splits; 
+			//document.getElementById("split_dep_rwys").innerHTML = splits[1] + "<br/>" + splits[2] + "<br/>" + splits[3]; 
+			if (save) {
+				saveConfiguration('splits',JSON.stringify(saveData));
+			}
+		}
+		if(!refresh) {
+			$('#DepartureSplit').modal('toggle');
+		}
+	}
+	
+	function checkboxToName(el) {
+		if(el.type && el.type === 'checkbox') {
+			if(el.checked) {
+				return el.name;
+			}
+		}
+		return "";
+	}
+	
+	function valueToCheckbox(val) {
+		if(val.length > 0) {
+			return true;
+		}
+		return false;
 	}
 	
 	function selectOption(id, selectValue) {  // Helper function for dealing with select options
@@ -547,6 +790,12 @@
 		xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				//alert(xhttp.responseText);
+				if(type == 'template') {
+					addTemplateItem(xhttp.responseText);
+				}
+				if(type == 'override') {
+					//alert(xhttp.responseText);
+				}
 			}
 			else {
 			}
@@ -611,22 +860,35 @@ function getSelectValues(select) { // Helper function for multi-select fields
 }
 
 	function saveBugReport() { // Saves bug reports to RSS feed
-		$('#BUG').modal('toggle');
-		var xhttp;
-		xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				alert('Thanks for reporting that bug!');
-				document.getElementById("bug_report_name").value = "";
-				document.getElementById("bug_description").value = "";
-			}
-			else {
-			}
-		};
-		var description = document.getElementById("bug_description").value + '<br/>Reported by: ' + document.getElementById("bug_report_name").value;
-		//alert(description);
-		xhttp.open("GET", "bug_reporting.php?bug_description=" + document.getElementById("bug_description").value, true); 
-		xhttp.send(); 
+		// Validate bug report first to ensure user actually reported something...
+		var validationErrors = new Array();
+		if(document.getElementById("bug_report_name").value.length < 1) {
+			validationErrors.push("Please submit your name or Discord user id with the bug report. This will help us contact you if we need more information about the bug that you found.");
+		}
+		if(document.getElementById("bug_description").value.length < 1) {
+			validationErrors.push("Oops... looks like you forgot to tell us all about that bug that you found. Please provide us with a detailed description of the bug so we can fix it!");
+		}
+		if(validationErrors.length > 0) { // Validation errors found
+			alert(validationErrors.join("\n\n"));
+		}
+		else { // Form was valid, so save the bug report
+			$('#BUG').modal('toggle');
+			var xhttp;
+			xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					alert('Thanks for reporting that bug!');
+					document.getElementById("bug_report_name").value = "";
+					document.getElementById("bug_description").value = "";
+				}
+				else {
+				}
+			};
+			var description = document.getElementById("bug_description").value + '<br/>Reported by: ' + document.getElementById("bug_report_name").value;
+			//alert(description);
+			xhttp.open("GET", "bug_reporting.php?bug_description=" + description, true); 
+			xhttp.send(); 
+		}
 	}
 	
 	function showAboutHelp() { // Makes the multi-airfield display visible

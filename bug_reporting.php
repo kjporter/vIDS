@@ -24,5 +24,6 @@ $new_bug = $bug_report->channel->addChild('item');
 $new_bug->addChild('title','vIDS Bug Reported: ' . date("m/d/y H:i:s"));
 $new_bug->addChild('link',$rss_url);
 $new_bug->addChild('description',$_GET['bug_description']);
+$new_bug->addChild('guid','vIDS_Bug_Tracking_' . sprintf("%06d", mt_rand(1, 999999)));
 
 file_put_contents($rss_file,$bug_report->asXML());
