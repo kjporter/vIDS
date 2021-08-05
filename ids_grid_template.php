@@ -96,7 +96,7 @@
 							</div>
 						</div>
 						<br/>
-						<input type="text" class="allblack" size="1" disabled />
+						<div class="scroll_content allblack"></div>
 					</div>
 				</div>
 		<div class="row template_local">
@@ -225,9 +225,9 @@
 			</div>
 			<div class="row rem-bor"><div class="col-lg-10">Gates assigned:</div></div>
 			<div class="row combines rem-bor">
-			<div class="col-lg-4"><input type="text" id="dep_gate_n" size="6" onclick="setDepartureGates();" /></div>
-			<div class="col-lg-4"><input type="text" id="dep_gate_s" size="6" onclick="setDepartureGates();" /></div>
-			<div class="col-lg-4"><input type="text" id="dep_gate_i" size="6" onclick="setDepartureGates();" /></div>
+			<div class="col-lg-4 scroll_content" id="dep_gate_n_container" onclick="setDepartureGates();"><p class="marquee_container"><span id="dep_gate_n">&nbsp;<!--<input type="text" id="dep_gate_n" class="scroll_content" onclick="setDepartureGates();" />--></span></p></div>
+			<div class="col-lg-4 scroll_content" id="dep_gate_s_container" onclick="setDepartureGates();"><p class="marquee_container"><span id="dep_gate_s">&nbsp;<!--<input type="text" id="dep_gate_s" class="scroll_content" onclick="setDepartureGates();" />--></span></p></div>
+			<div class="col-lg-4 scroll_content" id="dep_gate_i_container" onclick="setDepartureGates();"><p class="marquee_container"><span id="dep_gate_i">&nbsp;<!--<input type="text" id="dep_gate_i" class="scroll_content" onclick="setDepartureGates();" />--></span></p></div>
 			</div>				
 			</div>
 			</div>

@@ -74,19 +74,22 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	
 	$template = $_REQUEST['template']; // Is user requesting a specific multi-IDS template?
 	//echo "TEMPLATE: $template";
-	$template_airfields_list = null;
+	$reply_dataset['template'] = null;
 	if(intval($template) > 0) { // Zero is the default airfield template
 		if(file_exists("data/templates/" . $template . ".templ")) { 
 			$templ_data = file_get_contents("data/templates/" . $template . ".templ"); // Fetch the template file
 			$templ_data = strtoupper($templ_data); // Normalize ICAO IDs to upper case
-			$template_airfields = $template_airfields_list = explode("\n",$templ_data);
-			//$template_airfields = explode("\n",$templ_data);
-			unset($template_airfields_list[0]); // Remove the timestamp
+			//$templ_data = explode("\n",$templ_data);
+			//$templ_data = unset($templ_data[0]); // Remove the timestamp - not needed
+			//$airfields = $template_airfields_list = json_encode($templ_data);
+			$template_airfields = explode("\n",$templ_data);
+			//unset($template_airfields_list[0]); // Remove the timestamp
 			unset($template_airfields[0]); // We don't care about the timestamp
 			$airfields = $template_airfields; // Now, overwrite the airfields array
+			$reply_dataset['template'] = $template_airfields;
 		}
 	}
-	$reply_dataset['template'] = $template_airfields_list;	
+	//$reply_dataset['template'] = $template_airfields;	
 	$refreshInterval = 15; // How many seconds between requests to pull data from VATSIM data service
 	//$localPath = "http://127.0.0.1/ids/";
 	//$localPath = "https://kplink.net/ids/";
@@ -210,7 +213,7 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 		//echo substr($afld_data['atis_text'],strpos($afld_data['atis_text'],")")+3,strpos($afld_data['atis_text'],"NOTAMS")-strpos($afld_data['atis_text'],")")-5);
 		$atxt = explode(".",$afld_data['atis_text']);
 		//print_r($atxt);
-		$terminal_search = array("APCH","APCHS","APPR");
+		$terminal_search = array("APCH","APCHS","APPR","EXPECT");
 		$terminal_strings = array();
 		foreach($atxt as $atis_part) {
 			foreach($terminal_search as $search_str) {
@@ -228,7 +231,7 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 			}
 		}
 		//print_r($afld_data['apch_rwys']);
-		$terminal_search = array("DEPS");
+		$terminal_search = array("DEPS","LDG");
 		$terminal_strings = array();
 		foreach($atxt as $atis_part) {
 			foreach($terminal_search as $search_str) {
@@ -651,11 +654,14 @@ if(file_exists("data/pirep.dat")) {
 		$pirep_timeout = 3600; // Timeout in 1 hour (3,600 seconds)
 		$pirep_display = "";
 		if(strlen($pirep_data) > 0) {
-			$pireps = explode("\r\n",$pirep_data);
+			$pireps = explode("\r",$pirep_data);
 			foreach($pireps as $pirep) {
 				$rep = explode("|",$pirep);
 				if(intval($rep[0]) > (time() - $pirep_timeout)) { // Check if PIREP is still valid
-					$pirep_display .= $rep[1] . "\r\n";
+					if(strlen($pirep_display)>0) {
+						$pirep_display .= "\r";
+					}
+					$pirep_display .= str_replace("/R","/RM",$rep[1]); // . "\r";
 				}
 			}
 		}

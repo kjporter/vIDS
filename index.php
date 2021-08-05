@@ -48,9 +48,10 @@
 	$randomImage = $images[array_rand($images)];
 ?>
 <body style="background-image: url('<?php echo $randomImage; ?>')" onload="refreshData(true);">  <!-- refreshData call initializes the display data -->
+<input type="hidden" id="bgimg" value="<?php echo $randomImage; ?>" />
 <div id="container">
-			<div id="alerts" class="container fixed-top">  <!-- alert box displays authentication info -->
-		<div class="row no_border" style="padding: 5px; style="visibility:hidden">
+	<div id="alerts" class="container fixed-top">  <!-- alert box displays authentication info -->
+		<div class="row no_border" style="padding: 5px; visibility:hidden">
 			<div id="alert" class="col <?php echo $alert_style; ?>">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 					<span aria-hidden="true">&times;</span>

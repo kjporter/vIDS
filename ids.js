@@ -46,6 +46,9 @@
 		else {
 			other = "local";
 		}
+		document.body.style.backgroundColor = "black";
+		document.body.style.backgroundImage = null;
+		//document.body.classList.add("black_background");
 		document.getElementById("landing_hdr").style.display = "none";
 		document.getElementById("landing").style.display = "none";
 		//document.getElementById("landing").style.visibility = "hidden";
@@ -61,7 +64,9 @@
 			$('#multi_template').modal('toggle');
 		}
 		else {
-			refreshData(init=false,template=document.getElementById("pickMulti").value)
+			refreshData(init=false,template=document.getElementById("pickMulti").value) // IS THIS WHAT IS CAUSING THE RAPID REFRESH PROBLEM???????????????
+			document.body.style.backgroundColor = "black";
+			document.body.style.backgroundImage = null;
 			document.getElementById("landing_hdr").style.display = "none";
 			document.getElementById("landing").style.display = "none";
 			//document.getElementById("landing").style.visibility = "hidden";
@@ -152,6 +157,7 @@
 	
 	function returnToLanding(closeDiv) { // Hides an active display and returns to the landing page
 		document.getElementById(closeDiv).style.display = "none";
+		document.body.style.backgroundImage = "url('" + document.getElementById("bgimg").value + "')";
 		document.getElementById("landing_hdr").style.display = "block";
 		document.getElementById("landing").style.display = "table";
 		//document.getElementById("landing").style.visibility = "visible";
@@ -307,10 +313,15 @@
 			pirep_string += ' /' + document.getElementById("altitude").value;
 			pirep_string += ' /TP ' + document.getElementById("aircraft").value;
 			pirep_string += ' /RM ' + document.getElementById("conditions").value;
-			pirep_string += '\r\n';
-			document.getElementById("PIREP_info").innerHTML = pirep_string + document.getElementById("PIREP_info").innerHTML;
+			pirep_string += '\r';
+			if(document.getElementById("PIREP_info").innerHTML == "No PIREPs to display") {
+				document.getElementById("PIREP_info").innerHTML = pirep_string;
+			}
+			else {
+				document.getElementById("PIREP_info").innerHTML = pirep_string + document.getElementById("PIREP_info").innerHTML;
+			}
 			$('#PIREP').modal('toggle');
-			saveConfiguration('pirep',pirep_string);
+			saveConfiguration('pirep',pirep_string.replace('/RM','/R')); // String replace deals with the /RM HTTP server error
 			document.getElementById("pirep_entry").reset();
 			clearPirepValidation();
 		}
@@ -453,7 +464,9 @@
 		}
 		//alert(changes);
 		// Set text fields
-		changes = changeDetection(init,changes,document.getElementById("PIREP_info").innerHTML.replace(/(\r\n|\n|\r)/gm,""),json.pirep.replace(/(\r\n|\n|\r)/gm,""),"PIREP_info");
+		if(!json.pirep.includes('No PIREPs to display')) { // Only show change detection if something new happens, not simply if everything expires
+			changes = changeDetection(init,changes,document.getElementById("PIREP_info").innerHTML.replace(/(\r\n|\n|\r)/gm,""),json.pirep.replace(/(\r\n|\n|\r)/gm,""),"PIREP_info");
+		}
 		//alert("Current: \"" + document.getElementById("PIREP_info").innerHTML + "\"\nUpdate: \"" + json.pirep + "\"");
 		document.getElementById("PIREP_info").innerHTML = json.pirep; // Display-only (entries auto-timeout)
 		changes = changeDetection(init,changes,document.getElementById("TMU_info").innerHTML,json.tmu,"TMU_info");
@@ -530,12 +543,48 @@
 		}
 		//alert(json.gates);
 		if(json.gates.length == 3) {
-			changes = changeDetection(init,changes,document.getElementById("dep_gate_n").value,json.gates[0],"dep_gate_n");
-			changes = changeDetection(init,changes,document.getElementById("dep_gate_s").value,json.gates[1],"dep_gate_s");
-			changes = changeDetection(init,changes,document.getElementById("dep_gate_i").value,json.gates[2],"dep_gate_i");
-			document.getElementById("dep_gate_n").value = json.gates[0];	
-			document.getElementById("dep_gate_s").value = json.gates[1];
-			document.getElementById("dep_gate_i").value = json.gates[2];
+			changes = changeDetection(init,changes,document.getElementById("dep_gate_n").innerHTML,json.gates[0],"dep_gate_n");
+			changes = changeDetection(init,changes,document.getElementById("dep_gate_s").innerHTML,json.gates[1],"dep_gate_s");
+			changes = changeDetection(init,changes,document.getElementById("dep_gate_i").innerHTML,json.gates[2],"dep_gate_i");
+			document.getElementById("dep_gate_n").innerHTML = json.gates[0];	
+			document.getElementById("dep_gate_s").innerHTML = json.gates[1];
+			document.getElementById("dep_gate_i").innerHTML = json.gates[2];
+			//var txt_overrun = "";
+			if ($('#dep_gate_n')[0].scrollWidth >  $('#dep_gate_n_container').innerWidth()) { // When true, the text overruns the box, so we want to marquee
+				document.getElementById("dep_gate_n_container").classList.add("start_marquee");
+				//txt_overrun += "N";
+			}
+			else {
+				document.getElementById("dep_gate_n_container").classList.remove("start_marquee");
+			}
+			if ($('#dep_gate_s')[0].scrollWidth >  $('#dep_gate_s_container').innerWidth()) { // When true, the text overruns the box, so we want to marquee
+				document.getElementById("dep_gate_s_container").classList.add("start_marquee");
+				//txt_overrun += "S";
+			}
+			else {
+				document.getElementById("dep_gate_s_container").classList.remove("start_marquee");
+			}
+			if ($('#dep_gate_i')[0].scrollWidth >  $('#dep_gate_i_container').innerWidth()) { // When true, the text overruns the box, so we want to marquee
+				document.getElementById("dep_gate_i_container").classList.add("start_marquee");
+				//txt_overrun += "I";
+			}
+			else {
+				document.getElementById("dep_gate_i_container").classList.remove("start_marquee");
+			}
+/*
+			alert("N - Text width: " + $('#dep_gate_n')[0].scrollWidth + " Div width: " + $('#dep_gate_n_container').innerWidth() + 
+			"\nS - Text width: " + $('#dep_gate_s')[0].scrollWidth + " Div width: " + $('#dep_gate_s_container').innerWidth() + 
+			"\nI - Text width: " + $('#dep_gate_i')[0].scrollWidth + " Div width: " + $('#dep_gate_i_container').innerWidth() + 
+			"\n Overruns: " + txt_overrun);
+*/
+//			document.getElementById("dep_gate_n").value = json.gates[0];	
+//			document.getElementById("dep_gate_s").value = json.gates[1];
+//			document.getElementById("dep_gate_i").value = json.gates[2];
+/*
+			$('#dep_gate_n').marquee({ speed: 20 });
+			$('#dep_gate_s').marquee({ speed: 20 });
+			$('#dep_gate_i').marquee({ speed: 20 });
+*/
 			if(!$('#DepartureGates').is(':visible')) { // This conditional prevents the refresh script from updating data entry fields when a modal is in use
 				document.getElementById("depGateN").value = json.gates[0];
 				document.getElementById("depGateS").value = json.gates[1];
@@ -596,7 +645,8 @@
 		}
 		else {
 		var defaultAirfieldNoChange = "alert('Configuration for this airfield must be set through the local vIDS display by the tower CIC.');";
-		for(afld in json.airfield_data) {
+		for(afld in json.template) { //json.airfield_data
+			afld = json.template[afld];
 			afld = afld.toUpperCase();
 			if(afld == defaultAirfield) {
 				multi_disp_str += "<div class=\"row\" onclick=\"" + defaultAirfieldNoChange + "\">";
@@ -604,6 +654,7 @@
 			else {
 				multi_disp_str += "<div class=\"row\" onclick=\"airfieldConfig('" + afld + "');\">";
 			}
+			//alert(afld);
 			multi_disp_str += "<div class=\"col-lg-1\"><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(1,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(2,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(3,1).toUpperCase() + "</div></div>";
 			multi_disp_str += "<div class=\"col-lg-1 atis_code_m\">" + json.airfield_data[afld].atis_code + "</div>";
 			var active_rwy_apch = "";
@@ -680,13 +731,14 @@
 	function setDepartureGates(save = false) {
 		if(save) {
 			// Update fields in IDS and then save the data to file
-			document.getElementById("dep_gate_n").value = document.getElementById("depGateN").value;
-			document.getElementById("dep_gate_s").value = document.getElementById("depGateS").value;
-			document.getElementById("dep_gate_i").value = document.getElementById("depGateI").value;
+			document.getElementById("dep_gate_n").innerHTML = "<p><span>" + document.getElementById("depGateN").value + "</span></p>";
+			document.getElementById("dep_gate_s").innerHTML = "<p><span>" + document.getElementById("depGateS").value + "</span></p>";
+			document.getElementById("dep_gate_i").innerHTML = "<p><span>" + document.getElementById("depGateI").value + "</span></p>";
 			var gateConfig = "N:" + document.getElementById("depGateN").value + "\n";
 			gateConfig += "S:" + document.getElementById("depGateS").value + "\n";
 			gateConfig += "I:" + document.getElementById("depGateI").value;
 			saveConfiguration('gates',gateConfig);
+			//alert(document.getElementById("dep_gate_n").getElementsByTagName("p")[0].innerHTML);
 		}
 		$('#DepartureGates').modal('toggle');
 	}
@@ -899,3 +951,94 @@ function getSelectValues(select) { // Helper function for multi-select fields
 		$('#' + x).modal('toggle');
 		$('#BUG').modal('toggle');
 	}
+	
+	// Code to auto-scroll content in a text input box 
+	/*
+$(document).ready(function() {
+	var interval_val = 2;
+	var timeout_ = null;
+	timeout_ = setInterval(function() {
+    $(".scroll_content").scrollLeft(interval_val);
+		interval_val++;
+    }, 100);
+  });
+  */
+/*
+  $(".scroll_content").on("mouseout", function() {
+
+    clearInterval(timeout_);
+    $(this).scrollLeft(0);
+  });
+*/
+// Functions to add marquee functionality to a text-input box
+/*
+ (function($) {
+        $.fn.textWidth = function(){
+             var calc = '<span style="display:none">' + $(this).text() + '</span>';
+             $('body').append(calc);
+             var width = $('body').find('span:last').width();
+             $('body').find('span:last').remove();
+            return width;
+        };
+
+        $.fn.marquee = function(args) {
+            var that = $(this);
+            var textWidth = that.textWidth(),
+                offset = that.width(),
+                width = offset,
+                css = {
+                    'text-indent' : that.css('text-indent'),
+                    'overflow' : that.css('overflow'),
+                    'white-space' : that.css('white-space')
+                },
+                marqueeCss = {
+                    'text-indent' : width,
+                    'overflow' : 'hidden',
+                    'white-space' : 'nowrap'
+                },
+                args = $.extend(true, { count: -1, speed: 1e1, leftToRight: false }, args),
+                i = 0,
+                stop = textWidth*-1,
+                dfd = $.Deferred();
+
+            function go() {
+                if(!that.length) return dfd.reject();
+                if(width == stop) {
+                    i++;
+                    if(i == args.count) {
+                        that.css(css);
+                        return dfd.resolve();
+                    }
+                    if(args.leftToRight) {
+                        width = textWidth*-1;
+                    } else {
+                        width = offset;
+                    }
+                }
+                that.css('text-indent', width + 'px');
+                if(args.leftToRight) {
+                    width++;
+                } else {
+                    width--;
+                }
+                setTimeout(go, args.speed);
+            };
+            if(args.leftToRight) {
+                width = textWidth*-1;
+                width++;
+                stop = offset;
+            } else {
+                width--;            
+            }
+            that.css(marqueeCss);
+            go();
+            return dfd.promise();
+        };
+})(jQuery);
+
+		$(".scroll_content").mouseover(function () {     
+			$(this).removeAttr("style");
+		}).mouseout(function () {
+		$(this).marquee();
+	});
+	*/
