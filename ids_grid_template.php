@@ -423,11 +423,70 @@
 <!-- START A80 SATELLITE & OUTER AIRFIELD DISPLAY -->
 	<div class="row template_a80">
 		<div class="col-lg-12">
+<?php
+	$pdk = array("id"=>"KPDK","name"=>"Peachtree-Dekalb (PDK)","hours"=>"1130–0400Z‡ Mon–Fri, 1200–0400Z‡ Sat–Sun");
+	$fty = array("id"=>"KFTY","name"=>"Fulton County (FTY)","hours"=>"Attended continuously");
+	$mge = array("id"=>"KMGE","name"=>"Dobbins ARB (MGE)","hours"=>"1200–0400Z‡");
+	$ryy = array("id"=>"KRYY","name"=>"Cobb Co/McCollum (RYY)","hours"=>"1200–0400Z‡");
+	$lzu = array("id"=>"KLZU","name"=>"Gwinnette Co (LZU)","hours"=>"1200–0200Z‡");
+	$ahn = array("id"=>"KAHN","name"=>"Athens (AHN)","hours"=>"1300–0100Z‡");
+	$mcn = array("id"=>"KMCN","name"=>"Macon Regional (MCN)","hours"=>"1300–0100Z‡");
+	$wrb = array("id"=>"KWRB","name"=>"Robins AFB (WRB)","hours"=>"Attended continuously");
+	$csg = array("id"=>"KCSG","name"=>"Columbus (CSG)","hours"=>"1400–0200Z‡");
+	$a80sat = array($pdk,$fty,$mge,$ryy,$lzu,$ahn,$mcn,$wrb,$csg);
+	$newrow = true;
+	for($x=0;$x<count($a80sat);$x++) {
+		$str = "";
+		if($newrow) {
+			$str .= "<div class=\"row\">";
+			$newrow = false;
+		}
+		$str .= "<div class=\"col-lg-4\">
+				<input type=\"hidden\" id=\"" . $a80sat[$x]['id'] . "_override\" value=\"false\" />
+				<div class=\"dropdown noclear\">
+				<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"fas fa-caret-square-down\"></i></a>
+				<ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dLabel\">
+					<li class=\"dropdown-header\">" . $a80sat[$x]['id'] . "</li>
+					<li class=\"divider\"></li>
+					<li><a href=\"#\" onclick=\"airfieldConfig('" . $a80sat[$x]['id'] . "');\">Airfield Config</a></li>
+					<li><a href=\"#PROC\" onclick=\"loadProc('" . $a80sat[$x]['id'] . "');\" data-toggle=\"modal\">Instrument Procedures</a></li>
+				</ul>
+				</div>
+				<span class=\"cell_header\">" . $a80sat[$x]['name'] . "</span>
+				<div class=\"op_hours\">" . $a80sat[$x]['hours'] . "</div>
+				<div class=\"row rem-bor\">
+					<div id=\"" . $a80sat[$x]['id'] . "_atis_code\" class=\"col-lg-3 rem-bor atis_code\"></div>
+					<div class=\"col-lg-6\">
+						<div id=\"" . $a80sat[$x]['id'] . "_open_closed\" class=\"row rem-bor arrival_info\">
+						</div>
+						<div id=\"" . $a80sat[$x]['id'] . "_metar\" class=\"row rem-bor\">
+						</div>						
+					</div>
+					<div id=\"" . $a80sat[$x]['id'] . "_runway\" class=\"col-lg-3 apch_type\"></div>
+				</div>
+			</div>	";
+		if(($x+1) % 3 == 0) {
+			$str .= "</div>";
+			$newrow = true;
+		}
+		print $str;
+	}
+?>
+<!--
 		<div class="row">
-			<div class="col-lg-4" onclick="airfieldConfig('KPDK');">
+			<div class="col-lg-4">
 				<input type="hidden" id="KPDK_override" value="false" />
+				<div class="dropdown noclear">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fas fa-caret-square-down"></i></a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					<li class="dropdown-header">KPDK</li>
+					<li class="divider"></li>
+					<li><a href="#" onclick="airfieldConfig('KPDK');">Airfield Config</a></li>
+					<li><a href="#PROC" onclick="loadProc('KPDK');" data-toggle="modal">Instrument Procedures</a></li>
+				</ul>
+				</div>
 				<span class="cell_header">Peachtree-Dekalb (PDK)</span>
-				<span class="op_hours">1130–0400Z‡ Mon–Fri, 1200–0400Z‡ Sat–Sun</span>
+				<div class="op_hours">1130–0400Z‡ Mon–Fri, 1200–0400Z‡ Sat–Sun</div>
 				<div class="row rem-bor">
 					<div id="KPDK_atis_code" class="col-lg-3 rem-bor atis_code"></div>
 					<div class="col-lg-6">
@@ -564,6 +623,7 @@
 				</div>
 			</div>
 		</div>
+		-->
 	</div>
 	</div>
 <div id="buttons" class="row">
@@ -584,6 +644,7 @@
 		<a href="#aFREQS" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="fas fa-broadcast-tower fa-lg"></i><br/>FREQS</a>
 		<a href="#ARSPC" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="fas fa-map-marked-alt fa-lg"></i><br/>ARSPC</a>
 		<a href="#aARSPC" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="fas fa-map-marked-alt fa-lg"></i><br/>ARSPC</a>
+		<a href="#PROC" class="btn btn-lg btn-primary" data-toggle="modal" onclick="loadProc('KATL');"><i class="fas fa-file-invoice fa-lg"></i><br/>PROC</a>
 		<a href="#ROTG" class="btn btn-lg btn-primary" data-toggle="modal"><i class="fas fa-plane-departure fa-lg"></i><br/>ROTG</a>
 		<!--<a href="https://www.ztlartcc.org/storage/files/ATL%20ATCT%207110.65I_1607332373.pdf" title="SOP" class="btn btn-lg btn-primary view-pdf" data-toggle="modal" data-target="#PDF_MODAL"><i class="fas fa-book fa-lg"></i><br/>SOP</a>-->
 		<a href="#SOP" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="fas fa-book fa-lg"></i><br/>SOP</a>

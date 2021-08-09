@@ -54,6 +54,7 @@ elseif(isset($_GET['code'])) { // Need to get a new authentication - session doe
 	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
 	curl_setopt($ch,CURLOPT_POSTFIELDS,array ('grant_type'=>'authorization_code', 'client_id'=>$client_id, 'client_secret'=>$client_secret, 'redirect_uri'=>$redirect_uri, 'code'=>$_GET['code']));
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_ENCODING, "gzip");
 	$token = curl_exec($ch);
 	curl_close($ch);
 	// We've got the token, now extract the pieces needed for the API call
@@ -76,6 +77,7 @@ if($access_token != null) {
 	curl_setopt($ch,CURLOPT_HTTPHEADER, array("Authorization: Bearer " . $access_token, "Accept: application/json"));
 	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_ENCODING, "gzip");
 	$userData = curl_exec($ch);
 	$userData_json = json_decode($userData,true);
 	curl_close($ch);

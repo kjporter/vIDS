@@ -52,6 +52,7 @@
 		document.getElementById("landing_hdr").style.display = "none";
 		document.getElementById("landing").style.display = "none";
 		//document.getElementById("landing").style.visibility = "hidden";
+		acknowledgeChanges(); // Clear change acknowledge (if user was monitoring multi and decided to switch displays)
 		document.getElementById("local_ids").style.display = "block";
 		$('.template_' + template).show();
 		$('.template_' + other).hide();
@@ -388,6 +389,9 @@
 		xhttp.open("GET", "ajax_refresh.php?live=" + liveData + "&template=" + template, true); 
 		xhttp.send(); 
 		//if(init) { alert("Initial load data pull complete"); }
+		if(init) { // Check for browser type/capabilities and alert the user, if necessary
+			browser_detection();
+		}
 	}
 
 	function updateIDSFields(init,data) { // Called by refreshData() - updates all data fields with info retrieved from AJAX
@@ -644,16 +648,20 @@
 			multi_disp_str = "<div class=\"row\"><div class=\"col-lg\"><h3>Multi-IDS display is loading... please wait</h3></div></div>";
 		}
 		else {
-		var defaultAirfieldNoChange = "alert('Configuration for this airfield must be set through the local vIDS display by the tower CIC.');";
+		//var defaultAirfieldNoChange = "alert('Configuration for this airfield must be set through the local vIDS display by the tower CIC.');";
 		for(afld in json.template) { //json.airfield_data
 			afld = json.template[afld];
 			afld = afld.toUpperCase();
+			/*
+			// This code was used when the entire row was click-sensitive
 			if(afld == defaultAirfield) {
 				multi_disp_str += "<div class=\"row\" onclick=\"" + defaultAirfieldNoChange + "\">";
 			}
 			else {
 				multi_disp_str += "<div class=\"row\" onclick=\"airfieldConfig('" + afld + "');\">";
 			}
+			*/
+			multi_disp_str += "<div class=\"row\">";
 			//alert(afld);
 			multi_disp_str += "<div class=\"col-lg-1\"><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(1,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(2,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(3,1).toUpperCase() + "</div></div>";
 			multi_disp_str += "<div class=\"col-lg-1 atis_code_m\">" + json.airfield_data[afld].atis_code + "</div>";
@@ -686,7 +694,7 @@
 				//active_rwy_apch = json.airfield_data[afld].apch_rwys.join(", ");
 			}
 			multi_disp_str += "<div class=\"col-lg-2 arrival_info\"><div class=\"apch_type\">" + active_rwy_apch + "</div><div></div>";
-			multi_disp_str += "<div class=\"wx\">" + json.airfield_data[afld].winds + "&nbsp;&nbsp;&nbsp;" + json.airfield_data[afld].altimeter + "</div></div>";
+			multi_disp_str += "<div class=\"wx\">" + json.airfield_data[afld].winds + "&nbsp;&nbsp;&nbsp;" + json.airfield_data[afld].altimeter + "</div>" + generateDropdown(afld,defaultAirfield) + "</div>";
 			multi_disp_str += "<div class=\"col-lg-5 metar_m\">" + json.airfield_data[afld].metar + "</div>";
 			multi_disp_str += "<div class=\"col-lg-3 metar_m\">RY RVR<div class=\"rvr\">";
 			for(var x=0; x<json.airfield_data[afld].rvr_display.length; x++) {
@@ -701,6 +709,15 @@
 		if(changes) {
 			document.getElementById("acknowledge").style.visibility = "visible";
 		}
+	}
+	
+	function generateDropdown(afldId,defAfld) {
+		var configAfld = "airfieldConfig('" + afldId + "')";
+		if(afldId == defAfld) {
+			configAfld = "alert('Configuration for this airfield must be set through the local vIDS display by the tower CIC.');";
+		}
+		var str = "<div class=\"dropdown noclear\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"fas fa-caret-square-down\"></i></a><ul class=\"dropdown-menu\" role=\"menu\"  aria-labelledby=\"dLabel\"><li class=\"dropdown-header\">" + afldId + "</li><li class=\"divider\"></li><li><a href=\"#\" onclick=\"" + configAfld + "\">Airfield Config</a></li><li><a href=\"#PROC\" onclick=\"loadProc('" + afldId + "');\" data-toggle=\"modal\">Instrument Procedures</a></li></ul></div>";
+		return str;
 	}
 	
 	function airfieldConfig(afldId) {
@@ -1042,3 +1059,112 @@ $(document).ready(function() {
 		$(this).marquee();
 	});
 	*/
+	
+function browser_detection() { // Provides alerting functions for antique browsers and mobile devices that may be incompatible
+	// From https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+	// Internet Explorer 6-11
+	var isIE = ((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true ));
+	// From https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
+	var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+	var alertString = new Array();
+	if(isIE) {
+		alertString.push("Your browser may be incompatible with some of the features of this site. Please consider upgrading to a modern browser.");
+	}
+	if(isMobile) {
+		alertString.push("This site was not designed to work with mobile devices. Please consider accessing this site from a computer or tablet.");
+	}
+	if(alertString.length > 0) {
+		alert(alertString.join("\n"));
+	}
+}
+
+function loadProc(afld) { // Calls FAA data class, retrieves JSON, and serves it to caller as a dialog menu
+	if(!!!document.getElementById("RDY_" + afld)) { // Prevents the data from loading twice in the same session
+		// Since we reuse this modal, return it to a blank slate before loading
+		document.getElementById("PROC_afldId").innerHTML = afld;
+		document.getElementById("PROC_iap").innerHTML = "";
+		document.getElementById("PROC_dp").innerHTML = "";
+		document.getElementById("PROC_star").innerHTML = "";
+		document.getElementById("PROC_misc").innerHTML = "";
+		document.getElementById("PROC_load").innerHTML = "Please wait... loading";
+		
+		//document.getElementById("PROC_" + afld).innerHTML = "<li class=\"dropdown-header\">" + afld + " Procedures</li><li class=\"divider\"></li><li class=\"disabled\"><a>Please wait...</a></li>";
+		var xhttp;
+		xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var procedures = formatProcList(xhttp.responseText); // Send this JSON to another function for parse and display
+				//document.getElementById("PROC_" + afld).innerHTML = "<li id=\"RDY_" + afld + "\" class=\"dropdown-header\">" + afld + " Procedures</li><li class=\"divider\"></li>" + procedures;
+				document.getElementById("PROC_iap").innerHTML = procedures.iap;
+				document.getElementById("PROC_dp").innerHTML = procedures.dp;
+				document.getElementById("PROC_star").innerHTML = procedures.star;
+				document.getElementById("PROC_misc").innerHTML = procedures.misc;
+				document.getElementById("PROC_load").innerHTML = "<span id=\"RDY_" + afld + "\"></span>";				
+			}
+		};
+		xhttp.open("GET", "faa_data.php?afld_id=" + afld, true); 
+		xhttp.send();
+	} 	
+}
+
+function formatProcList(json) { // Formats procedure data into a UL
+	//var starter1 = "<li class=\"dropdown-submenu\"><a href=\"#\">";
+	//var starter2 = " <i class=\"fas fa-caret-right\"></i></a><ul class=\"dropdown-menu\">";
+	//var apd = "<li>None available</li>";
+	//var iap = starter1 + "Approaches" + starter2;
+	//var star = starter1 + "Arrivals" + starter2;
+	//var dp = starter1 + "Departures" + starter2;
+	//var misc = starter1 + "Misc" + starter2;
+	var def = "<li>None available</li>";
+	var iap = star = dp = misc = def;
+	json = JSON.parse(json);
+	for(var x=0; x<json.length; x++) {
+		var proc = json[x];
+		var item = "<li><a href=\"" + proc.link + "\" target=\"_blank\">" + proc.name + "</li>";
+		if(proc.type == "IAP") {
+			if(iap == def) { iap = ""; }
+			iap += item;
+		}
+		else if(proc.type == "STAR") {
+			if(star == def) { star = ""; }
+			star += item;
+		}
+		else if(proc.type == "DP") {
+			if(dp == def) { dp = ""; }
+			dp += item;
+		}
+		//else if(proc.type == "APD") {
+		//	apd += item;
+		//}
+		else {
+			if(misc == def) { misc = ""; }
+			misc += item;
+		}
+	}
+	// Build reply
+	//var finisher = "</ul></li>";
+	//iap += finisher;
+	//star += finisher;
+	//dp += finisher;
+	//misc += finisher;
+	//var reply = apd + iap + star + dp + misc;
+	const reply = {iap:iap,star:star,dp:dp,misc:misc};
+	return reply;
+}
+/*
+$(document).ready(function(){
+  $('.dropdown-submenu a.test').on('click', function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+*/
+/*
+function airfieldMenu(afld) { // Someone clicked on an airfield... load the context menu
+	$('#airfield_menu .dropdown-header').text(afld);
+	$('#airfield_menu .afld_config').html("<a href=\"#\" onclick=\"airfieldConfig(\"KPDK\");\">Airfield Config</a>");
+	$('#airfield_menu .afld_procedure').html("<a href=\"#PROC\" onclick=\"loadProc(\"" + afld + "\");\" data-toggle=\"modal\">Instrument Procedures</li>");
+	$('#airfield_menu').dropdown('toggle');
+}
+*/

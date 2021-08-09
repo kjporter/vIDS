@@ -16,7 +16,7 @@
         <div class="modal-dialog modal-lg">
            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">RECAT</h5>
+                    <h3 class="modal-title">RECAT</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -32,7 +32,7 @@
         <div class="modal-dialog modal-lg">
            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">SOP</h5>
+                    <h3 class="modal-title">SOP</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -49,7 +49,7 @@
         <div class="modal-dialog modal-lg">
            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">SOP</h5>
+                    <h3 class="modal-title">SOP</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -65,7 +65,7 @@
         <div class="modal-dialog modal-lg">
            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">LOA</h5>
+                    <h3 class="modal-title">LOA</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -82,7 +82,7 @@
         <div class="modal-dialog modal-lg">
            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">LOA</h5>
+                    <h3 class="modal-title">LOA</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -113,7 +113,7 @@
         <div class="modal-dialog modal-lg">
            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Aircraft Types</h5>
+                    <h3 class="modal-title">Aircraft Types</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -129,7 +129,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">ATL Weather & Forecast</h5>
+                    <h3 class="modal-title">ATL Weather & Forecast</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -146,7 +146,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">ATL Tower Frequency List</h5>
+                    <h3 class="modal-title">ATL Tower Frequency List</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -182,7 +182,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">A80 Facility Frequency List</h5>
+                    <h3 class="modal-title">A80 Facility Frequency List</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -233,7 +233,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">ATL Tower Airspace</h5>
+                    <h3 class="modal-title">ATL Tower Airspace</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -263,7 +263,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">A80 Airspace Diagrams</h5>
+                    <h3 class="modal-title">A80 Airspace Diagrams</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -357,7 +357,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">RNAV Off The Ground</h5>
+                    <h3 class="modal-title">RNAV Off The Ground</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div id="weather_request" class="modal-body">
@@ -373,7 +373,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">ATL Airfield Config</h5>
+                    <h3 class="modal-title">ATL Airfield Config</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -461,7 +461,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add Pilot Weather Report (PIREP)</h5>
+                    <h3 class="modal-title">Add Pilot Weather Report (PIREP)</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -517,7 +517,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Relief Briefings</h5>
+                    <h3 class="modal-title">Relief Briefings</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 				<div class="modal-body">
@@ -588,7 +588,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Relief Briefings</h5>
+                    <h3 class="modal-title">Relief Briefings</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 				<div class="modal-body">
@@ -621,7 +621,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">TMU Information</h5>
+                    <h3 class="modal-title">TMU Information</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -643,7 +643,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">A80 CIC Information</h5>
+                    <h3 class="modal-title">A80 CIC Information</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -666,7 +666,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Emergency Procedures</h5>
+                    <h3 class="modal-title">Emergency Procedures</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -706,7 +706,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">vIDS Help - Local Display</h5>
+                    <h3 class="modal-title">vIDS Help - Local Display</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -763,7 +763,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">vIDS Help - A80 Display</h5>
+                    <h3 class="modal-title">vIDS Help - A80 Display</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -825,7 +825,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">vIDS Help - Multi-Airfield</h5>
+                    <h3 class="modal-title">vIDS Help - Multi-Airfield</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -868,7 +868,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Assign A80 Departure Gates</h5>
+                    <h3 class="modal-title">Assign A80 Departure Gates</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -912,7 +912,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Configure Runway Departure Split</h5>
+                    <h3 class="modal-title">Configure Runway Departure Split</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -957,7 +957,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Launch Multi-Airfield IDS</h5>
+                    <h3 class="modal-title">Launch Multi-Airfield IDS</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -991,7 +991,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Multi-Airfield IDS Template Creator</h5>
+                    <h3 class="modal-title">Multi-Airfield IDS Template Creator</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -1029,7 +1029,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Report a bug</h5>
+                    <h3 class="modal-title">Report a bug</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -1059,14 +1059,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">vIDS About & Help</h5>
+                    <h3 class="modal-title">vIDS About & Help</h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<p>vIDS is the product of a team of controllers from across the VATUSA region and is not officially associated with VATUSA or VATSIM. Its primary function is to enhance the ATC experience from the controller perspective by providing information and collaboration tools that are similar to those used at real ATC facilities.<p/>
 					<p>To facilitate sharing information, any changes that you make to vIDS will be stored on the server and displayed to everyone else that is currently viewing the system. Settings such as controller position combinations should only be set by the CIC. Other information, like PIREPs can be entered by any controller.</p>
 					<p>vIDS is currently in development. If you notice a bug, please <a href="#" onclick="showBugReportReferal('about_help');">file a bug report.</a></p>
-					<p>If you have questions or would like to interact with the development team, <a href="https://discord.gg/bZky9bv697" alt="Discord">feel free to join us on Discord.</a></p>
+					<p>If you have questions or would like to interact with the development team, <a href="https://discord.gg/bZky9bv697" alt="Discord">feel free to join us on Discord.<br/><img src="img/Discord.png" height="30px" alt="Discord" /></a></p>
+					<p>vIDS is open-source software licensed under the GNU GPL v3.0. <a href="https://github.com/kjporter/vIDS" alt="GitHub">Join us on GitHub to contribute to the project.<br/><img src="img/GitHub.png" height="30px" alt="GitHub" /><img src="img/GitHub2.png" height="30px" alt="GitHub" /></a></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -1078,7 +1079,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Airfield Configuration: <span id="ac_afldId"></span></h5>
+                    <h3 class="modal-title">Airfield Configuration: <span id="ac_afldId"></span></h3>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -1101,6 +1102,44 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 					<button type="button" class="btn btn-primary" onclick="saveAfldConfigOverride(true);">Save Override</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div id="PROC" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Instrument Procedures: <span id="PROC_afldId"></span></h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+				<div class="row">
+					<div class="col-lg-3">
+						<h4>Approaches</h4>
+						<ul id="PROC_iap">
+						</ul>
+					</div>
+					<div class="col-lg-3">
+						<h4>Departures</h4>
+						<ul id="PROC_dp">
+						</ul>
+					</div>
+					<div class="col-lg-3">
+						<h4>Arrivals</h4>
+						<ul id="PROC_star">
+						</ul>
+					</div>
+					<div class="col-lg-3">
+						<h4>Misc</h4>
+						<ul id="PROC_misc">
+						</ul>
+					</div>
+				</div>
+                </div>
+				<h3 id="PROC_load">Please wait... loading</h3>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

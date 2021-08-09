@@ -83,6 +83,17 @@ if(!$valid_auth) {
 	</form>
 */
 ?>
+<!-- Menu for individual airfield config/proc info -->
+<!--
+<div class="dropdown">
+	<ul id="airfield_menu" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+		<li class="dropdown-header"></li>
+		<li class="divider"></li>
+		<li class="afld_config"></li>
+		<li class="afld_procedure"></li>
+	</ul>
+</div>
+-->
 <?php include "ids_grid_template.php"; ?>
 
 	<!-- MULTI (TRACON/ARTCC) IDS DISPLAY -->

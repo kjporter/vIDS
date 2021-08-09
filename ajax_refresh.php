@@ -10,6 +10,8 @@
 		Changes: 
 	*/
 
+//error_reporting(0); //This file always results in an AJAX reply. Turn errors off.
+
 include_once "shared_functions.php";
 
 $live_network = false;
@@ -102,6 +104,7 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	curl_setopt($cu,CURLOPT_URL,$vatsim_stats_url);
 	curl_setopt($cu,CURLOPT_RETURNTRANSFER,true);
 	curl_setopt($cu,CURLOPT_CONNECTTIMEOUT,3);
+	curl_setopt($cu, CURLOPT_ENCODING, "gzip");
 	curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,false); // There is no reason to verify the SSL certificate, skip this
 	$cached_stats = json_decode(curl_exec($cu), true); // Execute CURL and decode JSON
 	curl_close($cu);
@@ -121,9 +124,14 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	curl_setopt($cu,CURLOPT_URL,$vatsim_stats_url);
 	curl_setopt($cu,CURLOPT_RETURNTRANSFER,true);
 	curl_setopt($cu,CURLOPT_CONNECTTIMEOUT,3);
+	curl_setopt($cu, CURLOPT_ENCODING, "gzip");
 	curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,false); // There is no reason to verify the SSL certificate, skip this
+	// Note: In some instances, this CURL request to VATSIM has a tendancy to last more than 30 seconds and time-out. Catching the exception allows the script to continue.
+	try {
 	$curl_raw = curl_exec($cu);
-	$stats_array = json_decode(curl_exec($cu), true); // Execute CURL and decode JSON
+	//$stats_array = json_decode(curl_exec($cu), true); // Execute CURL and decode JSON
+	$stats_array = json_decode($curl_raw, true); // Execute CURL and decode JSON
+	} catch (Exception $e) { } // Do nothing for now... I don't have error handling built in to display this or alert the user
 	curl_close($cu);
 	file_put_contents("data/vatsim.json",$curl_raw);
 
@@ -140,6 +148,7 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	curl_setopt($cu,CURLOPT_URL,$vatsim_metar_url);
 	curl_setopt($cu,CURLOPT_RETURNTRANSFER,true);
 	curl_setopt($cu,CURLOPT_CONNECTTIMEOUT,3);
+	curl_setopt($cu, CURLOPT_ENCODING, "gzip");
 	curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,false); // There is no reason to verify the SSL certificate, skip this
 	$metar = curl_exec($cu); // Execute CURL
 	curl_close($cu);
@@ -202,6 +211,7 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 		curl_setopt($cu,CURLOPT_URL,$d_atis_url);
 		curl_setopt($cu,CURLOPT_RETURNTRANSFER,true);
 		curl_setopt($cu,CURLOPT_CONNECTTIMEOUT,3);
+		curl_setopt($cu, CURLOPT_ENCODING, "gzip");
 		curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,false); // There is no reason to verify the SSL certificate, skip this
 		$datis = curl_exec($cu); // Execute CURL
 		curl_close($cu);
@@ -231,7 +241,7 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 			}
 		}
 		//print_r($afld_data['apch_rwys']);
-		$terminal_search = array("DEPS","LDG");
+		$terminal_search = array("DEPS","LDG","DEPG");
 		$terminal_strings = array();
 		foreach($atxt as $atis_part) {
 			foreach($terminal_search as $search_str) {
@@ -319,8 +329,12 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 			else {
 				$active_rwys = $afld_data['dep_rwys'];
 			}
+			//if($afld == "KATL") {
+			//	print_r($active_rwys);
+			//}
 			if(is_array($active_rwys)) {
 				foreach($active_rwys as $rwy) {
+					//echo ($afld == "KATL" ? "HERE $rwy" : "");
 					$rvr_val = "P6000FT";
 					if(array_key_exists($rwy,$afld_data['rvr'])) {
 						$rvr_val = $afld_data['rvr'][$rwy];
@@ -825,6 +839,7 @@ function curl_request($url,$ssl_required=false) { // Simplified CURL request and
 	curl_setopt($cu,CURLOPT_URL,$url);
 	curl_setopt($cu,CURLOPT_RETURNTRANSFER,true);
 	curl_setopt($cu,CURLOPT_CONNECTTIMEOUT,3);
+	curl_setopt($cu, CURLOPT_ENCODING, "gzip");
 	curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,$ssl_required); // There is no reason to verify the SSL certificate, skip this
 	$curl_raw = curl_exec($cu);
 	curl_close($cu);	
