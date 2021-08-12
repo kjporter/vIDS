@@ -15,7 +15,6 @@
 	include_once "sso_auth.php";
 	
 	define('DEBUG', false);
-	//define('DEFAULT AIRFIELD', 'KATL'); 
 	
 ?>
 <!DOCTYPE html>
@@ -26,75 +25,50 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="ids.css">
 	<link rel="shortcut icon" href="img/favicon.ico" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<!-- TODO: Add support for bootstrap 4.x and remove bootstrap dependencies 3.X from project -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+	<!-- TODO: Add support for bootstrap 5.x and remove bootstrap dependencies 3.X from project -->
 	<!--
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" media="screen">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 	-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<!--
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+	-->
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
 	<script src="https://kit.fontawesome.com/9bd47a7738.js" crossorigin="anonymous"></script> <!-- used for glyph icons in tower IDS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- used for glyph icons in tower IDS -->
-	<!-- This script was buggy, problematic, and not compatible with boostrap 4.X
- 	<link href="css/bootstrap-modal-carousel.css" rel="stylesheet" /> 
-	<script src="js/bootstrap-modal-carousel.js"/></script>
-	-->
 	<script src="ids.js"/></script>
 </head>
 <?php
+	// Picks a random image from the $imagesDir to display in the landing page background
 	$imagesDir = 'img/bg/';
 	$images = glob($imagesDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
 	$randomImage = $images[array_rand($images)];
 ?>
 <body style="background-image: url('<?php echo $randomImage; ?>')" onload="refreshData(true);">  <!-- refreshData call initializes the display data -->
-<input type="hidden" id="bgimg" value="<?php echo $randomImage; ?>" />
-<div id="container">
-	<div id="alerts" class="container fixed-top">  <!-- alert box displays authentication info -->
-		<div class="row no_border" style="padding: 5px; visibility:hidden">
-			<div id="alert" class="col <?php echo $alert_style; ?>">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<?php echo $alert_text; ?>
+	<input type="hidden" id="bgimg" value="<?php echo $randomImage; ?>" />
+	<div id="container">
+		<div id="alerts" class="container fixed-top">  <!-- alert box displays authentication info -->
+			<div class="row no_border" style="padding: 5px; visibility:hidden">
+				<div id="alert" class="col <?php echo $alert_style; ?>">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<?php echo $alert_text; ?>
+				</div>
 			</div>
 		</div>
-	</div>
-	<form id="configForm" name="configForm" method="get" action="<?php //echo $localPath; ?>">
-		<!--<input type="checkbox" id="live" name="live" /> Use live network data (if unchecked, an archived dataset is used ***testing only***)-->
-	</form>
-<?php
-/*
-if(!$valid_auth) {
-	print "<div id=\"alerts\" class=\"container fixed-top\">  <!-- alert box displays authentication info -->
-		<div class=\"row no_border\" style=\"visibility:hidden\">
-			<div id=\"alert\" class=\"col $alert_style\">
-				<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
-					<span aria-hidden=\"true\">&times;</span>
-				</button>
-				$alert_text
-			</div>
-		</div>
-	</div>";
-}
-*/
-/*	<form id="configForm" name="configForm" method="get" action="<?php //echo $localPath; ?>">
-		<!--<input type="checkbox" id="live" name="live" /> Use live network data (if unchecked, an archived dataset is used ***testing only***)-->
-	</form>
-*/
+
+<?php 
+// Contains UI definition for local and A80 display
+include "ids_grid_template.php"; 
 ?>
-<!-- Menu for individual airfield config/proc info -->
-<!--
-<div class="dropdown">
-	<ul id="airfield_menu" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-		<li class="dropdown-header"></li>
-		<li class="divider"></li>
-		<li class="afld_config"></li>
-		<li class="afld_procedure"></li>
-	</ul>
-</div>
--->
-<?php include "ids_grid_template.php"; ?>
 
 	<!-- MULTI (TRACON/ARTCC) IDS DISPLAY -->
 	<div id="multi_ids" class="container-fluid" style="display:none;">
@@ -123,7 +97,6 @@ if(!$valid_auth) {
 	?>
 	</div>
 	<div id="landing" class="container container-table">
-		
 		<div class="row vertical-center-row" style="border:0px">
 			<div class="col-md-6 col-md-offset-3" border:0px">
 				<div class="row" style="border:0px; text-align:center">
@@ -156,7 +129,10 @@ else {
 		</div>
 	</div>
 	
-<?php include "modal.php"; ?>
+<?php 
+// Contains definitions for all of the modal boxes
+include "modal.php";
+?>
 
 </div>
 <?php

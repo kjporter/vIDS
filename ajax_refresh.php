@@ -126,14 +126,13 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	curl_setopt($cu,CURLOPT_CONNECTTIMEOUT,3);
 	curl_setopt($cu, CURLOPT_ENCODING, "gzip");
 	curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,false); // There is no reason to verify the SSL certificate, skip this
-	// Note: In some instances, this CURL request to VATSIM has a tendancy to last more than 30 seconds and time-out. Catching the exception allows the script to continue.
-	try {
-	$curl_raw = curl_exec($cu);
-	//$stats_array = json_decode(curl_exec($cu), true); // Execute CURL and decode JSON
-	$stats_array = json_decode($curl_raw, true); // Execute CURL and decode JSON
-	} catch (Exception $e) { } // Do nothing for now... I don't have error handling built in to display this or alert the user
+	$curl_raw = curl_exec($cu); // Execute CURL
+	//$stats_array = json_decode($curl_raw, true); // decode JSON
 	curl_close($cu);
-	file_put_contents("data/vatsim.json",$curl_raw);
+	if(isJSON($curl_raw)) {	// Note: In some instances, this CURL request to VATSIM has a tendancy to last more than 30 seconds and time-out. When it times out, a non-JSON is returned. This allows us to catch the error.
+		$stats_array = json_decode($curl_raw, true); // Execute CURL and decode JSON
+		file_put_contents("data/vatsim.json",$curl_raw);
+	}
 
 	//print_r($airfields);
 	// CURL to pull METAR from VATSIM data service

@@ -1106,6 +1106,30 @@
             </div>
         </div>
     </div>
+	<div id="ControllerEdit" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Edit Controller Positions/Combinations</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+				<p>The setting below toggles controller edit mode, allowing you to set controller positions in the vIDS display. This setting only impacts
+				the interface that you see - other users will not see edit mode unless they enable it (disabled by default).<p/>
+                <div class="form-group row">
+                    <label for="inputName" class="col-sm-4 col-form-label">Toggle Edit Mode?</label>
+					<div class="col-sm-8">
+						<p><input type="checkbox" id="controller_edit_active" /> When checked, controller edit mode is active and positions are displayed in vIDS as a selectable drop-down. When unchecked, display mode is active, which provides a clean read-only interface.</p>
+					</div>
+				</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary" onclick="saveControllerEdit();">Save Mode</button>
+                </div>
+            </div>
+        </div>
+    </div>
 	<div id="PROC" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">

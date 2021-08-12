@@ -15,8 +15,8 @@
 			</div>
 		</div>
 		<div class="row" style="border-right:2px solid white">
-			<div class="col-lg-1 atis_code" id="atis_code"></div>
-			<div class="col-lg-11">
+			<div class="col-lg-1 atis_code h-100" id="atis_code"></div>
+			<div class="col-lg-11"">
 				<div class="row">
 					<div class="col-lg-12" id="metar"></div>
 				</div>
@@ -47,8 +47,8 @@
 			<div class="col-lg-4">
 				<div class="row">
 					<div class="col-lg-12">
-						<span class="cell_header">Local Control</span>
-						<div class="row rem-bor">
+						<span class="cell_header">Local Control</span>&nbsp;<a href="#ControllerEdit" data-toggle="modal"><i class="fas fa-edit"></i></a>
+						<div class="row rem-bor controllerPositions">
 							<div class="col-lg-2">LC-1</div>
 							<div class="col-lg-2">LC-2</div>
 							<div class="col-lg-2">LC-3</div>
@@ -60,7 +60,7 @@
 						</div>
 						<div class="row combines rem-bor">
 							<div class="col-lg-2">
-								<select class="custom-select mr-sm-2" id="LC1" onchange="updateCtrlPos();">
+								<select class="custom-select mr-sm-2 controllerEdit hideControl" id="LC1" onchange="updateCtrlPos();">
 				<?php
 					$local_select_options = "	<option value=\".\" selected>...</option>
 												<option value=\"LC1\">LC-1</option>
@@ -72,27 +72,27 @@
 												<option value=\"C43\">C43</option>";
 					echo $local_select_options;
 				?>
-								</select>
+								</select><input type="text" class="controllerDisplay" id="LC1_disp" size="3" readonly>
 							</div>
 							<div class="col-lg-2">
-								<select class="custom-select mr-sm-2" id="LC2" onchange="updateCtrlPos();">
+								<select class="custom-select mr-sm-2 controllerEdit hideControl" id="LC2" onchange="updateCtrlPos();">
 									<?php echo $local_select_options; ?>
-								</select>
+								</select><input type="text" class="controllerDisplay" id="LC2_disp" size="3" readonly>
 							</div>
 							<div class="col-lg-2">
-								<select class="custom-select mr-sm-2" id="LC3" onchange="updateCtrlPos();">
+								<select class="custom-select mr-sm-2 controllerEdit hideControl" id="LC3" onchange="updateCtrlPos();">
 									<?php echo $local_select_options; ?>
-								</select>
+								</select><input type="text" class="controllerDisplay" id="LC3_disp" size="3" readonly>
 							</div>
 							<div class="col-lg-2">
-								<select class="custom-select mr-sm-2" id="LC4" onchange="updateCtrlPos();">
+								<select class="custom-select mr-sm-2 controllerEdit hideControl" id="LC4" onchange="updateCtrlPos();">
 									<?php echo $local_select_options; ?>
-								</select>
+								</select><input type="text" class="controllerDisplay" id="LC4_disp" size="3" readonly>
 							</div>
 							<div class="col-lg-2">
-								<select class="custom-select mr-sm-2" id="LC5" onchange="updateCtrlPos();">
+								<select class="custom-select mr-sm-2 controllerEdit hideControl" id="LC5" onchange="updateCtrlPos();">
 									<?php echo $local_select_options; ?>
-								</select>
+								</select><input type="text" class="controllerDisplay" id="LC5_disp" size="3" readonly>
 							</div>
 						</div>
 						<br/>
@@ -101,7 +101,7 @@
 				</div>
 		<div class="row template_local">
 			<div class="col-lg-12"><span class="cell_header">Ground Control</span>
-			<div class="row rem-bor" style="text-align:center">
+			<div class="row rem-bor">
 					<div class="col-lg-3">GC-N</div>
 					<div class="col-lg-3">GC-C</div>
 					<div class="col-lg-3">GC-S</div>
@@ -110,7 +110,7 @@
 				<div class="row rem-bor"><div class="col-lg-10">Combined to:</div></div>
 				<div class="row combines rem-bor">
 				<div class="col-lg-3">
-				<select class="custom-select mr-sm-2" id="GCN" onchange="updateCtrlPos();">
+				<select class="custom-select mr-sm-2 controllerEdit hideControl" id="GCN" onchange="updateCtrlPos();">
 				<?php
 					$ground_select_options = "	<option value=\".\" selected>...</option>
 												<option value=\"GCN\">GC-N</option>
@@ -126,29 +126,29 @@
 												<option value=\"C43\">C43</option>";
 					echo $ground_select_options;
 				?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="GCN_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-3">
-			<select class="custom-select mr-sm-2" id="GCC" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="GCC" onchange="updateCtrlPos();">
 			<?php echo $ground_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="GCC_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-3">
-			<select class="custom-select mr-sm-2" id="GCS" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="GCS" onchange="updateCtrlPos();">
 			<?php echo $ground_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="GCS_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-3">
-			<select class="custom-select mr-sm-2" id="GM" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="GM" onchange="updateCtrlPos();">
 			<?php echo $ground_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="GM_disp" size="3" readonly>
 			</div>
 			</div>
 			</div>
 		</div>
 		<div class="row template_a80">
 			<div class="col-lg-12"><span class="cell_header">A80 TAR</span>
-			<div class="row rem-bor" style="text-align:center">
+			<div class="row rem-bor">
 					<div class="col-lg-3">H</div>
 					<div class="col-lg-3">D</div>
 					<div class="col-lg-3">L</div>
@@ -157,7 +157,7 @@
 				<div class="row rem-bor"><div class="col-lg-10">Combined to:</div></div>
 				<div class="row combines rem-bor">
 				<div class="col-lg-3">
-				<select class="custom-select mr-sm-2" id="H" onchange="updateCtrlPos();">
+				<select class="custom-select mr-sm-2 controllerEdit hideControl" id="H" onchange="updateCtrlPos();">
 				<?php
 					$tar_select_options = "	<option value=\".\" selected>...</option>
 												<option value=\"H\">H</option>
@@ -169,22 +169,22 @@
 												<option value=\"C43\">C43</option>";
 					echo $tar_select_options;
 				?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="H_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-3">
-			<select class="custom-select mr-sm-2" id="D" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="D" onchange="updateCtrlPos();">
 			<?php echo $tar_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="D_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-3">
-			<select class="custom-select mr-sm-2" id="L" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="L" onchange="updateCtrlPos();">
 			<?php echo $tar_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="L_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-3">
-			<select class="custom-select mr-sm-2" id="Y" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="Y" onchange="updateCtrlPos();">
 			<?php echo $tar_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="Y_disp" size="3" readonly>
 			</div>
 			</div>
 			</div>
@@ -193,7 +193,7 @@
 	<div class="col-lg-4">
 	<div class="row">
 			<div class="col-lg-12"><span class="cell_header">A80 Departure</span>
-			<div class="row rem-bor" style="text-align:center">
+			<div class="row rem-bor">
 					<div class="col-lg-4">N</div>
 					<div class="col-lg-4">S</div>
 					<div class="col-lg-4">I</div>
@@ -201,7 +201,7 @@
 				<div class="row rem-bor"><div class="col-lg-10">Combined to:</div></div>
 				<div class="row combines rem-bor">
 				<div class="col-lg-4">
-				<select class="custom-select mr-sm-2" id="N" onchange="updateCtrlPos();">
+				<select class="custom-select mr-sm-2 controllerEdit hideControl" id="N" onchange="updateCtrlPos();">
 				<?php
 					$clnc_select_options = "	<option value=\".\" selected>...</option>
 												<option value=\"N\">N</option>
@@ -210,17 +210,17 @@
 												<option value=\"C43\">C43</option>";
 					echo $clnc_select_options;
 				?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="N_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-4">
-			<select class="custom-select mr-sm-2" id="S" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="S" onchange="updateCtrlPos();">
 			<?php echo $clnc_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="S_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-4">
-			<select class="custom-select mr-sm-2" id="I" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="I" onchange="updateCtrlPos();">
 			<?php echo $clnc_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="I_disp" size="3" readonly>
 			</div>
 			</div>
 			<div class="row rem-bor"><div class="col-lg-10">Gates assigned:</div></div>
@@ -234,7 +234,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 <span class="cell_header">A80 Satellite</span>
-				<div class="row rem-bor" style="text-align:center">
+				<div class="row rem-bor">
 					<div class="col-lg-2">P</div>
 					<div class="col-lg-2">F</div>
 					<div class="col-lg-2">X</div>
@@ -244,7 +244,7 @@
 				<div class="row rem-bor"><div class="col-lg-10">Combined to:</div></div>
 				<div class="row combines rem-bor">
 				<div class="col-lg-2">
-				<select class="custom-select mr-sm-2" id="P" onchange="updateCtrlPos();">
+				<select class="custom-select mr-sm-2 controllerEdit hideControl" id="P" onchange="updateCtrlPos();">
 				<?php
 					$local_select_options = "	<option value=\".\" selected>...</option>
 												<option value=\"P\">P</option>
@@ -256,27 +256,27 @@
 												<option value=\"C43\">C43</option>";
 					echo $local_select_options;
 				?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="P_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-2">
-			<select class="custom-select mr-sm-2" id="F" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="F" onchange="updateCtrlPos();">
 			<?php echo $local_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="F_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-2">
-			<select class="custom-select mr-sm-2" id="X" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="X" onchange="updateCtrlPos();">
 			<?php echo $local_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="X_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-2">
-			<select class="custom-select mr-sm-2" id="G" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="G" onchange="updateCtrlPos();">
 			<?php echo $local_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="G_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-2">
-			<select class="custom-select mr-sm-2" id="Q" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="Q" onchange="updateCtrlPos();">
 			<?php echo $local_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="Q_disp" size="3" readonly>
 			</div>
 			</div>			
 			</div>
@@ -289,7 +289,7 @@
 	<div class="col-lg-4">
 		<div class="row rem-bor-tp">
 			<div class="col-lg-12 template_local"><span class="cell_header">Clearance Delivery</span>
-			<div class="row rem-bor" style="text-align:center">
+			<div class="row rem-bor">
 					<div class="col-lg-4">CD-1</div>
 					<div class="col-lg-4">CD-2</div>
 					<div class="col-lg-4">FD</div>
@@ -297,7 +297,7 @@
 				<div class="row rem-bor"><div class="col-lg-10">Combined to:</div></div>
 				<div class="row combines rem-bor">
 				<div class="col-lg-4">
-				<select class="custom-select mr-sm-2" id="CD1" onchange="updateCtrlPos();">
+				<select class="custom-select mr-sm-2 controllerEdit hideControl" id="CD1" onchange="updateCtrlPos();">
 				<?php
 					$clnc_select_options = "	<option value=\".\" selected>...</option>
 												<option value=\"CD1\">CD-1</option>
@@ -310,22 +310,22 @@
 												<option value=\"C43\">C43</option>";
 					echo $clnc_select_options;
 				?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="CD1_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-4">
-			<select class="custom-select mr-sm-2" id="CD2" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="CD2" onchange="updateCtrlPos();">
 			<?php echo $clnc_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="CD2_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-4">
-			<select class="custom-select mr-sm-2" id="FD" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="FD" onchange="updateCtrlPos();">
 			<?php echo $clnc_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="FD_disp" size="3" readonly>
 			</div>
 			</div>
 			</div>
 			<div class="col-lg-12 template_a80"><span class="cell_header">A80 Outer</span>
-			<div class="row rem-bor" style="text-align:center">
+			<div class="row rem-bor">
 					<div class="col-lg-3">M</div>
 					<div class="col-lg-3">W</div>
 					<div class="col-lg-3">Z</div>
@@ -335,7 +335,7 @@
 				<div class="row rem-bor"><div class="col-lg-10">Combined to:</div></div>
 				<div class="row combines rem-bor">
 				<div class="col-lg-3">
-				<select class="custom-select mr-sm-2" id="M" onchange="updateCtrlPos();">
+				<select class="custom-select mr-sm-2 controllerEdit hideControl" id="M" onchange="updateCtrlPos();">
 				<?php
 					$outer_select_options = "	<option value=\".\" selected>...</option>
 												<option value=\"M\">M</option>
@@ -349,22 +349,22 @@
 												<option value=\"C43\">C43</option>";
 					echo $outer_select_options;
 				?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="M_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-3">
-			<select class="custom-select mr-sm-2" id="W" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="W" onchange="updateCtrlPos();">
 			<?php echo $outer_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="W_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-3">
-			<select class="custom-select mr-sm-2" id="Z" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="Z" onchange="updateCtrlPos();">
 			<?php echo $outer_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="Z_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-3">
-			<select class="custom-select mr-sm-2" id="R" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="R" onchange="updateCtrlPos();">
 			<?php echo $outer_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="R_disp" size="3" readonly>
 			</div>
 			</div>
 			</div>
@@ -376,7 +376,7 @@
 	<div class="col-lg-4">
 		<div class="row rem-bor-tp">
 			<div class="col-lg-12"><span class="cell_header">A80 Arrival</span>
-			<div class="row rem-bor" style="border-top:0px; border-bottom:0px; text-align:center">
+			<div class="row rem-bor" style="border-top:0px; border-bottom:0px;">
 					<div class="col-lg-4">O</div>
 					<div class="col-lg-4">V</div>
 					<div class="col-lg-4">A</div>
@@ -384,7 +384,7 @@
 				<div class="row rem-bor" style="border-top:0px; border-bottom:0px"><div class="col-lg-10">Combined to:</div></div>
 				<div class="row combines rem-bor" style="border-top:0px">
 				<div class="col-lg-4">
-				<select class="custom-select mr-sm-2" id="O" onchange="updateCtrlPos();">
+				<select class="custom-select mr-sm-2 controllerEdit hideControl" id="O" onchange="updateCtrlPos();">
 				<?php
 					$clnc_select_options = "	<option value=\".\" selected>...</option>
 												<option value=\"O\">O</option>
@@ -396,17 +396,17 @@
 												<option value=\"C43\">C43</option>";
 					echo $clnc_select_options;
 				?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="O_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-4">
-			<select class="custom-select mr-sm-2" id="V" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="V" onchange="updateCtrlPos();">
 			<?php echo $clnc_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="V_disp" size="3" readonly>
 			</div>
 			<div class="col-lg-4">
-			<select class="custom-select mr-sm-2" id="A" onchange="updateCtrlPos();">
+			<select class="custom-select mr-sm-2 controllerEdit hideControl" id="A" onchange="updateCtrlPos();">
 			<?php echo $clnc_select_options; ?>
-			</select>
+			</select><input type="text" class="controllerDisplay" id="A_disp" size="3" readonly>
 			</div>
 			</div>
 			</div>

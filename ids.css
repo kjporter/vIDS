@@ -16,6 +16,19 @@ h3.modal-title {
 div.noclear {
 	display: inline;
 }
+
+input.controllerDisplay {
+	border: 0px;
+}
+
+.hideControl {
+	display: none;
+}
+
+.showControl {
+	display: inline;
+}
+	
 /*
 .dropdown-submenu {
     position: relative;

@@ -464,7 +464,9 @@
 		for(var x=0; x<controllers.length;x++) {
 			//controllerPos += "Position: " + positions[x] + " Controller selected: " + controllers[x] + "\n";
 			changes = changeDetection(init,changes,document.getElementById(positions[x]).value,controllers[x],positions[x]);
+			changes = changeDetection(init,changes,document.getElementById(positions[x] + "_disp").value,controllers[x],positions[x]);
 			selectOption(positions[x],controllers[x]);
+			document.getElementById(positions[x] + "_disp").value = controllers[x];
 		}
 		//alert(changes);
 		// Set text fields
@@ -1168,3 +1170,27 @@ function airfieldMenu(afld) { // Someone clicked on an airfield... load the cont
 	$('#airfield_menu').dropdown('toggle');
 }
 */
+
+function saveControllerEdit() {
+	var editFields = document.getElementsByClassName("controllerEdit");
+	var dispFields = document.getElementsByClassName("controllerDisplay");
+	if (document.getElementById("controller_edit_active").checked) { // Enter controller edit mode
+		for(var x=0;x<editFields.length;x++) {
+			editFields[x].classList.add('showControl');
+			editFields[x].classList.remove('hideControl');
+			dispFields[x].classList.add('hideControl');
+			dispFields[x].classList.remove('showControl');
+
+		}
+	}
+	else { // Enter controller display mode
+		for(var x=0;x<editFields.length;x++) {
+			editFields[x].classList.add('hideControl');
+			editFields[x].classList.remove('showControl');
+			dispFields[x].classList.add('showControl');
+			dispFields[x].classList.remove('hideControl');
+
+		}
+	}
+	$('#ControllerEdit').modal('toggle');
+}
