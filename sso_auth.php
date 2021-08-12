@@ -51,23 +51,26 @@ elseif(isset($_GET['code'])) { // Need to get a new authentication - session doe
 	$ch = curl_init();
 	curl_setopt($ch,CURLOPT_URL, $sso_endpoint . "/oauth/token");
 	curl_setopt($ch,CURLOPT_POST, true);
+	//curl_setopt($ch,CURLOPT_HEADER,true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
 	curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
-	curl_setopt($ch,CURLOPT_POSTFIELDS,array ('grant_type'=>'authorization_code', 'client_id'=>$client_id, 'client_secret'=>$client_secret, 'redirect_uri'=>$redirect_uri, 'code'=>$_GET['code']));
+	curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query(array ('grant_type'=>'authorization_code', 'client_id'=>$client_id, 'client_secret'=>$client_secret, 'redirect_uri'=>$redirect_uri, 'code'=>$_GET['code'])));
 	curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_ENCODING, "gzip");
 	$token = curl_exec($ch);
 	curl_close($ch);
+	//echo "Raw Token: " . $token;
 	// We've got the token, now extract the pieces needed for the API call
 	// VATSIM API Documentation: https://api.vatsim.net/api/
 	$token_json = json_decode($token,true);
 	$access_token = $token_json['access_token'];
 	$_SESSION['access_token'] = $token_json['access_token'];
+	//echo "JSON Token: " . $token_json;
 	//print_r($token_json);
 	//$dump = $token_json['access_token'];
 }
-else {
-	//This should not happen
-}
+else {} // Do nothing, authentication sequence has not started
+
 $full_name = "";
 $user_rating = "";
 if($access_token != null) {
@@ -87,8 +90,8 @@ if($access_token != null) {
 		//$dump .= "<br/>Controller rating: " . $userData_json['vatsim']['rating']['id'];
 		if($userData_json['data']['vatsim']['rating']['id']>0) {
 			// Success... the person is at least an observer
-			$alert_text = "Authentication successful - access granted.";
-			$alert_style = "alert alert-success alert-visible";
+			//$alert_text = "Authentication successful - access granted.";
+			//$alert_style = "alert alert-success alert-visible";
 			$valid_auth = true;
 			if(isset($userData_json['data']['personal']['name_full'])) { // This shouldn't really be necessary, but it prevents an error when the full name isn't available
 				$full_name = $userData_json['data']['personal']['name_full'];
