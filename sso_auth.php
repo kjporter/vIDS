@@ -12,7 +12,8 @@
 		VATSIM OAUTH2 Provider: https://auth.vatsim.net/
 		VATSIM Connect SSO Documentation: https://github.com/vatsimnetwork/documentation/blob/master/connect.md
 	*/
-	
+
+include_once "config.php";	
 include_once "shared_functions.php";
 include_once "sso_variables.php";
 
@@ -35,7 +36,7 @@ $sso_endpoint = $sso_variables[$arr_var][3];
 //$dump = "";
 $alert_text = "";
 $alert_style = "";
-$full_name = "";
+//$full_name = "";
 $valid_auth = false;
 $access_token = null;
 
@@ -73,6 +74,7 @@ else {} // Do nothing, authentication sequence has not started
 
 $full_name = "";
 $user_rating = "";
+$vatsim_cid = "";
 if($access_token != null) {
 	//echo "CHECK TOKEN";
 	$ch = curl_init();
@@ -85,21 +87,47 @@ if($access_token != null) {
 	$userData_json = json_decode($userData,true);
 	curl_close($ch);
 	if(isset($userData_json['data']['vatsim']['rating']['id'])) {
+		// Check to see if the user is blacklisted before authorizing them
+		$blacklisted = false;
+		$blacklist = "data/blacklist.dat";
+		if(file_exists($blacklist)) {
+			if(strpos(file_get_contents($blacklist),$userData_json['data']['cid']) !== false) {
+				$blacklisted = true;
+			}
+		}
 		//print_r($userData_json['data']['vatsim']['rating']['id']);
 		// We've got the user data from the API, check to make sure they have a valid controller rating (> 0)
 		//$dump .= "<br/>Controller rating: " . $userData_json['vatsim']['rating']['id'];
-		if($userData_json['data']['vatsim']['rating']['id']>0) {
-			// Success... the person is at least an observer
-			//$alert_text = "Authentication successful - access granted.";
-			//$alert_style = "alert alert-success alert-visible";
+		if(!$blacklisted && ($userData_json['data']['vatsim']['rating']['id']>0)) { // The user logging in is at least an observer
+			// Check the VATUSA API to see if the user is a controller at THIS facility before granting access
+			// *Note* this API call will only work for facilities within the VATUSA region
+			$cu = curl_init();
+			curl_setopt($cu,CURLOPT_URL,"https://api.vatusa.net/v2/facility/" . FACILITY_ID . "/roster/both");
+			curl_setopt($cu,CURLOPT_RETURNTRANSFER,true);
+			curl_setopt($cu,CURLOPT_CONNECTTIMEOUT,3);
+			curl_setopt($cu, CURLOPT_ENCODING, "gzip");
+			curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,false); // There is no reason to verify the SSL certificate, skip this
+			$roster = curl_exec($cu); // Execute CURL
+			curl_close($cu);
+			if((strpos($roster,$userData_json['data']['cid']) !== false)||(strpos($sso_endpoint,"dev") !== false)) { // Does the CID exist in the roster JSON... OR are we using the dev endpoint (fake CIDs)?
 			$valid_auth = true;
 			if(isset($userData_json['data']['personal']['name_full'])) { // This shouldn't really be necessary, but it prevents an error when the full name isn't available
 				$full_name = $userData_json['data']['personal']['name_full'];
 			}
 			$user_rating = $userData_json['data']['vatsim']['rating']['short'];
+			$vatsim_cid = $userData_json['data']['cid']; // Added to identify users so they can delete templates they create
+			}
+			else {
+				$alert_text = "Insufficient privileges to use this system (must be a home or visiting controller at this facility). Contact a member of your ARTCC staff.";
+				$alert_style = "alert alert-danger alert-visible";						
+			}
+		}
+		elseif($blacklisted) {
+			$alert_text = "Your access to this system has been revoked. Contact a member of your ARTCC staff.";
+			$alert_style = "alert alert-danger alert-visible";				
 		}
 		else {
-			$alert_text = "Insufficient privileges to use this system - contact your ARTCC FE.";
+			$alert_text = "Insufficient privileges to use this system (must have at least an observer ATC rating). Contact a member of your ARTCC staff.";
 			$alert_style = "alert alert-danger alert-visible";		
 		}
 	}
