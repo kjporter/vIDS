@@ -86,9 +86,15 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 			//$airfields = $template_airfields_list = json_encode($templ_data);
 			$template_airfields = explode("\n",$templ_data);
 			//unset($template_airfields_list[0]); // Remove the timestamp
-			unset($template_airfields[0]); // We don't care about the timestamp
+			unset($template_airfields[0]); // We don't care about the template name
+			$templ_creator = null;
+			if(is_numeric($template_airfields[1])) { // Not all templates had this info...
+				$templ_creator = $template_airfields[1];
+				unset($template_airfields[1]); // We don't care about the template creator (here)
+			}
 			$airfields = $template_airfields; // Now, overwrite the airfields array
 			$reply_dataset['template'] = $template_airfields;
+			$reply_dataset['template_creator'] = $templ_creator;
 		}
 	}
 	//$reply_dataset['template'] = $template_airfields;	
@@ -113,9 +119,39 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	if(strtotime($cached_stats['general']['update_timestamp']) < (time()-$refreshInterval)) {
 		$refresh = true;
 		//echo "data is stale and needs to be refreshed";
+		// Fetch VATSIM status JSON to get appropriate feed URLs for data and metars
+		$cu = curl_init();
+		curl_setopt($cu,CURLOPT_URL,"https://status.vatsim.net/status.json");
+		curl_setopt($cu,CURLOPT_RETURNTRANSFER,true);
+		curl_setopt($cu,CURLOPT_CONNECTTIMEOUT,3);
+		curl_setopt($cu,CURLOPT_TIMEOUT,10); // Added to prevent execution errors when VATSIM JSON hangs
+		curl_setopt($cu, CURLOPT_ENCODING, "gzip");
+		curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,false); // There is no reason to verify the SSL certificate, skip this
+		$curl_raw = curl_exec($cu); // Execute CURL
+		$status_array = json_decode($curl_raw, true); // decode JSON
+		curl_close($cu);		
+		// Check to make sure that the data exists
+		if(isset($status_array['data']['v3'][0])) {
+			//echo "Using VATSIM status JSON URLs";
+			$vatsim_stats_url = $status_array['data']['v3'][0];
+			//print_r($status_array['data']['v3']);
+		}
+		else {
+			//echo "Using hard-coded URLs";
+			$vatsim_stats_url = "https://data.vatsim.net/v3/vatsim-data.json";
+		}
+		if(isset($status_array['metar'][0])) {
+			$vatsim_metar_url = $status_array['metar'][0];
+			//echo $status_array['metar'][0];
+		}
+		else {
+			//echo "Using hard-coded URLs";
+			$vatsim_metar_url = "http://metar.vatsim.net/metar.php";
+		}
+		
 	// CURL to ingest JSON from VATSIM data service
 	if ($live_network) {
-		$vatsim_stats_url = "https://data.vatsim.net/v3/vatsim-data.json"; // I NEED TO REPLACE THIS WITH THE status.json!!!!!!!!!!!!!!!!!!!!!!
+		//$vatsim_stats_url = "https://data.vatsim.net/v3/vatsim-data.json"; // Hard-coded URLs replaced with the vatsim status json
 	}
 	else {
 		$vatsim_stats_url = $localPath . "test_data/vatsim.json"; // For test use only!
@@ -124,11 +160,13 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	curl_setopt($cu,CURLOPT_URL,$vatsim_stats_url);
 	curl_setopt($cu,CURLOPT_RETURNTRANSFER,true);
 	curl_setopt($cu,CURLOPT_CONNECTTIMEOUT,3);
+	curl_setopt($cu,CURLOPT_TIMEOUT,10); // Added to prevent execution errors when VATSIM JSON hangs
 	curl_setopt($cu, CURLOPT_ENCODING, "gzip");
 	curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,false); // There is no reason to verify the SSL certificate, skip this
 	$curl_raw = curl_exec($cu); // Execute CURL
 	//$stats_array = json_decode($curl_raw, true); // decode JSON
 	curl_close($cu);
+	$stats_array = array(); // Error prevention in the case the the CURL does not return in the allotted time
 	if(isJSON($curl_raw)) {	// Note: In some instances, this CURL request to VATSIM has a tendancy to last more than 30 seconds and time-out. When it times out, a non-JSON is returned. This allows us to catch the error.
 		$stats_array = json_decode($curl_raw, true); // Execute CURL and decode JSON
 		file_put_contents("data/vatsim.json",$curl_raw);
@@ -138,15 +176,18 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	// CURL to pull METAR from VATSIM data service
 	foreach($airfields as $afld) {
 	if ($live_network) {
-	$vatsim_metar_url = "http://metar.vatsim.net/metar.php?id=$afld"; // I NEED TO REPLACE THIS WITH THE status.json!!!!!!!!!!!!!!!!!!!!!!
+		$vatsim_metar_str = $vatsim_metar_url . "?id=" . $afld;
+		//echo $vatsim_metar_str;
+		//$vatsim_metar_url = "http://metar.vatsim.net/metar.php?id=$afld"; // Hard-coded URLs replaced with the vatsim status json
 	}
 	else {
-	$vatsim_metar_url = $localPath . "test_data/" . $afld . ".metar"; // For test use only!
+		$vatsim_metar_str = $localPath . "test_data/" . $afld . ".metar"; // For test use only!
 	}
 	$cu = curl_init();
-	curl_setopt($cu,CURLOPT_URL,$vatsim_metar_url);
+	curl_setopt($cu,CURLOPT_URL,$vatsim_metar_str);
 	curl_setopt($cu,CURLOPT_RETURNTRANSFER,true);
 	curl_setopt($cu,CURLOPT_CONNECTTIMEOUT,3);
+	curl_setopt($cu,CURLOPT_TIMEOUT,10); // Added to prevent execution errors when VATSIM JSON hangs
 	curl_setopt($cu, CURLOPT_ENCODING, "gzip");
 	curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,false); // There is no reason to verify the SSL certificate, skip this
 	$metar = curl_exec($cu); // Execute CURL
