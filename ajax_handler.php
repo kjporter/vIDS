@@ -15,6 +15,7 @@
 $base_dir = "data/";
 $filename = $_GET['type']; // Get data type
 $file_ext = "dat";
+$log_str = "[" . date("YmdHms") . "] CID " . $_GET['cid'] . ": ";
 $reply_string = "";
 
 // Format header as timestamp
@@ -76,8 +77,22 @@ if($_GET['type'] == "override") { // For overrides, we have to read the current 
 	$payload = json_encode($override_data);
 }
 
+
+$log_str .= $_GET['type'] . " update (" . $payload . ")";
 // Write to file
 //file_put_contents("data/" . $_GET['type'] . ".dat",$header . $payload);
-file_put_contents($base_dir . $filename . "." . $file_ext ,$header . $payload);
+
+if(isset($_GET['delete'])) {
+	if(file_exists("data/templates/" . $_GET['delete'] . ".templ")&&(strlen($_GET['delete'])==5)) {
+		unlink("data/templates/" . $_GET['delete'] . ".templ");
+	}
+	$log_str .= "delete template (" . $_GET['delete'] . ")\n";
+}
+else {
+	file_put_contents($base_dir . $filename . "." . $file_ext ,$header . $payload);
+}
+
+// Write action to logfile
+file_put_contents("data/system.log",$log_str . "\n",FILE_APPEND);
 
 echo $reply_string;

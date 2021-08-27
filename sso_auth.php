@@ -39,6 +39,7 @@ $alert_style = "";
 //$full_name = "";
 $valid_auth = false;
 $access_token = null;
+$artcc_staff = false;
 
 session_start();
 
@@ -86,6 +87,7 @@ if($access_token != null) {
 	$userData = curl_exec($ch);
 	$userData_json = json_decode($userData,true);
 	curl_close($ch);
+	//echo $userData;
 	if(isset($userData_json['data']['vatsim']['rating']['id'])) {
 		// Check to see if the user is blacklisted before authorizing them
 		$blacklisted = false;
@@ -116,6 +118,16 @@ if($access_token != null) {
 			}
 			$user_rating = $userData_json['data']['vatsim']['rating']['short'];
 			$vatsim_cid = $userData_json['data']['cid']; // Added to identify users so they can delete templates they create
+			$vatusa_roster = json_decode($roster,true);
+			foreach($vatusa_roster['data'] as $artcc_user) {
+				if($artcc_user['cid'] == $userData_json['data']['cid']) {
+					foreach($artcc_user['roles'] as $role) {
+						if(($role['facility'] == FACILITY_ID)&&(in_array($role['role'],array('ATM','DATM','FE','TA','WM','EC')))) {
+							$artcc_staff = true;
+						}
+					}
+				}
+			}
 			}
 			else {
 				$alert_text = "Insufficient privileges to use this system (must be a home or visiting controller at this facility). Contact a member of your ARTCC staff.";
@@ -130,6 +142,13 @@ if($access_token != null) {
 			$alert_text = "Insufficient privileges to use this system (must have at least an observer ATC rating). Contact a member of your ARTCC staff.";
 			$alert_style = "alert alert-danger alert-visible";		
 		}
+		// Authentication logging
+		$log_str = "[" . date("YmdHms") . "] CID " . $userData_json['data']['cid'] . "/" . $userData_json['data']['personal']['name_full'] . ": Login attempt ";
+		$log_str .= $valid_auth ? 'successful' : 'failed';
+		$log_str .= $blacklisted ? ' - blacklisted' : '';
+		$log_str .= " (" . $_SERVER['REMOTE_ADDR'] . ")";
+		// Write action to logfile
+		file_put_contents("data/access.log",$log_str . "\n",FILE_APPEND);
 	}
 }
 /*

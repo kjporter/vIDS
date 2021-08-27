@@ -11,7 +11,6 @@
 	*/
 	
 	const defaultAirfield = 'KATL'; // I need this to be pulled from the php defines...
-
 	// Code below handles vIDS automatic data refreshes
 	var setRefreshTime = 15; // Defines vIDS refresh rate. Default is 15 (VATSIM JSON updates every 15 seconds)
 	var refreshTime = setRefreshTime;
@@ -38,6 +37,7 @@
 	
 	function showLocalIDS(template) { // Makes the local display visible
 		//alert("showing local");
+		loadingNotice();
 		document.getElementById("display_template").value = template;
 		var other = "";
 		if(template == "local") {
@@ -56,10 +56,12 @@
 		document.getElementById("local_ids").style.display = "block";
 		$('.template_' + template).show();
 		$('.template_' + other).hide();
+		setDynamicMargin();
 	}
 	
 	function showMultiIDS() { // Makes the multi-airfield display visible
 		//alert("showing multi");
+		loadingNotice();
 		$('#launch_multi').modal('toggle');
 		if(document.getElementById("pickMulti").value == '?') {
 			$('#multi_template').modal('toggle');
@@ -72,11 +74,21 @@
 			document.getElementById("landing").style.display = "none";
 			//document.getElementById("landing").style.visibility = "hidden";
 			document.getElementById("multi_ids").style.display = "block";
+			//alert(document.getElementById('templateCreator').value);
+			/*
+			if((document.getElementById("cid").value == ADMIN)||(document.getElementById("cid").value == document.getElementById('templateCreator').value)) { //**Note: need to add conditional in to allow creator to delete their own templates
+				document.getElementById("templateDeleteMenu").classList.remove('disabled');
+			}
+			else {
+				document.getElementById("templateDeleteMenu").classList.add('disabled');
+			}
+			*/
 		}
 	}
 	
 	function launchMulti() { 
 		//document.getElementById("pickMulti").value = "X";
+		//alert(document.getElementById('pickMulti').selectedIndex);
 		$('#launch_multi').modal('toggle');
 	}
 	
@@ -97,7 +109,7 @@
 				// Save the tempalte and display it for the user
 				var name = document.getElementById('template_name').value;
 				var options = document.getElementById('template_aflds').options;
-				var payload = name;
+				var payload = name + '\n' + document.getElementById('cid').value;
 				for(var x=0;x<options.length;x++) {
 					payload += '\n' + options[x].text;
 				}
@@ -367,6 +379,9 @@
 	
 	function refreshData(init=false,template='0') { // Fetches current dataset from network and server and inits display update
 		//if(!init) { alert("Data refresh requested, template " + template); }
+		if(init) {
+			//loadingNotice();
+		}
 		var xhttp;
 		xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
@@ -464,9 +479,9 @@
 		for(var x=0; x<controllers.length;x++) {
 			//controllerPos += "Position: " + positions[x] + " Controller selected: " + controllers[x] + "\n";
 			changes = changeDetection(init,changes,document.getElementById(positions[x]).value,controllers[x],positions[x]);
-			changes = changeDetection(init,changes,document.getElementById(positions[x] + "_disp").value,controllers[x],positions[x]);
+			changes = changeDetection(init,changes,document.getElementById(positions[x]).value,controllers[x],positions[x] + "_disp");
 			selectOption(positions[x],controllers[x]);
-			document.getElementById(positions[x] + "_disp").value = controllers[x];
+			document.getElementById(positions[x] + "_disp").value = (controllers[x] == '.' ? '' : controllers[x]);
 		}
 		//alert(changes);
 		// Set text fields
@@ -641,6 +656,12 @@
 		
 		// Set MULTI-IDS fields
 		//var multi_disp_str = '<div class=\"landing_menu\"><a onclick=\"returnToLanding(\'multi_ids\');\"><i class=\"fas fa-bars\"></i></a></div>';
+		if((document.getElementById("ad").value == '1')||(document.getElementById("cid").value == json.template_creator)) {
+			document.getElementById("templateDeleteMenu").classList.remove('disabled');
+		}
+		else {
+			document.getElementById("templateDeleteMenu").classList.add('disabled');
+		}
 		var multi_disp_str = '';
 		//alert("KATL approach type: " + json.airfield_data['KATL']['apch_rwys'].join(", "));
 		//alert("Resetting Multi-IDS airfields..." + JSON.stringify(json.template));
@@ -711,6 +732,29 @@
 		if(changes) {
 			document.getElementById("acknowledge").style.visibility = "visible";
 		}
+		document.getElementById('loading').className = "hideLoad"; // If the loading screen is active, hide it
+	}
+	
+	function loadingNotice() { // Moves progress bar in loading notice
+		// Initialize progress bar to zero
+		document.getElementById('loadingProgress').setAttribute("style","width:0%");
+		document.getElementById('loadingProgress').setAttribute("aria-valuenow",0);
+		var loadtime = 15; // Seconds
+		document.getElementById('loading').className = "showLoad";
+		var seconds = 0;
+		var t = setInterval(function() {
+			if(document.getElementById('loading').className == "hideLoad") {
+				clearInterval(t);
+			}
+			seconds += 0.25;
+			var percentage = (seconds/loadtime) * 100;
+				document.getElementById('loadingProgress').setAttribute("style","width:" + percentage + "%");
+				document.getElementById('loadingProgress').setAttribute("aria-valuenow",percentage);
+				//$('#loadingProgress').css('width', percentage+'%').attr('aria-valuenow', percentage);
+			if(seconds == loadtime) {
+				clearInterval(t);
+			}
+		},250);
 	}
 	
 	function generateDropdown(afldId,defAfld) {
@@ -871,7 +915,7 @@
 			else {
 			}
 		};
-		xhttp.open("GET", "ajax_handler.php?type=" + type + "&payload=" + encodeURIComponent(payload), true);
+		xhttp.open("GET", "ajax_handler.php?type=" + type + "&cid=" + document.getElementById('cid').value + "&payload=" + encodeURIComponent(payload), true);
 		xhttp.send();
 	}
 	function fetchWeather(icao) { // Retrieves METAR and TAF data from data provider
@@ -886,6 +930,13 @@
 		};
 		xhttp.open("GET", "ajax_weather.php?icao=" + icao, true);
 		xhttp.send();
+		// Update static images from sources
+		document.getElementById("wx_video_s").src = document.getElementById("wx_video_s").src + "?r=" + Math.floor(Math.random() * 1000);
+		document.getElementById("wx_gates_s").src = document.getElementById("wx_gates_s").src + "?r=" + Math.floor(Math.random() * 1000);
+		document.getElementById("wx_radar_s").src = document.getElementById("wx_radar_s").src + "?r=" + Math.floor(Math.random() * 1000);
+		document.getElementById("wx_satellite_s").src = document.getElementById("wx_satellite_s").src + "?r=" + Math.floor(Math.random() * 1000);
+		document.getElementById("wx_sigmets_s").src = document.getElementById("wx_sigmets_s").src + "?r=" + Math.floor(Math.random() * 1000);
+		document.getElementById("wx_prog_s").src = document.getElementById("wx_prog_s").src + "?r=" + Math.floor(Math.random() * 1000);
 	}
 	
 	function clearStyle(x) { // Removes classes applied to an element
@@ -1193,4 +1244,112 @@ function saveControllerEdit() {
 		}
 	}
 	$('#ControllerEdit').modal('toggle');
+}
+
+function removeTemplate(fn=false) { // Remove a multi-IDS template
+	if(!document.getElementById("templateDeleteMenu").classList.contains('disabled')) {
+	var sel = document.getElementById('pickMulti');
+	//alert(sel.selectedIndex);
+	document.getElementById('remTemplate').innerHTML = sel.options[sel.selectedIndex].text;
+	if(fn) {
+		// Delete the template file
+		var xhttp;
+		xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				// Template deleted, remove from select list
+				//alert('Removing index: ' + sel.selectedIndex);
+				sel.remove(sel.selectedIndex);
+				returnToLanding('multi_ids');
+			}
+			else {
+			}
+		};
+		//alert(sel.value);
+		xhttp.open("GET", "ajax_handler.php?delete=" + sel.value + "&cid=" + document.getElementById('cid').value, true); 
+		xhttp.send();
+	}
+		$('#TemplateDelete').modal('toggle');
+	}
+}
+
+function setDynamicMargin() {
+	var buttonHeight = $("#buttons").height();     
+     $(".dynMargin").css('margin-bottom',buttonHeight); 
+}
+
+function modBlacklist(fn) {
+	var reply = '';
+	var xhttp;
+	xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			reply = xhttp.responseText;
+			if((fn == 'add')&&(reply == 'success')) { // Add CID to select list
+				var opt = document.createElement('option');
+				opt.text = document.getElementById('blacklistCID').value;
+				opt.value = document.getElementById('blacklistCID').value;
+				document.getElementById('blacklist_select').add(opt);
+			}
+			if((fn == 'remove')&&(reply == 'success')) { // Remove CID from select list
+				var x = document.getElementById('blacklist_select');
+				for(y=0;y<x.length;y++) {
+					if(x.options[y].value == document.getElementById('blacklistCID').value) {
+						x.remove(y);
+					}
+				}
+			}
+			if(fn == 'lookup') { // Dump user data in fields
+				reply = JSON.parse(xhttp.responseText);
+				document.getElementById('blacklist_name').value = reply['data']['fname'] + ' ' + reply['data']['lname'];
+				document.getElementById('blacklist_rating').value = reply['data']['rating_short'];
+				document.getElementById('blacklist_facility').value = reply['data']['facility'];
+			}
+			if(fn == 'fetch') { // Refresh blacklist select list
+				document.getElementById('blacklist_select').innerHTML = "";
+				reply = JSON.parse(xhttp.responseText);
+				for(y=0;y<reply.length;y++) {
+					var opt = document.createElement('option');
+					opt.text = reply[y];
+					opt.value = reply[y];
+					document.getElementById('blacklist_select').add(opt);					
+				}				
+			}
+		}
+		else {
+		}
+	};
+	xhttp.open("GET", "ajax_administration.php?function=blacklist_" + fn + "&cid=" + document.getElementById('blacklistCID').value, true); 
+	xhttp.send();
+}
+
+function displayLogs() { // Pull logfiles via AJAX and dump into textarea for display
+	var logs = new Array('access','system');
+	for(const log of logs) {
+		logAJAX(log);
+	}	
+}
+
+function startLiveLogging() { // Process to start/stop live logging with a auto-refresh interval
+	displayLogs();
+	var logUpdate = window.setInterval(function(){
+		if (!$('#ADMIN').hasClass('in')) { // Stops logging when modal is closed
+			clearInterval(logUpdate);
+		}
+		else {
+			displayLogs();
+		}
+	}, 5000);
+}
+
+function logAJAX(log) {
+	var xhttp;
+	xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById(log + '_log').value = xhttp.responseText;
+		}
+	};
+	xhttp.open("GET", "ajax_administration.php?function=log_fetch&log_type=" + log, true); 
+	xhttp.send();
 }

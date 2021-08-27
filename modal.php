@@ -133,8 +133,47 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-					<div id="weather_request"></div> <!-- METAR & TAF go here -->
-					<div><img id="radar_loop" src="https://radar.weather.gov/ridge/lite/KFFC_loop.gif" alt="FFC Radar Loop" /></div>
+					<ul class="nav nav-tabs" id="weatherInfo">
+						<li class="active"><a href="#wx_terminal" data-toggle="tab">ATL Terminal</a></li>
+						<li><a href="#wx_video" data-toggle="tab">Video Briefing</a></li>
+						<li><a href="#wx_gates" data-toggle="tab">A80 Convective Gates</a></li>
+						<li><a href="#wx_radar" data-toggle="tab">ZTL Wx Radar</a></li>
+						<li><a href="#wx_satellite" data-toggle="tab">ZTL Wx Satellite</a></li>
+						<li><a href="#wx_sigmets" data-toggle="tab">ZTL SIGMETS</a></li>
+						<li><a href="#wx_prog" data-toggle="tab">National Prog</a></li>
+						
+					</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="wx_terminal">
+						<h4>ATL Terminal Wx</h4>
+						<div id="weather_request"></div> <!-- METAR & TAF go here -->
+						<div><img id="radar_loop" src="https://radar.weather.gov/ridge/lite/KFFC_loop.gif" alt="FFC Radar Loop" /></div>
+					</div>
+					<div class="tab-pane" id="wx_video">
+						<h4>ZTL Pre-Duty Video Wx Brief</h4>
+						<video id="wx_video_s" autoplay="no" controls="" poster="https://www.weather.gov/images/ztl/Thumbnails/Video_Image.png" preload="none" src="https://www.weather.gov/media/ztl/ZTLPreDutyVideo.mp4">&nbsp;</video>
+					</div>
+					<div class="tab-pane" id="wx_gates">
+						<h4>A80 Convective Gates</h4>
+						<a href="https://www.weather.gov/ztl/atlgatefcst" target="_blank"><img id="wx_gates_s" src="https://www.weather.gov/images/ztl/ATLGATES.png" alt="A80" /></a>
+					</div>
+					<div class="tab-pane" id="wx_radar">
+						<h4>ZTL Weather Radar</h4>
+						<a href="https://radar.weather.gov/?settings=v1_eyJhZ2VuZGEiOnsiaWQiOm51bGwsImNlbnRlciI6Wy04NS40MDUsMzMuMDIyXSwiem9vbSI6Nn0sImJhc2UiOiJzdGFuZGFyZCIsImNvdW50eSI6ZmFsc2UsImN3YSI6ZmFsc2UsInN0YXRlIjpmYWxzZSwibWVudSI6dHJ1ZSwic2hvcnRGdXNlZE9ubHkiOmZhbHNlfQ%3D%3D#/" target="_blank"><img id="wx_radar_s" src="https://www.weather.gov/images/ztl/ZTL_surface_plot.png" alt="Radar" /></a>
+					</div>
+					<div class="tab-pane" id="wx_satellite">
+						<h4>ZTL Weather Satellite</h4>
+						<a href="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/se/13/600x600.jpg" target="_blank"><img id="wx_satellite_s" src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/se/13/600x600.jpg" alt="Satellite" /></a>
+					</div>
+					<div class="tab-pane" id="wx_sigmets">
+						<h4>ZTL Active SIGMETs</h4>
+						<a href="https://www.weather.gov/ztl/ztlmap" target="_blank"><img id="wx_sigmets_s" src="https://www.weather.gov/images/ztl/cwsu_frontmap.png" alt="SIGMETs" /></a>
+					</div>
+					<div class="tab-pane" id="wx_prog">
+						<h4>National Prognostic Chart</h4>
+						<a href="https://www.weather.gov/images/ztl/wpc_loop.gif" target="_blank"><img id="wx_prog_s" src="https://www.weather.gov/images/ztl/wpc_loop.gif" alt="Prog" /></a>
+					</div>
+                </div>
                 </div>	
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -245,11 +284,11 @@
 				<div class="tab-content">
 					<div class="tab-pane active" id="atl_eastops">
 						<h4>ATL East Ops</h4>
-						<img src="resources/atl-east-airspace.png" atl="ATL east ops" />
+						<img src="resources/atl-east-airspace.png" alt="ATL east ops" />
 					</div>
 					<div class="tab-pane" id="atl_westops">
 						<h4>ATL West Ops</h4>
-						<img src="resources/atl-west-airspace.png" atl="ATL west ops" />
+						<img src="resources/atl-west-airspace.png" alt="ATL west ops" />
 					</div>
                 </div>
                 </div>
@@ -287,63 +326,63 @@
 				<div class="tab-content">
 					<div class="tab-pane active" id="atl_bravo">
 						<h4>ATL Class B</h4>
-						<img src="resources/class-b-airspace.PNG" atl="ATL class B" />
+						<img src="resources/class-b-airspace.PNG" alt="ATL class B" />
 					</div>
 					<div class="tab-pane" id="a80_tar_east">
 						<h4>A80 TAR East Ops</h4>
-						<img src="resources/tar-east-airspace.PNG" atl="A80 TAR east ops" />
+						<img src="resources/tar-east-airspace.PNG" alt="A80 TAR east ops" />
 					</div>
 					<div class="tab-pane" id="a80_tar_west">
 						<h4>A80 TAR West Ops</h4>
-						<img src="resources/tar-west-airspace.PNG" atl="A80 tar west ops" />
+						<img src="resources/tar-west-airspace.PNG" alt="A80 tar west ops" />
 					</div>
 					<div class="tab-pane" id="a80_ar_east">
 						<h4>A80 AR Final East Ops</h4>
-						<img src="resources/ar-east-airspace.PNG" atl="A80 ar east ops" />
+						<img src="resources/ar-east-airspace.PNG" alt="A80 ar east ops" />
 					</div>
 					<div class="tab-pane" id="a80_ar_west">
 						<h4>A80 AR Final West Ops</h4>
-						<img src="resources/ar-west-airspace.PNG" atl="A80 ar west ops" />
+						<img src="resources/ar-west-airspace.PNG" alt="A80 ar west ops" />
 					</div>
 					<div class="tab-pane" id="a80_dr_dual_east">
 						<h4>A80 DR Duals East Ops</h4>
-						<img src="resources/dr-east-duals-airspace.PNG" atl="A80 dr duals east ops" />
+						<img src="resources/dr-east-duals-airspace.PNG" alt="A80 dr duals east ops" />
 					</div>
 					<div class="tab-pane" id="a80_dr_trip_east">
 						<h4>A80 DR Trips East Ops</h4>
-						<img src="resources/dr-east-trips-airspace.PNG" atl="A80 dr trips east ops" />
+						<img src="resources/dr-east-trips-airspace.PNG" alt="A80 dr trips east ops" />
 					</div>
 					<div class="tab-pane" id="a80_dr_dual_west">
 						<h4>A80 DR Duals West Ops</h4>
-						<img src="resources/dr-west-duals-airspace.PNG" atl="A80 dr duals west ops" />
+						<img src="resources/dr-west-duals-airspace.PNG" alt="A80 dr duals west ops" />
 					</div>
 					<div class="tab-pane" id="a80_dr_trip_west">
 						<h4>A80 DR Trips West Ops</h4>
-						<img src="resources/dr-west-trips-airspace.PNG" atl="A80 dr trips west ops" />
+						<img src="resources/dr-west-trips-airspace.PNG" alt="A80 dr trips west ops" />
 					</div>
 					<div class="tab-pane" id="a80_sat_east">
 						<h4>A80 Satellite East Ops</h4>
-						<img src="resources/sat-east-airspace.PNG" atl="A80 sat east ops" />
+						<img src="resources/sat-east-airspace.PNG" alt="A80 sat east ops" />
 					</div>
 					<div class="tab-pane" id="a80_sat_west">
 						<h4>A80 Satellite West Ops</h4>
-						<img src="resources/sat-west-airspace.PNG" atl="A80 sat west ops" />
+						<img src="resources/sat-west-airspace.PNG" alt="A80 sat west ops" />
 					</div>
 					<div class="tab-pane" id="a80_pdk_final">
 						<h4>A80 PDK Final (SAT-Q)</h4>
-						<img src="resources/sat-q-airspace.PNG" atl="A80 sat q" />
+						<img src="resources/sat-q-airspace.PNG" alt="A80 sat q" />
 					</div>
 					<div class="tab-pane" id="a80_macon">
 						<h4>A80 Macon Sector</h4>
-						<img src="resources/mcn-airspace.PNG" atl="A80 mcn" />
+						<img src="resources/mcn-airspace.PNG" alt="A80 mcn" />
 					</div>
 					<div class="tab-pane" id="a80_columbus">
 						<h4>A80 Columbus Sector</h4>
-						<img src="resources/csg-airspace.PNG" atl="A80 csg" />
+						<img src="resources/csg-airspace.PNG" alt="A80 csg" />
 					</div>
 					<div class="tab-pane" id="a80_athens">
 						<h4>A80 Athens Sector</h4>
-						<img src="resources/ahn-airspace.PNG" atl="A80 ahn" />
+						<img src="resources/ahn-airspace.PNG" alt="A80 ahn" />
 					</div>
                 </div>
                 </div>
@@ -929,19 +968,6 @@
 						<tr><td>&nbsp;</td></tr>";
 							}
 					   ?>
-					   <!--
-					   <tr><td></td><th>N1</th><th>N2</th><th>W2</th><th>W1</th><th>S2</th><th>S1</th><th>E1</th><th>E2</th></tr>
-					   <tr><th rowspan="2" id="splits_rwy_1"><h3>28</h3></th><td><input type="hidden" id="splits_rwy_id_1" /><input type="checkbox" id="splits_n1_1" value="N1" /></td><td><input type="checkbox" id="splits_n2_1" value="N2" /></td><td><input type="checkbox" id="splits_w2_1" value="W2" /></td><td><input type="checkbox" id="splits_w1_1" value="W1" /></td><td><input type="checkbox" id="splits_s2_1" value="S2" /></td><td><input type="checkbox" id="splits_s1_1" value="S1" /></td><td><input type="checkbox" id="splits_e1_1" value="E1" /></td><td><input type="checkbox" id="splits_e2_1" value="E2" /></td></tr>
-					   <tr><td><input type="text" id="splits_n1t_1" size="4" /></td><td><input type="text" id="splits_n2t_1" size="4" /></td><td><input type="text" id="splits_w2t_1" size="4" /></td><td><input type="text" id="splits_w1t_1" size="4" /></td><td><input type="text" id="splits_s2t_1" size="4" /></td><td><input type="text" id="splits_s1t_1" size="4" /></td><td><input type="text" id="splits_e1t_1" size="4" /></td><td><input type="text" id="splits_e2t_1" size="4" /></td></tr>
-						<tr><td>&nbsp;</td></tr>
-					   <tr><td></td><th>N1</th><th>N2</th><th>W2</th><th>W1</th><th>S2</th><th>S1</th><th>E1</th><th>E2</th></tr>
-					   <tr><th rowspan="2" id="splits_rwy_2"><h3>28</h3></th><td><input type="hidden" id="splits_rwy_id_2" /><input type="checkbox" id="splits_n1_2" /></td><td><input type="checkbox" id="splits_n2_2" /></td><td><input type="checkbox" id="splits_w2_2" /></td><td><input type="checkbox" id="splits_w1_2" /></td><td><input type="checkbox" id="splits_s2_2" /></td><td><input type="checkbox" id="splits_s1_2" /></td><td><input type="checkbox" id="splits_e1_2" /></td><td><input type="checkbox" id="splits_e2_2" /></td></tr>
-					   <tr><td><input type="text" id="splits_n1t_2" size="4" /></td><td><input type="text" id="splits_n2t_2" size="4" /></td><td><input type="text" id="splits_w2t_2" size="4" /></td><td><input type="text" id="splits_w1t_2" size="4" /></td><td><input type="text" id="splits_s2t_2" size="4" /></td><td><input type="text" id="splits_s1t_2" size="4" /></td><td><input type="text" id="splits_e1t_2" size="4" /></td><td><input type="text" id="splits_e2t_2" size="4" /></td></tr>
-						<tr><td>&nbsp;</td></tr>
-					   <tr><td></td><th>N1</th><th>N2</th><th>W2</th><th>W1</th><th>S2</th><th>S1</th><th>E1</th><th>E2</th></tr>
-					   <tr><th rowspan="2" id="splits_rwy_3"><h3>28</h3></th><td><input type="hidden" id="splits_rwy_id_3" /><input type="checkbox" id="splits_n1_3" /></td><td><input type="checkbox" id="splits_n2_3" /></td><td><input type="checkbox" id="splits_w2_3" /></td><td><input type="checkbox" id="splits_w1_3" /></td><td><input type="checkbox" id="splits_s2_3" /></td><td><input type="checkbox" id="splits_s1_3" /></td><td><input type="checkbox" id="splits_e1_3" /></td><td><input type="checkbox" id="splits_e2_3" /></td></tr>
-					   <tr><td><input type="text" id="splits_n1t_3" size="4" /></td><td><input type="text" id="splits_n2t_3" size="4" /></td><td><input type="text" id="splits_w2t_3" size="4" /></td><td><input type="text" id="splits_w1t_3" size="4" /></td><td><input type="text" id="splits_s2t_3" size="4" /></td><td><input type="text" id="splits_s1t_3" size="4" /></td><td><input type="text" id="splits_e1t_3" size="4" /></td><td><input type="text" id="splits_e2t_3" size="4" /></td></tr>
-						-->
 					   </table>
 						</div>
                      </form>
@@ -1162,6 +1188,84 @@
 				</div>
                 </div>
 				<h3 id="PROC_load">Please wait... loading</h3>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div id="TemplateDelete" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Delete Multi-IDS Template</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+					<p><span style="color:yellow;font-size:5vw;"><i class="fas fa-exclamation-triangle"></i></span>&nbsp;&nbsp;Are you sure that you want to delete the multi-IDS template: <span id="remTemplate"></span>?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary" onclick="removeTemplate(true);"><i class="fas fa-trash"></i>&nbsp;Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div id="ADMIN" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">System Administration</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+					<ul class="nav nav-tabs" id="tabContent">
+						<li class="active"><a href="#blacklist" data-toggle="tab">Blacklist</a></li>
+						<li><a href="#logging" onClick="startLiveLogging();" data-toggle="tab">Live Logging</a></li>
+					</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="blacklist">
+					<p>Use this control to blacklist users from vIDS by adding a user's CID. When added to this list, users are denied access and given a message to contact the ARTCC staff. Users that are actively logged in
+					and using the system are forced out within 15 seconds of being added to the list. Removing a blacklisted CID from the control instentaneously restores access. Enter a CID or click on a blacklisted CID for
+					more information about the user.</p>
+					<div class="form-group row">
+                        <label for="inputName" class="col-sm-4 col-form-label">Enter CID:</label>
+						<div class="col-sm-6">
+							<input id="blacklistCID" style="width: 100%; max-width: 100%;" type="text" />
+						</div>
+						<div class="col-sm-2">
+							<input type="button" value="Add" onClick="modBlacklist('add');" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-4">
+                        <label for="inputName" class="col-form-label">Blacklist:</label><br/><br/>
+						<p>Name</p>
+						<input id="blacklist_name" type="text" readonly /><br/>
+						<p>Rating</p>
+						<input id="blacklist_rating" type="text" readonly /><br/>
+						<p>Home ARTCC</p>
+						<input id="blacklist_facility" type="text" readonly /><br/>
+						</div>
+						<div class="col-sm-6">
+							<select id="blacklist_select" size="6" style="width: 100%; max-width: 100%;" onClick="document.getElementById('blacklistCID').value = this.value;"></select>
+						</div>
+						<div class="col-sm-2">
+							<input type="button" value="Lookup" onClick="modBlacklist('lookup');" /><br/><br/>
+							<input type="button" value="Remove" onClick="modBlacklist('remove');" />
+						</div>
+					</div>
+                </div>
+				<div class="tab-pane" id="logging">
+				<h4>Access Log</h4>
+				<textarea id="access_log" style="width: 100%; max-width: 100%; overflow-y:scroll;" rows="6"></textarea>
+				<h4>System Log</h4>
+				<textarea id="system_log" style="width: 100%; max-width: 100%; overflow-y:scroll;" rows="6"></textarea>
+				<p>Download system events log <a href="data/system.log" target="_blank">system.log</a></p>
+				<p>Download system access log <a href="data/access.log" target="_blank">access.log</a></p>
+				</div>
+					</div>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
