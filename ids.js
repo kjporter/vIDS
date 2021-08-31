@@ -10,7 +10,7 @@
 	
 	*/
 	
-	const defaultAirfield = 'KATL'; // I need this to be pulled from the php defines...
+	//const defaultAirfield = 'KATL'; // I need this to be pulled from the php defines...
 	// Code below handles vIDS automatic data refreshes
 	var setRefreshTime = 15; // Defines vIDS refresh rate. Default is 15 (VATSIM JSON updates every 15 seconds)
 	var refreshTime = setRefreshTime;
@@ -616,14 +616,61 @@
 		// Set A80 satellite and outer field info
 		var underlying_fields = new Array("KPDK","KFTY","KMGE","KRYY","KLZU","KMCN","KWRB","KAHN","KCSG"); // I intentionally left LSF out... we never use it
 		//var underlying_fields = new Array("KPDK"); // For testing only.. real world use the line above to get all of the satellites
+		var openCloseStatus = "";
 		for(var y=0;y<underlying_fields.length;y++) {
 			var open_closed = "CLOSED";
 			if(underlying_fields[y] in json.airfield_data) {
 			document.getElementById(underlying_fields[y] + "_atis_code").innerHTML = json.airfield_data[underlying_fields[y]].atis_code;
-			if(json.airfield_data[underlying_fields[y]].atis_code != "--") {
+			//if(json.airfield_data[underlying_fields[y]].atis_code != "--") {
+				//open_closed = "OPEN";
+			//}
+			// New schema to make field OPEN/CLOSED status reflect real-world tower operating hours
+			var curDate = new Date();
+			var dayofweek = curDate.getUTCDay(); // 0 = Sunday, 1 = Monday
+			var cur24time = curDate.getUTCHours() * 100 + curDate.getUTCMinutes(); // Get UTC time and format HHmm
+			var opHours = document.getElementById(underlying_fields[y] + "_hours_mf").value;
+			//alert(underlying_fields[y] + ': ' + document.getElementById(underlying_fields[y] + "_hours_mf").value);
+			if ((dayofweek == 0)||(dayofweek == 6)) { // Sunday(0) or Saturday(6)
+				opHours = document.getElementById(underlying_fields[y] + "_hours_ss").value;
+			}
+			opHours = opHours.split('-');
+			var opHoursStart = parseInt(opHours[0]);
+			var opHoursEnd = parseInt(opHours[1]);
+			if((document.getElementById(underlying_fields[y] + "_hours_dstAdjust").value)&&(checkDST())) { // Adjust for DST
+				opHoursStart = opHours[0] -1;
+				opHoursEnd = opHours[1] -1;
+			}
+			if(opHoursEnd < opHoursStart) { // This happens when a tower closes after 0000Z
+				opHoursEnd += 2400;
+			}
+			if((cur24time > opHoursStart)&&(cur24time < opHoursEnd)) { // Airfield is open
+				//alert(underlying_fields[y] + ' Current UTC time: ' + cur24time + ' Field opening time: ' + opHoursStart + ' Field closing time: ' + opHoursEnd);
 				open_closed = "OPEN";
 			}
+			//openCloseStatus += underlying_fields[y] + ' Current UTC time: ' + cur24time + ' Field opening time: ' + opHoursStart + ' Field closing time: ' + opHoursEnd + '\n';
 			document.getElementById(underlying_fields[y] + "_open_closed").innerHTML = open_closed;
+			// New schema to display del/gnd/twr status
+			//alert(json.airfield_data[underlying_fields[y]].tower_cab.del);
+			if(json.airfield_data[underlying_fields[y]].tower_cab.del) {
+				//alert(underlying_fields[y] + ' delivery online ' + document.getElementById(underlying_fields[y] + "_online_del").classList);
+				document.getElementById(underlying_fields[y] + "_online_del").classList.add('badge-del');
+				//alert(underlying_fields[y] + ' delivery online ' + document.getElementById(underlying_fields[y] + "_online_del").classList);
+			}
+			else {
+				document.getElementById(underlying_fields[y] + "_online_del").classList.remove('badge-del');
+			}
+			if(json.airfield_data[underlying_fields[y]].tower_cab.gnd) {
+				document.getElementById(underlying_fields[y] + "_online_gnd").classList.add('badge-gnd');
+			}
+			else {
+				document.getElementById(underlying_fields[y] + "_online_gnd").classList.remove('badge-gnd');
+			}			
+			if(json.airfield_data[underlying_fields[y]].tower_cab.twr) {
+				document.getElementById(underlying_fields[y] + "_online_twr").classList.add('badge-twr');
+			}
+			else {
+				document.getElementById(underlying_fields[y] + "_online_twr").classList.remove('badge-twr');				
+			}
 			document.getElementById(underlying_fields[y] + "_metar").innerHTML = json.airfield_data[underlying_fields[y]].metar;
 			/*
 			var active_rwys = "--";
@@ -653,7 +700,7 @@
 			document.getElementById(underlying_fields[y] + "_override").value = override;
 			}
 		}
-		
+		//alert(openCloseStatus);
 		// Set MULTI-IDS fields
 		//var multi_disp_str = '<div class=\"landing_menu\"><a onclick=\"returnToLanding(\'multi_ids\');\"><i class=\"fas fa-bars\"></i></a></div>';
 		if((document.getElementById("ad").value == '1')||(document.getElementById("cid").value == json.template_creator)) {
@@ -1352,4 +1399,28 @@ function logAJAX(log) {
 	};
 	xhttp.open("GET", "ajax_administration.php?function=log_fetch&log_type=" + log, true); 
 	xhttp.send();
+}
+
+function stopVideo(id) {
+	video = document.getElementById(id);
+	video.pause();
+	video.currentTime = 0;
+}
+
+function checkDST() {
+Date.prototype.stdTimezoneOffset = function () {
+    var jan = new Date(this.getFullYear(), 0, 1);
+    var jul = new Date(this.getFullYear(), 6, 1);
+    return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+}
+
+Date.prototype.isDstObserved = function () {
+    return this.getTimezoneOffset() < this.stdTimezoneOffset();
+}
+
+var today = new Date();
+if (today.isDstObserved()) { 
+    return true;
+}
+else return false;	
 }

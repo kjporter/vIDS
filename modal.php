@@ -151,7 +151,7 @@
 					</div>
 					<div class="tab-pane" id="wx_video">
 						<h4>ZTL Pre-Duty Video Wx Brief</h4>
-						<video id="wx_video_s" autoplay="no" controls="" poster="https://www.weather.gov/images/ztl/Thumbnails/Video_Image.png" preload="none" src="https://www.weather.gov/media/ztl/ZTLPreDutyVideo.mp4">&nbsp;</video>
+						<video id="wx_video_s" controls poster="https://www.weather.gov/images/ztl/Thumbnails/Video_Image.png" preload="none" src="https://www.weather.gov/media/ztl/ZTLPreDutyVideo.mp4">&nbsp;</video>
 					</div>
 					<div class="tab-pane" id="wx_gates">
 						<h4>A80 Convective Gates</h4>
@@ -176,7 +176,7 @@
                 </div>
                 </div>	
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="stopVideo('wx_video_s');">Close</button>
                 </div>
             </div>
         </div>

@@ -12,7 +12,8 @@
 
 //error_reporting(0); //This file always results in an AJAX reply. Turn errors off.
 
-include_once "shared_functions.php";
+include_once "config.php";
+include_once "common.php";
 
 $live_network = false;
 if (isset($_REQUEST['live'])) {
@@ -71,7 +72,7 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 */
 	// Configuration
 	$ids_type = "B"; // L = local view, C = TRACON/ARTCC view, B = both (demo mode)
-	$airfields = array('KATL','KPDK','KFTY','KMGE','KRYY','KLZU','KMCN','KWRB','KAHN','KCSG'); // Configurable list of airfields (for TRACON/ARTCC view)
+//	$airfields = array('KATL','KPDK','KFTY','KMGE','KRYY','KLZU','KMCN','KWRB','KAHN','KCSG'); // Configurable list of airfields (for TRACON/ARTCC view)
 	$icao_id = $airfields[0]; // Primary airfield (for local view)
 	
 	$template = $_REQUEST['template']; // Is user requesting a specific multi-IDS template?
@@ -390,6 +391,30 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 			$rvr_disp[] = "RVR Not Available";
 		}
 	$afld_data['rvr_display'] = $rvr_disp;
+	
+	$tower_cab = array('del'=>0,'gnd'=>0,'twr'=>0);
+	// Search for online controllers in tower cab
+	foreach($stats_array['controllers'] as $controller) {
+		if(is_numeric(strpos($controller['callsign'],substr($afld,1)))) {
+			if(is_numeric(strpos($controller['callsign'],"DEL"))) {
+				$tower_cab['del'] = 1;
+			}
+			if(is_numeric(strpos($controller['callsign'],"GND"))) {
+				$tower_cab['gnd'] = 1;
+			}
+			if(is_numeric(strpos($controller['callsign'],"TWR"))) {
+				$tower_cab['twr'] = 1;
+			}
+		}			
+	}
+	/*
+	if($afld == "KPDK") {
+		$tower_cab['del'] = 0;
+		$tower_cab['gnd'] = 1;
+		$tower_cab['twr'] = 1;
+	}
+	*/
+	$afld_data['tower_cab'] = $tower_cab;
 	
 	$airfield_data[$afld] = $afld_data;
 	}
@@ -756,11 +781,11 @@ if(file_exists("data/flow.dat")&&!$reply_dataset['config']['AUTO']) {
 	$flow = fgets($file);
 	$arr = fgetcsv($file,1000,",");
 	$dep = fgetcsv($file,1000,",");
-	$reply_dataset['airfield_data']['KATL']['traffic_flow'] = preg_replace( "/\r|\n/", "", $flow ); //preg_replace removes endline char
-	$reply_dataset['airfield_data']['KATL']['apch_type'] = "";
-	$reply_dataset['airfield_data']['KATL']['apch_rwys'] = $arr;
-	$reply_dataset['airfield_data']['KATL']['dep_type'] = "";
-	$reply_dataset['airfield_data']['KATL']['dep_rwys'] = $dep;
+	$reply_dataset['airfield_data']['K' . DEFAULT_AFLD_ID]['traffic_flow'] = preg_replace( "/\r|\n/", "", $flow ); //preg_replace removes endline char
+	$reply_dataset['airfield_data']['K' . DEFAULT_AFLD_ID]['apch_type'] = "";
+	$reply_dataset['airfield_data']['K' . DEFAULT_AFLD_ID]['apch_rwys'] = $arr;
+	$reply_dataset['airfield_data']['K' . DEFAULT_AFLD_ID]['dep_type'] = "";
+	$reply_dataset['airfield_data']['K' . DEFAULT_AFLD_ID]['dep_rwys'] = $dep;
 }
 
 // Fetch CIC Notes

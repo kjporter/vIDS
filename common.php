@@ -2,7 +2,7 @@
 	/*
 		vIDS (virtual Information Display System) for VATSIM
 		
-		Filename: shared_functions.php
+		Filename: common.php
 		Function: Catch-all for commonly used/general-purpose functions
 		Created: 4/1/21
 		Edited: 

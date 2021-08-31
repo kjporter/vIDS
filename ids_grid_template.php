@@ -27,9 +27,9 @@
 			<div class="col-lg-2" style="text-align:left; vertical-align:middle">
 				<img src="img/logo.png" height="50px" style="margin-top:15px"/>
 			</div>
-			<div class="col-lg-7 ids-header template_local"><?php echo DEFAULT_AFLD_ID; ?> ATCT</div>
-			<div class="col-lg-7 ids-header template_a80"><?php echo TRACON_LONG_NAME; ?></div>
-			<div class="col-lg-3" style="text-align:right;">
+			<div class="col-lg-8 ids-header template_local"><?php echo DEFAULT_AFLD_ID; ?> ATCT</div>
+			<div class="col-lg-8 ids-header template_a80"><?php echo TRACON_LONG_NAME; ?></div>
+			<div class="col-lg-2" style="text-align:right;">
 				<a href="#" id="acknowledge" onclick="acknowledgeChanges();" class="btn btn-lg btn-primary" style="margin-top:15px">Acknowledge</a>
 				<br/>
 				<span id="refresh_countdown" style="color:white">Loading... </span>
@@ -81,14 +81,14 @@
 		</div>
 		<div class="row template_a80">
 			<div class="col-lg-12">
-			<?php controller_display("A80 TAR",array('H'=>'H','D'=>'D','L'=>'L','Y'=>'Y'),array('N'=>'N','S'=>'S','C43'=>'C43')); ?>
+			<?php controller_display(TRACON_ID . " TAR",array('H'=>'H','D'=>'D','L'=>'L','Y'=>'Y'),array('N'=>'N','S'=>'S','C43'=>'C43')); ?>
 			</div>
 		</div>
 	</div>
 	<div class="col-lg-4">
 	<div class="row info_grid">
 			<div class="col-lg-12">
-			<?php controller_display("A80 Departure",array('N'=>'N','S'=>'S','I'=>'I'),array('C43'=>'C43')); ?>
+			<?php controller_display(TRACON_ID . " Departure",array('N'=>'N','S'=>'S','I'=>'I'),array('C43'=>'C43')); ?>
 			<div class="row rem-bor"><div class="col-lg-10">Gates assigned:</div></div>
 			<div class="row combines rem-bor">
 			<div class="col-lg-4 scroll_content" id="dep_gate_n_container" onclick="setDepartureGates();"><p class="marquee_container"><span id="dep_gate_n">&nbsp;</span></p></div>
@@ -99,7 +99,7 @@
 			</div>
 		<div class="row info_grid">
 			<div class="col-lg-12 cntlPos">
-			<?php controller_display("A80 Satellite",array('P'=>'P','F'=>'F','X'=>'X','G'=>'G','Q'=>'Q'),array('N'=>'N','C43'=>'C43')); ?>
+			<?php controller_display(TRACON_ID . " Satellite",array('P'=>'P','F'=>'F','X'=>'X','G'=>'G','Q'=>'Q'),array('N'=>'N','C43'=>'C43')); ?>
 			</div>
 			</div>
 	</div>
@@ -112,7 +112,7 @@
 			<?php controller_display("Clearance Delivery",array('CD1'=>'CD-1','CD2'=>'CD-2','FD'=>'FD'),array('GCN'=>'GC-N','LC1'=>'LC-1','LC2'=>'LC-2','N'=>'N','C43'=>'C43')); ?>
 			</div>
 			<div class="col-lg-12 template_a80">
-			<?php controller_display("A80 Outer",array('M'=>'M','W'=>'W','Z'=>'Z','R'=>'R'),array('P'=>'P','F'=>'F','X'=>'X','G'=>'G','C43'=>'C43')); ?>
+			<?php controller_display(TRACON_ID . " Outer",array('M'=>'M','W'=>'W','Z'=>'Z','R'=>'R'),array('P'=>'P','F'=>'F','X'=>'X','G'=>'G','C43'=>'C43')); ?>
 			</div>
 		</div>
 		<div class="row" style="border-bottom:0px">
@@ -122,7 +122,7 @@
 	<div class="col-lg-4">
 		<div class="row rem-bor-tp">
 			<div class="col-lg-12">
-			<?php controller_display("A80 Arrival",array('O'=>'O','V'=>'V','A'=>'A'),array('N'=>'N','H'=>'H','D'=>'D','C43'=>'C43')); ?>
+			<?php controller_display(TRACON_ID . " Arrival",array('O'=>'O','V'=>'V','A'=>'A'),array('N'=>'N','H'=>'H','D'=>'D','C43'=>'C43')); ?>
 			</div>
 		</div>
 		<div class="row" style="border-bottom:0px">
@@ -138,16 +138,6 @@
 	<div class="row template_a80 dynMargin">
 		<div class="col-lg-12">
 <?php
-	$pdk = array("id"=>"KPDK","name"=>"Peachtree-Dekalb (PDK)","hours"=>"1130–0400Z‡ Mon–Fri, 1200–0400Z‡ Sat–Sun");
-	$fty = array("id"=>"KFTY","name"=>"Fulton County (FTY)","hours"=>"Attended continuously");
-	$mge = array("id"=>"KMGE","name"=>"Dobbins ARB (MGE)","hours"=>"1200–0400Z‡");
-	$ryy = array("id"=>"KRYY","name"=>"Cobb Co/McCollum (RYY)","hours"=>"1200–0400Z‡");
-	$lzu = array("id"=>"KLZU","name"=>"Gwinnette Co (LZU)","hours"=>"1200–0200Z‡");
-	$ahn = array("id"=>"KAHN","name"=>"Athens (AHN)","hours"=>"1300–0100Z‡");
-	$mcn = array("id"=>"KMCN","name"=>"Macon Regional (MCN)","hours"=>"1300–0100Z‡");
-	$wrb = array("id"=>"KWRB","name"=>"Robins AFB (WRB)","hours"=>"Attended continuously");
-	$csg = array("id"=>"KCSG","name"=>"Columbus (CSG)","hours"=>"1400–0200Z‡");
-	$a80sat = array($pdk,$fty,$mge,$ryy,$lzu,$ahn,$mcn,$wrb,$csg);
 	$newrow = true;
 	for($x=0;$x<count($a80sat);$x++) {
 		$str = "";
@@ -166,13 +156,16 @@
 					<li><a href=\"#PROC\" onclick=\"loadProc('" . $a80sat[$x]['id'] . "');\" data-toggle=\"modal\">Instrument Procedures</a></li>
 				</ul>
 				</div>
-				<span class=\"cell_header\">" . $a80sat[$x]['name'] . "</span>
+				<span class=\"cell_header\">" . $a80sat[$x]['name'] . "</span><span class=\"cab_status\">&nbsp;&nbsp;<span id=\"" . $a80sat[$x]['id'] . "_online_del\" class=\"badge badge-secondary\">D</span>&nbsp;<span id=\"" . $a80sat[$x]['id'] . "_online_gnd\" class=\"badge badge-secondary\">G</span>&nbsp;<span id=\"" . $a80sat[$x]['id'] . "_online_twr\" class=\"badge badge-secondary\">T</span></span>
 				<div class=\"op_hours\">" . $a80sat[$x]['hours'] . "</div>
 				<div class=\"row rem-bor\">
 					<div id=\"" . $a80sat[$x]['id'] . "_atis_code\" class=\"col-lg-3 rem-bor atis_code\"></div>
 					<div class=\"col-lg-6\">
 						<div id=\"" . $a80sat[$x]['id'] . "_open_closed\" class=\"row rem-bor arrival_info\">
 						</div>
+						<input type=\"hidden\" id=\"" . $a80sat[$x]['id'] . "_hours_mf\" value=\"" . $a80sat[$x]['MF'] . "\" />
+						<input type=\"hidden\" id=\"" . $a80sat[$x]['id'] . "_hours_ss\" value=\"" . $a80sat[$x]['SS'] . "\" />
+						<input type=\"hidden\" id=\"" . $a80sat[$x]['id'] . "_hours_dstAdjust\" value=\"" . $a80sat[$x]['DST_Adjust'] . "\" />
 						<div id=\"" . $a80sat[$x]['id'] . "_metar\" class=\"row rem-bor\">
 						</div>						
 					</div>
@@ -198,13 +191,13 @@
 				<li><a href="#BUG" data-toggle="modal">Report a bug</li></li>
 			</ul>
 		</div>
-		<a href="#WX" data-remote="https://www.aviationweather.gov/taf/data?ids=katl&format=decoded&metars=on&date=&submit=Get+TAF+data" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#WX" onClick="fetchWeather('KATL');"><i class="fas fa-cloud fa-lg"></i><br/>WX</a>
+		<a href="#WX" data-remote="https://www.aviationweather.gov/taf/data?ids=katl&format=decoded&metars=on&date=&submit=Get+TAF+data" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#WX" onClick="fetchWeather('K<?php echo DEFAULT_AFLD_ID; ?>');"><i class="fas fa-cloud fa-lg"></i><br/>WX</a>
 		<a href="#RECAT" class="btn btn-lg btn-primary" data-toggle="modal"><i class="fas fa-plane-arrival fa-lg"></i><br/>RECAT</a>
 		<a href="#FREQS" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="fas fa-broadcast-tower fa-lg"></i><br/>FREQS</a>
 		<a href="#aFREQS" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="fas fa-broadcast-tower fa-lg"></i><br/>FREQS</a>
 		<a href="#ARSPC" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="fas fa-map-marked-alt fa-lg"></i><br/>ARSPC</a>
 		<a href="#aARSPC" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="fas fa-map-marked-alt fa-lg"></i><br/>ARSPC</a>
-		<a href="#PROC" class="btn btn-lg btn-primary" data-toggle="modal" onclick="loadProc('KATL');"><i class="fas fa-file-invoice fa-lg"></i><br/>PROC</a>
+		<a href="#PROC" class="btn btn-lg btn-primary" data-toggle="modal" onclick="loadProc('K<?php echo DEFAULT_AFLD_ID; ?>');"><i class="fas fa-file-invoice fa-lg"></i><br/>PROC</a>
 		<a href="#ROTG" class="btn btn-lg btn-primary" data-toggle="modal"><i class="fas fa-plane-departure fa-lg"></i><br/>ROTG</a>
 		<a href="#SOP" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="fas fa-book fa-lg"></i><br/>SOP</a>
 		<a href="#aSOP" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="fas fa-book fa-lg"></i><br/>SOP</a>

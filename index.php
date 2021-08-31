@@ -12,8 +12,8 @@
 		VATSIM Data Provider: http://status.vatsim.net/
 	*/
 	include_once "config.php";
-	include_once "sso_auth.php";
-	
+//	include_once "sso_auth.php";
+	include_once "sso_auth_cl.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +115,7 @@ else {
 	if (is_sysad($vatsim_cid,$artcc_staff,$sso_endpoint)) { print "<a onclick=\"modBlacklist('fetch');\" href=\"#ADMIN\" class=\"btn btn-lg btn-block btn-primary\" data-toggle=\"modal\"><i class=\"fas fa-user-tie fa-lg\"></i><br/>System<br/>Administration</a><br/>"; }
 	print "	</div>
 			<div class=\"col-lg-6 menu_button\"><br/>
-			<a onclick=\"launchMulti();\" class=\"btn btn-lg btn-block btn-primary\" data-toggle=\"modal\"><i class=\"fas fa-compress-arrows-alt fa-lg\"></i><br/>TRACON/ARTCC<br/>IDS</a><br/>
+			<a onclick=\"launchMulti();\" class=\"btn btn-lg btn-block btn-primary\" data-toggle=\"modal\"><i class=\"fas fa-compress-arrows-alt fa-lg\"></i><br/>Multi-Airfield<br/>IDS</a><br/>
 			<a onclick=\"showAboutHelp();\" class=\"btn btn-lg btn-block btn-primary\" data-toggle=\"modal\"><i class=\"far fa-life-ring fa-lg\"></i><br/>Help<br/>& About</a><br/><br/>
 			</div>
 			</div>";
