@@ -17,7 +17,7 @@
 //namespace vids;
 
 // Toggles debug mode on/off. Debug mode is NOISY - it throws additional execution data and dumps the reply JSON in a viewable container
-define('DEBUG', true);
+define('DEBUG', false);
 // URL for production site
 define('PROD_URL', 'ztlarcc.org');
 // Authentication variables - do not edit
