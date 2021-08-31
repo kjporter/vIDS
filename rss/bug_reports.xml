@@ -6,11 +6,6 @@
   <link>https://kplink.net/ids</link>
   <description>virtual IDS bug reporting and tracking feed</description>
   <language>en-us</language>
-  <item>
-    <title/>
-    <link/>
-    <description/>
-  </item>
-<item><title>Bug found</title><link>http://test</link><description>I found a bug here!</description></item><item><title>Bug found</title><link>http://test</link><description>I found a bug here!</description></item><item><title>Bug found</title><link>http://test</link><description>I found a bug here!</description></item><item><title>Bug found</title><link>http://test</link><description>I found a bug here!</description></item><item><title>Bug found</title><link>http://test</link><description>I found a bug here!</description></item><item><title>vIDS Bug Reported: 06/10/21 20:26:24</title><link>https://kplink.net/ids/rss</link><description/></item><item><title>vIDS Bug Reported: 06/10/21 20:26:44</title><link>https://kplink.net/ids/rss</link><description>This is a test bug that I'm reporting just to see how well this machine works I hope that it does work well ok bye!Reported by: Kyle Porter(@Kyle Porter)</description></item><item><title>vIDS Bug Reported: 06/10/21 20:28:44</title><link>https://kplink.net/ids/rss</link><description>Yet another bug to track...Reported by: Kyle Porter(@Kyle Porter)</description></item></channel>
-
+<item><title>vIDS Bug Reported: 07/23/21 03:23:22</title><link>https://kplink.net/ids/bug_reporting.php?bug_description=This%20is%20another%20test%20bug%20report%20to%20fix%20a%20bug%20in%20the%20bug%20reporting%20thingy.%3Cbr/rss</link><description>This is another test bug report to fix a bug in the bug reporting thingy.&lt;br/&gt;Reported by: Kyle Porter</description><guid>vIDS_Bug_Tracking_039211</guid></item>
+</channel>
 </rss>
