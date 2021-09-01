@@ -350,7 +350,7 @@
 	
 	function updateCtrlPos() { // Saves controller position/configuration data
 		// TODO: Make the positions array global so it can be used by multiple functions and not duplicated
-		var positions = new Array("LC1","LC2","LC3","LC4","LC5","GCN","GCC","GCS","GM","CD1","CD2","FD","N","S","I","P","F","X","G","Q","O","V","A","H","D","L","Y","M","W","Z","R");
+		var positions = new Array("LC-1","LC-2","LC-3","LC-4","LC-5","GC-N","GC-C","GC-S","GM","CD-1","CD-2","FD","N","S","I","P","F","X","G","Q","O","V","A","H","D","L","Y","M","W","Z","R","E","3E");
 		var controllers = "";
 		for(var x=0;x<positions.length;x++) {
 			if(controllers.length > 0)
@@ -474,7 +474,7 @@
 		document.getElementById("local_arr_rwys").innerHTML = arrival_rwys;
 		// Set controller position combines in select boxes
 		var controllers = json.controllers.split("|");
-		var positions = new Array("LC1","LC2","LC3","LC4","LC5","GCN","GCC","GCS","GM","CD1","CD2","FD","N","S","I","P","F","X","G","Q","O","V","A","H","D","L","Y","M","W","Z","R");
+		var positions = new Array("LC-1","LC-2","LC-3","LC-4","LC-5","GC-N","GC-C","GC-S","GM","CD-1","CD-2","FD","N","S","I","P","F","X","G","Q","O","V","A","H","D","L","Y","M","W","Z","R","E","3E");
 		//var controllerPos = "";
 		for(var x=0; x<controllers.length;x++) {
 			//controllerPos += "Position: " + positions[x] + " Controller selected: " + controllers[x] + "\n";

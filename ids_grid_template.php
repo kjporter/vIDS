@@ -69,14 +69,14 @@
 			<div class="col-lg-4">
 				<div class="row">
 					<div class="col-lg-12 cntlPos">
-					<?php controller_display("Local Control",array('LC1'=>'LC-1','LC2'=>'LC-2','LC3'=>'LC-3','LC4'=>'LC-4','LC5'=>'LC-5'),array('N'=>'N','C43'=>'C43'),true); ?>
+					<?php controller_display("Local Control",array('LC-1'=>'LC-1','LC-2'=>'LC-2','LC-3'=>'LC-3','LC-4'=>'LC-4','LC-5'=>'LC-5'),array('N'=>'N','C43'=>'C43'),true); ?>
 						<br/>
 						<div class="scroll_content allblack"></div>
 					</div>
 				</div>
 		<div class="row template_local">
 			<div class="col-lg-12 cntlPos">
-			<?php controller_display("Ground Control",array('GCN'=>'GC-N','GCC'=>'GC-C','GCS'=>'GC-S','GM'=>'GM'),array('LC1'=>'LC-1','LC2'=>'LC-2','LC3'=>'LC-3','LC4'=>'LC-4','LC5'=>'LC-5','N'=>'N','C43'=>'C43')); ?>
+			<?php controller_display("Ground Control",array('GC-N'=>'GC-N','GC-C'=>'GC-C','GC-S'=>'GC-S','GM'=>'GM'),array('LC-1'=>'LC-1','LC-2'=>'LC-2','LC-3'=>'LC-3','LC-4'=>'LC-4','LC-5'=>'LC-5','N'=>'N','C43'=>'C43')); ?>
 			</div>
 		</div>
 		<div class="row template_a80">
@@ -109,10 +109,10 @@
 	<div class="col-lg-4">
 		<div class="row rem-bor-tp">
 			<div class="col-lg-12 template_local">
-			<?php controller_display("Clearance Delivery",array('CD1'=>'CD-1','CD2'=>'CD-2','FD'=>'FD'),array('GCN'=>'GC-N','LC1'=>'LC-1','LC2'=>'LC-2','N'=>'N','C43'=>'C43')); ?>
+			<?php controller_display("Clearance Delivery",array('CD-1'=>'CD-1','CD-2'=>'CD-2','FD'=>'FD'),array('GC-N'=>'GC-N','LC-1'=>'LC-1','LC-2'=>'LC-2','N'=>'N','C43'=>'C43')); ?>
 			</div>
 			<div class="col-lg-12 template_a80">
-			<?php controller_display(TRACON_ID . " Outer",array('M'=>'M','W'=>'W','Z'=>'Z','R'=>'R'),array('P'=>'P','F'=>'F','X'=>'X','G'=>'G','C43'=>'C43')); ?>
+			<?php controller_display(TRACON_ID . " Outer",array('M'=>'M','W'=>'W','Z'=>'Z','R'=>'R','E'=>'E','3E'=>'3E'),array('N'=>'N','P'=>'P','F'=>'F','X'=>'X','G'=>'G','C43'=>'C43')); ?>
 			</div>
 		</div>
 		<div class="row" style="border-bottom:0px">
@@ -122,7 +122,7 @@
 	<div class="col-lg-4">
 		<div class="row rem-bor-tp">
 			<div class="col-lg-12">
-			<?php controller_display(TRACON_ID . " Arrival",array('O'=>'O','V'=>'V','A'=>'A'),array('N'=>'N','H'=>'H','D'=>'D','C43'=>'C43')); ?>
+			<?php controller_display(TRACON_ID . " AR",array('O'=>'O','V'=>'V','A'=>'A'),array('N'=>'N','H'=>'H','D'=>'D','C43'=>'C43')); ?>
 			</div>
 		</div>
 		<div class="row" style="border-bottom:0px">
