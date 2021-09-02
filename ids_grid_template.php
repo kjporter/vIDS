@@ -40,21 +40,21 @@
 			<div class="col-lg-1 atis_code h-100" id="atis_code"></div>
 			<div class="col-lg-11">
 				<div class="row">
-					<div class="col-lg-12" id="metar"></div>
+					<div class="col-lg-12 text_grid" id="metar"></div>
 				</div>
 				<div id="row2" class="row rem-bor">
 					<div class="col-lg-3 traffic_flow" id="traffic_flow"></div>
-					<div class="col-lg-2">
+					<div class="col-lg-2 text_grid">
 						<span class="cell_header">Departure Rwys</span>
 						<div id="local_dep_rwys">
 						</div>
 					</div>
-					<div class="col-lg-2">
+					<div class="col-lg-2 text_grid">
 						<span class="cell_header">Arrival Rwys</span>
 						<div id="local_arr_rwys">
 						</div>
 					</div>
-					<div class="col-lg-2">
+					<div class="col-lg-2 text_grid">
 						<span class="cell_header">Trips Config</span>
 						<div id="TRIPS_info" onclick="clearStyle(this);" class=""></div>
 					</div>

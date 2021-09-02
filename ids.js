@@ -10,15 +10,12 @@
 	
 	*/
 	
-	//const defaultAirfield = 'KATL'; // I need this to be pulled from the php defines...
 	// Code below handles vIDS automatic data refreshes
 	var setRefreshTime = 15; // Defines vIDS refresh rate. Default is 15 (VATSIM JSON updates every 15 seconds)
 	var refreshTime = setRefreshTime;
 	var refreshTimer = setInterval(function(){
 		if(refreshTime <= 0){
-			//refreshData(); // <-- experimental... brings dataset from external AJAX instead of forced page reload
 			refreshData(false,document.getElementById("pickMulti").value);
-			//document.getElementById("configForm").submit();
 			refreshTime = setRefreshTime;
 		}
 		var sec = " second";
@@ -637,17 +634,17 @@
 			var opHoursStart = parseInt(opHours[0]);
 			var opHoursEnd = parseInt(opHours[1]);
 			if((document.getElementById(underlying_fields[y] + "_hours_dstAdjust").value)&&(checkDST())) { // Adjust for DST
-				opHoursStart = opHours[0] -1;
-				opHoursEnd = opHours[1] -1;
+				opHoursStart -= 100;
+				opHoursEnd -= -100;
 			}
 			if(opHoursEnd < opHoursStart) { // This happens when a tower closes after 0000Z
-				opHoursEnd += 2400;
+				//opHoursEnd += 2400;
 			}
-			if((cur24time > opHoursStart)&&(cur24time < opHoursEnd)) { // Airfield is open
-				//alert(underlying_fields[y] + ' Current UTC time: ' + cur24time + ' Field opening time: ' + opHoursStart + ' Field closing time: ' + opHoursEnd);
+			if((cur24time > opHoursStart)&&(cur24time < opHoursEnd)||(cur24time < opHoursStart)&&(cur24time < opHoursEnd)) { // Airfield is open
+				//alert(underlying_fields[y] + ' Current UTC time: ' + cur24time + ' Field opening time: ' + opHoursStart + ' Field closing time: ' + opHoursEnd + ' Field is: ' + open_closed);
 				open_closed = "OPEN";
 			}
-			//openCloseStatus += underlying_fields[y] + ' Current UTC time: ' + cur24time + ' Field opening time: ' + opHoursStart + ' Field closing time: ' + opHoursEnd + '\n';
+			openCloseStatus += underlying_fields[y] + ' Current UTC time: ' + cur24time + ' Field opening time: ' + opHoursStart + ' Field closing time: ' + opHoursEnd + ' Field is: ' + open_closed + '\n';
 			document.getElementById(underlying_fields[y] + "_open_closed").innerHTML = open_closed;
 			// New schema to display del/gnd/twr status
 			//alert(json.airfield_data[underlying_fields[y]].tower_cab.del);

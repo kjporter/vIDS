@@ -140,7 +140,7 @@ textarea.txt_low {
 span.cell_header {
 	color: gray;
 	font-weight: bold;
-	font-size: 1em;
+	font-size: 1.2vw;
 	text-decoration: underline;
 }
 
@@ -174,7 +174,7 @@ div.atis_code {
 	border-left: 1px solid white;
 }
 
-div.info_grid {
+div.info_grid, div.text_grid {
 	font-size: 1.2vw;
 }
 
