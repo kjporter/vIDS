@@ -21,7 +21,7 @@
 	<title>vIDS</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="ids.css">
+	<link data-cfasync="false" rel="stylesheet" href="ids.css">
 	<link rel="shortcut icon" href="img/favicon.ico" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
@@ -35,8 +35,8 @@
 	-->
 	<script src="https://kit.fontawesome.com/9bd47a7738.js" crossorigin="anonymous"></script> <!-- used for glyph icons in tower IDS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- used for glyph icons in tower IDS -->
-	<script><?php echo js_globals(); ?></script>
-	<script src="ids.js"/></script>
+	<script data-cfasync="false"><?php echo js_globals(); ?></script>
+	<script data-cfasync="false" src="ids.js"/></script>
 </head>
 <?php
 	// Picks a random image from the $imagesDir to display in the landing page background
