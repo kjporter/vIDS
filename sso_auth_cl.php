@@ -35,6 +35,7 @@ class Security{
 	private $full_name = "";
 	private $user_rating = "";
 	private $vatsim_cid = "";
+	private $dump = ""; // Debug string
 	
 	function __construct($my_url,$sso_variables) {
 		foreach($sso_variables as $sso_var) { // Determine SSO variable set to use based on server URL
@@ -54,6 +55,7 @@ class Security{
 		$this->user_data(); // Use token to authenticate and get user data
 		$this->authorize(); // Use user data to verify system authorization (call VATUSA API)
 		$this->write_access_log(); // Write access attempt to logfile
+		if(DEBUG) { echo $this->dump; }
 	}
 	
 	private function access_token() { // Check for an access token and request one if needed.
@@ -76,6 +78,7 @@ class Security{
 			$token_json = json_decode($token,true);
 			$this->access_token = $token_json['access_token'];
 			$_SESSION['access_token'] = $token_json['access_token'];
+			$this->dump .= "Code obtained!<br/>";
 		}
 		else {} // Do nothing, authentication sequence has not started
 	}
@@ -91,6 +94,7 @@ class Security{
 			$userData = curl_exec($ch);
 			$this->userData_json = json_decode($userData,true);
 			curl_close($ch);
+			//$this->dump .= "Controller rating: " . $this->userData_json['vatsim']['rating']['id'] . "<br/>";
 		}
 	}
 	
@@ -102,11 +106,13 @@ class Security{
 			if(file_exists($blacklist)) {
 				if(strpos(file_get_contents($blacklist),$this->userData_json['data']['cid']) !== false) {
 					$this->blacklisted = true;
+					$this->dump .= "User blacklisted :(<br/>";
 				}
 			}
 			// We've got the user data from the API, check to make sure they have a valid controller rating (> 0)
 			//$dump .= "<br/>Controller rating: " . $userData_json['vatsim']['rating']['id'];
 			if(!$this->blacklisted && ($this->userData_json['data']['vatsim']['rating']['id']>0)) { // The user logging in is at least an observer
+				$this->dump .= "User authorized :)<br/>";
 				// Check the VATUSA API to see if the user is a controller at THIS facility before granting access
 				// *Note* this API call will only work for facilities within the VATUSA region
 				$cu = curl_init();
@@ -118,9 +124,11 @@ class Security{
 				$roster = curl_exec($cu); // Execute CURL
 				curl_close($cu);
 				if((strpos($roster,$this->userData_json['data']['cid']) !== false)||(strpos($this->sso_vars['sso_endpoint'],"dev") !== false)) { // Does the CID exist in the roster JSON... OR are we using the dev endpoint (fake CIDs)?
+					$this->dump .= "User is a home or visiting controller!<br/>";
 					$this->valid_auth = true;
 					if(isset($this->userData_json['data']['personal']['name_full'])) { // This shouldn't really be necessary, but it prevents an error when the full name isn't available
 						$this->full_name = $this->userData_json['data']['personal']['name_full'];
+						$this->dump .= "Hello" . $this->userData_json['data']['personal']['name_full'] . "<br/>";
 					}
 					$this->user_rating = $this->userData_json['data']['vatsim']['rating']['short'];
 					$this->vatsim_cid = $this->userData_json['data']['cid']; // Added to identify users so they can delete templates they create
