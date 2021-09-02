@@ -386,7 +386,20 @@
 				if(!!document.getElementById('json_test_dump')) {
 					document.getElementById('json_test_dump').innerHTML = xhttp.responseText; // Dump the full JSON into a div
 				}
-				updateIDSFields(init,xhttp.responseText); // Send this JSON to another function for parse and display
+				var reply = xhttp.responseText;
+				var error = "";
+				// Capture errors from PHP reply, prevent JS errors
+				if(reply.substring(0,1) != '{') { // JSON start with '{', lack of this means there is error text before the JSON
+					error = reply.substring(0,reply.indexOf('{')); // Capture the error text
+					reply = reply.substring(reply.indexOf('{')+1); // Trim the error off of the JSON so we can use it normally
+				}
+				//alert(reply);
+				updateIDSFields(init,reply); // Send this JSON to another function for parse and display
+				//updateIDSFields(init,xhttp.responseText); // Send this JSON to another function for parse and display
+				if(error.length > 0) { // An error occurred - notify the user
+					document.getElementById('alert').classList.add('alert-warning');
+					document.getElementById('alert_text').innerHTML = "A data refresh error occurred. Some vIDS fields may contain outdated information.";
+				}
 			}
 			else {
 			}

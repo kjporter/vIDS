@@ -214,9 +214,11 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 		$afld_data['icao_id'] = $afld;
 	// Does the ATIS we're looking for currently exist on the network?
 	$atis_found = false;
+	if(array_key_exists('atis',$stats_array)) { // Error prevention when no atis field is returned...
 	for($a=0;$atis_found==false && $a < count($stats_array['atis']);$a++) {
 		$atis = $stats_array['atis'][$a];
 		$atis_found = ($atis['callsign'] == $afld . "_ATIS") ? true : false;
+	}
 	}
 	if ($atis_found && ($atis['atis_code'] != null)) { // ATIS code null protect from malformed vATIS messages
 		//print "Station found!<br/>";
@@ -394,6 +396,7 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	
 	$tower_cab = array('del'=>0,'gnd'=>0,'twr'=>0);
 	// Search for online controllers in tower cab
+	if(array_key_exists('controllers',$stats_array)) { // Error prevention for when controllers array isn't returned...
 	foreach($stats_array['controllers'] as $controller) {
 		if(is_numeric(strpos($controller['callsign'],substr($afld,1)))) {
 			if(is_numeric(strpos($controller['callsign'],"DEL"))) {
@@ -407,7 +410,9 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 			}
 		}			
 	}
+	}
 	/*
+	// Testing use only
 	if($afld == "KPDK") {
 		$tower_cab['del'] = 0;
 		$tower_cab['gnd'] = 1;
