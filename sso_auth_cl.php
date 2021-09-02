@@ -55,14 +55,15 @@ class Security{
 		$this->user_data(); // Use token to authenticate and get user data
 		$this->authorize(); // Use user data to verify system authorization (call VATUSA API)
 		$this->write_access_log(); // Write access attempt to logfile
-		if(DEBUG) { echo $this->dump; }
 	}
 	
 	private function access_token() { // Check for an access token and request one if needed.
 		if(isset($_SESSION['access_token'])) { // Session in progress, use existing token to get auth data
 			$this->access_token = $_SESSION['access_token'];
+			$this->dump = "Session in-progress, using existing access token<br/>";
 		}
 		elseif(isset($_GET['code'])) { // Need to get a new authentication - session does not exist
+			$this->dump = "No session found, requesting a new access token<br/>";
 			$ch = curl_init();
 			curl_setopt($ch,CURLOPT_URL, $this->sso_vars['sso_endpoint'] . "/oauth/token");
 			curl_setopt($ch,CURLOPT_POST, true);
@@ -78,13 +79,15 @@ class Security{
 			$token_json = json_decode($token,true);
 			$this->access_token = $token_json['access_token'];
 			$_SESSION['access_token'] = $token_json['access_token'];
-			$this->dump .= "Code obtained!<br/>";
+			$this->dump .= "Access token obtained and user session created!<br/>";
 		}
 		else {} // Do nothing, authentication sequence has not started
+		if(DEBUG) { echo $this->dump; }
 	}
 	
 	private function user_data() { // Fetch user data JSON using access token
 		if($this->access_token != null) {
+			$this->dump = "Using access token to fetch user data<br/>";
 			$ch = curl_init();
 			curl_setopt($ch,CURLOPT_URL, $this->sso_vars['sso_endpoint'] . "/api/user");
 			curl_setopt($ch,CURLOPT_HTTPHEADER, array("Authorization: Bearer " . $this->access_token, "Accept: application/json"));
@@ -94,14 +97,16 @@ class Security{
 			$userData = curl_exec($ch);
 			$this->userData_json = json_decode($userData,true);
 			curl_close($ch);
-			//$this->dump .= "Controller rating: " . $this->userData_json['vatsim']['rating']['id'] . "<br/>";
 		}
+		if(DEBUG) { echo $this->dump; }
 	}
 	
 	private function authorize() {
+		$this->dump = "";
 		if(isset($this->userData_json['data']['vatsim']['rating']['id'])) {
 			// Check to see if the user is blacklisted before authorizing them
 			//$blacklisted = false;
+			$this->dump .= "Checking to see if user is authorized... <br/>";
 			$blacklist = "data/blacklist.dat";
 			if(file_exists($blacklist)) {
 				if(strpos(file_get_contents($blacklist),$this->userData_json['data']['cid']) !== false) {
@@ -128,7 +133,7 @@ class Security{
 					$this->valid_auth = true;
 					if(isset($this->userData_json['data']['personal']['name_full'])) { // This shouldn't really be necessary, but it prevents an error when the full name isn't available
 						$this->full_name = $this->userData_json['data']['personal']['name_full'];
-						$this->dump .= "Hello" . $this->userData_json['data']['personal']['name_full'] . "<br/>";
+						$this->dump .= "Hello " . $this->userData_json['data']['personal']['name_full'] . "<br/>";
 					}
 					$this->user_rating = $this->userData_json['data']['vatsim']['rating']['short'];
 					$this->vatsim_cid = $this->userData_json['data']['cid']; // Added to identify users so they can delete templates they create
@@ -161,6 +166,7 @@ class Security{
 			//$this->alert_text = "Authentication attempt failed - please try again later.";
 			//$this->alert_style = "alert alert-danger alert-visible";					
 		}
+		if(DEBUG) { echo $this->dump; }
 	}
 	
 	public function fetch_params() { // Returns parameter array

@@ -12,6 +12,7 @@
 		VATSIM Data Provider: http://status.vatsim.net/
 	*/
 	include_once "config.php";
+	include_once "common.php";
 //	include_once "sso_auth.php";
 	include_once "sso_auth_cl.php";
 ?>
@@ -36,7 +37,8 @@
 	<script src="https://kit.fontawesome.com/9bd47a7738.js" crossorigin="anonymous"></script> <!-- used for glyph icons in tower IDS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- used for glyph icons in tower IDS -->
 	<script data-cfasync="false"><?php echo js_globals(); ?></script>
-	<script data-cfasync="false" src="ids.js"/></script>
+	<!--<script data-cfasync="false" src="ids.js"></script>-->
+	<script data-cfasync="false" src="<?php echo auto_version('/' . basename(__DIR__) . '/ids.js'); ?>"></script>
 </head>
 <?php
 	// Picks a random image from the $imagesDir to display in the landing page background
@@ -104,6 +106,7 @@ if(!$valid_auth) {
 	print "	<div id=\"auth\" class=\"row\" style=\"border:0px\">
 			<div class=\"col menu_button\"><br/>
 			<a href=\"$sso_endpoint/oauth/authorize?client_id=$client_id&redirect_uri=$url\" class=\"btn btn-lg btn-primary\"><i class=\"fas fa-sign-in-alt fa-lg\"></i><br/>Login</a><br/><br/>
+			<a href=\"https://www.ztlartcc.org/privacy\" target=\"_blank\">Privacy Policy, Terms and Conditions</a>
 			</div>
 			</div>";
 }
