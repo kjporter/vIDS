@@ -15,12 +15,17 @@
 	include_once "common.php";
 //	include_once "sso_auth.php";
 	include_once "sso_auth_cl.php";
-	/*
+	
+	// Cachebuster for JS on Cloudflare
 	$documentRoot = '';
 	if(strpos(basename(__DIR__),'.') !== true) {
-		$documentRoot = '/' . basename(__DIR__);
+		$documentRoot = substr($_SERVER['REQUEST_URI'],0,strpos($_SERVER['REQUEST_URI'],'?'));
 	}
-	*/
+	if(strlen($documentRoot) < 1) {
+		$documentRoot = '/';
+	}
+	
+	//echo $_SERVER['REQUEST_URI'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,8 +48,8 @@
 	<script src="https://kit.fontawesome.com/9bd47a7738.js" crossorigin="anonymous"></script> <!-- used for glyph icons in tower IDS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- used for glyph icons in tower IDS -->
 	<script data-cfasync="false"><?php echo js_globals(); ?></script>
-	<script data-cfasync="false" src="ids.js"></script>
-	<!--<script data-cfasync="false" src="<?php //echo auto_version($documentRoot . '/ids.js'); ?>"></script>-->
+	<!--<script data-cfasync="false" src="ids.js"></script>-->
+	<script data-cfasync="false" src="<?php echo auto_version($documentRoot . 'ids.js'); ?>"></script>
 </head>
 <?php
 	// Picks a random image from the $imagesDir to display in the landing page background

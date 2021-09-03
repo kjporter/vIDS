@@ -97,6 +97,7 @@ class Security{
 			$userData = curl_exec($ch);
 			$this->userData_json = json_decode($userData,true);
 			curl_close($ch);
+			$this->dump .= $userData;
 		}
 		if(DEBUG) { echo $this->dump; }
 	}
