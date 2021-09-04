@@ -97,10 +97,10 @@ include "ids_grid_template.php";
 	
 	<!-- LANDING MENU -->
 	<div id="landing_hdr" class="container-fluid">
-	<div class="row" style="padding-left: 5px; border:0px;"><h3 contentEditable class="landing_header_text"><?php echo FACILITY_ID; ?> vIDS - Virtual Information Display System</h3></div>
+	<div class="row" style="padding-left: 5px; border:0px;"><h3 class="landing_header_text"><?php echo FACILITY_ID; ?> vIDS - Virtual Information Display System</h3></div>
 	<?php
 	if($valid_auth) {
-		print "<div class=\"row\" style=\"padding-left: 25px; border:0px;\"><h4 contentEditable class=\"landing_header_text\">Hello, $full_name ($user_rating)</h4></div>";
+		print "<div class=\"row\" style=\"padding-left: 25px; border:0px;\"><h4 class=\"landing_header_text\">Hello, $full_name ($user_rating)</h4></div>";
 	}
 	?>
 	</div>
