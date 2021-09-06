@@ -2,34 +2,22 @@
 	/*
 		vIDS (virtual Information Display System) for VATSIM
 		
-		Filename: sso_auth.php
-		Function: Handles VATSIM SSO OAUTH2 integration
+		Filename: user_authentication.php
+		Function: Extends VATSIM_Connect class and implements user authorization
 		Created: 5/15/21
-		Edited: 8/29/21
+		Edited: 9/4/21
 		
-		Changes: Converted methods into OOP structure
-		
-		VATSIM OAUTH2 Provider: https://auth.vatsim.net/
-		VATSIM Connect SSO Documentation: https://github.com/vatsimnetwork/documentation/blob/master/connect.md
-		
-		**NOTE** Class no longer in use - replaced by extended class VATSIM_Connect
+		Changes:
 	*/
 
 include_once "config.php";	
 include_once "common.php";
+include_once "vatsim_connect.php";	
 include_once "sso_variables.php";
 
-$auth = new Security(fetch_my_url(),$sso_variables);
-extract($auth->fetch_endpoint()); // Return SSO variables to be used by login button
-$auth->init_sso(); // Attempt to init the sign on sequence
-extract($auth->fetch_params(),EXTR_OVERWRITE); // Return authentication parameters
-
-class Security{
+class Security extends VATSIM_Connect {
 	
-	private $sso_vars = null;
-	private $access_token = null;
 	private $blacklisted = false;
-	private $userData_json = null;
 	private $alert_text = "";
 	private $alert_style = "";
 	private $valid_auth = false;
@@ -37,19 +25,6 @@ class Security{
 	private $full_name = "";
 	private $user_rating = "";
 	private $vatsim_cid = "";
-	private $dump = ""; // Debug string
-	
-	function __construct($my_url,$sso_variables) {
-		foreach($sso_variables as $sso_var) { // Determine SSO variable set to use based on server URL
-			if(strpos($my_url,$sso_var['redirect_uri'])!== false) {
-				$this->sso_vars = $sso_var;
-			}
-		}
-	}
-	
-	public function fetch_endpoint() { // Returns VATSIM SSO endpoint variables
-		return $this->sso_vars;
-	}
 	
 	public function init_sso() { // Start the SSO sequence
 		session_start();
@@ -57,51 +32,6 @@ class Security{
 		$this->user_data(); // Use token to authenticate and get user data
 		$this->authorize(); // Use user data to verify system authorization (call VATUSA API)
 		$this->write_access_log(); // Write access attempt to logfile
-	}
-	
-	private function access_token() { // Check for an access token and request one if needed.
-		if(isset($_SESSION['access_token'])) { // Session in progress, use existing token to get auth data
-			$this->access_token = $_SESSION['access_token'];
-			$this->dump = "Session in-progress, using existing access token<br/>";
-		}
-		elseif(isset($_GET['code'])) { // Need to get a new authentication - session does not exist
-			$this->dump = "No session found, requesting a new access token<br/>";
-			$ch = curl_init();
-			curl_setopt($ch,CURLOPT_URL, $this->sso_vars['sso_endpoint'] . "/oauth/token");
-			curl_setopt($ch,CURLOPT_POST, true);
-			curl_setopt($ch,CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-			curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
-			curl_setopt($ch,CURLOPT_POSTFIELDS,http_build_query(array ('grant_type'=>'authorization_code', 'client_id'=>$this->sso_vars['client_id'], 'client_secret'=>$this->sso_vars['client_secret'], 'redirect_uri'=>$this->sso_vars['redirect_uri'], 'code'=>$_GET['code'])));
-			curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch,CURLOPT_ENCODING, "gzip");
-			$token = curl_exec($ch);
-			curl_close($ch);
-			// We've got the token, now extract the pieces needed for the API call
-			// VATSIM API Documentation: https://api.vatsim.net/api/
-			$token_json = json_decode($token,true);
-			$this->access_token = $token_json['access_token'];
-			$_SESSION['access_token'] = $token_json['access_token'];
-			$this->dump .= "Access token obtained and user session created!<br/>";
-		}
-		else {} // Do nothing, authentication sequence has not started
-		if(DEBUG) { echo $this->dump; }
-	}
-	
-	private function user_data() { // Fetch user data JSON using access token
-		if($this->access_token != null) {
-			$this->dump = "Using access token to fetch user data<br/>";
-			$ch = curl_init();
-			curl_setopt($ch,CURLOPT_URL, $this->sso_vars['sso_endpoint'] . "/api/user");
-			curl_setopt($ch,CURLOPT_HTTPHEADER, array("Authorization: Bearer " . $this->access_token, "Accept: application/json"));
-			curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
-			curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_ENCODING, "gzip");
-			$userData = curl_exec($ch);
-			$this->userData_json = json_decode($userData,true);
-			curl_close($ch);
-			$this->dump .= $userData;
-		}
-		if(DEBUG) { echo $this->dump; }
 	}
 	
 	private function authorize() {
@@ -188,12 +118,6 @@ class Security{
 		$log_str .= " (" . $_SERVER['REMOTE_ADDR'] . ")";
 		// Write action to logfile
 		file_put_contents("data/access.log",$log_str . "\n",FILE_APPEND);		
-	}
-	
-	private function terminate_session() { // Not currently in-use, but destroys the session variable effectively ending the authorization
-		session_destroy();
-		$this->alert_text = "User logged out.";
-		$this->alert_style = "alert alert-danger";
 	}
 }
 ?>

@@ -14,7 +14,14 @@
 	include_once "config.php";
 	include_once "common.php";
 //	include_once "sso_auth.php";
-	include_once "sso_auth_cl.php";
+//	include_once "sso_auth_cl.php";
+	include_once "user_authentication.php";
+	
+	//Init and run front-end security via VATSIM Connect SSO
+	$auth = new Security(fetch_my_url(),$sso_variables);
+	extract($auth->fetch_endpoint()); // Return SSO variables to be used by login button
+	$auth->init_sso(); // Attempt to init the sign on sequence
+	extract($auth->fetch_params(),EXTR_OVERWRITE); // Return authentication parameters
 	
 	// Cachebuster for JS on Cloudflare
 	$documentRoot = '';
@@ -117,7 +124,7 @@ if(!$valid_auth) {
 	print "	<div id=\"auth\" class=\"row\" style=\"border:0px\">
 			<div class=\"col menu_button\"><br/>
 			<a href=\"$sso_endpoint/oauth/authorize?client_id=$client_id&redirect_uri=$url\" class=\"btn btn-lg btn-primary\"><i class=\"fas fa-sign-in-alt fa-lg\"></i><br/>Login</a><br/><br/>
-			<a href=\"https://www.ztlartcc.org/privacy\" target=\"_blank\">Privacy Policy, Terms and Conditions</a>
+			<a href=\"#PRIVACY\" data-toggle=\"modal\">Privacy Policy, Terms and Conditions</a>
 			</div>
 			</div>";
 }
