@@ -1063,7 +1063,7 @@
                 <div class="form-group row">
                     <label for="inputName" class="col-sm-4 col-form-label">Your name:</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" id="bug_report_name" />
+						<input type="text" class="form-control" id="bug_report_name" value="<?php echo $full_name; ?>" />
 					</div>
 				</div>				
                 <div class="form-group row">
@@ -1265,6 +1265,70 @@
 				<p>Download system access log <a href="data/access.log" target="_blank">access.log</a></p>
 				</div>
 					</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div id="PRIVACY" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Privacy Policy & Terms and Conditions</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+					<h4>Information We Collect</h4>
+					<p>To help enhance the virtual air traffic control experience, we collect information across a series of products and services all to enhance the end user's experience. We collect information in the following ways:</p>
+					<ul>
+					<li>Information you give us. When you register an account with VATSIM and use that account to sign-in on vIDS, information that is generally considered personal is given to us from you and VATSIM to include, but is not limited to: your name and email address.</li>
+					<li>Information we get from you. Some other information is passed by your computer or electronic device, web browser, and VATSIM client. Information can include: your IP address, web browser type and version, device specific information (such as operating system, unique device identifiers and mobile network information). This information may be linked to your account.</li>
+					<li>Log Information. Each time you perform an action on vIDS, your action is logged. Information logged can include: type of action, data being sent and received, IP address the request originated from, software used to make the request, identification cookies, and the results of the request.</li>
+					<li>Location Information. Your location information may be associated with each request through geolocation against the originating IP address, information given to us by you or given to us by you through VATSIM.</li>
+					<li>Storage Location. Data is stored and encrypted on services owned or leased by vIDS within the United States.</li>
+					</ul>
+					<h4>Information Usage</h4>
+					<p>To help enhance the virtual air traffic control experience, we collect information across a series of products and services all to enhance the user experience.<br/>We use the information collected to provide, maintain, protect and improve our services.<br/>The information we collect is maintained with confidentiality to the extent possible. The following information is shared with vIDS associated facilities:</p>
+					<ul>
+					<li>VATSIM CERT Identification Number (CID)</li>
+					<li>Your name</li>
+					<li>Your VATSIM achievements and ratings</li>
+					<li>Your VATSIM associated email address</li>
+					<li>ARTCC facility associations, VATSIM region and division associations</li>
+					</ul>
+					<p>vIDS does not make any personal information available to the public, however the following information may be seen by users logged into the system:</p>
+					<ul>
+					<li>VATSIM CERT Identification Number (CID)</li>
+					<li>Your name</li>
+					<li>ARTCC staff associations and ARTCC staff email addresses</li>
+					<li>ARTCC facility associations, VATSIM region and division associations</li>
+					<li>VATSIM achievements and ratings</li>
+					</ul>
+					<p>The following information is collected and may be used to protect our services, up to and including cooperation with legal requests for information from law enforcement agencies:</p>
+					<ul>
+					<li>The above listed public information,</li>
+					<li>All IP addresses used and associated with your account</li>
+					<li>Geolocation against aforementioned IP addresses</li>
+					<li>Activities performed with vIDS web services</li>
+					</ul>
+					<p>We may store identification tokens and other limited information on your electronic device through web storage or cookie usage.</p>
+					<h4>Who We Share With</h4>
+					<p>The information we collect may be shared, in limited capacities, with the following:</p>
+					<ul>
+					<li>Virtual Air Traffic Simulation Network (www.vatsim.net)</li>
+					<li>VATUSA (www.vatusa.net)</li>
+					<li>Other Virtual ARTCC partners</li>
+					<li>Law enforcement agencies</li>
+					</ul>
+					<p>For more information on what is shared with whom, please see "Information Usage".</p>
+					<h4>Cookie Usage</h4>
+					<p>We use various technologies to collect and store information when you visit and use a vIDS service. This may include a cookie or other similar technologies to identify your browser or device.<br/>Our cookies are mainly used as a means of tracking virtual users across vIDS services. This allows us to know who is requesting and using our services, provide authentication and authorization checks to restricted areas.<br/>You may choose to disable cookie usage via your browser, but know that doing so will prevent access and use across restricted areas of the website and severely degrade your experience.</p>
+					<h4>Opt Out</h4>
+					<p>Given the nature of our services, it is not possible to opt out of data collection and use our services. But if you desire to opt out and no longer desire to use our services, we will purge all information we have collected upon written request.<br/>The first step is to deactivate and request VATSIM to purge your data. Please head to <a href="https://membership.vatsim.net" target="_blank">https://membership.vatsim.net</a> to do so.<br/>After VATSIM has purged your data, please send a written request to your virtual ARTCC's Air Traffic Manager via email. It is a manual process, so please allow up to 30 days for information to be purged. You will receive an email response once the data has been purged.<br/>Note vIDS cannot guarantee that information collected by parties outside of vIDS will be purged in the process.</p>
+					<h4>Disclaimer!</h4>
+					<p>All information on this website is for flight simulation use only and is not to be used for real world navigation or flight. This site is not affiliated with ICAO, the FAA, any actual ARTCC, or any other real world aerospace entity.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -1057,7 +1057,7 @@ function getSelectValues(select) { // Helper function for multi-select fields
 			xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					alert('Thanks for reporting that bug!');
-					document.getElementById("bug_report_name").value = "";
+					//document.getElementById("bug_report_name").value = "";
 					document.getElementById("bug_description").value = "";
 				}
 				else {
