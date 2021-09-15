@@ -59,11 +59,24 @@
 		document.getElementById("landing_hdr").style.display = "none";
 		document.getElementById("landing").style.display = "none";
 		//document.getElementById("landing").style.visibility = "hidden";
-		acknowledgeChanges(); // Clear change acknowledge (if user was monitoring multi and decided to switch displays)
+		//acknowledgeChanges(); // Clear change acknowledge (if user was monitoring multi and decided to switch displays)
 		document.getElementById("local_ids").style.display = "block";
 		$('.template_' + template).show();
 		$('.template_' + other).hide();
+		if(template == 'a80') { // Because Joe wants it this way... note
+			var temp = document.getElementById('grid5x1').innerHTML;
+			document.getElementById('grid5x1').innerHTML = document.getElementById('grid5x2').innerHTML;
+			document.getElementById('grid5x2').innerHTML = temp;
+		}
+		else {
+			if(document.getElementById('grid5x2').innerHTML.includes('Outer')) { // User was viewing A80 and has switched to local, so revert display
+				var temp = document.getElementById('grid5x1').innerHTML;
+				document.getElementById('grid5x1').innerHTML = document.getElementById('grid5x2').innerHTML;
+				document.getElementById('grid5x2').innerHTML = temp;				
+			}
+		}
 		setDynamicMargin();
+		acknowledgeChanges(); // Clear change acknowledge (if user was monitoring multi and decided to switch displays)
 	}
 	
 	function showMultiIDS() { // Makes the multi-airfield display visible
@@ -518,7 +531,9 @@
 		if(!$('#TMU').is(':visible')) { // This conditional prevents the refresh script from updating data entry fields when a modal is in use
 			document.getElementById("TMU_text").innerHTML = json.tmu // Data entry
 		}
-
+		if(!$('#A80_CIC_info').is(':visible')) { // Only do change detection on visible elements
+			changes = changeDetection(init,changes,document.getElementById("A80_CIC_info").innerHTML,json.a80cic,"A80_CIC_info");
+		}
 		document.getElementById("A80_CIC_info").innerHTML = json.a80cic;
 		if(!$('#CIC').is(':visible')) { // This conditional prevents the refresh script from updating data entry fields when a modal is in use
 			document.getElementById("A80_CIC_text").value = json.a80cic; // Data entry
@@ -560,7 +575,10 @@
 		//alert("Current: \"" + document.getElementById("AFLD_info").innerHTML + "\"\nUpdate: \"" + json.config['raw'] + "\"");
 		changes = changeDetection(init,changes,document.getElementById("AFLD_info").innerHTML,json.config['raw'],"AFLD_info");
 		document.getElementById("AFLD_info").innerHTML = json.config['raw']; // Display
-		changes = changeDetection(init,changes,document.getElementById("CIC_info").innerHTML,json.cic,"CIC_info");
+		if(!$('#CIC_info').is(':visible')) { // Only do change detection on visible elements
+			changes = changeDetection(init,changes,document.getElementById("CIC_info").innerHTML,json.cic,"CIC_info");
+		}
+		//changes = changeDetection(init,changes,document.getElementById("CIC_info").innerHTML,json.cic,"CIC_info");
 		//alert("CIC Info\nIn DOM: \"" + document.getElementById("CIC_info").innerHTML + "\"\nFrom file: \"" + json.cic.replace(/(\n)/gm,"") + "\"");
 		document.getElementById("CIC_info").innerHTML = json.cic; // Display
 		//document.getElementById("CIC_text").innerHTML = json.cic; // Data entry

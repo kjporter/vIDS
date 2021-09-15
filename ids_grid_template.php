@@ -124,7 +124,7 @@
 			<div class="col-lg-12 template_local">
 			<?php controller_display("Clearance Delivery",array('CD-1'=>'CD-1','CD-2'=>'CD-2','FD'=>'FD'),array('GC-N'=>'GC-N','LC-1'=>'LC-1','LC-2'=>'LC-2','N'=>'N','C43'=>'C43')); ?>
 			</div>
-			<div class="col-lg-12 template_a80">
+			<div class="col-lg-12 template_a80" id="grid5x1">
 			<?php controller_display(TRACON_ID . " Outer",array('M'=>'M','W'=>'W','Z'=>'Z','R'=>'R','E'=>'E','3E'=>'3E'),array('N'=>'N','P'=>'P','F'=>'F','X'=>'X','G'=>'G','C43'=>'C43')); ?>
 			</div>
 		</div>
@@ -139,7 +139,7 @@
 			</div>
 			</div>
 		<div class="row rem-bor-tp">
-			<div class="col-lg-12">
+			<div class="col-lg-12" id="grid5x2">
 			<?php controller_display(TRACON_ID . " AR",array('O'=>'O','V'=>'V','A'=>'A'),array('N'=>'N','H'=>'H','D'=>'D','C43'=>'C43')); ?>
 			</div>
 		</div>
@@ -266,7 +266,7 @@ function controller_display($heading,$cntlPositions,$selOptions,$edit_toggle=0) 
 	}
 	foreach($cntlPositions as $cntlPosition => $value) {
 	$output_str .= "<div class=\"col-lg-" . $col_size. "\"><select class=\"custom-select mr-sm-2 controllerEdit hideControl\" id=\"" . $cntlPosition . "\" onchange=\"updateCtrlPos();\">
-	" . $select_options . "</select><input type=\"text\" class=\"controllerDisplay\" id=\"" . $cntlPosition . "_disp\" size=\"3\" readonly></div>";
+	" . $select_options . "</select><input type=\"text\" class=\"controllerDisplay\" id=\"" . $cntlPosition . "_disp\" size=\"2\" readonly></div>";
 	}
 	$output_str .= "</div>";
 	echo $output_str;
