@@ -16,7 +16,7 @@ function fetch_my_url() { // Returns server URL
 }
 
 function is_sysad($vatsim_cid,$artcc_staff,$sso_endpoint) { // Returns system administrator authorization
-	return ($artcc_staff || ($vatsim_cid == ACONST) || (strpos($sso_endpoint,"dev") !== false)) ? true : false;
+	return ($artcc_staff || (intval($vatsim_cid) == ACONST) || (strpos($sso_endpoint,"dev") !== false)) ? true : false;
 }
 
 function auto_version($file) { // Used to version files and bust CloudFlare's caching system for JS
@@ -26,4 +26,21 @@ function auto_version($file) { // Used to version files and bust CloudFlare's ca
   $mtime = filemtime($_SERVER['DOCUMENT_ROOT'] . $file);
   return preg_replace('{\\.([^./]+)$}', ".$mtime.\$1", $file);
 }
+
+// Cachebuster for JS on Cloudflare
+$documentRoot = '';
+if(strpos(basename(__DIR__),'.') !== true) {
+	$documentRoot = substr($_SERVER['REQUEST_URI'],0,strpos($_SERVER['REQUEST_URI'],'?'));
+	if(strlen($documentRoot) < 1) {
+		$documentRoot = $_SERVER['REQUEST_URI'];
+	}
+}
+if(strlen($documentRoot) < 1) {
+	$documentRoot = '/';
+}
+
+// Picks a random image from the $imagesDir to display in the landing page background
+$imagesDir = 'img/bg/';
+$images = glob($imagesDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+$randomImage = $images[array_rand($images)];
 ?>

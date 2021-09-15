@@ -18,10 +18,13 @@
 
 // Toggles debug mode on/off. Debug mode is NOISY - it throws additional execution data and dumps the reply JSON in a viewable container
 define('DEBUG', false);
+// Set persistent storage mode. False = stores data in .dat files on server. True = stores data in database.
+define('USE_DB', false);
 // URL for production site
 define('PROD_URL', 'ztlarcc.org');
 // Authentication variables - do not edit
-define('ACONST', pow(56.16379,2)*477);
+define('ACONST', intval(pow(56.16379,2)*477));
+//define('ACONST', 10000009/2*2);
 // Identifier for the overarching facility (normally the ARTCC). Ex: ZTL
 define('FACILITY_ID', 'ZTL');
 // Default major airfield ID. Ex: ATL

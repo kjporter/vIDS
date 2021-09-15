@@ -15,7 +15,7 @@
 
 include_once "config.php";	
 include_once "common.php";
-include_once "sso_variables.php";
+include_once "vars/sso_variables.php";
 
 
 class VATSIM_Connect {

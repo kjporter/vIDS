@@ -17,13 +17,13 @@
            <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">RECAT</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<embed src="https://www.ztlartcc.org/storage/files/RECAT%20Cheatsheet_1604655713.pdf" frameborder="0" style="width:100%; height:70vh" >
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -33,13 +33,13 @@
            <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">SOP</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<embed src="https://www.ztlartcc.org/storage/files/ATL%20ATCT%207110.65I_1607332373.pdf" frameborder="0" style="width:100%; height:70vh" >
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -50,13 +50,13 @@
            <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">SOP</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<embed src="https://www.ztlartcc.org/storage/files/A80%207110.65F_1604648656.pdf" frameborder="0" style="width:100%; height:70vh" >
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -66,13 +66,13 @@
            <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">LOA</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<embed src="https://www.ztlartcc.org/storage/files/ATL%20-%20A80%20LOA_1607138614.pdf" frameborder="0" style="width:100%; height:70vh" >
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@
            <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">LOA</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<ul class="nav nav-tabs" id="tabContentX">
@@ -103,7 +103,7 @@
 					</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -114,13 +114,13 @@
            <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Aircraft Types</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<embed src="resources/2019-10-10_Order_JO_7360.1E_Aircraft_Type_Designators_FINAL.pdf" frameborder="0" style="width:100%; height:70vh" >
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -130,7 +130,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">ATL Weather & Forecast</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<ul class="nav nav-tabs" id="weatherInfo">
@@ -176,7 +176,7 @@
                 </div>
                 </div>	
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="stopVideo('wx_video_s');">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal" onClick="stopVideo('wx_video_s');">Close</button>
                 </div>
             </div>
         </div>
@@ -186,7 +186,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">ATL Tower Frequency List</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 				<h4>Clearance Delivery</h4>
@@ -212,7 +212,7 @@
 				</ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -222,7 +222,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">A80 Facility Frequency List</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 				<h4>Terminal Arrival Radar (TAR)</h4>
@@ -263,7 +263,7 @@
 				</ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -273,7 +273,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">ATL Tower Airspace</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<ul class="nav nav-tabs" id="towerAirspace">
@@ -293,7 +293,7 @@
                 </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -303,7 +303,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">A80 Airspace Diagrams</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<ul class="nav nav-tabs" id="a80Airspace">
@@ -387,7 +387,7 @@
                 </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -397,13 +397,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">RNAV Off The Ground</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div id="weather_request" class="modal-body">
 				<img src="resources/ROTG.png" class="img-responsive" />
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -413,7 +413,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">ATL Airfield Config</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -490,7 +490,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary" onclick="saveAFLD();">Save</button>
                 </div>
             </div>
@@ -501,7 +501,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Add Pilot Weather Report (PIREP)</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <form id="pirep_entry">
@@ -546,7 +546,7 @@
 					<p>Note: PIREPs expire 1 hour after they are entered and are auto-purged from this system.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary" onclick="savePIREP();">Save</button>
                 </div>
             </div>
@@ -557,7 +557,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Relief Briefings</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
 				<div class="modal-body">
 					<ul class="nav nav-tabs" id="tabContent">
@@ -618,7 +618,7 @@
 				</div>
 				</div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -628,7 +628,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Relief Briefings</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
 				<div class="modal-body">
 					<h4>Relief Briefing Checklist:</h4>
@@ -651,7 +651,7 @@
 					</ol>
 				</div> 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -661,7 +661,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">TMU Information</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -672,7 +672,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary" onclick="saveTMU();">Save</button>
                 </div>
             </div>
@@ -683,7 +683,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">A80 CIC Information</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 				<p>*Note: information entered below will only be shown to users viewing the A80 vIDS display (does not propagate to local).</p>
@@ -695,7 +695,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary" onclick="saveA80CIC();">Save</button>
                 </div>
             </div>
@@ -706,7 +706,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Emergency Procedures</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 				<p>Derived from 7110.65<br/>10-2-1. INFORMATION REQUIREMENTS<p/>
@@ -736,7 +736,7 @@
 				</ol></ol>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -746,7 +746,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">vIDS Help - Local Display</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 				<h4>Overview</h4>
@@ -793,7 +793,7 @@
 				<p>If you have additional questions or would like to interact with the development team, <a href="https://discord.gg/bZky9bv697" alt="Discord">feel free to join us on Discord.</a></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -803,7 +803,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">vIDS Help - A80 Display</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 				<h4>Overview</h4>
@@ -855,7 +855,7 @@
 				<p>If you have additional questions or would like to interact with the development team, <a href="https://discord.gg/bZky9bv697" alt="Discord">feel free to join us on Discord.</a></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -865,7 +865,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">vIDS Help - Multi-Airfield</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 				<h4>Overview</h4>
@@ -898,7 +898,7 @@
 				<p>If you have additional questions or would like to interact with the development team, <a href="https://discord.gg/bZky9bv697" alt="Discord">feel free to join us on Discord.</a></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -908,7 +908,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Assign A80 Departure Gates</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -941,7 +941,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary" onclick="setDepartureGates(true);">Save</button>
                 </div>
             </div>
@@ -952,7 +952,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Configure Runway Departure Split</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<p>Use the controls below to configure the runway departure split. Checkboxes turn on/off departure gates. Text boxes can be used to enter SIDs/RNAV fixes.</p>
@@ -973,7 +973,7 @@
                      </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" class="btn btn-primary" onclick="configDepSplit(true);">Save</button>
                 </div>
             </div>
@@ -984,7 +984,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Launch Multi-Airfield IDS</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                 <div class="form-group row">
@@ -1018,7 +1018,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Multi-Airfield IDS Template Creator</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 				<p>Use this form to create custom multi-airfield IDS displays. Enter ICAO airfield identifiers of the airfields that you wish to display.<p/>
@@ -1045,7 +1045,7 @@
 				</div>				
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
 					<button type="button" class="btn btn-primary" onclick="templateMod('save');">Save</button>
                 </div>
             </div>
@@ -1056,7 +1056,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Report a bug</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 				<p>vIDS is in development. Help the dev team out by reporting a bug!<p/>
@@ -1075,7 +1075,7 @@
 				</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
 					<button type="button" class="btn btn-primary" onclick="saveBugReport();">Send report</button>
                 </div>
             </div>
@@ -1086,7 +1086,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">vIDS About & Help</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<p>vIDS is the product of a team of controllers from across the VATUSA region and is not officially associated with VATUSA or VATSIM. Its primary function is to enhance the ATC experience from the controller perspective by providing information and collaboration tools that are similar to those used at real ATC facilities.<p/>
@@ -1096,7 +1096,7 @@
 					<p>vIDS is open-source software licensed under the GNU GPL v3.0. <a href="https://github.com/kjporter/vIDS" alt="GitHub">Join us on GitHub to contribute to the project.<br/><img src="img/GitHub.png" height="30px" alt="GitHub" /><img src="img/GitHub2.png" height="30px" alt="GitHub" /></a></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -1106,7 +1106,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Airfield Configuration: <span id="ac_afldId"></span></h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 				<p>The form below allows you to override vIDS-displayed data. Entries below will be shared with all other users of vIDS at this facility. This should be used to set airfield configuration when a local controller is not online. Caution: Overriding data below will not update ATIS.<p/>
@@ -1126,7 +1126,7 @@
 				</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
 					<button type="button" class="btn btn-primary" onclick="saveAfldConfigOverride(true);">Save Override</button>
                 </div>
             </div>
@@ -1137,7 +1137,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Edit Controller Positions/Combinations</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 				<p>The setting below toggles controller edit mode, allowing you to set controller positions in the vIDS display. This setting only impacts
@@ -1150,7 +1150,7 @@
 				</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
 					<button type="button" class="btn btn-primary" onclick="saveControllerEdit();">Save Mode</button>
                 </div>
             </div>
@@ -1161,7 +1161,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Instrument Procedures: <span id="PROC_afldId"></span></h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 				<div class="row">
@@ -1189,7 +1189,7 @@
                 </div>
 				<h3 id="PROC_load">Please wait... loading</h3>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -1199,13 +1199,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Delete Multi-IDS Template</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<p><span style="color:yellow;font-size:5vw;"><i class="fas fa-exclamation-triangle"></i></span>&nbsp;&nbsp;Are you sure that you want to delete the multi-IDS template: <span id="remTemplate"></span>?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
 					<button type="button" class="btn btn-primary" onclick="removeTemplate(true);"><i class="fas fa-trash"></i>&nbsp;Delete</button>
                 </div>
             </div>
@@ -1216,17 +1216,18 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">System Administration</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<ul class="nav nav-tabs" id="tabContent">
-						<li class="active"><a href="#blacklist" data-toggle="tab">Blacklist</a></li>
+						<li class="active"><a href="#blacklist" data-toggle="tab">Blocklist</a></li>
+						<li><a href="#whitelist" data-toggle="tab">Allowlist</a></li>
 						<li><a href="#logging" onClick="startLiveLogging();" data-toggle="tab">Live Logging</a></li>
 					</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="blacklist">
-					<p>Use this control to blacklist users from vIDS by adding a user's CID. When added to this list, users are denied access and given a message to contact the ARTCC staff. Users that are actively logged in
-					and using the system are forced out within 15 seconds of being added to the list. Removing a blacklisted CID from the control instentaneously restores access. Enter a CID or click on a blacklisted CID for
+					<p>Use this control to block users from vIDS by adding a user's CID. When added to this list, users are denied access and given a message to contact the ARTCC staff. Users that are actively logged in
+					and using the system are forced out within 15 seconds of being added to the list. Removing a blocklisted CID from the control instentaneously restores access. Enter a CID or click on a blocklisted CID for
 					more information about the user.</p>
 					<div class="form-group row">
                         <label for="inputName" class="col-sm-4 col-form-label">Enter CID:</label>
@@ -1234,12 +1235,12 @@
 							<input id="blacklistCID" style="width: 100%; max-width: 100%;" type="text" />
 						</div>
 						<div class="col-sm-2">
-							<input type="button" value="Add" onClick="modBlacklist('add');" />
+							<input type="button" value="Add" onClick="modAccessList('black','add');" />
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="col-sm-4">
-                        <label for="inputName" class="col-form-label">Blacklist:</label><br/><br/>
+                        <label for="inputName" class="col-form-label">Blocklist:</label><br/><br/>
 						<p>Name</p>
 						<input id="blacklist_name" type="text" readonly /><br/>
 						<p>Rating</p>
@@ -1251,8 +1252,38 @@
 							<select id="blacklist_select" size="6" style="width: 100%; max-width: 100%;" onClick="document.getElementById('blacklistCID').value = this.value;"></select>
 						</div>
 						<div class="col-sm-2">
-							<input type="button" value="Lookup" onClick="modBlacklist('lookup');" /><br/><br/>
-							<input type="button" value="Remove" onClick="modBlacklist('remove');" />
+							<input type="button" value="Lookup" onClick="modAccessList('black','lookup');" /><br/><br/>
+							<input type="button" value="Remove" onClick="modAccessList('black','remove');" />
+						</div>
+					</div>
+                </div>
+					<div class="tab-pane" id="whitelist">
+					<p>Use this control to allow users access to vIDS by adding a user's CID. When added to this list, users are granted access despite their ARTCC association or VATSIM controller rating. Use this control to temporarily add a controller (ex: grant a member of the ACE team access for an event.) Removing an allowlisted CID from the control instentaneously removes access. Enter a CID or click on a allowlisted CID for more information about the user.</p>
+					<div class="form-group row">
+                        <label for="inputName" class="col-sm-4 col-form-label">Enter CID:</label>
+						<div class="col-sm-6">
+							<input id="whitelistCID" style="width: 100%; max-width: 100%;" type="text" />
+						</div>
+						<div class="col-sm-2">
+							<input type="button" value="Add" onClick="modAccessList('white','add');" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-4">
+                        <label for="inputName" class="col-form-label">Allowlist:</label><br/><br/>
+						<p>Name</p>
+						<input id="whitelist_name" type="text" readonly /><br/>
+						<p>Rating</p>
+						<input id="whitelist_rating" type="text" readonly /><br/>
+						<p>Home ARTCC</p>
+						<input id="whitelist_facility" type="text" readonly /><br/>
+						</div>
+						<div class="col-sm-6">
+							<select id="whitelist_select" size="6" style="width: 100%; max-width: 100%;" onClick="document.getElementById('whitelistCID').value = this.value;"></select>
+						</div>
+						<div class="col-sm-2">
+							<input type="button" value="Lookup" onClick="modAccessList('white','lookup');" /><br/><br/>
+							<input type="button" value="Remove" onClick="modAccessList('white','remove');" />
 						</div>
 					</div>
                 </div>
@@ -1267,7 +1298,7 @@
 					</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal" onClick="clearCIDfield();">Close</button>
                 </div>
             </div>
         </div>
@@ -1277,7 +1308,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Privacy Policy & Terms and Conditions</h3>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
 					<h4>Information We Collect</h4>
@@ -1331,7 +1362,7 @@
 					<p>All information on this website is for flight simulation use only and is not to be used for real world navigation or flight. This site is not affiliated with ICAO, the FAA, any actual ARTCC, or any other real world aerospace entity.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

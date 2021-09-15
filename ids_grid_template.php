@@ -74,16 +74,18 @@
 						<div class="scroll_content allblack"></div>
 					</div>
 				</div>
-		<div class="row template_local">
+<!-- Reworked this area of the IDS to give TMU info more real estate -->
+<!--		<div class="row template_local">
 			<div class="col-lg-12 cntlPos">
-			<?php controller_display("Ground Control",array('GC-N'=>'GC-N','GC-C'=>'GC-C','GC-S'=>'GC-S','GM'=>'GM'),array('LC-1'=>'LC-1','LC-2'=>'LC-2','LC-3'=>'LC-3','LC-4'=>'LC-4','LC-5'=>'LC-5','N'=>'N','C43'=>'C43')); ?>
+			<?php //controller_display("Ground Control",array('GC-N'=>'GC-N','GC-C'=>'GC-C','GC-S'=>'GC-S','GM'=>'GM'),array('LC-1'=>'LC-1','LC-2'=>'LC-2','LC-3'=>'LC-3','LC-4'=>'LC-4','LC-5'=>'LC-5','N'=>'N','C43'=>'C43')); ?>
 			</div>
 		</div>
 		<div class="row template_a80">
 			<div class="col-lg-12">
-			<?php controller_display(TRACON_ID . " TAR",array('H'=>'H','D'=>'D','L'=>'L','Y'=>'Y'),array('N'=>'N','S'=>'S','C43'=>'C43')); ?>
+			<?php //controller_display(TRACON_ID . " TAR",array('H'=>'H','D'=>'D','L'=>'L','Y'=>'Y'),array('N'=>'N','S'=>'S','C43'=>'C43')); ?>
 			</div>
 		</div>
+-->	
 	</div>
 	<div class="col-lg-4">
 	<div class="row info_grid">
@@ -97,16 +99,27 @@
 			</div>			
 			</div>
 			</div>
-		<div class="row info_grid">
+<!--		<div class="row info_grid">
 			<div class="col-lg-12 cntlPos">
-			<?php controller_display(TRACON_ID . " Satellite",array('P'=>'P','F'=>'F','X'=>'X','G'=>'G','Q'=>'Q'),array('N'=>'N','C43'=>'C43')); ?>
+			<?php //controller_display(TRACON_ID . " Satellite",array('P'=>'P','F'=>'F','X'=>'X','G'=>'G','Q'=>'Q'),array('N'=>'N','C43'=>'C43')); ?>
 			</div>
 			</div>
+-->
 	</div>
 	<div class="col-lg-4"><span class="cell_header">Afld Config</span><div id="AFLD_info" onclick="clearStyle(this);" class=""><br/></div></div>
 </div>
-<div class="row info_grid dynMargin">
+<div class="row info_grid dynMargin" style="overflow:hidden; position: relative;">
 	<div class="col-lg-4">
+		<div class="row template_local">
+			<div class="col-lg-12 cntlPos">
+			<?php controller_display("Ground Control",array('GC-N'=>'GC-N','GC-C'=>'GC-C','GC-S'=>'GC-S','GM'=>'GM'),array('LC-1'=>'LC-1','LC-2'=>'LC-2','LC-3'=>'LC-3','LC-4'=>'LC-4','LC-5'=>'LC-5','N'=>'N','C43'=>'C43')); ?>
+			</div>
+		</div>
+		<div class="row template_a80">
+			<div class="col-lg-12">
+			<?php controller_display(TRACON_ID . " TAR",array('H'=>'H','D'=>'D','L'=>'L','Y'=>'Y'),array('N'=>'N','S'=>'S','C43'=>'C43')); ?>
+			</div>
+		</div>
 		<div class="row rem-bor-tp">
 			<div class="col-lg-12 template_local">
 			<?php controller_display("Clearance Delivery",array('CD-1'=>'CD-1','CD-2'=>'CD-2','FD'=>'FD'),array('GC-N'=>'GC-N','LC-1'=>'LC-1','LC-2'=>'LC-2','N'=>'N','C43'=>'C43')); ?>
@@ -120,19 +133,37 @@
 		</div>	
 	</div>
 	<div class="col-lg-4">
+		<div class="row info_grid">
+			<div class="col-lg-12 cntlPos">
+			<?php controller_display(TRACON_ID . " Satellite",array('P'=>'P','F'=>'F','X'=>'X','G'=>'G','Q'=>'Q'),array('N'=>'N','C43'=>'C43')); ?>
+			</div>
+			</div>
 		<div class="row rem-bor-tp">
 			<div class="col-lg-12">
 			<?php controller_display(TRACON_ID . " AR",array('O'=>'O','V'=>'V','A'=>'A'),array('N'=>'N','H'=>'H','D'=>'D','C43'=>'C43')); ?>
 			</div>
 		</div>
-		<div class="row" style="border-bottom:0px">
+		<div class="row" style="border-bottom:0px;">
 			<div class="col-lg-12"><span class="cell_header">CIC Notices</span>
+<!--
+			<div id="CIC_info" class="template_local scroller"></div>
+			<div id="A80_CIC_info" class="template_a80 scroller"></div>
+-->
+
 			<div class="template_local"><textarea id="CIC_info" class="txt_low" rows="3" readonly></textarea></div>
 			<div class="template_a80"><textarea id="A80_CIC_info" class="txt_low" rows="3" readonly></textarea></div>
+
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-4"><span class="cell_header">TMU Information</span><div onclick="clearStyle(this);" class=""><textarea id="TMU_info" class="txt_low" rows="7" readonly></textarea></div></div>
+	<div class="col-lg-4 scroll_wrapper"><span class="cell_header">TMU Information</span>
+	<!--<div onclick="clearStyle(this);" class="">-->
+	<!--<div class="scroll_wrapper">-->
+	<div id="TMU_info" class="scroller"></div>
+	<!--</div>-->
+	<!--<textarea id="TMU_info" class="txt_low" rows="7" readonly></textarea>-->
+	<!--</div>-->
+	</div>
 </div>
 <!-- START A80 SATELLITE & OUTER AIRFIELD DISPLAY -->
 	<div class="row template_a80 dynMargin">
@@ -185,34 +216,34 @@
 	<div class="col">
 		<div class="btn-group dropup">
 
-			<a href="#" class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-home fa-lg"></i><br/>HOME</a>
+			<a href="#" class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" href="#"><i class="fas fa-home fa-lg"></i><br/>HOME</a>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 				<li><a href="#" onclick="returnToLanding('local_ids');">Return to menu</a></li>
 				<li><a href="#BUG" data-toggle="modal">Report a bug</li></li>
 			</ul>
 		</div>
-		<a href="#WX" data-remote="https://www.aviationweather.gov/taf/data?ids=katl&format=decoded&metars=on&date=&submit=Get+TAF+data" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#WX" onClick="fetchWeather('K<?php echo DEFAULT_AFLD_ID; ?>');"><i class="fas fa-cloud fa-lg"></i><br/>WX</a>
-		<a href="#RECAT" class="btn btn-lg btn-primary" data-toggle="modal"><i class="fas fa-plane-arrival fa-lg"></i><br/>RECAT</a>
-		<a href="#FREQS" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="fas fa-broadcast-tower fa-lg"></i><br/>FREQS</a>
-		<a href="#aFREQS" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="fas fa-broadcast-tower fa-lg"></i><br/>FREQS</a>
-		<a href="#ARSPC" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="fas fa-map-marked-alt fa-lg"></i><br/>ARSPC</a>
-		<a href="#aARSPC" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="fas fa-map-marked-alt fa-lg"></i><br/>ARSPC</a>
-		<a href="#PROC" class="btn btn-lg btn-primary" data-toggle="modal" onclick="loadProc('K<?php echo DEFAULT_AFLD_ID; ?>');"><i class="fas fa-file-invoice fa-lg"></i><br/>PROC</a>
-		<a href="#ROTG" class="btn btn-lg btn-primary" data-toggle="modal"><i class="fas fa-plane-departure fa-lg"></i><br/>ROTG</a>
-		<a href="#SOP" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="fas fa-book fa-lg"></i><br/>SOP</a>
-		<a href="#aSOP" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="fas fa-book fa-lg"></i><br/>SOP</a>
-		<a href="#LOA" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="fas fa-handshake fa-lg"></i><br/>LOA</a>
-		<a href="#aLOA" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="fas fa-handshake fa-lg"></i><br/>LOA</a>
-		<a href="#PIREP" class="btn btn-lg btn-primary" data-toggle="modal"><i class="fas fa-headset fa-lg"></i><br/>PIREP</a>
-		<a href="#ACFT" class="btn btn-lg btn-primary" data-toggle="modal"><i class="fas fa-plane fa-lg"></i><br/>ACFT</a>
-		<a href="#RELIEF" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="fas fa-couch fa-lg"></i><br/>RELIEF</a>
-		<a href="#aRELIEF" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="fas fa-couch fa-lg"></i><br/>RELIEF</a>
-		<a href="#AFLD" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="fas fa-cogs fa-lg"></i><br/>AFLD</a>
-		<a href="#CIC" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="fas fa-user-tie fa-lg"></i><br/>CIC</a>
-		<a href="#TMU" class="btn btn-lg btn-primary" data-toggle="modal"><i class="fas fa-traffic-light fa-lg"></i><br/>TMU</a>
-		<a href="#EMER" class="btn btn-lg btn-primary" data-toggle="modal"><i class="fas fa-asterisk fa-lg icon-emergency"></i><br/>EMRG</a>
-		<a href="#HELP" class="btn btn-lg btn-primary template_local" data-toggle="modal"><i class="far fa-question-circle"></i><br/>HELP</a>
-		<a href="#aHELP" class="btn btn-lg btn-primary template_a80" data-toggle="modal"><i class="far fa-question-circle"></i><br/>HELP</a>
+		<a href="#WX" data-remote="https://www.aviationweather.gov/taf/data?ids=katl&format=decoded&metars=on&date=&submit=Get+TAF+data" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal" data-target="#WX" onClick="fetchWeather('K<?php echo DEFAULT_AFLD_ID; ?>');"><i class="fas fa-cloud fa-lg"></i><br/>WX</a>
+		<a href="#RECAT" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-plane-arrival fa-lg"></i><br/>RECAT</a>
+		<a href="#FREQS" class="btn btn-lg btn-primary template_local" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-broadcast-tower fa-lg"></i><br/>FREQS</a>
+		<a href="#aFREQS" class="btn btn-lg btn-primary template_a80" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-broadcast-tower fa-lg"></i><br/>FREQS</a>
+		<a href="#ARSPC" class="btn btn-lg btn-primary template_local" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-map-marked-alt fa-lg"></i><br/>ARSPC</a>
+		<a href="#aARSPC" class="btn btn-lg btn-primary template_a80" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-map-marked-alt fa-lg"></i><br/>ARSPC</a>
+		<a href="#PROC" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal" onclick="loadProc('K<?php echo DEFAULT_AFLD_ID; ?>');"><i class="fas fa-file-invoice fa-lg"></i><br/>PROC</a>
+		<a href="#ROTG" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-plane-departure fa-lg"></i><br/>ROTG</a>
+		<a href="#SOP" class="btn btn-lg btn-primary template_local" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-book fa-lg"></i><br/>SOP</a>
+		<a href="#aSOP" class="btn btn-lg btn-primary template_a80" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-book fa-lg"></i><br/>SOP</a>
+		<a href="#LOA" class="btn btn-lg btn-primary template_local" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-handshake fa-lg"></i><br/>LOA</a>
+		<a href="#aLOA" class="btn btn-lg btn-primary template_a80" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-handshake fa-lg"></i><br/>LOA</a>
+		<a href="#PIREP" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-headset fa-lg"></i><br/>PIREP</a>
+		<a href="#ACFT" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-plane fa-lg"></i><br/>ACFT</a>
+		<a href="#RELIEF" class="btn btn-lg btn-primary template_local" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-couch fa-lg"></i><br/>RELIEF</a>
+		<a href="#aRELIEF" class="btn btn-lg btn-primary template_a80" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-couch fa-lg"></i><br/>RELIEF</a>
+		<a href="#AFLD" class="btn btn-lg btn-primary template_local" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-cogs fa-lg"></i><br/>AFLD</a>
+		<a href="#CIC" class="btn btn-lg btn-primary template_a80" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-user-tie fa-lg"></i><br/>CIC</a>
+		<a href="#TMU" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-traffic-light fa-lg"></i><br/>TMU</a>
+		<a href="#EMER" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-asterisk fa-lg icon-emergency"></i><br/>EMRG</a>
+		<a href="#HELP" class="btn btn-lg btn-primary template_local" data-toggle="modal" data-bs-toggle="modal"><i class="far fa-question-circle"></i><br/>HELP</a>
+		<a href="#aHELP" class="btn btn-lg btn-primary template_a80" data-toggle="modal" data-bs-toggle="modal"><i class="far fa-question-circle"></i><br/>HELP</a>
 	</div>
 </div>
 </div>

@@ -41,6 +41,12 @@ div#json_test_dump {
 /*	mix-blend-mode: difference; */
 }
 
+div#pptc {
+	border:0px;
+    background:transparent;
+	text-align:center;
+}
+
 .landing_menu {
 	position: fixed; 
 	top: 20px;
@@ -324,6 +330,23 @@ p.marquee_container {
                 transform: translateX(-100%);
             }
         }
+	
+div.scroll_wrapper {
+	display: inline-block;
+	max-height:100%;
+	position:absolute;
+	overflow:auto;
+}
+
+div.scroller {
+	white-space: pre-wrap;
+}
+
+/* Mult-IDS styles */
+[draggable] {
+	user-select: none;
+}
+
 /* Modal styles */
 
 h3.modal-title {
@@ -364,8 +387,6 @@ input.is-valid,textarea.is-valid {
 input.is-invalid,textarea.is-invalid {
 	border-color: red;
 }
-
-
 
 div.metar_m {
 	font-size: 1vw;

@@ -31,7 +31,17 @@
         $(this).remove(); 
     });
 	}, 2000);
-	
+	/*
+	// Keypress listener
+	var keylog = '';
+	document.addEventListener('keydown', function(evt) {
+		keylog += evt.key;
+		if(keylog.match(/bruce/gi)) {
+			alert('Bruce mode!');
+			this.removeEventListener('keydown',arguments.callee,false);
+		}
+	});
+	*/
 	function showLocalIDS(template) { // Makes the local display visible
 		//alert("showing local");
 		loadingNotice();
@@ -358,12 +368,12 @@
 	}
 	
 	function saveTMU() { // Saves user-entered TMU notes
-		document.getElementById("TMU_info").innerHTML = document.getElementById("TMU_text").value;
+		document.getElementById("TMU_info").innerHTML = linkify(document.getElementById("TMU_text").value);
 		$('#TMU').modal('toggle');
 		saveConfiguration('tmu',document.getElementById("TMU_text").value);
 	}
 	
-	function saveA80CIC() { // Saves user-entered TMU notes
+	function saveA80CIC() { // Saves user-entered A80 CIC notes
 		document.getElementById("A80_CIC_info").innerHTML = document.getElementById("A80_CIC_text").value;
 		$('#CIC').modal('toggle');
 		saveConfiguration('a80cic',document.getElementById("A80_CIC_text").value);
@@ -500,10 +510,13 @@
 		}
 		//alert("Current: \"" + document.getElementById("PIREP_info").innerHTML + "\"\nUpdate: \"" + json.pirep + "\"");
 		document.getElementById("PIREP_info").innerHTML = json.pirep; // Display-only (entries auto-timeout)
-		changes = changeDetection(init,changes,document.getElementById("TMU_info").innerHTML,json.tmu,"TMU_info");
-		document.getElementById("TMU_info").innerHTML = json.tmu; // Display
+		changes = changeDetection(init,changes,unlinkify(document.getElementById("TMU_info").innerHTML),json.tmu,"TMU_info");
+		//var tmuText = json.tmu.map(i => i.replace(/\n/g, '<br />')).join('');
+		//alert(json.tmu);
+		//alert(unlinkify(document.getElementById("TMU_info").innerHTML));
+		document.getElementById("TMU_info").innerHTML = linkify(json.tmu); //.replaceAll(/\n/g, '<br />')); // Display
 		if(!$('#TMU').is(':visible')) { // This conditional prevents the refresh script from updating data entry fields when a modal is in use
-			document.getElementById("TMU_text").innerHTML = json.tmu; // Data entry
+			document.getElementById("TMU_text").innerHTML = json.tmu // Data entry
 		}
 
 		document.getElementById("A80_CIC_info").innerHTML = json.a80cic;
@@ -554,11 +567,15 @@
 		if(!$('#AFLD').is(':visible')) { // This conditional prevents the refresh script from updating data entry fields when a modal is in use
 			document.getElementById("flow").value = json.airfield_data['KATL']['traffic_flow'].trim();
 			setActiveRunways(document.getElementById("flow"));
+			if(json.airfield_data['KATL']['apch_rwys'].length != undefined) {
 			for (var i = 0; i < document.getElementById("arr_rwy").options.length; i++) {
 				document.getElementById("arr_rwy").options[i].selected = json.airfield_data['KATL']['apch_rwys'].indexOf(document.getElementById("arr_rwy").options[i].value) >= 0;
 			}
+			}
+			if(json.airfield_data['KATL']['dep_rwys'].length != undefined) {
 			for (var i = 0; i < document.getElementById("dep_rwy").options.length; i++) {
 				document.getElementById("dep_rwy").options[i].selected = json.airfield_data['KATL']['dep_rwys'].indexOf(document.getElementById("dep_rwy").options[i].value) >= 0;
+			}
 			}
 			document.getElementById("fta").checked = json.trips['FTA']; // Data entry
 			document.getElementById("ftd").checked = json.trips['FTD']; // Data entry
@@ -651,11 +668,11 @@
 				opHoursEnd -= -100;
 			}
 			if(opHoursEnd < opHoursStart) { // This happens when a tower closes after 0000Z
-				//opHoursEnd += 2400;
+				opHoursEnd += 2400;
 			}
 			if((cur24time > opHoursStart)&&(cur24time < opHoursEnd)||(cur24time < opHoursStart)&&(cur24time < opHoursEnd)) { // Airfield is open
-				//alert(underlying_fields[y] + ' Current UTC time: ' + cur24time + ' Field opening time: ' + opHoursStart + ' Field closing time: ' + opHoursEnd + ' Field is: ' + open_closed);
 				open_closed = "OPEN";
+				//alert(underlying_fields[y] + ' Current UTC time: ' + cur24time + ' Field opening time: ' + opHoursStart + ' Field closing time: ' + opHoursEnd + ' Field is: ' + open_closed);				
 			}
 			openCloseStatus += underlying_fields[y] + ' Current UTC time: ' + cur24time + ' Field opening time: ' + opHoursStart + ' Field closing time: ' + opHoursEnd + ' Field is: ' + open_closed + '\n';
 			document.getElementById(underlying_fields[y] + "_open_closed").innerHTML = open_closed;
@@ -742,6 +759,7 @@
 			}
 			*/
 			multi_disp_str += "<div class=\"row\">";
+			// draggable=\"true\" ondragstart=\"dragStarted(event);\" ondragover=\"draggingOver(event);\" ondrop=\"dropped(event);\" THIS CODE GOES IN TAG ABOVE TO ENABLE DRAG/DROP
 			//alert(afld);
 			multi_disp_str += "<div class=\"col-lg-1\"><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(1,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(2,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(3,1).toUpperCase() + "</div></div>";
 			multi_disp_str += "<div class=\"col-lg-1 atis_code_m\">" + json.airfield_data[afld].atis_code + "</div>";
@@ -1335,49 +1353,75 @@ function setDynamicMargin() {
      $(".dynMargin").css('margin-bottom',buttonHeight); 
 }
 
-function modBlacklist(fn) {
+function modAccessList(list,fn) {
 	var reply = '';
 	var xhttp;
 	xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			reply = xhttp.responseText;
+			//alert('function: ' + fn + ' status: ' + reply);
 			if((fn == 'add')&&(reply == 'success')) { // Add CID to select list
 				var opt = document.createElement('option');
-				opt.text = document.getElementById('blacklistCID').value;
-				opt.value = document.getElementById('blacklistCID').value;
-				document.getElementById('blacklist_select').add(opt);
+				opt.text = document.getElementById(list + 'listCID').value;
+				opt.value = document.getElementById(list + 'listCID').value;
+				document.getElementById(list + 'list_select').add(opt);
+				clearCIDfield();
 			}
 			if((fn == 'remove')&&(reply == 'success')) { // Remove CID from select list
-				var x = document.getElementById('blacklist_select');
+				var x = document.getElementById(list + 'list_select');
+				//alert('removing item');
 				for(y=0;y<x.length;y++) {
-					if(x.options[y].value == document.getElementById('blacklistCID').value) {
+					if(x.options[y].value == document.getElementById(list + 'listCID').value + '\n') {
+						//alert('found');
 						x.remove(y);
 					}
 				}
+				clearCIDfield();
 			}
 			if(fn == 'lookup') { // Dump user data in fields
 				reply = JSON.parse(xhttp.responseText);
-				document.getElementById('blacklist_name').value = reply['data']['fname'] + ' ' + reply['data']['lname'];
-				document.getElementById('blacklist_rating').value = reply['data']['rating_short'];
-				document.getElementById('blacklist_facility').value = reply['data']['facility'];
+				document.getElementById(list + 'list_name').value = reply['data']['fname'] + ' ' + reply['data']['lname'];
+				document.getElementById(list + 'list_rating').value = reply['data']['rating_short'];
+				document.getElementById(list + 'list_facility').value = reply['data']['facility'];
 			}
 			if(fn == 'fetch') { // Refresh blacklist select list
-				document.getElementById('blacklist_select').innerHTML = "";
+				document.getElementById(list + 'list_select').innerHTML = "";
 				reply = JSON.parse(xhttp.responseText);
 				for(y=0;y<reply.length;y++) {
 					var opt = document.createElement('option');
 					opt.text = reply[y];
 					opt.value = reply[y];
-					document.getElementById('blacklist_select').add(opt);					
+					document.getElementById(list + 'list_select').add(opt);					
 				}				
 			}
 		}
 		else {
 		}
 	};
-	xhttp.open("GET", "ajax_administration.php?function=blacklist_" + fn + "&cid=" + document.getElementById('blacklistCID').value, true); 
-	xhttp.send();
+	var valid = true;
+	var errorMsg = '';
+	var validate = document.getElementById(list + 'listCID').value;
+	if((fn == 'add')&&(isNaN(validate)||isNaN(parseInt(validate))||(parseInt(validate)< 100000)||parseInt(validate)>9999999)) {
+		valid = false;
+		errorMsg += "CID must consist of 6-7 digits\n";
+	}
+	if(((fn == 'remove')||(fn == 'lookup'))&&(document.getElementById(list + 'listCID').value == "")) {
+		valid = false;
+		errorMsg += "Please select a CID\n";		
+	}
+	if(valid) {
+		xhttp.open("GET", "ajax_administration.php?list=" + list + "&function=accesslist_" + fn + "&cid=" + document.getElementById(list + 'listCID').value, true); 
+		xhttp.send();
+	}
+	else {
+		alert(errorMsg);
+	}
+}
+
+function clearCIDfield() {
+	document.getElementById('blacklistCID').value = "";
+	document.getElementById('whitelistCID').value = "";
 }
 
 function displayLogs() { // Pull logfiles via AJAX and dump into textarea for display
@@ -1417,6 +1461,19 @@ function stopVideo(id) {
 	video.currentTime = 0;
 }
 
+function linkify(str) { // Not being used, but can turn links in text into a clickable link
+	var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+	str = str.replace(exp,"<a href=\"$1\" target=\"_blank\">$1</a>"); 
+	return str;
+}
+
+function unlinkify(str) {
+	//return $('#' + id + ' a').contents().unwrap();
+	let tmp = document.createElement("DIV");
+	tmp.innerHTML = str;
+	return tmp.textContent || tmp.innerText || "";
+}
+
 function checkDST() {
 Date.prototype.stdTimezoneOffset = function () {
     var jan = new Date(this.getFullYear(), 0, 1);
@@ -1433,4 +1490,31 @@ if (today.isDstObserved()) {
     return true;
 }
 else return false;	
+}
+
+// Drag events handle drag & drop of IDS airfield content boxes - from syntaxxx.com
+function dragStarted(evt) {
+	//Start drag
+	source = evt.target;
+	//Set data
+	evt.dataTransfer.setData("text/plain", evt.target.innerHTML);
+	//Specify allowed transfer
+	evt.dataTransfer.effectAllowed = "move";
+}
+
+function draggingOver(evt) {
+	//Drag over
+	evt.preventDefault();
+	//Specify operation
+	evt.dataTransfer.dropEffect = "move";
+}
+
+function dropped(evt) {
+	//Drop
+	evt.preventDefault();
+	evt.stopPropagation();
+	//Update text in dragged item
+	source.innerHTML = evt.target.innerHTML;
+	//Update text in drop target
+	evt.target.innerHTML = evt.dataTransfer.getData("text/plain");
 }

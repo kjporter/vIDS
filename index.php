@@ -11,27 +11,31 @@
 		
 		VATSIM Data Provider: http://status.vatsim.net/
 	*/
+
 	include_once "config.php";
 	include_once "common.php";
 //	include_once "sso_auth.php";
 //	include_once "sso_auth_cl.php";
 	include_once "user_authentication.php";
-	
+
 	//Init and run front-end security via VATSIM Connect SSO
 	$auth = new Security(fetch_my_url(),$sso_variables);
 	extract($auth->fetch_endpoint()); // Return SSO variables to be used by login button
 	$auth->init_sso(); // Attempt to init the sign on sequence
 	extract($auth->fetch_params(),EXTR_OVERWRITE); // Return authentication parameters
-	
-	// Cachebuster for JS on Cloudflare
+/*	
+	// Cachebuster for JS on Cloudflare - moved to common.php
 	$documentRoot = '';
 	if(strpos(basename(__DIR__),'.') !== true) {
 		$documentRoot = substr($_SERVER['REQUEST_URI'],0,strpos($_SERVER['REQUEST_URI'],'?'));
+		if(strlen($documentRoot) < 1) {
+			$documentRoot = $_SERVER['REQUEST_URI'];
+		}
 	}
 	if(strlen($documentRoot) < 1) {
 		$documentRoot = '/';
 	}
-	
+*/
 	//echo $_SERVER['REQUEST_URI'];
 ?>
 <!DOCTYPE html>
@@ -40,10 +44,9 @@
 	<title>vIDS</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link data-cfasync="false" rel="stylesheet" href="ids.css">
+	<link data-cfasync="false" rel="stylesheet" href="<?php echo auto_version($documentRoot . 'ids.css'); ?>">
 	<link rel="shortcut icon" href="img/favicon.ico" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	
@@ -59,10 +62,12 @@
 	<script data-cfasync="false" src="<?php echo auto_version($documentRoot . 'ids.js'); ?>"></script>
 </head>
 <?php
-	// Picks a random image from the $imagesDir to display in the landing page background
+/*
+	// Picks a random image from the $imagesDir to display in the landing page background -- moved to common.css
 	$imagesDir = 'img/bg/';
 	$images = glob($imagesDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
 	$randomImage = $images[array_rand($images)];
+*/
 ?>
 <body style="background-image: url('<?php echo $randomImage; ?>')" onload="refreshData(true);">  <!-- refreshData call initializes the display data -->
 	<input type="hidden" id="cid" value="<?php echo $vatsim_cid; ?>" />
@@ -123,9 +128,13 @@ if(!$valid_auth) {
 	$url = $redirect_uri . "&response_type=code&scope=full_name vatsim_details";
 	print "	<div id=\"auth\" class=\"row\" style=\"border:0px\">
 			<div class=\"col menu_button\"><br/>
-			<a href=\"$sso_endpoint/oauth/authorize?client_id=$client_id&redirect_uri=$url\" class=\"btn btn-lg btn-primary\"><i class=\"fas fa-sign-in-alt fa-lg\"></i><br/>Login</a><br/><br/>
-			<a href=\"#PRIVACY\" data-toggle=\"modal\">Privacy Policy, Terms and Conditions</a>
+			<a href=\"$sso_endpoint/oauth/authorize?client_id=$client_id&redirect_uri=$url\" class=\"btn btn-lg btn-primary\"><i class=\"fas fa-sign-in-alt fa-lg\"></i><br/>Login</a>
 			</div>
+			</div>
+			<div id=\"pptc\" class=\"navbar navbar-default navbar-fixed-bottom\">
+				<div class=\"container\">
+					<a href=\"#PRIVACY\" data-toggle=\"modal\">Privacy Policy, Terms and Conditions</a>
+				</div>
 			</div>";
 }
 else {
@@ -133,7 +142,7 @@ else {
 			<div class=\"col-lg-6 menu_button\"><br/>
 			<a onclick=\"showLocalIDS('local');\" class=\"btn btn-lg btn-block btn-primary\"><i class=\"fas fa-plane-departure fa-lg\"></i><br/>Tower<br/>IDS</a><br/>
 			<a onclick=\"showLocalIDS('a80');\" class=\"btn btn-lg btn-block btn-primary\" data-toggle=\"modal\"><i class=\"fas fa-layer-group fa-lg\"></i><br/>A80 Atlanta<br/>Large TRACON IDS</a><br/>";
-	if (is_sysad($vatsim_cid,$artcc_staff,$sso_endpoint)) { print "<a onclick=\"modBlacklist('fetch');\" href=\"#ADMIN\" class=\"btn btn-lg btn-block btn-primary\" data-toggle=\"modal\"><i class=\"fas fa-user-tie fa-lg\"></i><br/>System<br/>Administration</a><br/>"; }
+	if (is_sysad($vatsim_cid,$artcc_staff,$sso_endpoint)) { print "<a onclick=\"modAccessList('black','fetch'); modAccessList('white','fetch');\" href=\"#ADMIN\" class=\"btn btn-lg btn-block btn-primary\" data-toggle=\"modal\"><i class=\"fas fa-user-tie fa-lg\"></i><br/>System<br/>Administration</a><br/>"; }
 	print "	</div>
 			<div class=\"col-lg-6 menu_button\"><br/>
 			<a onclick=\"launchMulti();\" class=\"btn btn-lg btn-block btn-primary\" data-toggle=\"modal\"><i class=\"fas fa-compress-arrows-alt fa-lg\"></i><br/>Multi-Airfield<br/>IDS</a><br/>

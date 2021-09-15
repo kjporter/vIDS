@@ -806,7 +806,7 @@ if(file_exists("data/cic.dat")) {
 else {
 	$cic_data = "";
 }
-$reply_dataset['cic'] = str_replace("\n","",$cic_data); // Remove line breaks
+$reply_dataset['cic'] = $cic_data; //str_replace("\n","",$cic_data); // Remove line breaks
 
 // Fetch A80 CIC Notes
 if(file_exists("data/a80cic.dat")) {
@@ -821,7 +821,7 @@ if(file_exists("data/a80cic.dat")) {
 else {
 	$a80cic_data = "";
 }
-$reply_dataset['a80cic'] = str_replace("\n","",$a80cic_data); // Remove line breaks
+$reply_dataset['a80cic'] = $a80cic_data; //str_replace("\n","",$a80cic_data); // Remove line breaks
 
 // Fetch TMU Information
 if(file_exists("data/tmu.dat")) {
@@ -836,7 +836,7 @@ if(file_exists("data/tmu.dat")) {
 else {
 	$tmu_data = "";
 }
-$reply_dataset['tmu'] = str_replace("\n","",$tmu_data); // Remove line breaks
+$reply_dataset['tmu'] = $tmu_data; //str_replace("\n","",$tmu_data); // Remove line breaks
 
 // Fetch Trips Information
 if(file_exists("data/trips.dat")) {
