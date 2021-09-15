@@ -238,7 +238,7 @@
 		<a href="#ACFT" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-plane fa-lg"></i><br/>ACFT</a>
 		<a href="#RELIEF" class="btn btn-lg btn-primary template_local" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-couch fa-lg"></i><br/>RELIEF</a>
 		<a href="#aRELIEF" class="btn btn-lg btn-primary template_a80" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-couch fa-lg"></i><br/>RELIEF</a>
-		<a href="#AFLD" class="btn btn-lg btn-primary template_local" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-cogs fa-lg"></i><br/>AFLD</a>
+		<a href="#AFLD" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-cogs fa-lg"></i><br/>AFLD</a>
 		<a href="#CIC" class="btn btn-lg btn-primary template_a80" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-user-tie fa-lg"></i><br/>CIC</a>
 		<a href="#TMU" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-traffic-light fa-lg"></i><br/>TMU</a>
 		<a href="#EMER" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-asterisk fa-lg icon-emergency"></i><br/>EMRG</a>
