@@ -342,6 +342,20 @@ div.scroller {
 	white-space: pre-wrap;
 }
 
+div.moveable {
+  position:relative;
+}
+
+div.moveable:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top: 20px solid #15ABFF;
+    border-left: 20px solid black;
+    width: 0;
+}
+
 /* Mult-IDS styles */
 [draggable] {
 	user-select: none;

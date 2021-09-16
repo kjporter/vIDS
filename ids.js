@@ -764,23 +764,62 @@
 		}
 		else {
 		//var defaultAirfieldNoChange = "alert('Configuration for this airfield must be set through the local vIDS display by the tower CIC.');";
+		// Note: I had to break-out refresh vs redraw logic below to allow users to click/drag/reorder airfields
+		// Create array of all airfields displayed by walking DOM and getting IDs
+		var nextAfld = document.getElementById('multi_ids_data').firstChild;
+		var displayedAirfields = new Array();
+		while(nextAfld) {
+			displayedAirfields.push(nextAfld.id);
+			nextAfld = nextAfld.nextSibling;
+		}
+		displayedAirfields = displayedAirfields.map(function(x){ return x.toUpperCase(); }).sort();
+		templateAirfields = Object.values(json.template).map(function(x){ return x.toUpperCase(); }).sort();
+		/*
+		if(JSON.stringify(displayedAirfields) === JSON.stringify(templateAirfields)) { // Displayed and template are the same, so just refresh data
+			//alert(displayedAirfields + "\n" + templateAirfields);
+			//alert('refresh');
+			for(afld in displayedAirfields) {
+				afld = displayedAirfields[afld];
+				//alert(afld);
+				document.getElementById(afld + '_ATIS').innerHTML = json.airfield_data[afld].atis_code;
+				document.getElementById(afld + '_WX').innerHTML = json.airfield_data[afld].winds + "&nbsp;&nbsp;&nbsp;" + json.airfield_data[afld].altimeter;
+				document.getElementById(afld + '_METAR').innerHTML = json.airfield_data[afld].metar;
+				var active_rwy_apch = "";
+				// New scheme to display active runways/traffic flow with the option for manual override
+				var override = false;
+				if(json.override.hasOwnProperty(afld)) { // An override exists, so display it
+					active_rwy_apch = json.override[afld];
+					override = json.override[afld];
+				}
+				else if(json.airfield_data[afld].apch_rwys != "") { // Display generated active runway and approach type
+					for(var rwy in json.airfield_data[afld]['apch_rwys']) {
+						if(active_rwy_apch.length > 0) {
+							active_rwy_apch += ", ";
+						}
+						active_rwy_apch += json.airfield_data[afld]['apch_rwys'][rwy] + " " + json.airfield_data[afld]['apch_type'];
+					}
+				}
+				document.getElementById(afld + '_RWYAPCH').innerHTML = active_rwy_apch;
+				var rvr = "";
+				for(var x=0; x<json.airfield_data[afld].rvr_display.length; x++) {
+					rvr += json.airfield_data[afld].rvr_display[x] + "<br/>";
+				}
+				document.getElementById(afld + '_RVR').innerHTML = rvr;
+			}
+		}
+		
+		else { // Redraw multi-ids view
+		*/
+		if(JSON.stringify(displayedAirfields) !== JSON.stringify(templateAirfields)) { // Displayed and template are not the same, so just redraw grid
 		for(afld in json.template) { //json.airfield_data
 			afld = json.template[afld];
 			afld = afld.toUpperCase();
-			/*
-			// This code was used when the entire row was click-sensitive
-			if(afld == defaultAirfield) {
-				multi_disp_str += "<div class=\"row\" onclick=\"" + defaultAirfieldNoChange + "\">";
-			}
-			else {
-				multi_disp_str += "<div class=\"row\" onclick=\"airfieldConfig('" + afld + "');\">";
-			}
-			*/
-			multi_disp_str += "<div class=\"row\">";
-			// draggable=\"true\" ondragstart=\"dragStarted(event);\" ondragover=\"draggingOver(event);\" ondrop=\"dropped(event);\" THIS CODE GOES IN TAG ABOVE TO ENABLE DRAG/DROP
-			//alert(afld);
+			multi_disp_str += "<div id=\"" + afld + "\" class=\"row moveable\" draggable=\"true\" ondragstart=\"dragStarted(event);\" ondragover=\"draggingOver(event);\" ondrop=\"dropped(event);\">";
 			multi_disp_str += "<div class=\"col-lg-1\"><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(1,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(2,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(3,1).toUpperCase() + "</div></div>";
-			multi_disp_str += "<div class=\"col-lg-1 atis_code_m\">" + json.airfield_data[afld].atis_code + "</div>";
+
+//			multi_disp_str += "<div id=\"" + afld + "_ATIS\" class=\"col-lg-1 atis_code_m\">" + json.airfield_data[afld].atis_code + "</div>";
+			multi_disp_str += "<div id=\"" + afld + "_ATIS\" class=\"col-lg-1 atis_code_m\"></div>";
+/*			
 			var active_rwy_apch = "";
 			// New scheme to display active runways/traffic flow with the option for manual override
 			var override = false;
@@ -796,32 +835,66 @@
 					active_rwy_apch += json.airfield_data[afld]['apch_rwys'][rwy] + " " + json.airfield_data[afld]['apch_type'];
 				}
 			}
-			/*
-			else if((json.airfield_data[afld]['apch_rwys'].length > 0)&&(json.airfield_data[afld].apch_type != "")) { // We need to combine the runway and approach types into a string
-				for(var x=0;x<json.airfield_data[afld]['apch_type'].length;x++) {
-					if(active_rwy_apch.length > 0) {
-						active_rwy_apch += ", ";
-					}
-					active_rwy_apch += json.airfield_data[afld]['apch_rwys'][x] + " " + json.airfield_data[afld]['apch_type'];
-				}
-			}
-			*/
+
 			else {
 				//active_rwy_apch = json.airfield_data[afld].apch_rwys.join(", ");
 			}
-			multi_disp_str += "<div class=\"col-lg-2 arrival_info\"><div class=\"apch_type\">" + active_rwy_apch + "</div><div></div>";
-			multi_disp_str += "<div class=\"wx\">" + json.airfield_data[afld].winds + "&nbsp;&nbsp;&nbsp;" + json.airfield_data[afld].altimeter + "</div>" + generateDropdown(afld,defaultAirfield) + "</div>";
-			multi_disp_str += "<div class=\"col-lg-5 metar_m\">" + json.airfield_data[afld].metar + "</div>";
-			multi_disp_str += "<div class=\"col-lg-3 metar_m\">RY RVR<div class=\"rvr\">";
-			for(var x=0; x<json.airfield_data[afld].rvr_display.length; x++) {
+*/
+/*
+			multi_disp_str += "<div class=\"col-lg-2 arrival_info\"><div id=\"" + afld + "_RWYAPCH\" class=\"apch_type\">" + active_rwy_apch + "</div><div></div>";
+			multi_disp_str += "<div id=\"" + afld + "_WX\" class=\"wx\">" + json.airfield_data[afld].winds + "&nbsp;&nbsp;&nbsp;" + json.airfield_data[afld].altimeter + "</div>" + generateDropdown(afld,defaultAirfield) + "</div>";
+			multi_disp_str += "<div id=\"" + afld + "_METAR\" class=\"col-lg-5 metar_m\">" + json.airfield_data[afld].metar + "</div>";
+			multi_disp_str += "<div class=\"col-lg-3 metar_m\">RY RVR<div id=\"" + afld + "_RVR\" class=\"rvr\">";
+*/
+			multi_disp_str += "<div class=\"col-lg-2 arrival_info\"><div id=\"" + afld + "_RWYAPCH\" class=\"apch_type\"></div><div></div>";
+			multi_disp_str += "<div id=\"" + afld + "_WX\" class=\"wx\"></div>" + generateDropdown(afld,defaultAirfield) + "</div>";
+			multi_disp_str += "<div id=\"" + afld + "_METAR\" class=\"col-lg-5 metar_m\"></div>";
+			multi_disp_str += "<div class=\"col-lg-3 metar_m\">RY RVR<div id=\"" + afld + "_RVR\" class=\"rvr\">";
+/*			for(var x=0; x<json.airfield_data[afld].rvr_display.length; x++) {
 				multi_disp_str += json.airfield_data[afld].rvr_display[x] + "<br/>";
 			}
+*/
 		multi_disp_str += "	<input type=\"hidden\" id=\"" + afld + "_override\" value=\"" + override + "\" /></div></div></div>";
 		//airfield_listing += json.airfield_data[afld].icao_id.toUpperCase() + ", ";
 		}
+		document.getElementById('multi_ids_data').innerHTML = multi_disp_str;
+		}
+		// Refresh data fields
+			//alert(displayedAirfields + "\n" + templateAirfields);
+			//alert('refresh');
+			for(afld in displayedAirfields) {
+				afld = displayedAirfields[afld];
+				if(json.airfield_data[afld] != undefined) { // Sometimes the refresh is too fast for the redraw... this prevents errors
+				//alert(afld);
+				document.getElementById(afld + '_ATIS').innerHTML = json.airfield_data[afld].atis_code;
+				document.getElementById(afld + '_WX').innerHTML = json.airfield_data[afld].winds + "&nbsp;&nbsp;&nbsp;" + json.airfield_data[afld].altimeter;
+				document.getElementById(afld + '_METAR').innerHTML = json.airfield_data[afld].metar;
+				var active_rwy_apch = "";
+				// New scheme to display active runways/traffic flow with the option for manual override
+				var override = false;
+				if(json.override.hasOwnProperty(afld)) { // An override exists, so display it
+					active_rwy_apch = json.override[afld];
+					override = json.override[afld];
+				}
+				else if(json.airfield_data[afld].apch_rwys != "") { // Display generated active runway and approach type
+					for(var rwy in json.airfield_data[afld]['apch_rwys']) {
+						if(active_rwy_apch.length > 0) {
+							active_rwy_apch += ", ";
+						}
+						active_rwy_apch += json.airfield_data[afld]['apch_rwys'][rwy] + " " + json.airfield_data[afld]['apch_type'];
+					}
+				}
+				document.getElementById(afld + '_RWYAPCH').innerHTML = active_rwy_apch;
+				var rvr = "";
+				for(var x=0; x<json.airfield_data[afld].rvr_display.length; x++) {
+					rvr += json.airfield_data[afld].rvr_display[x] + "<br/>";
+				}
+				document.getElementById(afld + '_RVR').innerHTML = rvr;
+				}
+			}
 		}
 		//alert(airfield_listing);
-		document.getElementById('multi_ids_data').innerHTML = multi_disp_str;
+		//document.getElementById('multi_ids_data').innerHTML = multi_disp_str;
 		if(changes) {
 			document.getElementById("acknowledge").style.visibility = "visible";
 		}
@@ -1510,7 +1583,7 @@ if (today.isDstObserved()) {
 else return false;	
 }
 
-// Drag events handle drag & drop of IDS airfield content boxes - from syntaxxx.com
+// Drag events handle drag & drop of IDS airfield content boxes - source from syntaxxx.com (https://syntaxxx.com/rearranging-web-page-items-with-html5-drag-and-drop/)
 function dragStarted(evt) {
 	//Start drag
 	source = evt.target;
@@ -1531,8 +1604,13 @@ function dropped(evt) {
 	//Drop
 	evt.preventDefault();
 	evt.stopPropagation();
+	//alert(evt.target.closest("div.moveable").tagName + ' ' + evt.target.closest("div.moveable").classList + ' dump: ' + evt.dataTransfer.getData("text/plain"));
+	//alert(source.closest("div.moveable").tagName + ' ' + source.closest("div.moveable").classList + ' dump: ' + evt.target.closest("div.moveable").innerHTML);
+
 	//Update text in dragged item
-	source.innerHTML = evt.target.innerHTML;
+	//source.innerHTML = evt.target.innerHTML;
+	source.closest("div.moveable").innerHTML = evt.target.closest("div.moveable").innerHTML;
 	//Update text in drop target
-	evt.target.innerHTML = evt.dataTransfer.getData("text/plain");
+	//evt.target.innerHTML = evt.dataTransfer.getData("text/plain");
+	evt.target.closest("div.moveable").innerHTML = evt.dataTransfer.getData("text/plain")
 }

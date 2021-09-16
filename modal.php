@@ -1220,9 +1220,9 @@
                 </div>
                 <div class="modal-body">
 					<ul class="nav nav-tabs" id="tabContent">
-						<li class="active"><a href="#blacklist" data-toggle="tab">Blocklist</a></li>
-						<li><a href="#whitelist" data-toggle="tab">Allowlist</a></li>
-						<li><a href="#logging" onClick="startLiveLogging();" data-toggle="tab">Live Logging</a></li>
+						<li class="nav-item active"><a class="nav-link" href="#blacklist" data-toggle="tab">Blocklist</a></li>
+						<li class="nav-item"><a class="nav-link" href="#whitelist" data-toggle="tab">Allowlist</a></li>
+						<li class="nav-item"><a href="#logging" onClick="startLiveLogging();" data-toggle="tab">Live Logging</a></li>
 					</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="blacklist">

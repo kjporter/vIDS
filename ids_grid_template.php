@@ -176,7 +176,7 @@
 			$str .= "<div class=\"row\">";
 			$newrow = false;
 		}
-		$str .= "<div class=\"col-lg-4\">
+		$str .= "<div class=\"col-lg-4 moveable\" draggable=\"true\" ondragstart=\"dragStarted(event);\" ondragover=\"draggingOver(event);\" ondrop=\"dropped(event);\">
 				<input type=\"hidden\" id=\"" . $a80sat[$x]['id'] . "_override\" value=\"false\" />
 				<div class=\"dropdown noclear\">
 				<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"><i class=\"fas fa-caret-square-down\"></i></a>
