@@ -82,10 +82,26 @@ include "ids_grid_template.php";
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-bars"></i></a>
 			<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
 				<li><a href="#" onclick="returnToLanding('multi_ids');">Return to menu</a></li>
-				<li><a href="#" onclick="launchMulti();">Select template</a></li>
 				<li><a href="#BUG" data-toggle="modal">Report a bug</a></li>
 				<li><a href="#mHELP" data-toggle="modal">Help</a></li>
+				<div class="dropdown-divider"></div>
+				<li><a href="#" onclick="launchMulti();">Select template</a></li>
 				<li id="templateDeleteMenu" class="dropdown-item disabled"><a href="#" onclick="removeTemplate();">Remove this template</a></li>
+				<li role="separator" class="divider dropdown-divider"></li>
+				<h6 class="dropdown-header">Controller tools</h6>
+				<li><a href="#WX" data-toggle="modal">Weather</a></li>
+				<li><a href="#PIREP" data-toggle="modal">PIREP</a></li>
+				<li><a href="#ACFT" data-toggle="modal">A/C Types</a></li>
+				<li><a href="#aRELIEF" data-toggle="modal">Briefing</a></li>
+				<li><a href="#EMER" data-toggle="modal">Emergency</a></li>
+				<li role="separator" class="divider dropdown-divider"></li>
+				<h6 class="dropdown-header">A80 top-down</h6>
+				<li><a href="#RECAT" data-toggle="modal">RECAT</a></li>
+				<li><a href="#aFREQS" data-toggle="modal">FREQs</a></li>
+				<li><a href="#aARSPC" data-toggle="modal">Airspace</a></li>
+				<li><a href="#ROTG" data-toggle="modal">ROTG</a></li>
+				<li><a href="#aSOP" data-toggle="modal">SOP</a></li>				
+				<li><a href="#aLOA" data-toggle="modal">LOA</a></li>	
 			</ul>
 		</div>
 		</div>

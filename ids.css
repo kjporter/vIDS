@@ -214,6 +214,8 @@ div.row {
 }
 
 div.vert_id {
+	width: 1ch;
+	text-align: center;
 	font-size: 2vw;
 	font-weight: bold;
 }

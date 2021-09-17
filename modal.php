@@ -240,7 +240,7 @@
 				</ul>
 				<h4>Departure Radar (DR)</h4>
 				<ul>
-					<li>DR-N: 125.700</li>
+					<li>DR-N: 135.320</li>
 					<li>DR-S: 125.650</li>
 					<li>DR-I: 121.220</li>
 				</ul>

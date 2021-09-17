@@ -847,7 +847,9 @@
 			multi_disp_str += "<div class=\"col-lg-3 metar_m\">RY RVR<div id=\"" + afld + "_RVR\" class=\"rvr\">";
 */
 			multi_disp_str += "<div class=\"col-lg-2 arrival_info\"><div id=\"" + afld + "_RWYAPCH\" class=\"apch_type\"></div><div></div>";
-			multi_disp_str += "<div id=\"" + afld + "_WX\" class=\"wx\"></div>" + generateDropdown(afld,defaultAirfield) + "</div>";
+			multi_disp_str += "<div id=\"" + afld + "_WX\" class=\"wx\"></div>" + generateDropdown(afld,defaultAirfield);
+			multi_disp_str += "<span class=\"cab_status\">&nbsp;&nbsp;<span id=\"" + afld + "_multi_online_del\" class=\"badge badge-secondary\">D</span>&nbsp;<span id=\"" + afld + "_multi_online_gnd\" class=\"badge badge-secondary\">G</span>&nbsp;<span id=\"" + afld + "_multi_online_twr\" class=\"badge badge-secondary\">T</span></span>";
+			multi_disp_str += "</div>";
 			multi_disp_str += "<div id=\"" + afld + "_METAR\" class=\"col-lg-5 metar_m\"></div>";
 			multi_disp_str += "<div class=\"col-lg-3 metar_m\">RY RVR<div id=\"" + afld + "_RVR\" class=\"rvr\">";
 /*			for(var x=0; x<json.airfield_data[afld].rvr_display.length; x++) {
@@ -860,10 +862,13 @@
 		document.getElementById('multi_ids_data').innerHTML = multi_disp_str;
 		}
 		// Refresh data fields
+		//while(document.getElementById('multi_ids_data').innerHTML == '') {
+			// Wait... causes the code to delay until the template is loaded into the DOM ;)
+		//}
 			//alert(displayedAirfields + "\n" + templateAirfields);
 			//alert('refresh');
-			for(afld in displayedAirfields) {
-				afld = displayedAirfields[afld];
+			for(afld in templateAirfields) {
+				afld = templateAirfields[afld];
 				if(json.airfield_data[afld] != undefined) { // Sometimes the refresh is too fast for the redraw... this prevents errors
 				//alert(afld);
 				document.getElementById(afld + '_ATIS').innerHTML = json.airfield_data[afld].atis_code;
@@ -890,6 +895,25 @@
 					rvr += json.airfield_data[afld].rvr_display[x] + "<br/>";
 				}
 				document.getElementById(afld + '_RVR').innerHTML = rvr;
+				}
+				// Update D/G/T badge colors based on tower cab staffing
+				if(json.airfield_data[afld].tower_cab.del) {
+					document.getElementById(afld + "_multi_online_del").classList.add('badge-del');
+				}
+				else {
+					document.getElementById(afld + "_multi_online_del").classList.remove('badge-del');
+				}
+				if(json.airfield_data[afld].tower_cab.gnd) {
+					document.getElementById(afld + "_multi_online_gnd").classList.add('badge-gnd');
+				}
+				else {
+					document.getElementById(afld + "_multi_online_gnd").classList.remove('badge-gnd');
+				}		
+				if(json.airfield_data[afld].tower_cab.twr) {
+					document.getElementById(afld + "_multi_online_twr").classList.add('badge-twr');
+				}
+				else {
+					document.getElementById(afld + "_multi_online_twr").classList.remove('badge-twr');				
 				}
 			}
 		}
