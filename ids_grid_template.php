@@ -266,7 +266,7 @@ function controller_display($heading,$cntlPositions,$selOptions,$edit_toggle=0) 
 	}
 	foreach($cntlPositions as $cntlPosition => $value) {
 	$output_str .= "<div class=\"col-lg-" . $col_size. "\"><select class=\"custom-select mr-sm-2 controllerEdit hideControl\" id=\"" . $cntlPosition . "\" onchange=\"updateCtrlPos();\">
-	" . $select_options . "</select><input type=\"text\" class=\"controllerDisplay\" id=\"" . $cntlPosition . "_disp\" size=\"2\" readonly></div>";
+	" . $select_options . "</select><input type=\"text\" class=\"controllerDisplay\" id=\"" . $cntlPosition . "_disp\" size=\"3\" readonly></div>";
 	}
 	$output_str .= "</div>";
 	echo $output_str;
