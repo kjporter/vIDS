@@ -856,7 +856,7 @@
 				multi_disp_str += json.airfield_data[afld].rvr_display[x] + "<br/>";
 			}
 */
-		multi_disp_str += "	<input type=\"hidden\" id=\"" + afld + "_override\" value=\"" + override + "\" /></div></div></div>";
+		multi_disp_str += "	</div></div><input type=\"hidden\" id=\"" + afld + "_override\" value=\"false\" /></div>";
 		//airfield_listing += json.airfield_data[afld].icao_id.toUpperCase() + ", ";
 		}
 		document.getElementById('multi_ids_data').innerHTML = multi_disp_str;
@@ -889,6 +889,7 @@
 						active_rwy_apch += json.airfield_data[afld]['apch_rwys'][rwy] + " " + json.airfield_data[afld]['apch_type'];
 					}
 				}
+				document.getElementById(afld + '_override').value = override;
 				document.getElementById(afld + '_RWYAPCH').innerHTML = active_rwy_apch;
 				var rvr = "";
 				for(var x=0; x<json.airfield_data[afld].rvr_display.length; x++) {
