@@ -1,0 +1,790 @@
+[20210828200815] CID 10000009: controllers update (LC1|LC1|LC1|LC4|LC1|.|.|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210828200817] CID 10000009: controllers update (LC1|LC1|LC4|LC4|LC1|.|.|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210828200818] CID 10000009: controllers update (LC1|LC1|LC4|LC4|LC4|.|.|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210828200804] CID 10000009: controllers update (LC1|LC2|LC4|LC4|LC4|.|.|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210828200817] CID 10000009: trips update (FTA ON<br>FTD OFF)
+[20210828200817] CID 10000009: afld update (9L@M2 ON<br>LAHSO ON<br>AUTO OFF)
+[20210828200817] CID 10000009: flow update (
+EAST
+8L VIS,9R VIS
+8R RV,9L RV)
+[20210828200817] CID 10000009: cic update (Test message from a CIC)
+[20210828200834] CID 10000009: gates update (N:test1
+S:test2
+I:)
+[20210902050920] CID 10000009: controllers update (LC-1|||||.|.|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210902050921] CID 10000009: controllers update (LC-1|LC-1||||.|.|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210902050922] CID 10000009: controllers update (LC-1|LC-1|LC-1|||.|.|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210902050923] CID 10000009: controllers update (LC-1|LC-1|LC-1|LC-1||.|.|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210902050924] CID 10000009: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|.|.|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200950] CID 1504635: controllers update (LC-1|LC-2|LC-1|LC-1|LC-1|.|.|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200942] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|.|.|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200944] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|.|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200945] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|.|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200947] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|.|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200948] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|I|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200952] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|I|N|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200953] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|I|N|N|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200955] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|I|N|N|N|.|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200956] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|I|N|N|.|Q|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200958] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|I|N|N|N|Q|.|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200900] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|I|N|N|N|Q|N|.|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200902] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|I|N|N|N|Q|N|N|.|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200903] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|I|N|N|N|Q|N|N|N|.|.|.|.|.|.|.|.|.|.|.)
+[20210909200905] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|I|N|N|N|Q|N|N|N|N|.|.|.|.|.|.|.|.|.|.)
+[20210909200907] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|I|N|N|N|Q|N|N|N|N|.|.|.|.|.|.|.|.|.|.)
+[20210909200908] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|Q|N|N|N|N|.|.|.|.|.|.|.|.|.|.)
+[20210909200914] CID 1333141: gates update (N:
+S:
+I:)
+[20210909200931] CID 1333141: trips update (FTA ON<br>FTD OFF)
+[20210909200931] CID 1333141: afld update (9L@M2 ON<br>LAHSO ON<br>AUTO OFF)
+[20210909200932] CID 1333141: cic update ()
+[20210909200932] CID 1333141: flow update (
+EAST
+8L VIS,9R VIS
+8R RV,9L RV)
+[20210909200935] CID 1333141: tmu update ()
+[20210909200950] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|.|.|.|.|.|.|.|.|.|.)
+[20210909200921] CID 1333141: splits update ([["8R/L","N1","","N2","","W2","","W1","","","","","","","","",""],["9R/L","","","","","","","","","S2","","S1","","E1","","E2",""],["10","","","","","","","","","","","","","","","",""]])
+[20210909200931] CID 1333141: trips update (FTA ON<br>FTD OFF)
+[20210909200931] CID 1333141: afld update (9L@M2 OFF<br>LAHSO ON<br>AUTO OFF)
+[20210909200931] CID 1333141: flow update (
+WEST
+26R VIS,27L VIS,28 VIS
+26L ROTG,27R ROTG)
+[20210909200931] CID 1333141: cic update ()
+[20210909200918] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|.|.|.|.|.|.|.|.|.)
+[20210909200919] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|.|.|.|.|.|.|.|.)
+[20210909200920] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|.|.|.|.|.|.|.)
+[20210909200921] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|.|.|.|.|.|.)
+[20210909200924] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|.|.|.|.|.)
+[20210909200924] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|.|.|.|.)
+[20210909200926] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|.|.|.)
+[20210909200927] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|.|.)
+[20210909200928] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|.)
+[20210909200930] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909200959] CID 1333141: override update ({"KIAH":"33L\/R VIS"})
+[20210909200904] CID 1333141: a80cic update ()
+[20210909210935] CID 1350969: template update (CLT
+1350969
+KCLT)
+[20210909210953] CID 1436006: pirep update (1631247593|/UA /OV KATL /TM 0100 /FL083 /TP A21N /R TEST)
+[20210909210906] CID 1436006: gates update (N:N1,N2,W1,W2
+S:E1,E2,S1,S2
+I:)
+[20210909210945] CID 1436006: a80cic update (THIS IS A TEST. DISREGARD.)
+[20210909210912] CID 1436006: tmu update (THIS IS A TEST. DISREGARD. TMU INFO IS SHOWN TO A80 AND ATL ATCT.)
+[20210909210917] CID 1350969:  update ()delete template (22099)
+
+[20210909210958] CID 1436006: trips update (FTA OFF<br>FTD OFF)
+[20210909210959] CID 1436006: cic update ()
+[20210909210959] CID 1436006: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210909210959] CID 1436006: flow update (
+EAST
+8L VIS,9R VIS
+8R RV,9L RV)
+[20210909210944] CID 1333141: trips update (FTA OFF<br>FTD OFF)
+[20210909210944] CID 1333141: flow update (
+EAST
+8L VIS,9R VIS
+8R RV,9L RV)
+[20210909210944] CID 1333141: cic update ()
+[20210909210944] CID 1333141: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210909210956] CID 1436006: trips update (FTA OFF<br>FTD OFF)
+[20210909210956] CID 1436006: flow update (
+EAST
+8L VIS,9R VIS
+8R RV,9L RV)
+[20210909210956] CID 1436006: afld update (9L@M2 OFF<br>LAHSO OFF<br>AUTO OFF)
+[20210909210957] CID 1436006: cic update ()
+[20210909210912] CID 1436006: tmu update ()
+[20210909210922] CID 1505957: cic update ()
+[20210909210922] CID 1505957: flow update (
+EAST
+8L VIS,9R VIS
+8R RV,9L RV)
+[20210909210923] CID 1505957: afld update (9L@M2 OFF<br>LAHSO OFF<br>AUTO ON)
+[20210909210924] CID 1505957: trips update (FTA OFF<br>FTD OFF)
+[20210909210927] CID 1259390: controllers update (LC-1|LC-2|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210929] CID 1259390: controllers update (LC-1|LC-2|LC-3|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210930] CID 1259390: controllers update (LC-1|LC-2|LC-3|LC-4|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210931] CID 1259390: controllers update (LC-1|LC-2|LC-3|LC-4|LC-5|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210933] CID 1259390: controllers update (LC-1|LC-2|LC-3|LC-4|LC-5|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210941] CID 1498044: controllers update (LC-1|LC-1|LC-3|LC-4|LC-5|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210943] CID 1498044: controllers update (LC-1|LC-1|LC-4|LC-4|LC-5|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210944] CID 1498044: controllers update (LC-1|LC-1|LC-4|LC-4|LC-4|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210946] CID 1498044: controllers update (LC-1|LC-1|LC-4|LC-4|.|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210948] CID 1498044: controllers update (LC-1|LC-1|LC-4|LC-4|LC-4|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210900] CID 1498044: controllers update (LC-1|LC-1|LC-1|LC-4|LC-4|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210900] CID 1498044: controllers update (LC-1|LC-1|LC-1|LC-1|LC-4|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210901] CID 1498044: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210908] CID 1259390: controllers update (LC-1|LC-1|LC-1|LC-4|LC-4|GC-N|GC-N|LC-1|GC-N|.|.|.|N|S|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210920] CID 1259390: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210909210912] CID 1498044: cic update ()
+[20210909210912] CID 1498044: trips update (FTA OFF<br>FTD OFF)
+[20210909210912] CID 1498044: flow update (
+EAST
+9R VIS
+9L ROTG)
+[20210909210912] CID 1498044: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210909210944] CID 1498044: cic update ()
+[20210909210944] CID 1498044: trips update (FTA OFF<br>FTD OFF)
+[20210909210944] CID 1498044: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210909210944] CID 1498044: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210909210934] CID 1498044: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210909210934] CID 1498044: trips update (FTA OFF<br>FTD OFF)
+[20210909210934] CID 1498044: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210909210934] CID 1498044: cic update ()
+[20210910010950] CID 957392: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|.|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910010927] CID 957392: cic update ()
+[20210910010927] CID 957392: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910010928] CID 957392: trips update (FTA ON<br>FTD OFF)
+[20210910010929] CID 957392: flow update (
+EAST
+10 VIS
+8R ROTG,9L ROTG)
+[20210910010946] CID 957392: a80cic update ()
+[20210910010939] CID 957392: splits update ([["8R/L","N1","","N2","","W2","","W1","","","","","","","","",""],["9R/L","","","","","","","","","S2","","S1","","E1","","E2",""],["10","","","","","","","","","","","","","","","",""]])
+[20210910010929] CID 957392: trips update (FTA ON<br>FTD OFF)
+[20210910010929] CID 957392: flow update (
+EAST
+8L VIS,9R VIS,10 VIS
+8R ROTG,9L ROTG)
+[20210910010929] CID 957392: cic update ()
+[20210910010930] CID 957392: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210910010943] CID 957392: splits update ([["26R/L","N1","","N2","","W2","","W1","","","","","","","","",""],["27R/L","","","","","","","","","S2","","S1","","E1","","E2",""],["28","","","","","","","","","","","","","","","",""]])
+[20210910010919] CID 957392: override update ({"KIAH":"33L\/R VIS"})
+[20210910070904] CID 1441523: template update (KCLT
+1441523
+KCLT)
+[20210910070940] CID 1441523: template update (CLT TRACON
+1441523
+KCLT
+KJQF
+KHKY
+KUZA
+KLKR)
+[20210910070941] CID 1505957: trips update (FTA OFF<br>FTD OFF)
+[20210910070941] CID 1505957: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210910070941] CID 1505957: flow update (
+
+
+)
+[20210910070941] CID 1505957: cic update ()
+[20210910080944] CID 1262568: template update (ZTL -CS
+1262568
+KATL
+KCLT
+KBHM
+KCHA
+KGSP
+KAVL
+KGSO
+KTYS
+KTRI
+KMGM
+KGMU
+KGYH
+KAGS
+KTOI
+KTCL
+KMXF
+KHKY)
+[20210910130945] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-5|.|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910130947] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-4|LC-5|.|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910130902] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-5|.|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910130903] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|.|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910130920] CID 1333141: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150907] CID 1259390: template update (ZDC
+1259390
+KBKT
+KBWI
+KCHO
+KCLT
+KDCA
+KFAY
+KGSB
+KGSO
+KIAD
+KILM
+KLYH
+KLWB
+KNKT
+KORF
+KRDU
+KRIC
+KROA
+KPHL)
+[20210910150910] CID 1443834: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|GC-N|GC-N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150917] CID 1443834: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|GC-N|GC-N|CD-1|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150918] CID 1443834: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|GC-N|GC-N|CD-1|CD-1|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150920] CID 1443834: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|GC-N|GC-N|CD-1|CD-1|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150939] CID 1259390: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150930] CID 1443834: controllers update (.|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150904] CID 1497213: controllers update (.|.|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150905] CID 1497213: controllers update (.|.|.|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150906] CID 1497213: controllers update (.|.|.|.|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150907] CID 1497213: controllers update (.|.|.|.|.|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150908] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150925] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|GC-N|LC-1|.|CD-1|CD-1|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150925] CID 1443834: controllers update (LC-1|.|LC-3|.|.|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150927] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|GC-N|.|.|CD-1|CD-1|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150929] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|.|.|CD-1|CD-1|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150940] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|.|.|CD-1|.|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150943] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|.|.|CD-1|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150948] CID 1443834: controllers update (LC-1|.|LC-3|.|.|GC-N|.|.|.|CD-1|.|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150911] CID 1443834: controllers update (LC-1|.|.|.|.|GC-N|.|.|.|CD-1|.|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150912] CID 1443834: controllers update (LC-1|.|.|LC-4|.|GC-N|.|.|.|CD-1|.|CD-1|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150919] CID 1443834: controllers update (LC-1|.|.|LC-4|.|GC-N|.|.|.|CD-1|.|CD-1|N|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150920] CID 1443834: controllers update (LC-1|.|.|LC-4|.|GC-N|.|.|.|CD-1|.|CD-1|N|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150923] CID 1443834: controllers update (LC-1|.|.|LC-4|.|GC-N|.|.|.|CD-1|.|CD-1|N|.|.|N|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150923] CID 1443834: controllers update (LC-1|.|.|LC-4|.|GC-N|.|.|.|CD-1|.|CD-1|N|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150924] CID 1443834: controllers update (LC-1|.|.|LC-4|.|GC-N|.|.|.|CD-1|.|CD-1|N|.|.|N|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150925] CID 1443834: controllers update (LC-1|.|.|LC-4|.|GC-N|.|.|.|CD-1|.|CD-1|N|.|.|N|.|.|.|.|N|N|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150928] CID 1443834: controllers update (LC-1|.|.|LC-4|.|GC-N|.|.|.|CD-1|.|CD-1|N|.|.|N|.|.|.|.|N|.|N|N|N|N|N|N|N|N|N|N|N)
+[20210910150930] CID 1443834: controllers update (LC-1|.|.|LC-4|.|GC-N|.|.|.|CD-1|.|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150937] CID 1443834: controllers update (LC-1|.|.|LC-4|.|GC-N|.|.|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150919] CID 1443834: splits update ([["","N1","","N2","","W2","","W1","","","","","","","","",""],["","","","","","","","","","S2","","S1","","E1","","E2",""],["","","","","","","","","","","","","","","","",""]])
+[20210910150922] CID 1443834: gates update (N:N1,N2,W1,W2
+S:E1,E2,S1,S2
+I:)
+[20210910150938] CID 1443834: gates update (N:N1,N2,W1
+S:E1,E2,S1,S2,w2
+I:)
+[20210910150953] CID 1443834: gates update (N:N1,N2,W1
+S:E1,E2,S1,S2,W2
+I:)
+[20210910150932] CID 1259390: splits update ([["","N1","","N2","","","","","","","","","","","","",""],["","","","","","W2","","W1","","S2","","S1","","E1","","E2",""],["","","","","","","","","","","","","","","","",""]])
+[20210910150920] CID 1497213: gates update (N:N1,N2
+S:E1,E2,S1,S2, W1, W2
+I:)
+[20210910150945] CID 1443834: gates update (N:N1,N2
+S:E1,E2,S1,S2,W1,W2
+I:)
+[20210910150946] CID 1259390: gates update (N:N1,N2
+S:E1,E2,S1,S2,W1,W2
+I:)
+[20210910150908] CID 1259390: gates update (N:N1 N2
+S:E1 E2 S1 S2 W1 W2
+I:)
+[20210910150945] CID 1443834: cic update (Great Job Kyle!!)
+[20210910150945] CID 1443834: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210910150945] CID 1443834: flow update (
+
+
+)
+[20210910150945] CID 1443834: trips update (FTA OFF<br>FTD OFF)
+[20210910150930] CID 1259390: tmu update (ORIG                     DEST    ROUTE
+----                     ----    -----
+ATL (CATEGORY: RNAV)     JFK     SMKEY2 >BOBBD PSK J22 MOL AML
+                                 J220 WUNDR MAGIO LVZ< LENDY6
+ATL (CATEGORY: NON-RNAV) JFK     >NOTWO HRS V267 VXV PSK J22 MOL
+                                 AML J220 BIGEO J49 MAGIO LVZ<
+                                 LENDY6)
+[20210910150940] CID 1259390: tmu update (JFK RNAV: SMKEY2 >BOBBD PSK J22 MOL AML J220 WUNDR MAGIO LVZ< LENDY6
+JFK NON-RNAV: >NOTWO HRS V267 VXV PSK J22 MOL AML J220 BIGEO J49 MAGIO LVZ< LENDY6)
+[20210910150901] CID 1259390: tmu update (JFK RNAV: SMKEY2 >BOBBD PSK J22 MOL AML J220 WUNDR MAGIO LVZ< LENDY6
+
+JFK NON-RNAV: >NOTWO HRS V267 VXV PSK J22 MOL AML J220 BIGEO J49 MAGIO LVZ< LENDY6)
+[20210910150930] CID 1443834: template update (TD Test
+1443834
+kclt
+katl
+kbhm)
+[20210910150939] CID 1259390: tmu update (JFK RNAV: SMKEY2 >BOBBD PSK J22 MOL AML J220 WUNDR MAGIO LVZ< LENDY6\n
+JFK NON-RNAV: >NOTWO HRS V267 VXV PSK J22 MOL AML J220 BIGEO J49 MAGIO LVZ< LENDY6)
+[20210910150917] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|.|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150937] CID 1505957: template update (KCLT TWR
+1505957
+kclt)
+[20210910150948] CID 1259390: tmu update (JFK RNAV: SMKEY2 >BOBBD PSK J22 MOL AML J220 WUNDR MAGIO LVZ< LENDY6	
+JFK NON-RNAV: >NOTWO HRS V267 VXV PSK J22 MOL AML J220 BIGEO J49 MAGIO LVZ< LENDY6)
+[20210910150948] CID 1443834:  update ()delete template (32136)
+
+[20210910150954] CID 1504110: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150906] CID 1436006: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910150906] CID 1436006: trips update (FTA OFF<br>FTD OFF)
+[20210910150906] CID 1436006: cic update (Great Job Kyle!!)
+[20210910150906] CID 1436006: flow update (
+WEST
+
+)
+[20210910150907] CID 1504110: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910150907] CID 1504110: trips update (FTA OFF<br>FTD OFF)
+[20210910150907] CID 1504110: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210910150907] CID 1504110: cic update (Great Job Kyle!!)
+[20210910150920] CID 1436006: cic update (Great Job Kyle!!)
+[20210910150920] CID 1436006: trips update (FTA OFF<br>FTD OFF)
+[20210910150920] CID 1436006: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910150920] CID 1436006: afld update (9L@M2 OFF<br>LAHSO OFF<br>AUTO OFF)
+[20210910150927] CID 1436006: cic update (Great Job Kyle!!)
+[20210910150927] CID 1436006: trips update (FTA OFF<br>FTD OFF)
+[20210910150927] CID 1436006: afld update (9L@M2 OFF<br>LAHSO OFF<br>AUTO OFF)
+[20210910150927] CID 1436006: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910150946] CID 1504110: trips update (FTA OFF<br>FTD OFF)
+[20210910150946] CID 1504110: cic update (Great Job Kyle!!)
+[20210910150946] CID 1504110: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910150946] CID 1504110: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910150948] CID 1443834: cic update (Great Job Kyle!!)
+[20210910150948] CID 1443834: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910150948] CID 1443834: flow update (
+WEST
+
+)
+[20210910150948] CID 1443834: trips update (FTA OFF<br>FTD OFF)
+[20210910150910] CID 1443834: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910150910] CID 1443834: flow update (
+EAST
+
+)
+[20210910150910] CID 1443834: cic update (Great Job Kyle!!)
+[20210910150911] CID 1443834: trips update (FTA OFF<br>FTD OFF)
+[20210910150912] CID 1436006: trips update (FTA OFF<br>FTD OFF)
+[20210910150912] CID 1436006: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910150912] CID 1436006: afld update (9L@M2 OFF<br>LAHSO OFF<br>AUTO OFF)
+[20210910150912] CID 1504110: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910150912] CID 1504110: trips update (FTA OFF<br>FTD OFF)
+[20210910150912] CID 1504110: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910150912] CID 1504110: cic update (Great Job Kyle!!)
+[20210910150913] CID 1436006: cic update (Great Job Kyle!!)
+[20210910150934] CID 1504110: controllers update (LC-1|.|.|.|.|GC-N|GC-N|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150936] CID 1504110: controllers update (LC-1|LC-1|.|.|.|GC-N|GC-N|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150937] CID 1504110: controllers update (LC-1|LC-1|LC-1|.|.|GC-N|GC-N|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150938] CID 1504110: controllers update (LC-1|LC-1|LC-1|LC-1|.|GC-N|GC-N|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150939] CID 1504110: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150948] CID 1504110: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150951] CID 1504110: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150952] CID 1504110: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150959] CID 1505957:  update ()delete template (25452)
+
+[20210910150924] CID 1497213: controllers update (LC-1|.|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150925] CID 1497213: controllers update (LC-1|.|.|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150927] CID 1497213: controllers update (LC-1|.|.|.|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150928] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150929] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150931] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150931] CID 1504110: controllers update (LC-1|LC-1|.|.|.|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150932] CID 1504110: controllers update (LC-1|LC-1|LC-1|.|.|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150906] CID 1497213: controllers update (LC-1|.|LC-1|.|.|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150907] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150909] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150910] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150912] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|CD-1|CD-1|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150914] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150955] CID 1504110: controllers update (LC-1|LC-1|.|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150956] CID 1504110: controllers update (LC-1|LC-1|LC-1|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150956] CID 1504110: controllers update (LC-1|LC-1|LC-1|LC-1|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150957] CID 1504110: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150959] CID 1504110: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150900] CID 1504110: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150903] CID 1504110: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|.|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150904] CID 1504110: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|N|N|N|N|N|N|N|N|N)
+[20210910150927] CID 1497213: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|N|N|N|N|N|N|N|N)
+[20210910150928] CID 1497213: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|N|N|N|N|N|N|N)
+[20210910150929] CID 1497213: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|N|N|N|N|N)
+[20210910150933] CID 1497213: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|N|N|N|N)
+[20210910150934] CID 1497213: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|N|N|N)
+[20210910150936] CID 1497213: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|N|N)
+[20210910150938] CID 1497213: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|N)
+[20210910150939] CID 1497213: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210910150941] CID 1497213: controllers update (LC-1|.|LC-1|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210910150942] CID 1497213: controllers update (LC-1|LC-1|.|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210910150943] CID 1497213: controllers update (LC-1|.|.|LC-1|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210910150944] CID 1497213: controllers update (LC-1|.|.|.|LC-1|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210910150945] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|GC-N|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210910150908] CID 1259390: tmu update (JFK RNAV: SMKEY2 >BOBBD PSK J22 MOL AML J220 WUNDR MAGIO LVZ< LENDY6	
+JFK NON-RNAV: >NOTWO HRS V267 VXV PSK J22 MOL AML J220 BIGEO J49 MAGIO LVZ< LENDY6
+
+JFK VIA PSK 30 MIT ZDC::ZTL)
+[20210910150923] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|GC-N|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210910150925] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|CD-1|CD-1|CD-1|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210910150927] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|CD-1|CD-1|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210910150928] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210910150943] CID 1259390: tmu update (JFK RNAV: SMKEY2 >BOBBD PSK J22 MOL AML J220 WUNDR MAGIO LVZ< LENDY6 //	JFK NON-RNAV: >NOTWO HRS V267 VXV PSK J22 MOL AML J220 BIGEO J49 MAGIO LVZ< LENDY6 //	JFK VIA PSK 30 MIT ZDC::ZTL)
+[20210910150918] CID 1497213: tmu update ()
+[20210910150952] CID 1443834: template update (GSO
+1443834
+kgso
+kint)
+[20210910150923] CID 1456808: override update ({"KIAH":"33L\/R VIS","KCLT":"18C, 18R"})
+[20210910150922] CID 1456808: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS "})
+[20210910150910] CID 1333141: tmu update (testing)
+[20210910150949] CID 1386905: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210910150949] CID 1386905: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910150949] CID 1386905: trips update (FTA ON<br>FTD OFF)
+[20210910150949] CID 1386905: cic update (ATL-JFK SPECIAL ROUTE DPTG N COMPLEX
+RNAV: SMKEY2 BOBBD PSK J22 MOL AML J220 WUNDR MAGIO LVZ LENDY6
+
+NON-RNAV: ATL1 NOTWO HRS VXV PSK J22 MOL AML J220 BIGEO J49 MAGIO LVZ LENDY6)
+[20210910160919] CID 1386905: trips update (FTA ON<br>FTD OFF)
+[20210910160919] CID 1386905: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910160919] CID 1386905: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910160919] CID 1386905: cic update (ATL-JFK SPECIAL ROUTE DPTG N COMPLEX
+RNAV: SMKEY2 BOBBD PSK J22 MOL AML J220 WUNDR MAGIO LVZ LENDY6
+NON-RNAV: ATL1 NOTWO HRS VXV PSK J22 MOL AML J220 BIGEO J49 MAGIO LVZ LENDY6)
+[20210910160941] CID 1333141: tmu update (testing
+testv2)
+[20210910160946] CID 1386905: gates update (N:N1 N2 W1 W2
+S:E1 E2 S1 S2
+I:)
+[20210910160951] CID 1386905: gates update (N:N1 N2 W1 W2
+S:E1 E2 S1 S2
+I:)
+[20210910160908] CID 1386905: trips update (FTA ON<br>FTD OFF)
+[20210910160908] CID 1386905: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910160908] CID 1386905: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910160908] CID 1386905: cic update ()
+[20210910160935] CID 1386905: trips update (FTA ON<br>FTD OFF)
+[20210910160935] CID 1386905: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910160935] CID 1386905: cic update (JFK FNO TMU IN EFFECT)
+[20210910160935] CID 1386905: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910160957] CID 1386905: tmu update (ATL-JFK:
+RNAV: SMKEY2 BOBBD PSK J22 MOL AML J220 WUNDR MAGIO LVZ LENDY6
+NON-RNAV: ATL1 NOTWO HRS VXV PSK J22 MOL AML J220 BIGEO J49 MAGIO LVZ LENDY6)
+[20210910160959] CID 1333141: tmu update ()
+[20210910160902] CID 1443834: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS "})
+[20210910160912] CID 1443834: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS "})
+[20210910160934] CID 1443834: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS "})
+[20210910160907] CID 1386905: tmu update (JFK DEPS 5MIT OFF THE GORUND
+
+SPEC ROUTES:
+RNAV: SMKEY2 BOBBD PSK J22 MOL AML J220 WUNDR MAGIO LVZ LENDY6
+NON-RNAV: ATL1 NOTWO HRS VXV PSK J22 MOL AML J220 BIGEO J49 MAGIO LVZ LENDY6)
+[20210910160916] CID 1443834: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS "})
+[20210910160953] CID 1386905: splits update ([["8R/L","N1","","N2","","W2","","W1","","","","","","","","",""],["9R/L","","","","","","","","","S2","","S1","","E1","","E2",""],["10","","","","","","","","","","","","","","","",""]])
+[20210910160948] CID 1386905: splits update ([["8R/L","N1","","N2","","","","","","","","","","","","",""],["9R/L","","","","","W2","","W1","","S2","","S1","","E1","","E2",""],["10","","","","","","","","","","","","","","","",""]])
+[20210910160958] CID 1386905: gates update (N:N1 N2
+S:W1 W2 E1 E2 S1 S2
+I:)
+[20210910160921] CID 1386905: tmu update (JFK DEPS 5MIT OFF THE GROUND.
+SPEC ROUTES:
+RNAV: SMKEY2 BOBBD PSK J22 MOL AML J220 WUNDR MAGIO LVZ LENDY6
+NON-RNAV: ATL1 NOTWO HRS VXV PSK J22 MOL AML J220 BIGEO J49 MAGIO LVZ LENDY6)
+[20210910160922] CID 816206: template update (AVL
+816206
+KAVL)
+[20210910160942] CID 1386905: tmu update (ATL OFFLOAD ROUTE IN EFFECT FOR ALL JFK DEPS. https://docs.google.com/document/d/1eLcgRXjLni-R4V-_2xh1QS0P2KRVIw9KuKhZ-EH5oyc/edit)
+[20210910160912] CID 1386905: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910160912] CID 1386905: cic update (JFK FNO TMU IN EFFECT - ZTL FACILITY CIC: ELI SNOWDEN.)
+[20210910160912] CID 1386905: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910160912] CID 1386905: trips update (FTA ON<br>FTD OFF)
+[20210910160927] CID 1386905: cic update (ZTL FACILTIY CIC: ELI SNOWDEN - JFK FNO TMU OPS IN EFFECT)
+[20210910160927] CID 1386905: trips update (FTA ON<br>FTD OFF)
+[20210910160927] CID 1386905: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910160927] CID 1386905: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910160937] CID 1505957: template update (KCLT TWR
+1505957
+kclt)
+[20210910160939] CID 1386905: gates update (N:N1 N2 W1 W2 E1 E2 S1 S2
+S:
+I:)
+[20210910160914] CID 1504635: tmu update (ATL OFFLOAD ROUTE IN EFFECT FOR ALL JFK DEPS. 
+
+https://docs.google.com/document/d/1eLcgRXjLni-R4V-_2xh1QS0P2KRVIw9KuKhZ-EH5oyc/edit)
+[20210910160935] CID 1504110: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910160935] CID 1504110: trips update (FTA ON<br>FTD OFF)
+[20210910160935] CID 1504110: cic update (ZTL FACILTIY CIC: ELI SNOWDEN - JFK FNO TMU OPS IN EFFECT)
+[20210910160935] CID 1504110: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910160937] CID 1436006: tmu update (ATL OFFLOAD ROUTE IN EFFECT FOR ALL JFK DEPS.
+
+https://docs.google.com/document/d/1eLcgRXjLni-R4V-_2xh1QS0P2KRVIw9KuKhZ-EH5oyc/edit)
+[20210910160934] CID 1386905: trips update (FTA ON<br>FTD OFF)
+[20210910160934] CID 1386905: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910160934] CID 1386905: cic update (ATL CIC: ADAM VEALL - JFK FNO TMU OPS IN EFFECT)
+[20210910160934] CID 1386905: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910200952] CID 1505957: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910200952] CID 1505957: trips update (FTA OFF<br>FTD OFF)
+[20210910200952] CID 1505957: cic update (ATL CIC: ADAM VEALL - JFK FNO TMU OPS IN EFFECT)
+[20210910200952] CID 1505957: flow update (
+EAST
+8L VIS,9R VIS
+9L ROTG)
+[20210910200914] CID 1505957: trips update (FTA OFF<br>FTD OFF)
+[20210910200914] CID 1505957: cic update ()
+[20210910200914] CID 1505957: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210910200914] CID 1505957: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910200927] CID 1505957: tmu update ()
+[20210910210915] CID 1386905: splits update ([["8R/L","N1","","N2","","W2","","W1","","","","","","","","",""],["9R/L","","","","","","","","","S2","","S1","","E1","","E2",""],["10","","","","","","","","","","","","","","","",""]])
+[20210910210953] CID 1386905: trips update (FTA OFF<br>FTD OFF)
+[20210910210953] CID 1386905: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210910210953] CID 1386905: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210910210953] CID 1386905: cic update ()
+[20210911090904] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS"})
+[20210911090913] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS"})
+[20210911090946] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS"})
+[20210911090906] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS"})
+[20210911090917] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS"})
+[20210911090908] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS"})
+[20210911090929] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS"})
+[20210911100930] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS"})
+[20210911100924] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS"})
+[20210911100913] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS"})
+[20210911100919] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS"})
+[20210911100926] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS"})
+[20210911100956] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS"})
+[20210911100925] CID 1262568: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"24 VIS, 36 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS"})
+[20210911100944] CID 1262568: trips update (FTA ON<br>FTD OFF)
+[20210911100944] CID 1262568: cic update ()
+[20210911100944] CID 1262568: flow update (
+EAST
+
+)
+[20210911100944] CID 1262568: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210911110907] CID 1459978: override update ({"KIAH":"33L\/R VIS","KCLT":"18C VIS, 18L VIS ","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS"})
+[20210911140906] CID 1171089: controllers update (LC-1|LC-3|.|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210911140909] CID 1171089: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210911140915] CID 1171089: controllers update (LC-1|LC-1|.|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210911140915] CID 1171089: controllers update (LC-1|LC-1|LC-1|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210911140916] CID 1171089: controllers update (LC-1|LC-1|LC-1|LC-1|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210911140917] CID 1171089: controllers update (LC-1|LC-1|LC-1|LC-1|LC-1|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210911140958] CID 1171089: flow update (
+
+
+)
+[20210911140958] CID 1171089: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210911140958] CID 1171089: trips update (FTA OFF<br>FTD OFF)
+[20210911140959] CID 1171089: cic update ()
+[20210911140906] CID 1171089: tmu update ()
+[20210911140955] CID 1171089: cic update ()
+[20210911140955] CID 1171089: trips update (FTA OFF<br>FTD OFF)
+[20210911140955] CID 1171089: afld update (9L@M2 OFF<br>LAHSO OFF<br>AUTO OFF)
+[20210911140956] CID 1171089: flow update (
+WEST
+26R VIS,27L VIS
+26L ROTG,27R ROTG)
+[20210911140940] CID 1171089: cic update ()
+[20210911140940] CID 1171089: flow update (
+WEST
+26R VIS,27L VIS
+26L ROTG,27R ROTG)
+[20210911140940] CID 1171089: afld update (9L@M2 OFF<br>LAHSO OFF<br>AUTO ON)
+[20210911140941] CID 1171089: trips update (FTA OFF<br>FTD OFF)
+[20210911140953] CID 1171089: cic update ()
+[20210911140953] CID 1171089: trips update (FTA OFF<br>FTD OFF)
+[20210911140953] CID 1171089: flow update (
+EAST
+
+)
+[20210911140954] CID 1171089: afld update (9L@M2 OFF<br>LAHSO OFF<br>AUTO OFF)
+[20210911200957] CID 979914: gates update (N:NWSE
+S:
+I:)
+[20210911200958] CID 1259390: flow update (
+EAST
+8L VIS,9R VIS
+8R RV,9L RV)
+[20210911200958] CID 1259390: trips update (FTA OFF<br>FTD OFF)
+[20210911200959] CID 1259390: cic update ()
+[20210911200959] CID 1259390: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210911200942] CID 1259390: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210911200942] CID 1259390: cic update ()
+[20210911200942] CID 1259390: flow update (
+
+
+)
+[20210911200943] CID 1259390: trips update (FTA ON<br>FTD OFF)
+[20210912090938] CID 967414: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS"})
+[20210912140907] CID 1436006: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210912140907] CID 1436006: cic update ()
+[20210912140908] CID 1436006: trips update (FTA OFF<br>FTD OFF)
+[20210912140908] CID 1436006: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210912140932] CID 1436006: controllers update (LC-1|LC-1|LC-1|LC-1|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210912140933] CID 1436006: controllers update (LC-1|LC-1|LC-1|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210912140934] CID 1436006: controllers update (LC-1|LC-1|.|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210912140934] CID 1436006: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210912140937] CID 1436006: controllers update (LC-1|.|.|.|.|GC-N|.|.|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210912170948] CID 1386905: trips update (FTA ON<br>FTD OFF)
+[20210912170948] CID 1386905: flow update (
+EAST
+8L ILS,9R ILS,10 VIS
+8R ROTG,9L ROTG)
+[20210912170948] CID 1386905: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210912170948] CID 1386905: cic update ()
+[20210912170945] CID 1259390: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS","KPDK":"3L VIS 3R VIS"})
+[20210912170954] CID 1259390: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS","KPDK":"3L VIS 3R VIS"})
+[20210912170921] CID 1315134: template update (HKY ATCT
+1315134
+KHKY)
+[20210912170953] CID 1459978: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KTYS":"23L\/23R VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS","KPDK":"3L VIS 3R VIS","KJQF":"20 VIS"})
+[20210912170907] CID 1459978: template update (CLT
+1459978
+KCLT
+KJQF
+KHKY
+KVUJ
+KEQY
+KUZA
+KLKR
+KDCM
+KAKH)
+[20210912170902] CID 967414: template update (GSP
+967414
+KGSP
+KGMU
+KGYH)
+[20210912180935] CID 1386905: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS","KPDK":"3L VIS 3R VIS","KJQF":"20 VIS"})
+[20210912180918] CID 1386905: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS","KPDK":"3L VIS 3R VIS","KJQF":"20 VIS","KTYS":"23L VIS"})
+[20210912180942] CID 1504635: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210912180942] CID 1504635: trips update (FTA ON<br>FTD OFF)
+[20210912180942] CID 1504635: cic update ()
+[20210912180942] CID 1504635: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210912180923] CID 1459978: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS","KPDK":"3L VIS 3R VIS","KJQF":"20 VIS","KTYS":"23L VIS","KFTY":"8 VIS"})
+[20210912180934] CID 1459978: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS","KPDK":"3L VIS 3R VIS","KJQF":"20 VIS","KTYS":"23L VIS","KFTY":"8 VIS","KMGE":"11 VIS"})
+[20210913100938] CID 1235978: template update (TYS Tower
+1235978
+KTYS)
+[20210913120958] CID 1235978:  update ()delete template (17620)
+
+[20210913170948] CID 1505957: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210913170948] CID 1505957: trips update (FTA OFF<br>FTD OFF)
+[20210913170948] CID 1505957: flow update (
+WEST
+26R ILS,27L ILS
+26R ROTG)
+[20210913170948] CID 1505957: cic update ()
+[20210914160949] CID 1262568: pirep update (1631663869|/UA /OV OKW /TM 2350 /FL360 /TP B744 /R LGT-MOD TURB)
+[20210914180936] CID 1333141: cic update ()
+[20210914180936] CID 1333141: afld update (9L@M2 ON<br>LAHSO ON<br>AUTO OFF)
+[20210914180937] CID 1333141: flow update (
+EAST
+8L VIS,9R VIS
+8R ROTG,9L ROTG)
+[20210914180937] CID 1333141: trips update (FTA OFF<br>FTD OFF)
+[20210915150911] CID 1505957: trips update (FTA OFF<br>FTD OFF)
+[20210915150911] CID 1505957: cic update ()
+[20210915150911] CID 1505957: flow update (
+EAST
+8L ILS,9R ILS
+8R ROTG,9L ROTG)
+[20210915150912] CID 1505957: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210916090933] CID 1259390: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS","KJQF":"20 VIS","KTYS":"23L VIS","KFTY":"8 VIS","KMGE":"11 VIS"})
+[20210916090939] CID 1259390: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS","KJQF":"20 VIS","KTYS":"23L VIS","KFTY":"8 VIS","KMGE":"11 VIS"})
+[20210916090951] CID 1259390: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS","KJQF":"20 VIS","KTYS":"23L VIS","KFTY":"8 ILS","KMGE":"11 VIS"})
+[20210916090902] CID 1259390: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"22 VIS","KAVL":"17 VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS","KJQF":"20 VIS","KTYS":"23L VIS","KFTY":"8 ILS","KMGE":"11 ILS"})
+[20210916090943] CID 1259390: cic update ()
+[20210916090943] CID 1259390: trips update (FTA ON<br>FTD OFF)
+[20210916090943] CID 1259390: flow update (
+EAST
+8L ILS,9R ILS
+8R ROTG,9L ROTG)
+[20210916090943] CID 1259390: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO ON)
+[20210916090921] CID 1259390: flow update (
+EAST
+8L ILS,9R ILS,10 ILS
+8R ROTG,9L ROTG)
+[20210916090921] CID 1259390: trips update (FTA ON<br>FTD OFF)
+[20210916090921] CID 1259390: cic update ()
+[20210916090921] CID 1259390: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210916100906] CID 1497213: controllers update (LC-1|.|.|.|.|.|.|.|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210916100908] CID 1497213: controllers update (LC-1|.|.|.|.|.|.|.|.|.|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210916110947] CID 1497213: controllers update (LC-1|.|.|.|.|N|.|.|.|.|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210916110907] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|.|.|.|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210916110908] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|.|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210916110917] CID 1497213: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210916110908] CID 1497213: controllers update (N|.|.|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210916110921] CID 1497213: cic update ()
+[20210916110921] CID 1497213: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210916110921] CID 1497213: trips update (FTA ON<br>FTD OFF)
+[20210916110921] CID 1497213: flow update (
+EAST
+8L ILS,9R ILS
+8R ROTG,9L ROTG)
+[20210916110903] CID 1315134: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|CD-1|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210916110906] CID 1315134: controllers update (LC-1|.|.|.|.|GC-N|.|LC-1|.|GC-N|.|.|N|.|.|N|.|.|.|.|N|.|.|N|.|.|.|N|.|.|.|.|.)
+[20210916110933] CID 1315134: flow update (
+EAST
+8L ILS,9R ILS
+8R ROTG,9L ROTG)
+[20210916110933] CID 1315134: trips update (FTA OFF<br>FTD OFF)
+[20210916110933] CID 1315134: cic update ()
+[20210916110933] CID 1315134: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210916130939] CID 1459978: override update ({"KIAH":"33L\/R VIS","KBHM":"06 VIS, 18 VIS","KCHA":"20 VIS, 33 VIS","KGSP":"4 VIS","KAVL":"17 VIS","KGSO":"23L\/23R VIS","KTRI":"23 VIS, 27 VIS","KMGM":"10 VIS, 3 VIS","KGMU":"19 VIS, 28 VIS","KGYH":"23 VIS","KAGS":"35 VIS","KTOI":"7 VIS, 14 VIS","KMXF":"15 VIS","KHKY":"24 VIS, 19 VIS","KJQF":"20 VIS","KTYS":"23L VIS","KFTY":"8 ILS","KMGE":"11 ILS"})
+[20210916160952] CID 1259390: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210916160952] CID 1259390: trips update (FTA ON<br>FTD OFF)
+[20210916160952] CID 1259390: cic update ()
+[20210916160952] CID 1259390: flow update (
+EAST
+8L ILS,9R ILS,10 ILS
+8R ROTG,9L ROTG)
+[20210916180904] CID 1436006: cic update ()
+[20210916180904] CID 1436006: flow update (
+EAST
+8L ILS,9R ILS,10 ILS
+8R ROTG,9L ROTG)
+[20210916180904] CID 1436006: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210916180904] CID 1436006: trips update (FTA OFF<br>FTD OFF)
+[20210916180932] CID 1436006: flow update (
+EAST
+8L ILS,9R ILS
+8R ROTG,9L ROTG)
+[20210916180932] CID 1436006: trips update (FTA OFF<br>FTD OFF)
+[20210916180932] CID 1436006: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210916180932] CID 1436006: cic update ()
+[20210916180939] CID 1436006: afld update (9L@M2 ON<br>LAHSO OFF<br>AUTO OFF)
+[20210916180939] CID 1436006: flow update (
+EAST
+8L ILS,9R ILS
+8R ROTG,9L ROTG)
+[20210916180939] CID 1436006: cic update ()
+[20210916180939] CID 1436006: trips update (FTA OFF<br>FTD OFF)
