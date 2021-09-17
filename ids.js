@@ -449,9 +449,19 @@
 		// Set Tower IDS fields
 		//init = false; // For testing only, this needs to be removed
 		changes = changeDetection(init,changes,document.getElementById("atis_code").innerHTML,json.airfield_data['KATL']['atis_code'],"atis_code");
-		document.getElementById("atis_code").innerHTML = json.airfield_data['KATL']['atis_code'];
+		if(json.airfield_data['KATL']['atis_code'] != 'undefined') {
+			document.getElementById("atis_code").innerHTML = json.airfield_data['KATL']['atis_code'];
+		}
+		else {
+			document.getElementById("atis_code").innerHTML = '--';
+		}
 		changes = changeDetection(init,changes,document.getElementById("metar").innerHTML,json.airfield_data['KATL']['metar'],"metar");
-		document.getElementById("metar").innerHTML = json.airfield_data['KATL']['metar'];
+		if(json.airfield_data['KATL']['metar'] != 'undefined') {
+			document.getElementById("metar").innerHTML = json.airfield_data['KATL']['metar'];
+		}
+		else {
+			document.getElementById("metar").innerHTML = 'METAR unavailable';
+		}
 		changes = changeDetection(init,changes,document.getElementById("traffic_flow").innerHTML,json.airfield_data['KATL']['traffic_flow'],"traffic_flow");
 		document.getElementById("traffic_flow").innerHTML = json.airfield_data['KATL']['traffic_flow'];
 		
@@ -760,7 +770,7 @@
 		//var airfield_listing = "";
 		//for(afld in json.airfield_data.template) {
 		if(json.template === null) { // Refresh isn't finished... show a loading message
-			multi_disp_str = "<div class=\"row\"><div class=\"col-lg\"><h3>Multi-IDS display is loading... please wait</h3></div></div>";
+			multi_disp_str = "<div class=\"row\"><div class=\"col-sm\"><h3>Multi-IDS display is loading... please wait</h3></div></div>";
 		}
 		else {
 		//var defaultAirfieldNoChange = "alert('Configuration for this airfield must be set through the local vIDS display by the tower CIC.');";
@@ -815,10 +825,10 @@
 			afld = json.template[afld];
 			afld = afld.toUpperCase();
 			multi_disp_str += "<div id=\"" + afld + "\" class=\"row moveable\" draggable=\"true\" ondragstart=\"dragStarted(event);\" ondragover=\"draggingOver(event);\" ondrop=\"dropped(event);\">";
-			multi_disp_str += "<div class=\"col-lg-1\"><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(1,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(2,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(3,1).toUpperCase() + "</div></div>";
+			multi_disp_str += "<div class=\"col-sm-1\"><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(1,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(2,1).toUpperCase() + "</div><div class=\"vert_id\">" + json.airfield_data[afld].icao_id.substr(3,1).toUpperCase() + "</div></div>";
 
-//			multi_disp_str += "<div id=\"" + afld + "_ATIS\" class=\"col-lg-1 atis_code_m\">" + json.airfield_data[afld].atis_code + "</div>";
-			multi_disp_str += "<div id=\"" + afld + "_ATIS\" class=\"col-lg-1 atis_code_m\"></div>";
+//			multi_disp_str += "<div id=\"" + afld + "_ATIS\" class=\"col-sm-1 atis_code_m\">" + json.airfield_data[afld].atis_code + "</div>";
+			multi_disp_str += "<div id=\"" + afld + "_ATIS\" class=\"col-sm-1 atis_code_m\"></div>";
 /*			
 			var active_rwy_apch = "";
 			// New scheme to display active runways/traffic flow with the option for manual override
@@ -846,12 +856,12 @@
 			multi_disp_str += "<div id=\"" + afld + "_METAR\" class=\"col-lg-5 metar_m\">" + json.airfield_data[afld].metar + "</div>";
 			multi_disp_str += "<div class=\"col-lg-3 metar_m\">RY RVR<div id=\"" + afld + "_RVR\" class=\"rvr\">";
 */
-			multi_disp_str += "<div class=\"col-lg-2 arrival_info\"><div id=\"" + afld + "_RWYAPCH\" class=\"apch_type\"></div><div></div>";
+			multi_disp_str += "<div class=\"col-sm-2 arrival_info\"><div id=\"" + afld + "_RWYAPCH\" class=\"apch_type\"></div><div></div>";
 			multi_disp_str += "<div id=\"" + afld + "_WX\" class=\"wx\"></div>" + generateDropdown(afld,defaultAirfield);
 			multi_disp_str += "<span class=\"cab_status\">&nbsp;&nbsp;<span id=\"" + afld + "_multi_online_del\" class=\"badge badge-secondary\">D</span>&nbsp;<span id=\"" + afld + "_multi_online_gnd\" class=\"badge badge-secondary\">G</span>&nbsp;<span id=\"" + afld + "_multi_online_twr\" class=\"badge badge-secondary\">T</span></span>";
 			multi_disp_str += "</div>";
-			multi_disp_str += "<div id=\"" + afld + "_METAR\" class=\"col-lg-5 metar_m\"></div>";
-			multi_disp_str += "<div class=\"col-lg-3 metar_m\">RY RVR<div id=\"" + afld + "_RVR\" class=\"rvr\">";
+			multi_disp_str += "<div id=\"" + afld + "_METAR\" class=\"col-sm-5 metar_m\"></div>";
+			multi_disp_str += "<div class=\"col-sm-3 metar_m\">RY RVR<div id=\"" + afld + "_RVR\" class=\"rvr\">";
 /*			for(var x=0; x<json.airfield_data[afld].rvr_display.length; x++) {
 				multi_disp_str += json.airfield_data[afld].rvr_display[x] + "<br/>";
 			}
