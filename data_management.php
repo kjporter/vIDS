@@ -97,4 +97,17 @@ function data_save($item,$data,$overwrite=true,$queryString=null) {
 		}
 	}
 }
+
+function data_delete($item,$queryString=null) {
+	if(USE_DB) {
+		if($GLOBALS['db']->row_exists($GLOBALS['db']->query("SELECT ref FROM legacy WHERE token = '$item'"))) {
+			$data = $GLOBALS['db']->query("DELETE FROM legacy WHERE token = '$item'");
+		}
+	}
+	else {
+		if(file_exists("data/" . $item)&&(strlen($item)>5)) { // length > 5 prevents accidental deletes from invalid params
+			unlink("data/" . $item);
+		}
+	}
+}
 ?>

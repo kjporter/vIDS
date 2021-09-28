@@ -70,6 +70,10 @@ table#splits {
     border-collapse: separate;
 }
 
+div.cntlPos {
+	overflow:hidden;
+}
+
 div#header {
 	color: white;
 	text-align: center;
@@ -262,7 +266,7 @@ div#buttons {
 .scroll_content {
 	display: block;
 	overflow: hidden;
-	height: 40px; /* 20px */
+	height: 40px;
 	width: 100%;
 	color: white;
 	border-top: 1px solid white;
@@ -279,7 +283,7 @@ div.scroll_content {
 .start_marquee p {
 	white-space: nowrap;
     width: 100%;
-	min-height: 40px; /* 20px */
+	min-height: 7vh; /* 20px */
     height: 100%;
     text-align: center;
 	-moz-transform: translateX(100%);
@@ -299,7 +303,8 @@ p.marquee_container {
 
 .scroll_content span {
 	display:inline-block;
-	white-space: nowrap;
+	/* white-space: nowrap; */
+	line-height: 1.2em;
 	margin:auto;
 }
         @-moz-keyframes scroll-left {

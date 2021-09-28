@@ -420,7 +420,7 @@
                        <div class="form-group row">
                             <label for="inputName" class="col-sm-4 col-form-label">Traffic flow</label>
 							<div class="col-sm-2">
-								<select id="flow" onclick="setActiveRunways(this);" disabled>
+								<select id="flow" onchange="setActiveRunways(this);" disabled>
 									<option value="EAST">EAST</option>
 									<option value="WEST">WEST</option>
 									<option selected></option>
@@ -670,6 +670,7 @@
                             <textarea class="form-control" id="TMU_text" rows="4"></textarea>
                         </div>
                     </form>
+					<p>URLs entered in this field will appear as clickable links</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>

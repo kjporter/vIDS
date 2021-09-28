@@ -69,7 +69,9 @@
 			<div class="col-sm-4">
 				<div class="row">
 					<div class="col-sm-12 cntlPos">
-					<?php controller_display("Local Control",array('LC-1'=>'LC-1','LC-2'=>'LC-2','LC-3'=>'LC-3','LC-4'=>'LC-4','LC-5'=>'LC-5'),array('N'=>'N','C43'=>'C43'),true); ?>
+					<?php //controller_display("Local Control",array('LC-1'=>'LC-1','LC-2'=>'LC-2','LC-3'=>'LC-3','LC-4'=>'LC-4','LC-5'=>'LC-5'),array('N'=>'N','C43'=>'C43'),true); 
+					controller_display($positions[0][0],$positions[0][1],$positions[0][2],true);
+					?>
 						<br/>
 						<div class="scroll_content allblack"></div>
 					</div>
@@ -90,12 +92,21 @@
 	<div class="col-sm-4">
 	<div class="row info_grid">
 			<div class="col-sm-12">
-			<?php controller_display(TRACON_ID . " Departure",array('N'=>'N','S'=>'S','I'=>'I'),array('C43'=>'C43')); ?>
+			<?php //controller_display(TRACON_ID . " Departure",array('N'=>'N','S'=>'S','I'=>'I'),array('C43'=>'C43')); 
+			controller_display($positions[3][0],$positions[3][1],$positions[3][2]);
+			?>
 			<div class="row rem-bor"><div class="col-sm-10">Gates assigned:</div></div>
 			<div class="row combines rem-bor">
+			<!-- Scrolling marquee design... removed 9/22 at Joe's request -->
+<!--		
 			<div class="col-sm-4 scroll_content" id="dep_gate_n_container" onclick="setDepartureGates();"><p class="marquee_container"><span id="dep_gate_n">&nbsp;</span></p></div>
 			<div class="col-sm-4 scroll_content" id="dep_gate_s_container" onclick="setDepartureGates();"><p class="marquee_container"><span id="dep_gate_s">&nbsp;</span></p></div>
 			<div class="col-sm-4 scroll_content" id="dep_gate_i_container" onclick="setDepartureGates();"><p class="marquee_container"><span id="dep_gate_i">&nbsp;</span></p></div>
+-->
+			<div class="col-sm-4 scroll_content" id="dep_gate_n_container" onclick="setDepartureGates();"><span id="dep_gate_n">&nbsp;</span></div>
+			<div class="col-sm-4 scroll_content" id="dep_gate_s_container" onclick="setDepartureGates();"><span id="dep_gate_s">&nbsp;</span></div>
+			<div class="col-sm-4 scroll_content" id="dep_gate_i_container" onclick="setDepartureGates();"><span id="dep_gate_i">&nbsp;</span></div>
+
 			</div>			
 			</div>
 			</div>
@@ -112,20 +123,28 @@
 	<div class="col-sm-4">
 		<div class="row template_local">
 			<div class="col-sm-12 cntlPos">
-			<?php controller_display("Ground Control",array('GC-N'=>'GC-N','GC-C'=>'GC-C','GC-S'=>'GC-S','GM'=>'GM'),array('LC-1'=>'LC-1','LC-2'=>'LC-2','LC-3'=>'LC-3','LC-4'=>'LC-4','LC-5'=>'LC-5','N'=>'N','C43'=>'C43')); ?>
+			<?php //controller_display("Ground Control",array('GC-N'=>'GC-N','GC-C'=>'GC-C','GC-S'=>'GC-S','GM'=>'GM'),array('LC-1'=>'LC-1','LC-2'=>'LC-2','LC-3'=>'LC-3','LC-4'=>'LC-4','LC-5'=>'LC-5','N'=>'N','C43'=>'C43')); 
+			controller_display($positions[1][0],$positions[1][1],$positions[1][2]);
+			?>
 			</div>
 		</div>
 		<div class="row template_a80">
-			<div class="col-sm-12">
-			<?php controller_display(TRACON_ID . " TAR",array('H'=>'H','D'=>'D','L'=>'L','Y'=>'Y'),array('N'=>'N','S'=>'S','C43'=>'C43')); ?>
+			<div class="col-sm-12 cntlPos">
+			<?php //controller_display(TRACON_ID . " TAR",array('H'=>'H','D'=>'D','L'=>'L','Y'=>'Y'),array('N'=>'N','S'=>'S','C43'=>'C43')); 
+			controller_display($positions[6][0],$positions[6][1],$positions[6][2]);
+			?>
 			</div>
 		</div>
 		<div class="row rem-bor-tp">
-			<div class="col-sm-12 template_local">
-			<?php controller_display("Clearance Delivery",array('CD-1'=>'CD-1','CD-2'=>'CD-2','FD'=>'FD'),array('GC-N'=>'GC-N','LC-1'=>'LC-1','LC-2'=>'LC-2','N'=>'N','C43'=>'C43')); ?>
+			<div class="col-sm-12 template_local cntlPos">
+			<?php //controller_display("Clearance Delivery",array('CD-1'=>'CD-1','CD-2'=>'CD-2','FD'=>'FD'),array('GC-N'=>'GC-N','LC-1'=>'LC-1','LC-2'=>'LC-2','N'=>'N','C43'=>'C43')); 
+			controller_display($positions[2][0],$positions[2][1],$positions[2][2]);
+			?>
 			</div>
-			<div class="col-sm-12 template_a80" id="grid5x1">
-			<?php controller_display(TRACON_ID . " Outer",array('M'=>'M','W'=>'W','Z'=>'Z','R'=>'R','E'=>'E','3E'=>'3E'),array('N'=>'N','P'=>'P','F'=>'F','X'=>'X','G'=>'G','C43'=>'C43')); ?>
+			<div class="col-sm-12 template_a80 cntlPos" id="grid5x1">
+			<?php //controller_display(TRACON_ID . " Outer",array('M'=>'M','W'=>'W','Z'=>'Z','R'=>'R','E'=>'E','3E'=>'3E'),array('N'=>'N','P'=>'P','F'=>'F','X'=>'X','G'=>'G','C43'=>'C43')); 
+			controller_display($positions[7][0],$positions[7][1],$positions[7][2]);
+			?>
 			</div>
 		</div>
 		<div class="row" style="border-bottom:0px">
@@ -135,12 +154,16 @@
 	<div class="col-sm-4">
 		<div class="row info_grid">
 			<div class="col-sm-12 cntlPos">
-			<?php controller_display(TRACON_ID . " Satellite",array('P'=>'P','F'=>'F','X'=>'X','G'=>'G','Q'=>'Q'),array('N'=>'N','C43'=>'C43')); ?>
+			<?php //controller_display(TRACON_ID . " Satellite",array('P'=>'P','F'=>'F','X'=>'X','G'=>'G','Q'=>'Q'),array('N'=>'N','C43'=>'C43')); 
+			controller_display($positions[4][0],$positions[4][1],$positions[4][2]);
+			?>
 			</div>
 			</div>
 		<div class="row rem-bor-tp">
-			<div class="col-sm-12" id="grid5x2">
-			<?php controller_display(TRACON_ID . " AR",array('O'=>'O','V'=>'V','A'=>'A'),array('N'=>'N','H'=>'H','D'=>'D','C43'=>'C43')); ?>
+			<div class="col-sm-12 cntlPos" id="grid5x2">
+			<?php //controller_display(TRACON_ID . " AR",array('O'=>'O','V'=>'V','A'=>'A'),array('N'=>'N','H'=>'H','D'=>'D','C43'=>'C43')); 
+			controller_display($positions[5][0],$positions[5][1],$positions[5][2]);
+			?>
 			</div>
 		</div>
 		<div class="row" style="border-bottom:0px;">

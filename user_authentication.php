@@ -120,14 +120,16 @@ class Security extends VATSIM_Connect {
 	}
 	
 	private function write_access_log() { // Authentication logging
-		$log_str = "[" . date("YmdHms") . "] CID " . $this->userData_json['data']['cid'] . "/" . $this->userData_json['data']['personal']['name_full'] . ": Login attempt ";
+		if(isset($this->userData_json['data'])) {
+		$log_str = "[" . date("YmdHis") . "] CID " . $this->userData_json['data']['cid'] . "/" . $this->userData_json['data']['personal']['name_full'] . ": Login attempt ";
 		$log_str .= $this->valid_auth ? 'successful' : 'failed';
 		$log_str .= $this->blacklisted ? ' - blacklisted' : '';
 		$log_str .= " (" . $_SERVER['REMOTE_ADDR'] . ")";
-		// Write action to logfile
+		// Write action to logfile **Note: logfiles go to both the file AND the database when the db is in use
 		file_put_contents("data/access.log",$log_str . "\n",FILE_APPEND);
 		if(USE_DB) {
-			data_save('access.log',$log_str,false);
+			data_save('access.log',$log_str . "\n",false);
+		}
 		}
 	}
 }

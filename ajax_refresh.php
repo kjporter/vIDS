@@ -9,7 +9,7 @@
 		
 		Changes: 
 	*/
-
+// *** THIS FILE IS AN ABOMINATION TO CODERS EVERYWHERE... IT'S ON MY LIST OF THINGS TO DO ***
 //error_reporting(0); //This file always results in an AJAX reply. Turn errors off.
 
 include_once "config.php";
@@ -73,7 +73,8 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	// Configuration
 	$ids_type = "B"; // L = local view, C = TRACON/ARTCC view, B = both (demo mode)
 //	$airfields = array('KATL','KPDK','KFTY','KMGE','KRYY','KLZU','KMCN','KWRB','KAHN','KCSG'); // Configurable list of airfields (for TRACON/ARTCC view)
-	$icao_id = $airfields[0]; // Primary airfield (for local view)
+	//$icao_id = $airfields[0]; // Primary airfield (for local view)
+	$icao_id = DEFAULT_AFLD_ICAO;
 	
 	$template = $_REQUEST['template']; // Is user requesting a specific multi-IDS template?
 	//echo "TEMPLATE: $template";
@@ -324,7 +325,9 @@ if($refresh) { // We've determined that the network data is stale or doesn't exi
 	$afld_data['metar'] = file_get_contents("data/" . $afld . ".metar");
 	if (!array_key_exists('altimeter',$afld_data)) {
 		preg_match('/A(\d{4})/',$afld_data['metar'],$alt_set);
-		$afld_data['altimeter'] = substr($alt_set[0],1,2) . "." . substr($alt_set[0],3);
+		if(isset($alt_set[0])) { // Added for error prevention
+			$afld_data['altimeter'] = substr($alt_set[0],1,2) . "." . substr($alt_set[0],3);
+		}
 	}
 	preg_match('/\d*\w+(KT)/',$afld_data['metar'],$wind_arr);
 	//$wind = substr($afld_data['metar'],strpos($afld_data['metar'],"KT")-6,6);
