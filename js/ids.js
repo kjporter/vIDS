@@ -685,10 +685,13 @@
 			//}
 			// New schema to make field OPEN/CLOSED status reflect real-world tower operating hours
 			var curDate = new Date();
-			var dayofweek = curDate.getUTCDay(); // 0 = Sunday, 1 = Monday
+			var dayofweek = curDate.getUTCDay(); // 0 = Sunday, 1 = Monday <- we actually need to pull the local day that the airfield OPENED... not the Z day
 			var cur24time = curDate.getUTCHours() * 100 + curDate.getUTCMinutes(); // Get UTC time and format HHmm
+			var cur24timex = cur24time;
 			var opHours = document.getElementById(underlying_fields[y] + "_hours_mf").value;
 			//alert(underlying_fields[y] + ': ' + document.getElementById(underlying_fields[y] + "_hours_mf").value);
+			// Note: there is still a bug in this code... airfields that close on a Z day other than the local day will not display proper times
+			// I need to make this logic more robust
 			if ((dayofweek == 0)||(dayofweek == 6)) { // Sunday(0) or Saturday(6)
 				opHours = document.getElementById(underlying_fields[y] + "_hours_ss").value;
 			}
@@ -697,16 +700,19 @@
 			var opHoursEnd = parseInt(opHours[1]);
 			if((document.getElementById(underlying_fields[y] + "_hours_dstAdjust").value)&&(checkDST())) { // Adjust for DST
 				opHoursStart -= 100;
-				opHoursEnd -= -100;
+				opHoursEnd -= 100;
 			}
 			if(opHoursEnd < opHoursStart) { // This happens when a tower closes after 0000Z
 				opHoursEnd += 2400;
+				cur24timex += 2400;
+				
 			}
-			if((cur24time > opHoursStart)&&(cur24time < opHoursEnd)||(cur24time < opHoursStart)&&(cur24time < opHoursEnd)) { // Airfield is open
+			if((cur24time > opHoursStart)&&(cur24time < opHoursEnd)||(cur24time < opHoursStart)&&(cur24timex < opHoursEnd)) { // Airfield is open
+//			if((cur24time > opHoursStart)&&(cur24timex < opHoursEnd)) { // Airfield is open - attempt to fix > 2400 closing error
 				open_closed = "OPEN";
 				//alert(underlying_fields[y] + ' Current UTC time: ' + cur24time + ' Field opening time: ' + opHoursStart + ' Field closing time: ' + opHoursEnd + ' Field is: ' + open_closed);				
 			}
-			openCloseStatus += underlying_fields[y] + ' Current UTC time: ' + cur24time + ' Field opening time: ' + opHoursStart + ' Field closing time: ' + opHoursEnd + ' Field is: ' + open_closed + '\n';
+			openCloseStatus += underlying_fields[y] + ' Current UTC time: ' + cur24time + ' Field opening time: ' + opHoursStart + ' Current UTC time: ' + cur24timex + ' Field closing time: ' + opHoursEnd + ' Field is: ' + open_closed + '\n';
 			document.getElementById(underlying_fields[y] + "_open_closed").innerHTML = open_closed;
 			// New schema to display del/gnd/twr status
 			//alert(json.airfield_data[underlying_fields[y]].tower_cab.del);
