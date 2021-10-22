@@ -193,6 +193,7 @@
 		<div class="col-sm-12">
 <?php
 	$newrow = true;
+	$a80sat = $satellite_fields; // Legacy compatibility... I need to replaced references to the $a80sat variable
 	for($x=0;$x<count($a80sat);$x++) {
 		$str = "";
 		if($newrow) {

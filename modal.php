@@ -995,7 +995,14 @@
 					<select id="pickMulti" onchange="showMultiIDS();" >
 						<option value="0" selected></option>
 						<?php
-						
+						if(USE_DB) {
+							$template_token = data_read(null,'array',"SELECT token FROM legacy WHERE token LIKE 'templates/_____.templ'");
+							$template_name = data_read(null,'array',"SELECT payload FROM legacy WHERE token LIKE 'templates/_____.templ'");
+							for($x=0;$x<count($template_token);$x++) {
+								echo "<option value=\"" . str_replace('.templ','',str_replace('templates/','',$template_token[$x])) . "\">" . str_getcsv($template_name[$x],",")[0] . "</option>";
+							}
+						}
+						else {
 						foreach (array_filter(glob('data/templates/*.templ'), 'is_file') as $file)
 						{
 							$path_parts = pathinfo($file);
@@ -1003,7 +1010,7 @@
 							echo "<option value=\"" . $path_parts['filename'] . "\">" . fgets($fil) . "</option>";
 							fclose($fil);
 						}
-						
+						}
 						?>
 						<option value="?">Create Template</option>
 					</select>

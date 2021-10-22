@@ -110,4 +110,13 @@ function data_delete($item,$queryString=null) {
 		}
 	}
 }
+
+function data_unique($item,$queryString=null) {
+	if(USE_DB) {
+		return $GLOBALS['db']->row_exists($GLOBALS['db']->query("SELECT ref FROM legacy WHERE token = '$item'"));
+	}
+	else {
+		return file_exists($item);
+	}
+}
 ?>

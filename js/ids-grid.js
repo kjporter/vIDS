@@ -73,8 +73,11 @@ function setDynamicMargin() {
 }
 
 function linkify(str) { // Not being used, but can turn links in text into a clickable link
+	if(typeof str === 'string') { // This is required to protect the .replace funtion, which will throw an error when called on a non-string
 	var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 	str = str.replace(exp,"<a href=\"$1\" target=\"_blank\">$1</a>"); 
+	//return str;
+	}
 	return str;
 }
 

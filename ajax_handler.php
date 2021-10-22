@@ -5,7 +5,7 @@
 		Filename: ajax_handler.php
 		Function: Handles AJAX requests from main vIDS page to store dynamic/user-entry data
 		Created: 4/1/21
-		Edited: 9/22/21
+		Edited: 10/17/21
 		
 		Changes: Converted data manipulation to new data management schema including db integration
 		
@@ -27,17 +27,20 @@ $payload = $_GET['payload']; // Get data payload
 if($_GET['type'] == "pirep") { // PIREPs get special treatment. We check to see if any of the PIREPs are expired, delete them, timestamp the new ones and write to file
 	$header = ""; // We don't use this in the PIREP data file
 	$pirep_timeout = 3600; // Timeout in 1 hour (3,600 seconds)
-	$file = fopen("data/pirep.dat","r"); // <- NEED TO WORK ON THIS TO TRANSITION TO THE NEW DATA MANAGEMENT SCHEMA 
+//	$file = fopen("data/pirep.dat","r"); // <- NEED TO WORK ON THIS TO TRANSITION TO THE NEW DATA MANAGEMENT SCHEMA 
 	$pireps = array();
 	$pireps[] = time() . "|" . $payload;
-	while(!feof($file)) { // Read in PIREPs from file one at at time for evaluation
-		$pirep = fgets($file);  // <- NEED TO WORK ON THIS TO TRANSITION TO THE NEW DATA MANAGEMENT SCHEMA
+	$stored_pireps = data_read('override.dat','array');
+//	$file = fopen("data/pirep.dat","r"); // <- NEED TO WORK ON THIS TO TRANSITION TO THE NEW DATA MANAGEMENT SCHEMA 
+//	while(!feof($file)) { // Read in PIREPs from file one at at time for evaluation
+	foreach($stored_pireps as $pirep) {
+//		$pirep = fgets($file);  // <- NEED TO WORK ON THIS TO TRANSITION TO THE NEW DATA MANAGEMENT SCHEMA
 		$pirep_exp = explode("|",$pirep);
 		if(intval($pirep_exp[0]) > (time() - $pirep_timeout)) { // Check if PIREP is still valid
 			$pireps[] = $pirep; // If it is valid, add it to the array
 		}
 	}
-	fclose($file);
+//	fclose($file);
 	$payload = implode("",$pireps);
 }
 
@@ -47,7 +50,8 @@ if($_GET['type'] == "template") { // Multi-airfield layout templates also get sp
 	$file_ext = "templ";
 	$digits = 5; // Randomized 5-digit id
 	$templ_id = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
-	while(file_exists($target . $templ_id . "." . $file_ext)) { // Make sure we have a unique id  // <- NEED TO WORK ON THIS TO TRANSITION TO THE NEW DATA MANAGEMENT SCHEMA
+	//while(file_exists($target . $templ_id . "." . $file_ext)) { // Make sure we have a unique id  // <- NEED TO WORK ON THIS TO TRANSITION TO THE NEW DATA MANAGEMENT SCHEMA
+	while(data_unique($target . $templ_id . "." . $file_ext)) {
 		$templ_id = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
 	}
 	$filename = $templ_id;

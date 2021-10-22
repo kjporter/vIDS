@@ -36,6 +36,8 @@ define('DEFAULT_AFLD_ICAO', 'KATL');
 define('TRACON_ID', 'A80');
 // Large TRACON long name. Ex: A80 Atlanta Large TRACON
 define('TRACON_LONG_NAME', 'A80 Atlanta Large TRACON');
+// Traffic flow direction - displayed in the IDS next to the ATIS ID (Ex. EAST/WEST). By default, the IDS will use an algorithm based on runway ID/mag heading to determine the traffic flow. You can override this or create custom flow names by adding them to this array in format RWY ID=>FLOW NAME (Ex. '09'=>'EAST'). Only enter runway numbers - do not enter left/right/center characters.
+$flow_override = array();
 // Controller positions - used to build controller/position combination grids & selects
 // 1st index in each array is the display name, 2nd index are the positions, 3rd index are the possible combinations (don't duplicate items from 2nd index)
 // You can have 8 total staffing areas. pos0-5 are displayed on the local view and pos2-7 are displayed on the TRACON view
@@ -47,10 +49,12 @@ $pos4 = array(TRACON_ID . " Satellite",array('P'=>'P','F'=>'F','X'=>'X','G'=>'G'
 $pos5 = array(TRACON_ID . " AR",array('O'=>'O','V'=>'V','A'=>'A'),array('N'=>'N','H'=>'H','D'=>'D','C43'=>'C43'));
 $pos6 = array(TRACON_ID . " TAR",array('H'=>'H','D'=>'D','L'=>'L','Y'=>'Y'),array('N'=>'N','S'=>'S','C43'=>'C43'));
 $pos7 = array(TRACON_ID . " Outer",array('M'=>'M','W'=>'W','Z'=>'Z','R'=>'R','E'=>'E','3E'=>'3E'),array('N'=>'N','P'=>'P','F'=>'F','X'=>'X','G'=>'G','C43'=>'C43','C49'=>'C49'));
+// Departure gates - define the departure gate names for your airspace. This is used for the display in the upper right corner of the local and large TRACON
+// displays to turn individual gates on/off and define RNAV fixes for routing traffic through
+$departure_gates = array('N1','N2','W2','W1','S2','S1','E1','E2');
 // Configurable list of airfields (for TRACON/ARTCC view) - you may create as many of these as you'd like, the view is optimized for multiples of 3
-// For the 'id' field, ensure that you use the 4-digit ICAO airfield ID
-//$airfields = array('KATL','KPDK','KFTY','KMGE','KRYY','KLZU','KMCN','KWRB','KAHN','KCSG'); 
-$a80sat = array(
+// For the 'id' field, ensure that you use the 4-digit ICAO airfield ID (Ex. KATL)
+$satellite_fields = array(
 array("id"=>"KPDK","name"=>"DeKalb-Peachtree (PDK)","hours"=>"1130–0400Z‡ Mon–Fri, 1200–0400Z‡ Sat–Sun","MF"=>"1130-0400","SS"=>"1200-0400","DST_Adjust"=>true),
 array("id"=>"KFTY","name"=>"Fulton County (FTY)","hours"=>"Attended continuously","MF"=>"0000-2400","SS"=>"0000-2400","DST_Adjust"=>true),
 array("id"=>"KMGE","name"=>"Dobbins ARB (MGE)","hours"=>"1200–0400Z‡","MF"=>"1200-0400","SS"=>"1200-0400","DST_Adjust"=>true),
@@ -61,22 +65,19 @@ array("id"=>"KMCN","name"=>"Macon Regional (MCN)","hours"=>"1300–0100Z‡","MF
 array("id"=>"KWRB","name"=>"Robins AFB (WRB)","hours"=>"Attended continuously","MF"=>"0000-2400","SS"=>"0000-2400","DST_Adjust"=>true),
 array("id"=>"KCSG","name"=>"Columbus (CSG)","hours"=>"1400–0200Z‡","MF"=>"1400-0200","SS"=>"1400-0200","DST_Adjust"=>true)
 );
-/*
-$pdk = array("id"=>"KPDK","name"=>"DeKalb-Peachtree (PDK)","hours"=>"1130–0400Z‡ Mon–Fri, 1200–0400Z‡ Sat–Sun","MF"=>"1130-0400","SS"=>"1200-0400","DST_Adjust"=>true);
-$fty = array("id"=>"KFTY","name"=>"Fulton County (FTY)","hours"=>"Attended continuously","MF"=>"0000-2400","SS"=>"0000-2400","DST_Adjust"=>true);
-$mge = array("id"=>"KMGE","name"=>"Dobbins ARB (MGE)","hours"=>"1200–0400Z‡","MF"=>"1200-0400","SS"=>"1200-0400","DST_Adjust"=>true);
-$ryy = array("id"=>"KRYY","name"=>"Cobb Co/McCollum (RYY)","hours"=>"1200–0400Z‡","MF"=>"1200-0400","SS"=>"1200-0400","DST_Adjust"=>true);
-$lzu = array("id"=>"KLZU","name"=>"Gwinnett Co (LZU)","hours"=>"1200–0200Z‡","MF"=>"1200-0200","SS"=>"1200-0200","DST_Adjust"=>true);
-$ahn = array("id"=>"KAHN","name"=>"Athens (AHN)","hours"=>"1300–0100Z‡","MF"=>"1300-0100","SS"=>"1300-0100","DST_Adjust"=>true);
-$mcn = array("id"=>"KMCN","name"=>"Macon Regional (MCN)","hours"=>"1300–0100Z‡","MF"=>"1300-0100","SS"=>"1300-0100","DST_Adjust"=>true);
-$wrb = array("id"=>"KWRB","name"=>"Robins AFB (WRB)","hours"=>"Attended continuously","MF"=>"0000-2400","SS"=>"0000-2400","DST_Adjust"=>true);
-$csg = array("id"=>"KCSG","name"=>"Columbus (CSG)","hours"=>"1400–0200Z‡","MF"=>"1400-0200","SS"=>"1400-0200","DST_Adjust"=>true);
-$a80sat = array($pdk,$fty,$mge,$ryy,$lzu,$ahn,$mcn,$wrb,$csg);
-*/
+// Modal configuration: the modal boxes hold all of the static display information - airspace diagrams, frequencies, checklists, etc. You can configure all
+// of the static information here.
+// Weather config
+$modal_wx_radar = "https://radar.weather.gov/ridge/lite/KFFC_loop.gif"; // Must point to a graphics file (Ex. jpg, gif)
+$modal_wx_video = "https://www.weather.gov/media/ztl/ZTLPreDutyVideo.mp4"; // Link to the CWSU video briefing
+
+
+
+
 // ************************************ DO NOT EDIT BELOW THIS LINE ************************************
 $positions = array($pos2,$pos1,$pos0,$pos3,$pos4,$pos5,$pos6,$pos7);
 $satellites = array();
-foreach($a80sat as $sat) {
+foreach($satellite_fields as $sat) {
 	$satellites[] = $sat['id'];
 }
 $airfields = Array(DEFAULT_AFLD_ICAO);
@@ -85,7 +86,7 @@ $airfields = array_merge($airfields,$satellites);
 function js_globals() { // Translates PHP globals into JS globals
 	global $positions;
 	global $satellites;
-	$js_globals = "	const defaultAirfield = 'K" . DEFAULT_AFLD_ID . "';
+	$js_globals = "	const defaultAirfield = '" . DEFAULT_AFLD_ICAO . "';
 					const positions = new Array('" . implode("','",array_unique(array_merge($positions[0][1],$positions[1][1],$positions[2][1],$positions[3][1],$positions[4][1],$positions[5][1],$positions[6][1],$positions[7][1]))) . "');
 					const underlying_fields = new Array('" . implode("','",$satellites) . "');";
 	return $js_globals;
