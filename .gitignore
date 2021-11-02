@@ -1,5 +1,4 @@
 !.gitignore
-/data
 /vars
 .htaccess
 COPYING
