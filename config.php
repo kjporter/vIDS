@@ -48,7 +48,7 @@ $pos3 = array(TRACON_ID . " Departure",array('N'=>'N','S'=>'S','I'=>'I'),array('
 $pos4 = array(TRACON_ID . " Satellite",array('P'=>'P','F'=>'F','X'=>'X','G'=>'G','Q'=>'Q'),array('N'=>'N','C43'=>'C43'));
 $pos5 = array(TRACON_ID . " AR",array('O'=>'O','V'=>'V','A'=>'A'),array('N'=>'N','H'=>'H','D'=>'D','C43'=>'C43'));
 $pos6 = array(TRACON_ID . " TAR",array('H'=>'H','D'=>'D','L'=>'L','Y'=>'Y'),array('N'=>'N','S'=>'S','C43'=>'C43'));
-$pos7 = array(TRACON_ID . " Outer",array('M'=>'M','W'=>'W','Z'=>'Z','R'=>'R','E'=>'E','3E'=>'3E'),array('N'=>'N','P'=>'P','F'=>'F','X'=>'X','G'=>'G','C43'=>'C43','C49'=>'C49'));
+$pos7 = array(TRACON_ID . " Outer",array('M'=>'M','W'=>'W','Z'=>'Z','R'=>'R','E'=>'E','3E'=>'3E'),array('N'=>'N','P'=>'P','F'=>'F','X'=>'X','G'=>'G','C43'=>'C43','C49'=>'C49','C16'=>'C16','C19'=>'C19','C21'=>'C21','C09'=>'C09'));
 // Departure gates - define the departure gate names for your airspace. This is used for the display in the upper right corner of the local and large TRACON
 // displays to turn individual gates on/off and define RNAV fixes for routing traffic through
 $departure_gates = array('N1','N2','W2','W1','S2','S1','E1','E2');
