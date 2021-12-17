@@ -1,5 +1,5 @@
 <?php
-header('Access-Control-Allow-Origin: https://ztlartcc.org/*');
+header('Access-Control-Allow-Origin: https://www.ztlartcc.org/');
 
 // Fetch datafeed, if needed
 $refreshInterval = 15; // How many seconds between requests to pull data from VATSIM data service
