@@ -10,7 +10,7 @@
 		Changes: 
 	*/
 
-include_once "config.php";
+include_once "vars/config.php";
 include_once "common.php";
 include_once "mysql_db.php";
 
@@ -24,6 +24,13 @@ if (USE_DB) {
 //data_read('blacklist','dat','array');
 
 function data_read($item,$outputType,$queryString=null) {
+	if(isset($GLOBALS['diradj'])) { // Allows subtools to adjust the search directory
+		$diradj = $GLOBALS['diradj'];
+	}
+	else {
+		$diradj = "";
+	}
+
 	if(USE_DB) {
 		if($queryString == null) {
 			$queryString = "SELECT payload FROM legacy WHERE token = '$item' LIMIT 1";
@@ -52,12 +59,12 @@ function data_read($item,$outputType,$queryString=null) {
 		}
 	}
 	else {
-		if(file_exists("data/" . $item)) {
+		if(file_exists($diradj . "data/" . $item)) {
 			if($outputType == 'string') {
-				$data = file_get_contents("data/" . $item);
+				$data = file_get_contents($diradj . "data/" . $item);
 			}
 			elseif($outputType == 'array') {
-				$data = file("data/" . $item);
+				$data = file($diradj . "data/" . $item);
 			}
 		}
 		else {

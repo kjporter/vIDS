@@ -13,8 +13,9 @@
 
 define("DEBUG_REFRESH",false); // Enables noisy mode for debugging
 
-include_once "config.php";
+include_once "vars/config.php";
 include_once "common.php";
+include_once "ajax_rvr.php";
 include_once "data_management.php";	
 
 // Configuration
@@ -239,6 +240,11 @@ foreach($airfields as $afld) {
 	if (!isset($afld_data['apch_type'])) {
 		$afld_data['apch_type'] = "";
 	}
+
+	// Fetch RVR data
+	$rvr_detail = fetch_rvr($afld,false,false);
+	$afld_data['rvr_detail'] = $rvr_detail;
+	
 	// RVR capture/decoding logic
 	$rvr = array();
 	$rvr_strings = null;
@@ -248,13 +254,13 @@ foreach($airfields as $afld) {
 		if(isset($a[0])) {
 			$runway = $a[0];
 		}			
-	/*
+	
 		// Following are not used, but saved just in case I need to pull a variable RVR string apart at some point...
-			preg_match('/([PM]*\d{4})/',$rvr_string,$b);
-			preg_match('/([V]\d{4})/',$rvr_string,$c);
-			$rvr = $b[0];
-			$variable = $c[0];
-	*/
+		//	preg_match('/([PM]*\d{4})/',$rvr_string,$b);
+		//	preg_match('/([V]\d{4})/',$rvr_string,$c);
+		//	$rvr = $b[0];
+		//	$variable = $c[0];
+	
 		preg_match('/(?<=\/)(\S*)/',$rvr_string,$d);
 		if(isset($d[0])) {
 			$rvr[$runway] = $d[0];
@@ -391,10 +397,14 @@ $afld_reply["9L@M2"] = $afld_reply["LAHSO"] = $afld_reply["AUTO"] = false; // In
 	$afld_data = str_replace("\n","",$afld_data); // Remove line breaks
 	$afld_raw = str_replace("<br>AUTO ON","",$afld_data); // Remove the auto declaration
 	$afld_raw = str_replace("<br>AUTO OFF","",$afld_raw); // Remove the auto declaration
-	$afld_reply["raw"] = str_replace("AUTO ON","",$afld_raw); // Remove the auto declaration
-	$afld_reply["9L@M2"] = is_numeric(strpos($afld_data,"9L@M2 ON")) ? true : false;
-	$afld_reply["LAHSO"] = is_numeric(strpos($afld_data,"LAHSO ON")) ? true : false;
-	$afld_reply["AUTO"] = is_numeric(strpos($afld_data,"AUTO ON")) ? true : false;
+	$afld_reply["raw"] = $afld_raw;
+	global $afld_config_options;
+	foreach($afld_config_options as $afld_config_option) {
+		$afld_reply[$afld_config_option[0]] = is_numeric(strpos($afld_data,$afld_config_option[0] . " ON")) ? true : false;
+	}
+//	$afld_reply["9L@M2"] = is_numeric(strpos($afld_data,"9L@M2 ON")) ? true : false;
+//	$afld_reply["LAHSO"] = is_numeric(strpos($afld_data,"LAHSO ON")) ? true : false;
+//	$afld_reply["AUTO"] = is_numeric(strpos($afld_data,"AUTO ON")) ? true : false;
 //}
 //else {
 //		$afld_reply["9L@M2"] = $afld_reply["LAHSO"] = $afld_reply["AUTO"] = false;
@@ -558,8 +568,8 @@ function curl_request($url,$timeout_limit=false,$ssl_required=false) { // Simpli
 	curl_setopt($cu,CURLOPT_CONNECTTIMEOUT,3);
 	if($timeout_limit) curl_setopt($cu,CURLOPT_TIMEOUT,10); // Added to prevent execution errors when VATSIM JSON hangs
 	curl_setopt($cu, CURLOPT_ENCODING, "gzip");
-	curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,$ssl_required); // There is no reason to verify the SSL certificate, skip this
-	$curl_raw = curl_exec($cu);
+	curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,$ssl_required);
+	$curl_raw = @curl_exec($cu); // Errors suppressed to prevent them being thrown into reply JSON
 	curl_close($cu);	
 	return $curl_raw;
 }

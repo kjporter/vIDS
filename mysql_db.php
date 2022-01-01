@@ -59,6 +59,10 @@ class MySQL_db {
 		return mysqli_fetch_array($result);
 	}
 	
+	public function fetch_assoc($result) { // Returns the query result as an associative array
+		return mysqli_fetch_assoc($result);
+	}
+	
 	public function error() { // Return errors
 		echo $this->errors;
 	}

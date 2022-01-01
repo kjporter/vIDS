@@ -5,13 +5,19 @@
 		Filename: modal.php
 		Function: Contains definitions for bootstrap modal dialogs
 		Created: 7/22/21 (moved from index)
-		Edited: 
+		Edited: 12/30/21
 		
-		Changes: 
+		Changes: Removed ZTL hard-code references from non-static content. Implemented configurable airfield flows.
 	*/
 
 ?>
-    <!-- Modal container markup for local IDS display -->
+    <!-- 
+		Modal container markup for local IDS display 
+		Webmaster: Edit the modal content below to fit your use case. These modals are triggered when a user clicks on one of the buttons at the bottom of the vIDS grid display.
+		Do not edit below the line that says "DO NOT EDIT BELOW THIS LINE" - those definitions are for dynamic content or otherwise have no practical need for editing.
+	-->
+	
+	<!-- RECAT Information - modal available in local and TRACON view -->
     <div id="RECAT" class="modal fade">
         <div class="modal-dialog modal-lg">
            <div class="modal-content">
@@ -28,9 +34,10 @@
             </div>
         </div>
 	</div>
-   <div id="SOP" class="modal fade">
+	<!-- Local SOP - modal available in local view -->
+	<div id="SOP" class="modal fade">
         <div class="modal-dialog modal-lg">
-           <div class="modal-content">
+			<div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">SOP</h3>
                     <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
@@ -44,8 +51,8 @@
             </div>
         </div>
 	</div>
-	<!-- SOP Modal for A80 -->
-   <div id="aSOP" class="modal fade"> 
+	<!-- TRACON SOP - modal available in TRACON view -->
+	<div id="aSOP" class="modal fade"> 
         <div class="modal-dialog modal-lg">
            <div class="modal-content">
                 <div class="modal-header">
@@ -61,7 +68,8 @@
             </div>
         </div>
 	</div>
-   <div id="LOA" class="modal fade">
+	<!-- Local LOA - modal available in local view -->
+	<div id="LOA" class="modal fade">
         <div class="modal-dialog modal-lg">
            <div class="modal-content">
                 <div class="modal-header">
@@ -77,8 +85,8 @@
             </div>
         </div>
 	</div>
-	<!-- LOA Modal for A80 --> 
-   <div id="aLOA" class="modal fade">
+	<!-- TRACON LOAs - modal available in TRACON view --> 
+	<div id="aLOA" class="modal fade">
         <div class="modal-dialog modal-lg">
            <div class="modal-content">
                 <div class="modal-header">
@@ -109,7 +117,8 @@
         </div>
 	</div>
 	</div>
-   <div id="ACFT" class="modal fade">
+	<!-- Aircraft Types - modal available in local and TRACON view -->
+	<div id="ACFT" class="modal fade">
         <div class="modal-dialog modal-lg">
            <div class="modal-content">
                 <div class="modal-header">
@@ -125,11 +134,13 @@
             </div>
         </div>
 	</div>
+	<!-- Weater Information - modal available in local and TRACON view -->
+	<!-- Use this link to find products for your ARTCC: https://www.weather.gov/aviation/cwsu -->
     <div id="WX" class="modal fade">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">ATL Weather & Forecast</h3>
+                    <h3 class="modal-title"><?php echo DEFAULT_AFLD_ID; ?> Weather & Forecast</h3>
                     <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -139,14 +150,15 @@
 						<li><a href="#wx_gates" data-toggle="tab">A80 Convective Gates</a></li>
 						<li><a href="#wx_radar" data-toggle="tab">ZTL Wx Radar</a></li>
 						<li><a href="#wx_satellite" data-toggle="tab">ZTL Wx Satellite</a></li>
+						<li><a href="#wx_rvr" data-toggle="tab">ATL RVR</a></li>
 						<li><a href="#wx_sigmets" data-toggle="tab">ZTL SIGMETS</a></li>
 						<li><a href="#wx_prog" data-toggle="tab">National Prog</a></li>
 						
 					</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="wx_terminal">
-						<h4>ATL Terminal Wx</h4>
-						<div id="weather_request"></div> <!-- METAR & TAF go here -->
+						<h4><?php echo DEFAULT_AFLD_ID; ?> Terminal Wx</h4>
+						<div id="weather_request"></div> <!-- METAR & TAF are auto-filled here, don't delete or modify this line -->
 						<div><img id="radar_loop" src="https://radar.weather.gov/ridge/lite/KFFC_loop.gif" alt="FFC Radar Loop" /></div>
 					</div>
 					<div class="tab-pane" id="wx_video">
@@ -165,6 +177,10 @@
 						<h4>ZTL Weather Satellite</h4>
 						<a href="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/se/13/600x600.jpg" target="_blank"><img id="wx_satellite_s" src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/se/13/600x600.jpg" alt="Satellite" /></a>
 					</div>
+					<div class="tab-pane" id="wx_rvr">
+						<h4><?php echo DEFAULT_AFLD_ID; ?> RVR</h4>
+						<div id="rvr_table"></div><!-- RVR table is auto-filled here, don't delete or modify this line -->
+					</div>
 					<div class="tab-pane" id="wx_sigmets">
 						<h4>ZTL Active SIGMETs</h4>
 						<a href="https://www.weather.gov/ztl/ztlmap" target="_blank"><img id="wx_sigmets_s" src="https://www.weather.gov/images/ztl/cwsu_frontmap.png" alt="SIGMETs" /></a>
@@ -181,11 +197,12 @@
             </div>
         </div>
 	</div>
+	<!-- Local radio frequencies - modal available in local view -->
     <div id="FREQS" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">ATL Tower Frequency List</h3>
+                    <h3 class="modal-title"><?php echo DEFAULT_AFLD_ID; ?> Tower Frequency List</h3>
                     <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -217,11 +234,12 @@
             </div>
         </div>
 	</div>
+	<!-- TRACON radio frequencies - modal available in TRACON view -->
     <div id="aFREQS" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">A80 Facility Frequency List</h3>
+                    <h3 class="modal-title"><?php echo TRACON_ID; ?> Facility Frequency List</h3>
                     <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -268,11 +286,12 @@
             </div>
         </div>
 	</div>
+	<!-- Local airspace diagrams - modal available in local view -->
     <div id="ARSPC" class="modal fade">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">ATL Tower Airspace</h3>
+                    <h3 class="modal-title"><?php echo DEFAULT_AFLD_ID; ?> Tower Airspace</h3>
                     <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -298,11 +317,12 @@
             </div>
         </div>
 	</div>
+	<!-- TRACON airspace diagrams - modal available in TRACON view -->
     <div id="aARSPC" class="modal fade">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">A80 Airspace Diagrams</h3>
+                    <h3 class="modal-title"><?php echo TRACON_ID; ?> Airspace Diagrams</h3>
                     <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -392,6 +412,7 @@
             </div>
         </div>
 	</div>
+	<!-- RNAV Off-The-Ground reference - modal available in local and TRACON view -->
     <div id="ROTG" class="modal fade">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -408,150 +429,7 @@
             </div>
         </div>
 	</div>
-    <div id="AFLD" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">ATL Airfield Config</h3>
-                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                       <div class="form-group row">
-                            <label for="inputName" class="col-sm-4 col-form-label">Traffic flow</label>
-							<div class="col-sm-2">
-								<select id="flow" onchange="setActiveRunways(this);" disabled>
-									<option value="EAST">EAST</option>
-									<option value="WEST">WEST</option>
-									<option selected></option>
-								</select>
-							</div>
-							<div class="col-sm-6">
-								<p>Sets traffic flow direction displayed in vIDS.</p>
-							</div>
-						</div>
-                       <div class="form-group row">
-                            <label for="inputName" class="col-sm-4 col-form-label">Arrival runways</label>
-							<div class="col-sm-2">
-								<select id="arr_rwy" onchange="checkDuplicates(this);" multiple disabled>
-								</select>
-							</div>
-							<div class="col-sm-6">
-								<p>Sets arrival runways and approach type displayed in vIDS. Hold 'CTRL' and click to select multiple.</p>
-							</div>
-						</div>
-                       <div class="form-group row">
-                            <label for="inputName" class="col-sm-4 col-form-label">Departure runways</label>
-							<div class="col-sm-2">
-								<select id="dep_rwy" onchange="checkDuplicates(this);" multiple disabled>
-								</select>
-							</div>
-							<div class="col-sm-6">
-								<p>Sets departure runways and ROTG operation displayed in vIDS. Hold 'CTRL' and click to select multiple.</p>
-							</div>
-						</div>
-                        <div class="form-group row">
-                            <label for="inputName" class="col-sm-4 col-form-label">Full triple arrivals?</label>
-							<div class="col-sm-2">
-								<input type="checkbox" class="form-control" id="fta">
-							</div>
-						</div>
-                        <div class="form-group row">
-                            <label for="inputName" class="col-sm-4 col-form-label">Full triple departures?</label>
-							<div class="col-sm-2">
-								<input type="checkbox" class="form-control" id="ftd">
-							</div>
-						</div>
-                        <div class="form-group row">
-                            <label for="inputName" class="col-sm-4 col-form-label">9L departures @ intersection M2</label>
-							<div class="col-sm-2">
-								<input type="checkbox" class="form-control" id="ninelm2">
-							</div>
-						</div>
-                        <div class="form-group row">
-                            <label for="inputName" class="col-sm-4 col-form-label">LAHSO</label>
-							<div class="col-sm-2">
-								<input type="checkbox" class="form-control" id="lahso">
-							</div>
-							<div class="col-sm-6">
-								<p>Land and hold short operations in effect.</p>
-							</div>
-						</div>
-                        <div class="form-group">
-                            <label for="inputComment">CIC Notices</label>
-							<p>*Note: information entered below will only be shown to users viewing the local vIDS display (does not propagate to A80).</p>
-                            <textarea class="form-control" id="CIC_text" rows="4"></textarea>
-                        </div>
-						<div class="custom-control custom-switch">
-							<input type="checkbox" class="custom-control-input" id="AutoIDS" onclick="manualControl(this);" readonly>
-                            <label class="custom-control-label" for="autoIDS">Auto-populate vIDS from network</label>
-							<p>Uncheck this box for manual/CIC control of flow/arrival/departure information</p>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="saveAFLD();">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="PIREP" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Add Pilot Weather Report (PIREP)</h3>
-                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form id="pirep_entry">
-                        <div class="form-group">
-                            <label for="urgency">Select Routine/Urgent</label>
-                            <select id="urgency" class="form-control">
-								<option value="UA" selected>UA - Routine</option>
-								<option value="UUA">UUA - Urgent</option>
-							</select>
-                        </div>
-                        <div class="form-group">
-                            <label for="location">Location</label>
-                            <input type="text" id="location" class="form-control" placeholder="KATL">
-							<small id="locationHelp" class="form-text text-muted">Use Airport or NAVAID identifiers only</small>
-							</select>
-                        </div>
-                        <div class="form-group">
-                            <label for="time">Time</label>
-                            <input type="text" id="time" class="form-control" placeholder="0000">
-							<small id="timeHelp" class="form-text text-muted">When conditions occurred or were encountered (Zulu)</small>
-							</select>
-                        </div>
-                        <div class="form-group">
-                            <label for="altitude">Altitude/Flight Level</label>
-                            <input type="text" id="altitude" class="form-control" placeholder="FL310">
-							<small id="altitudeHelp" class="form-text text-muted">Examples: FL095, FL310, FLUNKN</small>
-							</select>
-                        </div>
-                        <div class="form-group">
-                            <label for="aircraft">Type Aircraft</label>
-                            <input type="text" id="aircraft" class="form-control" placeholder="B738">
-							<small id="aircraftHelp" class="form-text text-muted">Examples: P28A, RV8, B738, UNKN</small>
-							</select>
-                        </div>
-                        <div class="form-group">
-                            <label for="conditions">Flight Conditions/Remarks</label>
-                            <textarea id="conditions" class="form-control" rows="3"></textarea>
-							<small id="conditionsHelp" class="form-text text-muted">Enter weather conditions (turbulence, icing, windshear) here</small>
-							</select>
-                        </div>
-                    </form>
-					<p>Note: PIREPs expire 1 hour after they are entered and are auto-purged from this system.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="savePIREP();">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<!-- Local relief briefing - modal available in local view -->
     <div id="RELIEF" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -623,6 +501,7 @@
             </div>
         </div>
 	</div>
+	<!-- TRACON relief briefing - modal available in TRACON view -->
     <div id="aRELIEF" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -656,52 +535,7 @@
             </div>
         </div>
 	</div>
-    <div id="TMU" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">TMU Information</h3>
-                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="inputComment">Enter TMU info below</label>
-                            <textarea class="form-control" id="TMU_text" rows="4"></textarea>
-                        </div>
-                    </form>
-					<p>URLs entered in this field will appear as clickable links</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="saveTMU();">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="CIC" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">A80 CIC Information</h3>
-                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-				<p>*Note: information entered below will only be shown to users viewing the A80 vIDS display (does not propagate to local).</p>
-                    <form>
-                        <div class="form-group">
-                            <label for="inputComment">Enter CIC notes below</label>
-                            <textarea class="form-control" id="A80_CIC_text" rows="4"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="saveA80CIC();">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<!-- Emergency checklist - modal available in local and TRACON view -->
     <div id="EMER" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -742,6 +576,229 @@
             </div>
         </div>
     </div>
+	
+<!-- 
+	DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE 
+	DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE 
+	DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE 
+-->
+
+    <div id="AFLD" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title"><?php echo DEFAULT_AFLD_ID; ?> Airfield Config</h3>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                       <div class="form-group row">
+                            <label for="inputName" class="col-sm-4 col-form-label">Traffic flow</label>
+							<div class="col-sm-2">
+								<select id="flow" onchange="setActiveRunways(this);" disabled>
+								<?php
+								global $flow_override;
+								foreach(array_unique($flow_override) as $flow) {
+									print "									<option value=\"$flow\">$flow</option>";
+									
+								}
+								?>
+<!--
+									<option value="EAST">EAST</option>
+									<option value="WEST">WEST</option>
+-->
+									<option selected></option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<p>Sets traffic flow direction displayed in vIDS.</p>
+							</div>
+						</div>
+                       <div class="form-group row">
+                            <label for="inputName" class="col-sm-4 col-form-label">Arrival runways</label>
+							<div class="col-sm-2">
+								<select id="arr_rwy" onchange="checkDuplicates(this);" multiple disabled>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<p>Sets arrival runways and approach type displayed in vIDS. Hold 'CTRL' and click to select multiple.</p>
+							</div>
+						</div>
+                       <div class="form-group row">
+                            <label for="inputName" class="col-sm-4 col-form-label">Departure runways</label>
+							<div class="col-sm-2">
+								<select id="dep_rwy" onchange="checkDuplicates(this);" multiple disabled>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<p>Sets departure runways and ROTG operation displayed in vIDS. Hold 'CTRL' and click to select multiple.</p>
+							</div>
+						</div>
+						<?php
+						// Display customizable airfield options set in config.php
+						global $afld_config_options;
+						foreach($afld_config_options as $afld_config_option) {
+							print "	<div class=\"form-group row\">
+										<label for=\"inputName\" class=\"col-sm-4 col-form-label\">$afld_config_option[1]</label>
+										<div class=\"col-sm-2\">
+											<input type=\"checkbox\" class=\"form-control\" id=\"$afld_config_option[0]\">
+										</div>
+										<div class=\"col-sm-6\">
+											<p>$afld_config_option[2]</p>
+										</div>
+									</div>";							
+						}
+						?>
+<!--
+                        <div class="form-group row">
+                            <label for="inputName" class="col-sm-4 col-form-label">Full triple arrivals?</label>
+							<div class="col-sm-2">
+								<input type="checkbox" class="form-control" id="fta">
+							</div>
+						</div>
+                        <div class="form-group row">
+                            <label for="inputName" class="col-sm-4 col-form-label">Full triple departures?</label>
+							<div class="col-sm-2">
+								<input type="checkbox" class="form-control" id="ftd">
+							</div>
+						</div>
+                        <div class="form-group row">
+                            <label for="inputName" class="col-sm-4 col-form-label">9L departures @ intersection M2</label>
+							<div class="col-sm-2">
+								<input type="checkbox" class="form-control" id="ninelm2">
+							</div>
+						</div>
+                        <div class="form-group row">
+                            <label for="inputName" class="col-sm-4 col-form-label">LAHSO</label>
+							<div class="col-sm-2">
+								<input type="checkbox" class="form-control" id="lahso">
+							</div>
+							<div class="col-sm-6">
+								<p>Land and hold short operations in effect.</p>
+							</div>
+						</div>
+-->
+                        <div class="form-group">
+                            <label for="inputComment">CIC Notices</label>
+							<p>*Note: information entered below will only be shown to users viewing the local vIDS display (does not propagate to A80).</p>
+                            <textarea class="form-control" id="CIC_text" rows="4"></textarea>
+                        </div>
+						<div class="custom-control custom-switch">
+							<input type="checkbox" class="custom-control-input" id="AutoIDS" onclick="manualControl(this);" readonly>
+                            <label class="custom-control-label" for="autoIDS">Auto-populate vIDS from network</label>
+							<p>Uncheck this box for manual/CIC control of flow/arrival/departure information</p>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveAFLD();">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="PIREP" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Add Pilot Weather Report (PIREP)</h3>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="pirep_entry">
+                        <div class="form-group">
+                            <label for="urgency">Select Routine/Urgent</label>
+                            <select id="urgency" class="form-control">
+								<option value="UA" selected>UA - Routine</option>
+								<option value="UUA">UUA - Urgent</option>
+							</select>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" class="form-control" placeholder="<?php echo DEFAULT_AFLD_ID; ?>">
+							<small id="locationHelp" class="form-text text-muted">Use Airport or NAVAID identifiers only</small>
+							</select>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input type="text" id="time" class="form-control" placeholder="0000">
+							<small id="timeHelp" class="form-text text-muted">When conditions occurred or were encountered (Zulu)</small>
+							</select>
+                        </div>
+                        <div class="form-group">
+                            <label for="altitude">Altitude/Flight Level</label>
+                            <input type="text" id="altitude" class="form-control" placeholder="FL310">
+							<small id="altitudeHelp" class="form-text text-muted">Examples: FL095, FL310, FLUNKN</small>
+							</select>
+                        </div>
+                        <div class="form-group">
+                            <label for="aircraft">Type Aircraft</label>
+                            <input type="text" id="aircraft" class="form-control" placeholder="B738">
+							<small id="aircraftHelp" class="form-text text-muted">Examples: P28A, RV8, B738, UNKN</small>
+							</select>
+                        </div>
+                        <div class="form-group">
+                            <label for="conditions">Flight Conditions/Remarks</label>
+                            <textarea id="conditions" class="form-control" rows="3"></textarea>
+							<small id="conditionsHelp" class="form-text text-muted">Enter weather conditions (turbulence, icing, windshear) here</small>
+							</select>
+                        </div>
+                    </form>
+					<p>Note: PIREPs expire 1 hour after they are entered and are auto-purged from this system.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="savePIREP();">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="TMU" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">TMU Information</h3>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="inputComment">Enter TMU info below</label>
+                            <textarea class="form-control" id="TMU_text" rows="4"></textarea>
+                        </div>
+                    </form>
+					<p>URLs entered in this field will appear as clickable links</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveTMU();">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="CIC" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title"><?php echo TRACON_ID; ?> CIC Information</h3>
+                    <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+				<p>*Note: information entered below will only be shown to users viewing the <?php echo TRACON_ID; ?> vIDS display (does not propagate to local).</p>
+                    <form>
+                        <div class="form-group">
+                            <label for="inputComment">Enter CIC notes below</label>
+                            <textarea class="form-control" id="A80_CIC_text" rows="4"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveA80CIC();">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="HELP" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -756,10 +813,10 @@
 				asking the user to acknowledge the change. Although all users logged into the system can make changes to the data in vIDS, only the facility 
 				CIC should make changes.</p>
 				<p>The vIDS system contains multiple display formats, some of which are user-customizable. Critical data is automatically-shared between the 
-				different display elements (for example, the A80 display uses live data elements from the ATL local display). Because of this feature, all users 
+				different display elements (for example, the <?php echo TRACON_ID; ?> display uses live data elements from the <?php echo DEFAULT_AFLD_ID; ?> local display). Because of this feature, all users 
 				benefit from the same data despite viewing different displays.</p>
 				<h4>The local display</h4>
-				<p>Local view is optimized for use by controllers working the ATL tower cab (CIC, LC, GC, CD, GM, FD). The countdown in the upper right 
+				<p>Local view is optimized for use by controllers working the <?php echo DEFAULT_AFLD_ID; ?> tower cab (CIC, LC, GC, CD, GM, FD). The countdown in the upper right 
 				corner displays the remainder of the 15-second auto-refresh interval. When this count expires, the system pulls the most current data from sync files 
 				and the VATSIM network and refreshes all data on the user's display. Clicking the "refresh" button in your web browser will not speed this process up, 
 				as the network limits pulls to 15 seconds in order to manage traffic. Please allow the page to auto-refresh.</p>
@@ -803,7 +860,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">vIDS Help - A80 Display</h3>
+                    <h3 class="modal-title">vIDS Help - TRACON Display</h3>
                     <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -813,10 +870,10 @@
 				asking the user to acknowledge the change. Although all users logged into the system can make changes to the data in vIDS, only the facility 
 				CIC should make changes.</p>
 				<p>The vIDS system contains multiple display formats, some of which are user-customizable. Critical data is automatically-shared between the 
-				different display elements (for example, the A80 display uses live data elements from the ATL local display). Because of this feature, all users 
+				different display elements (for example, the <?php echo TRACON_ID; ?> display uses live data elements from the <?php echo DEFAULT_AFLD_ID; ?> local display). Because of this feature, all users 
 				benefit from the same data despite viewing different displays.</p>
-				<h4>The A80 display</h4>
-				<p>A80 view is optimized for use by controllers working the Atlanta Large TRACON. The countdown in the upper right 
+				<h4>The <?php echo TRACON_ID; ?> display</h4>
+				<p><?php echo TRACON_ID; ?> view is optimized for use by controllers working the <?php echo TRACON_LONG_NAME; ?>. The countdown in the upper right 
 				corner displays the remainder of the 15-second auto-refresh interval. When this count expires, the system pulls the most current data from sync files 
 				and the VATSIM network and refreshes all data on the user's display. Clicking the "refresh" button in your web browser will not speed this process up, 
 				as the network limits pulls to 15 seconds in order to manage traffic. Please allow the page to auto-refresh.</p>
@@ -832,7 +889,7 @@
 				<p>Below the PIREPs and CIC notices, there is a display containing information for the A80 satellite and outer fields. Each section contains 
 				normal tower operating hours, the ATIS code, open/closed status, active runways, and the current METAR. If a local controller is staffing 
 				one of these fields, all information will be displayed. If no local controller is online and no ATIS is posted, the field will show "closed" 
-				and most of the information will appear as double-dashes. Note: Lawson AAF (LSF) was intentionally omitted from this display.</p>
+				and most of the information will appear as double-dashes.</p>
 				<h4>Menu buttons</h4>
 				<p>At the bottom of the grid, there is a row of buttons that each launch a unique pop-up with additional information or settings.</p>
 				<ul>
@@ -908,11 +965,26 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Assign A80 Departure Gates</h3>
+                    <h3 class="modal-title">Assign <?php echo TRACON_ID; ?> Departure Gates</h3>
                     <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <form>
+					<?php
+					global $departure_positions;
+					foreach($departure_positions as $departure_position) {
+						print "<div class=\"form-group row\">
+                            <label for=\"inputName\" class=\"col-sm-2 col-form-label\">" . $departure_position . ": </label>
+							<div class=\"col-sm-6\">
+								<input type=\"text\" id=\"depGate" . $departure_position . "\" />
+							</div>
+							<div class=\"col-sm-4\">
+								<p>Sets assigned departure gate for " . TRACON_ID . " " . $departure_position . " position.</p>
+							</div>
+						</div>";
+					}
+					?>
+<!--						
                        <div class="form-group row">
                             <label for="inputName" class="col-sm-2 col-form-label">N: </label>
 							<div class="col-sm-6">
@@ -930,7 +1002,8 @@
 							<div class="col-sm-4">
 								<p>Sets assigned departure gate for A80 S position.</p>
 							</div>
-						</div>                       <div class="form-group row">
+						</div>
+						<div class="form-group row">
                             <label for="inputName" class="col-sm-2 col-form-label">I: </label>
 							<div class="col-sm-6">
 								<input type="text" id="depGateI" />
@@ -939,6 +1012,7 @@
 								<p>Sets assigned departure gate for A80 I position.</p>
 							</div>
 						</div>
+-->
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -961,13 +1035,41 @@
                        <div class="form-group row"> 
 					   <table border="0" class="departure_split">
 					   <?php
+	
+							global $departure_gates;
+							$row_header = "<tr><td></td>";
+							foreach($departure_gates as $departure_gate) {
+								$row_header .= "<th>" . $departure_gate . "</th>";
+							}
+							$row_header .= "</tr>";
 							for($x=1; $x<4; $x++) {
+								$row_chk_body = "<tr><th rowspan=\"2\" id=\"splits_rwy_$x\">--</th>";
+								$row_txt_body = "";
+								$first = true;
+								foreach($departure_gates as $departure_gate) {
+									$ins = "";
+									if($first) {
+										$ins = "<input type=\"hidden\" id=\"splits_rwy_id_$x\" />";
+										$first = false;
+									}
+									$row_chk_body .= "<td>$ins<input type=\"checkbox\" id=\"splits_" . $departure_gate . "_$x\" name=\"" . $departure_gate . "\" /></td>";
+									$row_txt_body .= "<td><input type=\"text\" id=\"splits_" . $departure_gate . "t_$x\" size=\"4\" /></td>";
+								}
+							$row_chk_body .= "</tr>";
+							$row_txt_body .= "</tr>";
+							print $row_header . $row_chk_body . $row_txt_body . "<tr><td>&nbsp;</td></tr>";
+							}
+							
+/*
+						for($x=1; $x<4; $x++) {
 								print "<tr><td></td><th>N1</th><th>N2</th><th>W2</th><th>W1</th><th>S2</th><th>S1</th><th>E1</th><th>E2</th></tr>
 					   <tr><th rowspan=\"2\" id=\"splits_rwy_$x\">--</th><td><input type=\"hidden\" id=\"splits_rwy_id_$x\" /><input type=\"checkbox\" id=\"splits_n1_$x\" name=\"N1\" /></td><td><input type=\"checkbox\" id=\"splits_n2_$x\" name=\"N2\" /></td><td><input type=\"checkbox\" id=\"splits_w2_$x\" name=\"W2\" /></td><td><input type=\"checkbox\" id=\"splits_w1_$x\" name=\"W1\" /></td><td><input type=\"checkbox\" id=\"splits_s2_$x\" name=\"S2\" /></td><td><input type=\"checkbox\" id=\"splits_s1_$x\" name=\"S1\" /></td><td><input type=\"checkbox\" id=\"splits_e1_$x\" name=\"E1\" /></td><td><input type=\"checkbox\" id=\"splits_e2_$x\" name=\"E2\" /></td></tr>
 					   <tr><td><input type=\"text\" id=\"splits_n1t_$x\" size=\"4\" /></td><td><input type=\"text\" id=\"splits_n2t_$x\" size=\"4\" /></td><td><input type=\"text\" id=\"splits_w2t_$x\" size=\"4\" />
 					   </td><td><input type=\"text\" id=\"splits_w1t_$x\" size=\"4\" /></td><td><input type=\"text\" id=\"splits_s2t_$x\" size=\"4\" /></td><td><input type=\"text\" id=\"splits_s1t_$x\" size=\"4\" /> </td><td><input type=\"text\" id=\"splits_e1t_$x\" size=\"4\" /></td><td><input type=\"text\" id=\"splits_e2t_$x\" size=\"4\" /></td></tr>
 						<tr><td>&nbsp;</td></tr>";
+
 							}
+*/							
 					   ?>
 					   </table>
 						</div>
@@ -1097,7 +1199,7 @@
                     <button type="button" class="close btn-close" data-dismiss="modal" data-bs-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-					<p>vIDS is the product of a team of controllers from across the VATUSA region and is not officially associated with VATUSA or VATSIM. Its primary function is to enhance the ATC experience from the controller perspective by providing information and collaboration tools that are similar to those used at real ATC facilities.<p/>
+					<p>vIDS is the product of a team of controllers from across the VATUSA division and is not officially associated with VATUSA or VATSIM. Its primary function is to enhance the ATC experience from the controller perspective by providing information and collaboration tools that are similar to those used at real ATC facilities.<p/>
 					<p>To facilitate sharing information, any changes that you make to vIDS will be stored on the server and displayed to everyone else that is currently viewing the system. Settings such as controller position combinations should only be set by the CIC. Other information, like PIREPs can be entered by any controller.</p>
 					<p>vIDS is currently in development. If you notice a bug, please <a href="#" onclick="showBugReportReferal('about_help');">file a bug report.</a></p>
 					<p>If you have questions or would like to interact with the development team, <a href="https://discord.gg/bZky9bv697" alt="Discord">feel free to join us on Discord.<br/><img src="img/Discord.png" height="30px" alt="Discord" /></a></p>

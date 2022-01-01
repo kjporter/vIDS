@@ -41,6 +41,8 @@ if(strlen($documentRoot) < 1) {
 
 // Picks a random image from the $imagesDir to display in the landing page background
 $imagesDir = 'img/bg/';
-$images = glob($imagesDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
-$randomImage = $images[array_rand($images)];
+if(is_dir($imagesDir)) {
+	$images = glob($imagesDir . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
+	$randomImage = $images[array_rand($images)];
+}
 ?>

@@ -11,7 +11,7 @@
 	*/
 
 date_default_timezone_set("UTC");
-include_once "common.php";
+include_once "vars/common.php";
 
 $rss_file = "rss/bug_reports.xml";
 $rss_url = fetch_my_url() . "rss";

@@ -12,7 +12,7 @@
 		VATSIM Data Provider: http://status.vatsim.net/
 	*/
 
-	include_once "config.php";
+	include_once "vars/config.php";
 	include_once "common.php";
 	include_once "user_authentication.php";
 
@@ -81,7 +81,10 @@ include "ids_grid_template.php";
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-bars"></i></a>
 			<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
 				<li><a href="#" onclick="returnToLanding('multi_ids');">Return to menu</a></li>
-				<li><a href="#BUG" data-toggle="modal">Report a bug</a></li>
+				<?php if(BUG_REPORTING) {
+					print "<li><a href=\"#BUG\" data-toggle=\"modal\">Report a bug</li></li>";
+				}?>
+			<!--	<li><a href="#BUG" data-toggle="modal">Report a bug</a></li> -->
 				<li><a href="#mHELP" data-toggle="modal">Help</a></li>
 				<div class="dropdown-divider"></div>
 				<li><a href="#" onclick="launchMulti();">Select template</a></li>
@@ -145,11 +148,15 @@ else {
 	if (is_sysad($vatsim_cid,$artcc_staff,$sso_endpoint)) { print "<a onclick=\"modAccessList('black','fetch'); modAccessList('white','fetch');\" href=\"#ADMIN\" class=\"btn btn-lg btn-block btn-primary\" data-toggle=\"modal\" data-bs-toggle=\"modal\"><i class=\"fas fa-user-tie fa-lg\"></i><br/>System<br/>Administration</a><br/>"; }
 	print "	</div>
 			<div class=\"col-lg-6 menu_button\"><br/>
-			<a onclick=\"launchMulti();\" class=\"btn btn-lg btn-block btn-primary\"><i class=\"fas fa-compress-arrows-alt fa-lg\"></i><br/>Multi-Airfield<br/>IDS</a><br/>
-			<a onclick=\"showAboutHelp();\" class=\"btn btn-lg btn-block btn-primary\"><i class=\"far fa-life-ring fa-lg\"></i><br/>Help<br/>& About</a><br/><br/>
+			<a onclick=\"launchMulti();\" class=\"btn btn-lg btn-block btn-primary\"><i class=\"fas fa-compress-arrows-alt fa-lg\"></i><br/>Multi-Airfield<br/>IDS</a><br/>";
+	if (TRAFFIC_MANAGEMENT) {
+		print "	<a href=\"traffic.php\" target=\"_blank\" class=\"btn btn-lg btn-block btn-primary\"><i class=\"fas fa-traffic-light fa-lg\"></i><br/>Traffic Management<br/>Tools</a><br/>";
+	}
+	print " <a onclick=\"showAboutHelp();\" class=\"btn btn-lg btn-block btn-primary\"><i class=\"far fa-life-ring fa-lg\"></i><br/>Help<br/>& About</a><br/>
+			<br/>
 			</div>
 			</div>";
-}
+} 
 ?>
 			</div>
 		</div>

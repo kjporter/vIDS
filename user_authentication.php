@@ -10,7 +10,7 @@
 		Changes:
 	*/
 
-include_once "config.php";	
+include_once "vars/config.php";	
 include_once "common.php";
 include_once "vatsim_connect.php";	
 include_once "data_management.php";	
@@ -30,6 +30,7 @@ class Security extends VATSIM_Connect {
 	
 	public function init_sso() { // Start the SSO sequence
 		session_start();
+		$_SESSION["vids_authenticated"] = false;
 		$this->access_token(); // Verify or get a token
 		$this->user_data(); // Use token to authenticate and get user data
 		$this->authorize(); // Use user data to verify system authorization (call VATUSA API)
@@ -72,6 +73,7 @@ class Security extends VATSIM_Connect {
 				if((strpos($roster,$this->userData_json['data']['cid']) !== false)||(strpos($this->sso_vars['sso_endpoint'],"dev") !== false)||$this->whitelisted) { // Does the CID exist in the roster JSON... OR are we using the dev endpoint (fake CIDs) OR are they whitelisted?
 					$this->dump .= "User is a home or visiting controller!<br/>";
 					$this->valid_auth = true;
+					$_SESSION["vids_authenticated"] = true;
 					if(isset($this->userData_json['data']['personal']['name_full'])) { // This shouldn't really be necessary, but it prevents an error when the full name isn't available
 						$this->full_name = $this->userData_json['data']['personal']['name_full'];
 						$this->dump .= "Hello " . $this->userData_json['data']['personal']['name_full'] . "<br/>";

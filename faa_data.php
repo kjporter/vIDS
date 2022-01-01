@@ -5,13 +5,14 @@
 		Filename: faa_dtpp.php
 		Function: Experimental module to pull d-TPP from the FAA's shitty data service. This code mines the FAA Aeronav site for data, sorts/formats it, and returns as JSON.
 		Created: 8/5/21
-		Edited: 
+		Edited: 12/24/21
 		
-		Changes: 
+		Changes: Added cache system for procedures to speed up queries. The procedure list is only pulled from the FAA once per cycle.
 	
 		TODO:
-		- Cacheing system to speed up subsequent queries
 */
+
+include_once "data_management.php";
 
 $terps = new FAA_dTPP($_GET['afld_id']);
 $terps->echo_json();
@@ -28,7 +29,9 @@ class FAA_dTPP
 		$this->airac_cycle = $this->fetch_airac_cycle();
 		//echo "AIRAC Cycle: " . $this->airac_cycle;
 		$this->faa_data_url = "https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/results/?cycle=" . $this->airac_cycle . "&ident=" . $this->airfield_id;
-		$this->fetch_dtpp();
+		if(!$this->fetch_cache()) { // Attempt to pull the data from cache first
+			$this->fetch_dtpp(); // If not cached (or valid), then pull from the FAA
+		}
 	}
 
 	public function fetch_dtpp() {
@@ -112,6 +115,41 @@ class FAA_dTPP
 		}
 		//print_r($terps);
 		$this->terps_table = $terps;
+		$this->write_cache($terps);
+	}
+
+	private function fetch_cache() { // Checks cache to see if this airfield has been accessed within the current AIRAC cycle and returns data if valid
+		$cache = data_read('dTPP_cache.dat','string');
+		if($cache != '') {
+			$cache = json_decode($cache,true);
+			$this->purge_cache($cache);
+			if(key_exists($this->airfield_id,$cache)) {
+				$this->terps_table = $cache[$this->airfield_id];
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private function write_cache($data) { // Sends query to cache for susequent use
+		$cache = data_read('dTPP_cache.dat','string');
+		if($cache != '') {
+			$cache = json_decode($cache,true);
+			$this->purge_cache($cache);	
+		}
+		if(is_array($cache)) { // Append to JSON
+			$cache[$this->airfield_id] = $data;
+		}
+		else { // Create new JSON
+			$cache = array('cycle'=>$this->airac_cycle,$this->airfield_id=>$data);
+		}
+		data_save('dTPP_cache.dat',json_encode($cache));
+	}
+	
+	private function purge_cache(&$cache) { // Checks AIRAC cycle of cached data and purges, if neccessary
+		if($this->airac_cycle != $cache['cycle']) { // Cached cycle is invalid... purge cache
+			data_save('dTPP_cache.dat','');
+		}
 	}
 }
 ?>

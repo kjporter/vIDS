@@ -13,7 +13,7 @@
 		VATSIM Connect SSO Documentation: https://github.com/vatsimnetwork/documentation/blob/master/connect.md
 	*/
 
-include_once "config.php";	
+include_once "vars/config.php";	
 include_once "common.php";
 include_once "vars/sso_variables.php";
 

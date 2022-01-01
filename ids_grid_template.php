@@ -54,11 +54,14 @@
 						<div id="local_arr_rwys">
 						</div>
 					</div>
+<!-- Removed TRIPS config from this area to 1) free up real-estate for other features, 2) make the IDS more universally-configurable
 					<div class="col-sm-2 text_grid">
 						<span class="cell_header">Trips Config</span>
 						<div id="TRIPS_info" onclick="clearStyle(this);" class=""></div>
 					</div>
 					<div class="col-sm-3">
+-->
+					<div class="col-sm-5">
 						<span class="cell_header" onclick="configDepSplit();">Departure Split</span>
 						<div id="split_dep_rwys" onclick="configDepSplit();"></div>
 					</div>
@@ -103,10 +106,18 @@
 			<div class="col-sm-4 scroll_content" id="dep_gate_s_container" onclick="setDepartureGates();"><p class="marquee_container"><span id="dep_gate_s">&nbsp;</span></p></div>
 			<div class="col-sm-4 scroll_content" id="dep_gate_i_container" onclick="setDepartureGates();"><p class="marquee_container"><span id="dep_gate_i">&nbsp;</span></p></div>
 -->
+			<?php
+			global $departure_positions;
+			$disp_size = 12/count($departure_positions);
+			foreach($departure_positions as $departure_position) {
+				print "<div class=\"col-sm-" . $disp_size . " scroll_content\" id=\"dep_gate_" . $departure_position . "_container\" onclick=\"setDepartureGates();\"><span id=\"dep_gate_" . $departure_position . "\">&nbsp;</span></div>";
+			}
+			?>
+<!--
 			<div class="col-sm-4 scroll_content" id="dep_gate_n_container" onclick="setDepartureGates();"><span id="dep_gate_n">&nbsp;</span></div>
 			<div class="col-sm-4 scroll_content" id="dep_gate_s_container" onclick="setDepartureGates();"><span id="dep_gate_s">&nbsp;</span></div>
 			<div class="col-sm-4 scroll_content" id="dep_gate_i_container" onclick="setDepartureGates();"><span id="dep_gate_i">&nbsp;</span></div>
-
+-->
 			</div>			
 			</div>
 			</div>
@@ -243,7 +254,9 @@
 			<a href="#" class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" href="#"><i class="fas fa-home fa-lg"></i><br/>HOME</a>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 				<li><a href="#" onclick="returnToLanding('local_ids');">Return to menu</a></li>
-				<li><a href="#BUG" data-toggle="modal">Report a bug</li></li>
+				<?php if(BUG_REPORTING) {
+					print "<li><a href=\"#BUG\" data-toggle=\"modal\">Report a bug</li></li>";
+				}?>
 			</ul>
 		</div>
 		<a href="#WX" data-remote="https://www.aviationweather.gov/taf/data?ids=katl&format=decoded&metars=on&date=&submit=Get+TAF+data" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal" data-target="#WX" onClick="fetchWeather('K<?php echo DEFAULT_AFLD_ID; ?>');"><i class="fas fa-cloud fa-lg"></i><br/>WX</a>

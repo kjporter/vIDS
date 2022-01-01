@@ -121,12 +121,18 @@
 	function setDepartureGates(save = false) {
 		if(save) {
 			// Update fields in IDS and then save the data to file
+			departure_positions.forEach(function(position) {
+				document.getElementById("dep_gate_" + position).innerHTML = "<p><span>" + document.getElementById("depGate" + position).value + "</span></p>";
+				var gateConfig = position + ":" + document.getElementById("depGate" + position).value + "\n";
+			});
+/*
 			document.getElementById("dep_gate_n").innerHTML = "<p><span>" + document.getElementById("depGateN").value + "</span></p>";
 			document.getElementById("dep_gate_s").innerHTML = "<p><span>" + document.getElementById("depGateS").value + "</span></p>";
 			document.getElementById("dep_gate_i").innerHTML = "<p><span>" + document.getElementById("depGateI").value + "</span></p>";
 			var gateConfig = "N:" + document.getElementById("depGateN").value + "\n";
 			gateConfig += "S:" + document.getElementById("depGateS").value + "\n";
 			gateConfig += "I:" + document.getElementById("depGateI").value;
+*/
 			saveConfiguration('gates',gateConfig);
 			// Responsive font sizing
 			//fitty('#dep_gate_n');
@@ -144,7 +150,8 @@
 			//var splits = new Array(); 
 			var saveData = new Array();
 			var splits = "<table id=\"splits\">";
-			var gates = new Array("n1","n2","w2","w1","s2","s1","e1","e2");
+			//var gates = new Array("n1","n2","w2","w1","s2","s1","e1","e2");
+			var gates = departure_gates;
 			for(var i=1; i<4 ; i++) {
 				var saveRunway = new Array();
 				//splits[i] = document.getElementById("splits_rwy_id_" + i).value + " " + document.getElementById("splits_n1_" + i).value + " " + document.getElementById("splits_n1t_" + i).value + " " + document.getElementById("splits_n2_" + i).value + " " + document.getElementById("splits_n2t_" + i).value + " " + document.getElementById("splits_w2_" + i).value + " " + document.getElementById("splits_w2t_" + i).value + " " + document.getElementById("splits_w1_" + i).value + " " + document.getElementById("splits_w1t_" + i).value + " " + document.getElementById("splits_s2_" + i).value + " " + document.getElementById("splits_s2t_" + i).value + " " + document.getElementById("splits_s1_" + i).value + " " + document.getElementById("splits_s1t_" + i).value + " " + document.getElementById("splits_e1_" + i).value + " " + document.getElementById("splits_e1t_" + i).value + " " + document.getElementById("splits_e2_" + i).value + " " + document.getElementById("splits_e2t_" + i).value;
@@ -210,6 +217,18 @@
 		};
 		xhttp.open("GET", "ajax_weather.php?icao=" + icao, true);
 		xhttp.send();
+		// Fetch RVR and update display
+		var xhttp1;
+		xhttp1 = new XMLHttpRequest();
+		xhttp1.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				document.getElementById('wx_rvr').innerHTML = xhttp1.responseText;
+			}
+			else {
+			}
+		};
+		xhttp1.open("GET", "ajax_rvr.php?icao=" + icao, true);
+		xhttp1.send();
 		// Update static images from sources
 		document.getElementById("wx_video_s").src = document.getElementById("wx_video_s").src + "?r=" + Math.floor(Math.random() * 1000);
 		document.getElementById("wx_gates_s").src = document.getElementById("wx_gates_s").src + "?r=" + Math.floor(Math.random() * 1000);
@@ -455,8 +474,9 @@ function stopVideo(id) {
 		var dep_sel = document.getElementById("dep_rwy");
 		arr_sel.options.length = 0;
 		dep_sel.options.length = 0;
-		var apch_types = new Array('VIS','ILS');
-		var dep_types = new Array('RV','ROTG');
+		//var apch_types = new Array('VIS','ILS');
+		//var dep_types = new Array('RV','ROTG');
+/*		
 		if(el.value == "EAST") {
 			arr_runways = new Array('8L','9R','10','8R','9L');
 			dep_runways = new Array('8R','9L','10','8L','9R');
@@ -469,6 +489,13 @@ function stopVideo(id) {
 			var arr_runways = new Array();
 			var dep_runways = new Array();
 		}
+*/
+		//alert(JSON.stringify(rwy_flows, null, 4));
+		var arr_runways = new Array();
+		var dep_runways = new Array();
+		arr_runways = rwy_flows[el.value].arr;
+		dep_runways = rwy_flows[el.value].dep;
+
 		for(var x=0; x<arr_runways.length; x++) {
 			for(var y=0; y<apch_types.length; y++) {
 				var option = document.createElement("option");
@@ -514,6 +541,10 @@ function stopVideo(id) {
 		return valid;
 	}
 	
+	function checkDuplicates(el) {
+		// Placeholder - function above isn't working as expected
+	}
+	
 	function saveAFLD() { // Saves airfield config settings
 		var valid = true;
 		var valid_str = '';
@@ -546,6 +577,7 @@ function stopVideo(id) {
 			}
 		}
 		if(valid) {
+/*
 		var fta = "OFF";
 		var ftd = "OFF";
 		var intdep = "OFF";
@@ -580,11 +612,33 @@ function stopVideo(id) {
 		var afld = "9L@M2 " + intdep + "<br>LAHSO " + lahso;
 		document.getElementById("AFLD_info").innerHTML = afld;
 		afld += "<br>AUTO " + auto;
+*/		
+		var afld_config_str = '';
+		afld_config_options.forEach(function(opt){
+			var set = 'OFF';
+			if(afld_config_str.length > 0) {
+				afld_config_str += '<br>';
+			}
+			if (document.getElementById(opt).checked) {
+				set = "ON";
+			}			
+			afld_config_str += opt + ' ' + set;
+		});
+		document.getElementById("AFLD_info").innerHTML = afld_config_str;
+		var auto = "ON";
+		if (document.getElementById("AutoIDS").checked) {
+			auto = "ON";
+		}
+		else {
+			auto = "OFF";
+		}
+		afld_config_str += "<br>AUTO " + auto; // This option does not get displayed, but it does get output
 		document.getElementById("CIC_info").innerHTML = document.getElementById("CIC_text").value;
 		$('#AFLD').modal('toggle');
 
-			saveConfiguration('trips',document.getElementById("TRIPS_info").innerHTML);
-			saveConfiguration('afld',afld);
+			//saveConfiguration('trips',document.getElementById("TRIPS_info").innerHTML);
+			//saveConfiguration('afld',afld);
+			saveConfiguration('afld',afld_config_str);
 			var arrivals = getSelectValues(document.getElementById("arr_rwy")).toString();
 			var departures = getSelectValues(document.getElementById("dep_rwy")).toString();
 			saveConfiguration('flow','\n' + document.getElementById("flow").value + '\n' + arrivals + '\n' + departures);
