@@ -1,0 +1,7 @@
+config.php
+db_variables.php
+sso_variables.php
+!.gitignore
+!/examples/config.php
+!/examples/db_variables.php
+!/examples/sso_variables.php
