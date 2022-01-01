@@ -474,8 +474,8 @@ function stopVideo(id) {
 		var dep_sel = document.getElementById("dep_rwy");
 		arr_sel.options.length = 0;
 		dep_sel.options.length = 0;
-		//var apch_types = new Array('VIS','ILS');
-		//var dep_types = new Array('RV','ROTG');
+		var apch_types = new Array('VIS','ILS');
+		var dep_types = new Array('RV','ROTG');
 /*		
 		if(el.value == "EAST") {
 			arr_runways = new Array('8L','9R','10','8R','9L');
