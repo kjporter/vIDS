@@ -59,7 +59,8 @@ function fetch_rvr($station,$reply_raw_data=true,$ajax_reply=true) {	// Fetch RV
 				$td = array_key_exists(0,$rvr_val[0]) ? str_replace("&nbsp;","",$rvr_val[0][0]) : null;
 				$mp = array_key_exists(1,$rvr_val[0]) ? str_replace("&nbsp;","",$rvr_val[0][1]) : null;
 				$ro = array_key_exists(2,$rvr_val[0]) ? str_replace("&nbsp;","",$rvr_val[0][2]) : null;
-				$rvr_array["RWY"][$rwy_id[0]] = array("TD"=>$td,"MP"=>$mp,"RO"=>$ro,"WORST"=>min(array($td,$mp,$ro)));
+				$worst = array('TD'=>$td,'MP'=>$mp,'RO'=>$ro);
+				$rvr_array["RWY"][$rwy_id[0]] = array("TD"=>$td,"MP"=>$mp,"RO"=>$ro,"WORST"=>min(array($worst)) . array_keys($worst, min($worst))[0]);
 			}
 		}
 	}
