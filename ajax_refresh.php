@@ -237,6 +237,19 @@ foreach($airfields as $afld) {
 	else {
 		$afld_data['winds'] = "Error";
 	}
+	// Extract visibility from METAR
+	preg_match('/(\s{1}\d{1}\s?)*([M\/\d]+SM)/',$afld_data['metar'],$vis);
+	$afld_data['visibility'] = $vis[0]; // Not currently using this for anything, but leaving it here just in case we need it
+	$vis_numeric = 0;
+	if(strpos($vis[0],"/") != false) {
+		$vis_numeric = intval(substr($vis[0],strpos($vis[0],"/")-1,1)) / intval(substr($vis[0],strpos($vis[0],"/")+1,1));
+		$vis_numeric += intval(str_replace(array('M','SM'),"",substr($vis[0],0,strpos($vis[0],"/")-1)));
+	}
+	else {
+		$vis_numeric = intval(str_replace(array('M','SM'),"",$vis[0]));
+	}
+	$afld_data['visibility_numeric'] = $vis_numeric;
+	
 	if (!isset($afld_data['apch_type'])) {
 		$afld_data['apch_type'] = "";
 	}
