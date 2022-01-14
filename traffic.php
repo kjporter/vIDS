@@ -358,6 +358,8 @@ else { // Return local resources
 </div>
   <div class="tab-pane fade" id="edct" role="tabpanel" aria-labelledby="edct-tab">
   <h2>Public (Pilot/Virtual Airline) View for EDCTs</h2>
+  <a href="https://www.ztlartcc.org/ramp-status/atl" target="_blank">View ATL Ramp Status</a>
+  <div class="container p-3 my-3 bg-primary text-white"><h3>Traffic Management Notices:</h3><div id="pilot_tmu_notes"></div></div>
   <table id="edct_view" class="table table-striped">
 <!--  <tr style="text-align:center"><th>Callsign</th><th>Departure<br/>Point</th><th>EDCT<br/>Assigned</th><th>STAR</th><th>Metering Fix</th><th>Slot Time @<br/>Metering Fix</th><th>ETA</th></tr>
   <tr><td colspan="8" style="text-align:center">Ground delay program not currently in effect</td></tr>-->
