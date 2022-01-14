@@ -33,7 +33,12 @@ class MySQL_db {
 	}
 
 	private function init() { // Initialize db server connection
-		$this->dbconn = mysqli_connect($this->db_vars['server_host'],$this->db_vars['username'],$this->db_vars['password'],$this->db_vars['database_name']);
+		if(array_key_exists('server_port',$this->db_vars)) {
+			$this->dbconn = mysqli_connect($this->db_vars['server_host'],$this->db_vars['username'],$this->db_vars['password'],$this->db_vars['database_name'],$this->db_vars['server_port']);
+		}
+		else {
+			$this->dbconn = mysqli_connect($this->db_vars['server_host'],$this->db_vars['username'],$this->db_vars['password'],$this->db_vars['database_name']);
+		}
 		if(mysqli_connect_errno()) {
 			$this->errors .= mysqli_connect_error() . "<br/>";
 		}
