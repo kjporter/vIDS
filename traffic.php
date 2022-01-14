@@ -12,7 +12,7 @@
 	*/
 	
 	define("DEBUGT",false);
-	define("DEV",true);
+	define("DEV",false);
 	
 	include_once "data_management.php";	
 	include_once "traffic/point-library.php";	
@@ -138,17 +138,22 @@ else { // Return local resources
    <li class="nav-item">
     <a class="nav-link" id="pgui-tab" data-bs-toggle="tab" data-bs-target="#pgui" type="button" role="tab" aria-controls="pgui" aria-selected="false">PGUI</a>
   </li>
+   <li class="nav-item">
+    <a class="nav-link" id="ground-tab" data-bs-toggle="tab" data-bs-target="#ground" type="button" role="tab" aria-controls="ground" aria-selected="false">Ground Handling</a>
+  </li>
+   <li class="nav-item">
+    <a class="nav-link" id="sector-tab" data-bs-toggle="tab" data-bs-target="#sector" type="button" role="tab" aria-controls="sector" aria-selected="false">Sector Saturation</a>
+  </li>
   <!-- NOT USED
    <li class="nav-item">
     <a class="nav-link" id="ntos-tab" data-bs-toggle="tab" data-bs-target="#ntos" type="button" role="tab" aria-controls="ntos" aria-selected="false">NTOS</a>
   </li>
   -->
-  </li>
    <li class="nav-item">
     <a class="nav-link" id="vatcscc-tab" data-bs-toggle="tab" data-bs-target="#vatcscc" type="button" role="tab" aria-controls="vatcscc" aria-selected="false">NTML</a>
   </li>
    <li class="nav-item">
-    <a class="nav-link" id="ids_notes-tab" data-bs-toggle="tab" data-bs-target="#ids_notes" type="button" role="tab" aria-controls="ids_notes" aria-selected="false">vIDS TMU Notes</a>
+    <a class="nav-link" id="ids_notes-tab" data-bs-toggle="tab" data-bs-target="#ids_notes" type="button" role="tab" aria-controls="ids_notes" aria-selected="false">TMU Notices</a>
   </li>
    <li class="nav-item">
     <a class="nav-link" id="nmap-tab" data-bs-toggle="tab" data-bs-target="#nmap" type="button" role="tab" aria-controls="nmap" aria-selected="false">Map</a>
@@ -181,11 +186,16 @@ else { // Return local resources
   <label class="form-check-label" for="disableExternalSources">Disable external data sources</label>
   <div class="form-text">Use for testing when internet sources are not available.</div>
 </div>
-
 <div class="form-check form-switch">
   <input class="form-check-input" type="checkbox" id="enabledMetering" onchange="meteringSwitch(this);">
   <label class="form-check-label" for="enabledMetering">Enable metering</label>
   <div class="form-text">DP will provide EDCTs, allow slot scheduling, and provide metering guidance based on AAR/ADR.</div>
+</div>
+<br/>
+<div class="mb-3">
+  <button type="button" class="btn btn-outline-primary btn-sm" onclick="flowSwap();">Swap</button>
+  <label class="form-check-label" for="">Arrival/Departure Flow Change</label>
+  <div class="form-text">This button purges all runway assignments and should be used when a flow swap is directed at the primary airport.</div>
 </div>
 	<div class="mb-3">
 		<div class="col-auto"><label for="aar">Airport Arrival Rate (AAR)</label></div>
@@ -270,6 +280,31 @@ else { // Return local resources
 ?>
 	</div>
   </div>
+  <div class="tab-pane fade" id="ground" role="tabpanel" aria-labelledby="ground-tab">
+  <h2>Ground Handling</h2>
+  <div class="container">
+	<div class="row">
+		<div class="col">
+			<table id="ground_handling" class="table table-striped">
+			</table>
+		</div>
+	</div>
+  </div>
+  </div>
+  <div class="tab-pane fade" id="sector" role="tabpanel" aria-labelledby="sector-tab">
+  <h2>Sector Saturation</h2>
+  <div class="container">
+	<div class="row">
+		<div class="col-4">
+			<table id="saturation" class="table table-striped">
+			</table>
+		</div>
+		<div class="col-8">
+			<img src="traffic/departure_sectors.png" class="mx-auto" style="width:100%" />
+		</div>
+	</div>
+  </div>
+  </div>
   <div class="tab-pane fade" id="ntos" role="tabpanel" aria-labelledby="ntos-tab">
   <h2>VATUSA TMU Notices (NTOS): <?php echo $artcc; ?></h2>
   <table id="ntos_text" class="table table-striped">
@@ -286,7 +321,7 @@ else { // Return local resources
 </object>
 </div>
   <div class="tab-pane fade" id="ids_notes" role="tabpanel" aria-labelledby="ids_notes-tab">
-  <h2>vIDS TMU Notes</h2>
+  <h2>TMU Notices</h2>
   <div class="container">
   	<form>
 	<div class="mb-3">
@@ -297,7 +332,19 @@ else { // Return local resources
 	<button type="button" class="btn btn-primary" onclick="saveTMUnotes();">Save</button>
 	</form>
 	</div>
+	<hr/>
+  <div class="container">
+  	<form>
+	<div class="mb-3">
+		<label for="">Public TMU Notices (displayed to pilots and operators via EDCT display)</label>
+		<div class="col-auto"><textarea class="form-control" id="TMU_text_public" rows="4"></textarea></div>
+	</div>
+	<p>URLs entered in this field will appear as clickable links</p>
+	<button type="button" class="btn btn-primary" onclick="saveTMUnotes('public');">Save</button>
+	</form>
+	</div>
 </div>
+
   <div class="tab-pane fade" id="slot" role="tabpanel" aria-labelledby="slot-tab">
   <h2><?php echo $artcc; ?> External Controller Slot Time Request</h2>
   	<form>
