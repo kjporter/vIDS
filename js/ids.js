@@ -122,7 +122,7 @@
 			departure_rwys += json.airfield_data[defaultAirfield]['dep_type'] + " " + json.airfield_data[defaultAirfield]['dep_rwys'][x];
 			var this_rwy = json.airfield_data[defaultAirfield]['dep_rwys'][x].substr(0,json.airfield_data[defaultAirfield]['dep_rwys'][x].indexOf(' '));
 			if(json.airfield_data[defaultAirfield]['rvr_detail']['RWY'].hasOwnProperty(this_rwy)) {
-				if((parseInt(json.airfield_data[defaultAirfield]['rvr_detail']['RWY'][this_rwy]['WORST']) < 6000)||(parseInt(json.airfield_data[defaultAirfield]['visibility_numeric']) < 1)) {
+				if((parseInt(json.airfield_data[defaultAirfield]['rvr_detail']['RWY'][this_rwy]['WORST']) < 6000)||(parseInt(json.airfield_data[defaultAirfield]['visibility_numeric']) <= 1)) {
 					departure_rwys += ' [' + json.airfield_data[defaultAirfield]['rvr_detail']['RWY'][this_rwy]['WORST'] + ']';
 				}
 			}
