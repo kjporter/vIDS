@@ -13,6 +13,7 @@
 */
 
 include_once "data_management.php";
+include_once "airac.php";
 
 $terps = new FAA_dTPP($_GET['afld_id']);
 $terps->echo_json();
@@ -26,7 +27,9 @@ class FAA_dTPP
 
 	function __construct($icao_id)	{
 		$this->airfield_id = $icao_id;
-		$this->airac_cycle = $this->fetch_airac_cycle();
+		//$this->airac_cycle = $this->fetch_airac_cycle();
+		$aac = new airac();
+		$this->airac_cycle = $aac->current_cycle;
 		//echo "AIRAC Cycle: " . $this->airac_cycle;
 		$this->faa_data_url = "https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/results/?cycle=" . $this->airac_cycle . "&ident=" . $this->airfield_id;
 		if(!$this->fetch_cache()) { // Attempt to pull the data from cache first
