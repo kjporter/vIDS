@@ -139,7 +139,7 @@ else { // Return local resources
     <a class="nav-link" id="pgui-tab" data-bs-toggle="tab" data-bs-target="#pgui" type="button" role="tab" aria-controls="pgui" aria-selected="false">PGUI</a>
   </li>
    <li class="nav-item">
-    <a class="nav-link" id="ground-tab" data-bs-toggle="tab" data-bs-target="#ground" type="button" role="tab" aria-controls="ground" aria-selected="false">Ground Handling</a>
+    <a class="nav-link disabled" id="ground-tab" data-bs-toggle="tab" data-bs-target="#ground" type="button" role="tab" aria-controls="ground" aria-selected="false">Ground Handling</a>
   </li>
    <li class="nav-item">
     <a class="nav-link" id="sector-tab" data-bs-toggle="tab" data-bs-target="#sector" type="button" role="tab" aria-controls="sector" aria-selected="false">Sector Saturation</a>
@@ -295,12 +295,15 @@ else { // Return local resources
   <h2>Sector Saturation</h2>
   <div class="container">
 	<div class="row">
-		<div class="col-4">
-			<table id="saturation" class="table table-striped">
-			</table>
+		<div class="col">
+			<div class="table-responsive">
+				<table id="saturation" class="table table-striped">
+				</table>
+			</div>
+			<p>MAP values represent the number of aircraft projected to fly within the bounds of a given sector that exceed the sector's handling capabilities under normal circumstances. For example, if 14 aircraft can transit a sector while maintaining enroute MIT, then 15 aircraft projected in the sector will trigger a MAP value of 1 and an alert. Note: because VATSIM flight plan departure times do not closely correlate to actual departure times, saturation in departure sectors is estimated by the number of aircraft on the ground with a flight plan filed through the airspace.</p>
 		</div>
-		<div class="col-8">
-			<img src="traffic/departure_sectors.png" class="mx-auto" style="width:100%" />
+		<div class="col-7">
+			<img src="traffic/departure_sectors.png" class="mx-auto" style="width:100%; max-height:80%" />
 		</div>
 	</div>
   </div>
