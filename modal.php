@@ -4,13 +4,15 @@
 		
 		Filename: modal.php
 		Function: Contains definitions for bootstrap modal dialogs
-		Created: 7/22/21 (moved from index)
-		Edited: 12/30/21
+		Created: 7/22/21 (moved from index.php)
+		Edited: 1/24/22 (moved user-defined content to user-modals.php)
 		
 		Changes: Removed ZTL hard-code references from non-static content. Implemented configurable airfield flows.
 	*/
-
+include_once "vars/user_modals.php"; // User-defined modal content moved here
 ?>
+<?php // Added to ease commenting out user defned lines below that moved to user_modals.php
+/*
     <!-- 
 		Modal container markup for local IDS display 
 		Webmaster: Edit the modal content below to fit your use case. These modals are triggered when a user clicks on one of the buttons at the bottom of the vIDS grid display.
@@ -576,7 +578,8 @@
             </div>
         </div>
     </div>
-	
+*/
+?>	
 <!-- 
 	DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE 
 	DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE   DO NOT EDIT BELOW THIS LINE 
