@@ -120,6 +120,8 @@ function js_globals() { // Translates PHP globals into JS globals
 	global $departure_gates;
 	global $departure_positions;
 	global $afld_config_ids;
+	global $approach_types;
+	global $departure_types;
 	global $flow_override;
 	global $rwy_flows;
 	$js_globals = "	const defaultAirfield = '" . DEFAULT_AFLD_ICAO . "';
