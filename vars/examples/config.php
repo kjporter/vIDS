@@ -82,6 +82,8 @@ array("id"=>"KCSG","name"=>"Columbus (CSG)","hours"=>"1400–0200Z‡","MF"=>"14
 );
 
 // ************************************ DO NOT EDIT BELOW THIS LINE ************************************
+include_once "js_support.php";
+/*
 $positions = array($pos2,$pos1,$pos0,$pos3,$pos4,$pos5,$pos6,$pos7);
 $satellites = array();
 foreach($satellite_fields as $sat) {
@@ -141,4 +143,5 @@ function js_globals() { // Translates PHP globals into JS globals
 	$js_globals .= $rwy_flow;				
 	return $js_globals;
 }
+*/
 ?>

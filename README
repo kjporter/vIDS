@@ -25,7 +25,7 @@ Configuration:
 
 4. You can change the logo in the upper left corner of vIDS grid displays to anything that you'd like. Simply name your image "logo.png" and overwrite the file in the img folder with the same name.
 
-5. The content in the pop-up modals that display airspace diagrams, SOPs, checklists, etc can be edited in the modal.php file. Again, do not edit below the "do not edit below this line" line.
+5. The content in the pop-up modals that display airspace diagrams, SOPs, checklists, etc can be edited in the vars/user_modals.php file. Again, do not edit below the "do not edit below this line" line.
 
 6. You can add/remove the rotating background images. They are located in the img/bg folder. Any image file in this folder can be randomly chosen by vIDS as a background for the landing page and menu page.
 
