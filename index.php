@@ -18,9 +18,13 @@
 
 	//Init and run front-end security via VATSIM Connect SSO
 	$auth = new Security(fetch_my_url(),$sso_variables);
-	extract($auth->fetch_endpoint()); // Return SSO variables to be used by login button
+	if(is_array($auth->fetch_endpoint())) {
+		extract($auth->fetch_endpoint()); // Return SSO variables to be used by login button
+	}
 	$auth->init_sso(); // Attempt to init the sign on sequence
-	extract($auth->fetch_params(),EXTR_OVERWRITE); // Return authentication parameters
+	if(is_array($auth->fetch_params())) {
+		extract($auth->fetch_params(),EXTR_OVERWRITE); // Return authentication parameters
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
