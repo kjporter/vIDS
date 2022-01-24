@@ -201,11 +201,13 @@ foreach($airfields as $afld) {
 	//print_r($afld_data['dep_rwys']);
 
 	// Determines displayed airport flow pattern (Ex. EAST/WEST) displayed in vATIS
-	if(count($afld_data['apch_rwys'])>0) {
+//	if(count($afld_data['apch_rwys'])>0) {
+	if(isset($afld_data['apch_rwys'][0])) {
 		preg_match('/(\d{2})+/',$afld_data['apch_rwys'][0],$rwy); // Extract runway number only (strips L/C/R)
 		$afld_data['traffic_flow'] = traffic_flow($rwy[0]);
 	}
-	elseif(count($afld_data['dep_rwys'])>0) {
+//	elseif(count($afld_data['dep_rwys'])>0) {
+	elseif(isset($afld_data['dep_rwys'][0])) {
 		preg_match('/(\d{2})+/',$afld_data['dep_rwys'][0],$rwy);
 		$afld_data['traffic_flow'] = traffic_flow($rwy[0]);	
 	}
@@ -426,9 +428,9 @@ $reply_dataset['config'] = $afld_reply;
 
 // Fetch Manual Flow & Runway Configuration********************************************************************************************************************
 $rwy_config = data_read("flow.dat","string");
-//$rwy_config = str_getcsv($rwy_config,",");
+//$rwy_config = str_getcsv($rwy_config,","); // Uncommented on 1/23/2022 to fix critical php warning
 //if(file_exists("data/flow.dat")&&!$reply_dataset['config']['AUTO']) {
-if(count($rwy_config > 0)&&!$reply_dataset['config']['AUTO']) {
+if((strlen($rwy_config) > 0)&&!$reply_dataset['config']['AUTO']) {
 //	$file = fopen("data/flow.dat","r");
 //	fgets($file);
 //	$flow = fgets($file);

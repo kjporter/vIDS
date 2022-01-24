@@ -97,7 +97,7 @@ $airfields = array_merge($airfields,$satellites);
 $rwy_flows = array(); // Create an array where [flow][rwy][typ]
 foreach($flow_override as $rwy=>$flow_rwy) {
 	if(!array_key_exists($flow_rwy,$rwy_flows)) {
-		$rwy_flows[$flow_rwy];
+		$rwy_flows[$flow_rwy] = array('id'=>array(),'arr'=>array(),'dep'=>array());
 	}
 	if(!in_array($rwy,$rwy_flows[$flow_rwy]['id'])) {
 		$rwy_flows[$flow_rwy]['id'][] = $rwy;
