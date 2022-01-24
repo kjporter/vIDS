@@ -9,6 +9,8 @@
 		
 		Changes: Moved from config.php
 	*/
+	
+include_once "vars/config.php";
 
 $positions = array($pos2,$pos1,$pos0,$pos3,$pos4,$pos5,$pos6,$pos7);
 $satellites = array();
