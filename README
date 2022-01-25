@@ -42,7 +42,10 @@ RewriteRule ^(.*)\.[\d]{10}\.(css|js)$ $1.$2 [L]
 </IfModule>
 ------ Copy above this line to .htaccess ------
 
-Questions/Contact
+Traffic Management Tools / TMU Tools:
+A traffic management plug-in is currently under development for vIDS. At this time, it is not part of the vIDS repository. When configuring vIDS, you should set the TRAFFIC_MANAGEMENT constant to false. Contact the development team for additional information.
+
+Questions/Contact:
 The best way to get in touch with the development team is via our Discord. Feel free to ask support and setup questions in the General channel.
 https://discord.gg/FXdT8jtd
 
