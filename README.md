@@ -33,6 +33,7 @@ Configuration:
 6. You can add/remove the rotating background images. They are located in the img/bg folder. Any image file in this folder can be randomly chosen by vIDS as a background for the landing page and menu page.
 
 7. A note about server-side cache: many hosting companies cache files in order to provide faster service. If you are using the .dat files for local storage, this often results in a delay of up to 5 minutes in displaying newly updated information - an obvious problem. We've instituted a number of cache-busting techniques into the code associated with this project in an effort to prevent critical files from being cached. We recommend that you create an .htaccess file in the root of the ids directory and add the following text:
+```
 ------ Copy below this line to .htaccess ------
 RewriteEngine on
 RewriteRule ^(.*)\.[\d]{10}\.(css|js)$ $1.$2 [L]
@@ -44,7 +45,7 @@ RewriteRule ^(.*)\.[\d]{10}\.(css|js)$ $1.$2 [L]
     Header set Expires 0
 </IfModule>
 ------ Copy above this line to .htaccess ------
-
+```
 Traffic Management Tools / TMU Tools:
 A traffic management plug-in is currently under development for vIDS. At this time, it is not part of the vIDS repository. When configuring vIDS, you should set the TRAFFIC_MANAGEMENT constant to false. Contact the development team for additional information.
 
