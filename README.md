@@ -58,7 +58,7 @@ Thanks for your interest in vIDS!
 [version-image]: https://img.shields.io/github/package-json/v/kjporter/vIDS
 
 [release-date-image]: https://img.shields.io/github/release-date/kjporter/vIDS
-[release-url]: https://github.com/kjporter/vIDS/blob/main/COPYINGreleases
+[release-url]: https://github.com/kjporter/vIDS/blob/main/releases
 
 [license-image]: https://img.shields.io/npm/l/@kjporter/vIDS.svg
 [license-url]: https://github.com/kjporter/vIDS/blob/main/COPYING
