@@ -1,8 +1,7 @@
+# vIDS - virtual Information Display System
 ![][version-image]
 [![Release date][release-date-image]][release-url]
 [![npm license][license-image]][license-url]
-
-vIDS - virtual Information Display System
 
 Project Overview:
 The goal of vIDS is to create a collaboration tool similar in function to the Information Display Systems found in real-world air traffic control facilities. vIDS is tailored to the VATSIM environment (and particularly, VATUSA). Each IDS displays information to controllers in a slightly different format based on position and facility, and vIDS is no different. vIDS is capable of displaying information in 3 different formats: one tailored to a major (Class B Primary) local control, a large TRACON centered on a major, and a multi-IDS view suitable for other TRACONs and ARTCCs. Controllers use vIDS to share information regarding active runways, approach and departure types, posiiton combinations, etc. Additionally, vIDS pulls information from a multitude of data sources to consolidate information necessary for control in a single location.
