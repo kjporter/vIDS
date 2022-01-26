@@ -1,3 +1,7 @@
+![][version-image]
+[![Release date][release-date-image]][release-url]
+[![npm license][license-image]][license-url]
+
 vIDS - virtual Information Display System
 
 Project Overview:
@@ -50,3 +54,16 @@ The best way to get in touch with the development team is via our Discord. Feel 
 https://discord.gg/FXdT8jtd
 
 Thanks for your interest in vIDS!
+
+<!-- Links: -->
+[version-image]: https://img.shields.io/github/package-json/v/cycjimmy/semantic-release-action
+
+[release-date-image]: https://img.shields.io/github/release-date/cycjimmy/semantic-release-action
+[release-url]: https://github.com/kjporter/vIDS/blob/main/COPYINGreleases
+
+[license-image]: https://img.shields.io/npm/l/@cycjimmy/semantic-release-action.svg
+[license-url]: https://github.com/kjporter/vIDS/blob/main/COPYING
+
+[changelog-url]: https://github.com/kjporter/vIDS/blob/main/CHANGELOG.md
+
+[github-packages-registry]: https://github.com/features/packages
