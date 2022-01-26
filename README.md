@@ -55,12 +55,12 @@ https://discord.gg/FXdT8jtd
 Thanks for your interest in vIDS!
 
 <!-- Links: -->
-[version-image]: https://img.shields.io/github/package-json/v/cycjimmy/semantic-release-action
+[version-image]: https://img.shields.io/github/package-json/v/kjporter/vIDS
 
-[release-date-image]: https://img.shields.io/github/release-date/cycjimmy/semantic-release-action
+[release-date-image]: https://img.shields.io/github/release-date/kjporter/vIDS
 [release-url]: https://github.com/kjporter/vIDS/blob/main/COPYINGreleases
 
-[license-image]: https://img.shields.io/npm/l/@cycjimmy/semantic-release-action.svg
+[license-image]: https://img.shields.io/npm/l/@kjporter/vIDS.svg
 [license-url]: https://github.com/kjporter/vIDS/blob/main/COPYING
 
 [changelog-url]: https://github.com/kjporter/vIDS/blob/main/CHANGELOG.md
