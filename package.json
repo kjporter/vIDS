@@ -1,0 +1,25 @@
+{
+  "name": "@kjporter/vIDS",
+  "version": "1.0.0",
+  "description": "virtual Information Display System",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kjporter/vIDS.git"
+  },
+  "keywords": [
+    "vIDS",
+    "VATSIM"
+  ],
+  "author": "kjporter <kporter@kplink.net> (https://github.com/kjporter)",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/kjporter/vIDS/issues"
+  },
+  "homepage": "https://github.com/kjporter/vIDS#readme",
+  "dependencies": {
+  }
+}
