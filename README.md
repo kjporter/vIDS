@@ -3,18 +3,18 @@
 [![Release date][release-date-image]][release-url]
 [![npm license][license-image]][license-url]
 
-##Project Overview:
+## Project Overview:
 The goal of vIDS is to create a collaboration tool similar in function to the Information Display Systems found in real-world air traffic control facilities. vIDS is tailored to the VATSIM environment (and particularly, VATUSA). Each IDS displays information to controllers in a slightly different format based on position and facility, and vIDS is no different. vIDS is capable of displaying information in 3 different formats: one tailored to a major (Class B Primary) local control, a large TRACON centered on a major, and a multi-IDS view suitable for other TRACONs and ARTCCs. Controllers use vIDS to share information regarding active runways, approach and departure types, posiiton combinations, etc. Additionally, vIDS pulls information from a multitude of data sources to consolidate information necessary for control in a single location.
 
-##Server Requirements:
+## Server Requirements:
 vIDS requires PHP 5.6 or newer. Database support is optional, but if used requires MySQL (or compatible MariaDB) 10 or newer. All other dependencies (Javascript libraries, etc) are accessed via CDN.
 
-##Installation:
+## Installation:
 Clone the repository and make a pull request to your server. 
 
 You will need a VATSIM Connect SSO token to facilitate user authorization and authentication. This process can take 2 weeks or more - go to https://auth.vatsim.net for more information and to submit a request.
 
-###Configuration:
+### Configuration:
 1. Submit a request for a VATSIM Connect SSO token via the instructions above if your organization does not already have one. When you've been approved, enter the information in the vars/sso_variables.php file. You'll need your client ID, client secret, redirect URI, and SSO endpoint.
 
 2. Decide if you'd like to use a database to store server-side data or if you'd like to use .dat files. We recommend using a database, as it will make feature upgrades easier for you (simple as a pull request). Reasons you may want to use the .dat files include: no compatible database server, you don't like dolphins, or your ex's name is Maria. Anyway... if you decide to use a database, you'll need to add the applicable connection variables to the vars/db_variables.php file. You'll need the server address, username, password, and database name. Note that if you decide to migrate to a different data management strategy after setting up vIDS, you will lose all user-entered data - there is no way to migrate the data.
@@ -46,10 +46,10 @@ RewriteRule ^(.*)\.[\d]{10}\.(css|js)$ $1.$2 [L]
 </IfModule>
 ------ Copy above this line to .htaccess ------
 ```
-##Traffic Management Tools / TMU Tools:
+## Traffic Management Tools / TMU Tools:
 A traffic management plug-in is currently under development for vIDS. At this time, it is not part of the vIDS repository. When configuring vIDS, you should set the TRAFFIC_MANAGEMENT constant to false. Contact the development team for additional information.
 
-##Questions/Contact:
+## Questions/Contact:
 The best way to get in touch with the development team is via our Discord. Feel free to ask support and setup questions in the General channel.
 https://discord.gg/FXdT8jtd
 
@@ -63,7 +63,3 @@ Thanks for your interest in vIDS!
 
 [license-image]: https://img.shields.io/github/license/kjporter/vIDS
 [license-url]: https://github.com/kjporter/vIDS/blob/main/COPYING
-
-[changelog-url]: https://github.com/kjporter/vIDS/blob/main/CHANGELOG.md
-
-[github-packages-registry]: https://github.com/features/packages
