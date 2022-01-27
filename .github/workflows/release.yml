@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install semantic-release extra plugins
-        run: npm install --save-dev @semantic-release/changelog @semantic-release/git 
+        run: npm install --save-dev @semantic-release/changelog @semantic-release/git conventional-changelog-eslint
       - name: Release        
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
