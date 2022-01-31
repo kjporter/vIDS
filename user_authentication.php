@@ -74,6 +74,7 @@ class Security extends VATSIM_Connect {
 					$this->dump .= "User is a home or visiting controller!<br/>";
 					$this->valid_auth = true;
 					$_SESSION["vids_authenticated"] = true;
+					$_SESSION["cid"] = $this->userData_json['data']['cid']; // Added 1/25/22 for passage to plugins for logging purposes
 					if(isset($this->userData_json['data']['personal']['name_full'])) { // This shouldn't really be necessary, but it prevents an error when the full name isn't available
 						$this->full_name = $this->userData_json['data']['personal']['name_full'];
 						$this->dump .= "Hello " . $this->userData_json['data']['personal']['name_full'] . "<br/>";
