@@ -1207,6 +1207,7 @@ include_once "vars/user_modals.php"; // User-defined modal content moved here
 					<p>vIDS is currently in development. If you notice a bug, please <a href="#" onclick="showBugReportReferal('about_help');">file a bug report.</a></p>
 					<p>If you have questions or would like to interact with the development team, <a href="https://discord.gg/bZky9bv697" alt="Discord">feel free to join us on Discord.<br/><img src="img/Discord.png" height="30px" alt="Discord" /></a></p>
 					<p>vIDS is open-source software licensed under the GNU GPL v3.0. <a href="https://github.com/kjporter/vIDS" alt="GitHub">Join us on GitHub to contribute to the project.<br/><img src="img/GitHub.png" height="30px" alt="GitHub" /><img src="img/GitHub2.png" height="30px" alt="GitHub" /></a></p>
+					<p>This server is running vIDS version <?php echo get_version(); ?></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-dismiss="modal">Close</button>

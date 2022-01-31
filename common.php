@@ -19,6 +19,18 @@ function is_sysad($vatsim_cid,$artcc_staff,$sso_endpoint) { // Returns system ad
 	return ($artcc_staff || (intval($vatsim_cid) == ACONST) || (strpos($sso_endpoint,"dev") !== false)) ? true : false;
 }
 
+function get_version() { // Fetches software version from package.json and returns it in a string
+	$return_val = "";
+	if(file_exists("package.json")) {
+		$str = file_get_contents("package.json");
+		$json = json_decode($str,true);
+		if(array_key_exists('version',$json)) {
+			$return_val = $json['version'];
+		}
+	}
+	return $return_val;
+}
+
 function auto_version($file) { // Used to version files and bust CloudFlare's caching system for JS
   if(strpos($file, '/') !== 0 || !file_exists($_SERVER['DOCUMENT_ROOT'] . $file))
     return $file;
