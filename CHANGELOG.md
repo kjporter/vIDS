@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/kjporter/vIDS/compare/v1.1.0...v1.2.0) (2022-02-01)
+
+
+### Chore
+
+* new RVR in multi-IDS ([9f1cafa](https://github.com/kjporter/vIDS/commit/9f1cafaa5b5548ec1f28b5a830e7207a45c3676c))
+
 # [1.1.0](https://github.com/kjporter/vIDS/compare/v1.0.0...v1.1.0) (2022-01-31)
 
 
