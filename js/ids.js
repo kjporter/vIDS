@@ -121,9 +121,11 @@
 		for(var x=0;x<json.airfield_data[defaultAirfield]['dep_rwys'].length;x++) {
 			departure_rwys += json.airfield_data[defaultAirfield]['dep_type'] + " " + json.airfield_data[defaultAirfield]['dep_rwys'][x];
 			var this_rwy = json.airfield_data[defaultAirfield]['dep_rwys'][x].substr(0,json.airfield_data[defaultAirfield]['dep_rwys'][x].indexOf(' '));
-			if(json.airfield_data[defaultAirfield]['rvr_detail']['RWY'].hasOwnProperty(this_rwy)) {
-				if((parseInt(json.airfield_data[defaultAirfield]['rvr_detail']['RWY'][this_rwy]['WORST']) < 6000)||(parseInt(json.airfield_data[defaultAirfield]['visibility_numeric']) <= 1)) {
-					departure_rwys += ' [' + json.airfield_data[defaultAirfield]['rvr_detail']['RWY'][this_rwy]['WORST'] + ']';
+			if(json.airfield_data[defaultAirfield].hasOwnProperty('rvr_detail')) { // Check if RVR has been extracted before display
+				if(json.airfield_data[defaultAirfield]['rvr_detail']['RWY'].hasOwnProperty(this_rwy)) {
+					if(parseInt(json.airfield_data[defaultAirfield]['rvr_detail']['RWY'][this_rwy]['WORST']) < 6000) {
+						departure_rwys += ' [' + json.airfield_data[defaultAirfield]['rvr_detail']['RWY'][this_rwy]['WORST'] + ']';
+					}
 				}
 			}
 			departure_rwys += "<br/>";
@@ -186,9 +188,11 @@
 		for(var x=0;x<json.airfield_data[defaultAirfield]['apch_rwys'].length;x++) {
 			arrival_rwys += json.airfield_data[defaultAirfield]['apch_type'] + " " + json.airfield_data[defaultAirfield]['apch_rwys'][x];
 			var this_rwy = json.airfield_data[defaultAirfield]['apch_rwys'][x].substr(0,json.airfield_data[defaultAirfield]['apch_rwys'][x].indexOf(' '));
-			if(json.airfield_data[defaultAirfield]['rvr_detail']['RWY'].hasOwnProperty(this_rwy)) {
-				if(parseInt(json.airfield_data[defaultAirfield]['rvr_detail']['RWY'][this_rwy]['WORST']) < 6000) {
-					arrival_rwys += ' [' + json.airfield_data[defaultAirfield]['rvr_detail']['RWY'][this_rwy]['WORST'] + ']';
+			if(json.airfield_data[defaultAirfield].hasOwnProperty('rvr_detail')) { // Check if RVR has been extracted before display
+				if(json.airfield_data[defaultAirfield]['rvr_detail']['RWY'].hasOwnProperty(this_rwy)) {
+					if(parseInt(json.airfield_data[defaultAirfield]['rvr_detail']['RWY'][this_rwy]['WORST']) < 6000) {
+						arrival_rwys += ' [' + json.airfield_data[defaultAirfield]['rvr_detail']['RWY'][this_rwy]['WORST'] + ']';
+					}
 				}
 			}
 			arrival_rwys += "<br/>";

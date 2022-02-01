@@ -259,8 +259,10 @@ foreach($airfields as $afld) {
 	// Fetch RVR data
 	$rvr_detail = fetch_rvr($afld,false,false);
 	$afld_data['rvr_detail'] = $rvr_detail;
-	
-	// RVR capture/decoding logic
+/*	
+	// METAR RVR capture/decoding logic
+	// This was replaced with ajax_rvr.php, which decodes sensor-specific RVR data
+	// Code retained for future use, as it contains critical decoding logic
 	$rvr = array();
 	$rvr_strings = null;
 	preg_match('/(R\d{2})(\S*)/',$afld_data['metar'],$rvr_strings);
@@ -282,6 +284,7 @@ foreach($airfields as $afld) {
 		}
 	}
 	$afld_data['rvr'] = $rvr;
+*/
 	$rvr_disp = array();
 	
 	// Build approach/departure runway unique array so there are no repeats
@@ -297,10 +300,13 @@ foreach($airfields as $afld) {
 		}
 		if(is_array($active_rwys)) {
 			foreach($active_rwys as $rwy) {
-				$rvr_val = "P6000FT"; // Default value if no RVR value is given
-				if(array_key_exists($rwy,$afld_data['rvr'])) {
-					$rvr_val = $afld_data['rvr'][$rwy];
-				}
+//				$rvr_val = "P6000FT"; // Default value if no RVR value is given
+//				if(array_key_exists($rwy,$afld_data['rvr'])) {
+//					$rvr_val = $afld_data['rvr'][$rwy];
+//				}
+				if(array_key_exists($rwy,$rvr_detail['RWY'])) {
+					$rvr_val = $rvr_detail['RWY'][$rwy]['WORST'];
+				}				
 			$rvr_disp[] = "RY$rwy $rvr_val";
 			}
 		}
@@ -311,6 +317,7 @@ foreach($airfields as $afld) {
 	else {
 		$rvr_disp[] = "RVR Not Available";
 	}
+	sort($rvr_disp); // Sorts RVR values into logical order
 	$afld_data['rvr_display'] = $rvr_disp;
 
 	// Build tower cab status (D/G/T) display to indicate when a controller is online
