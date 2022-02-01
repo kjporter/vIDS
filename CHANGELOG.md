@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/kjporter/vIDS/compare/v1.2.0...v1.2.1) (2022-02-01)
+
+
+### Fix
+
+* versioning bug ([23e9bdb](https://github.com/kjporter/vIDS/commit/23e9bdb3b779612b8704b9e13fe2d985ce0313d5))
+
 # [1.2.0](https://github.com/kjporter/vIDS/compare/v1.1.0...v1.2.0) (2022-02-01)
 
 
