@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "virtual Information Display System",
   "main": "index.php",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
