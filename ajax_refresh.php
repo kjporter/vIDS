@@ -132,12 +132,58 @@ foreach($airfields as $afld) {
 	$afld_data['icao_id'] = $afld;
 	// Does the ATIS we're looking for currently exist on the network?
 	$atis_found = false;
+	$atis_data = array();
+	$afld_data['multi_atis'] = false;
+//	$afld_data['atis_code_dep'] = 'X';
 	if(array_key_exists('atis',$stats_array)) { // Error prevention when no atis field is returned...
+		// This changed in the spring of 2022 with vATIS support for arr/dep ATIS at the same airport
+
+		for($a=0;(count($atis_data) < 3)&&($a < count($stats_array['atis']));$a++) {
+			if(preg_match('/^' . $afld . '_.*ATIS$/', $stats_array['atis'][$a]['callsign'])) {
+				$atis_data[] = $stats_array['atis'][$a];
+			}
+		}
+
+		if (count($atis_data) > 0) { // Arrival and departure ATIS
+			$atis_arr = $atis_dep = null;
+			for($t=0;$t<count($atis_data);$t++) {
+				if($atis_data[$t]['callsign'] == $afld . '_A_ATIS') { $atis_arr = $atis_data[$t]; } 
+				if($atis_data[$t]['callsign'] == $afld . '_D_ATIS') { $atis_dep = $atis_data[$t]; } 
+			}
+			if(!is_null($atis_arr)&&!is_null($atis_dep)&&!is_null($atis_arr['atis_code'])&&!is_null($atis_dep['atis_code'])) {
+				$atis_found = true;
+				$afld_data['multi_atis'] = true;
+				$afld_data['atis_online'] = $atis_found;
+				$afld_data['atis_code'] = $atis_arr['atis_code'];
+				$afld_data['atis_code_dep'] = $atis_dep['atis_code'];
+				$afld_data['atis_text'] = implode(" ",$atis_arr['text_atis']) . ' ' . implode(" ",$atis_dep['text_atis']);
+			}
+			else { // Singular ATIS at an airfield
+				$atis = $atis_data[0];
+				$atis_found = true;
+				$afld_data['traffic_flow'] = null; // Added to fix error on 6/9
+				$afld_data['apch_rwys'] = null; // Added to fix error on 6/9
+				$afld_data['dep_rwys'] = null; // Added to fix error on 6/9
+				if ($atis['atis_code'] != null) { // ATIS code null protect from malformed vATIS messages
+					$afld_data['atis_online'] = $atis_found;
+					$afld_data['atis_code'] = $atis['atis_code'];
+					$afld_data['atis_text'] = implode(" ",$atis['text_atis']);	
+				}
+			}
+			if (is_numeric(preg_match('/A(\d{4})/',$afld_data['atis_text'],$alt_set))) {
+				$afld_data['altimeter'] = substr($alt_set[0],1,2) . "." . substr($alt_set[0],3);
+			}
+		}
+		
+/*
+		// Old ATIS logic - this can be commented out
 		for($a=0;$atis_found==false && $a < count($stats_array['atis']);$a++) {
 			$atis = $stats_array['atis'][$a];
 			$atis_found = ($atis['callsign'] == $afld . "_ATIS") ? true : false;
 		}
+*/
 	}
+/*
 	if ($atis_found && ($atis['atis_code'] != null)) { // ATIS code null protect from malformed vATIS messages
 		$afld_data['atis_online'] = $atis_found;
 		$afld_data['atis_code'] = $atis['atis_code'];
@@ -149,7 +195,8 @@ foreach($airfields as $afld) {
 			$afld_data['altimeter'] = substr($alt_set[0],1,2) . "." . substr($alt_set[0],3);
 		}
 	}
-	else { // vATIS is offline or not found in status array... set fields appropriately
+*/
+	if(!$afld_data['atis_online'] || !isset($afld_data['atis_online'])) { // vATIS is offline or not found in status array... set fields appropriately
 		$afld_data['atis_online'] = 0;
 		$afld_data['atis_code'] = "--";
 		$afld_data['traffic_flow'] = "OFFLINE";
@@ -167,7 +214,9 @@ foreach($airfields as $afld) {
 		$datis = curl_request($d_atis_url);
 		//file_put_contents("data/" . $afld . ".atis",$datis); // Cache data locally to prevent overwhelming the D-ATIS URL with requests
 		data_save($afld . ".atis",$datis); // Cache data locally to prevent overwhelming the D-ATIS URL with requests - is this even used anymore?
-		$afld_data['atis_text'] = $datis;
+		if(!is_numeric(strpos($datis,"404 - PAGE NOT FOUND"))) { // Protects from bad replies
+			$afld_data['atis_text'] = $datis;
+		}
 	}
 	// Process ATIS... parse approach and departure info
 	$atxt = explode(".",$afld_data['atis_text']);

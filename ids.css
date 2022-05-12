@@ -177,11 +177,26 @@ div.atis_code {
 	color: #15ABFF;
 	font-size: 7vw;
 	font-weight: bold;
+	text-align: center;
+}
+
+div.atis_container {
 	overflow: hidden;
 	white-space: nowrap;
-	text-align: center;
 	border-right: 1px solid white;
-	border-left: 1px solid white;
+	border-left: 1px solid white;	
+}
+
+div.atis_label {
+	position: absolute;
+	top: 0;
+	left: 5px;
+	bottom: 0;
+	z-index: 1000;
+	color: gray;
+	font-size: 1vw;	
+	font-weight: bold;
+	text-decoration: underline;
 }
 
 div.info_grid, div.text_grid {

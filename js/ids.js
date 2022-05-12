@@ -101,12 +101,26 @@
 		// Set Tower IDS fields
 		//init = false; // For testing only, this needs to be removed
 		changes = changeDetection(init,changes,document.getElementById("atis_code").innerHTML,json.airfield_data[defaultAirfield]['atis_code'],"atis_code");
+		//changes = changeDetection(init,changes,document.getElementById("atis_code_d").innerHTML,json.airfield_data[defaultAirfield]['atis_code_dep'],"atis_code_dep");
 		if(json.airfield_data[defaultAirfield]['atis_code'] != 'undefined') {
 			document.getElementById("atis_code").innerHTML = json.airfield_data[defaultAirfield]['atis_code'];
 		}
 		else {
 			document.getElementById("atis_code").innerHTML = '--';
 		}
+		if(json.airfield_data[defaultAirfield]['multi_atis']) {
+			$("#atis_label_arrival").show();
+			$("#atis_container_departure").addClass("col-sm-1").show();
+			$("#second_row").removeClass("col-sm-11").addClass("col-sm-10");
+			//document.getElementById("atis_code").innerHTML = json.airfield_data[defaultAirfield]['atis_code'];
+			document.getElementById("atis_code_d").innerHTML = json.airfield_data[defaultAirfield]['atis_code_dep'];
+		}
+		else {
+			$("#atis_label_arrival").hide();
+			$("#atis_container_departure").removeClass("col-sm-1").hide();
+			$("#second_row").removeClass("col-sm-10").addClass("col-sm-11");
+			document.getElementById("atis_code_d").innerHTML = '--';
+		}		
 		changes = changeDetection(init,changes,document.getElementById("metar").innerHTML,json.airfield_data[defaultAirfield]['metar'],"metar");
 		if(json.airfield_data[defaultAirfield]['metar'] != 'undefined') {
 			document.getElementById("metar").innerHTML = json.airfield_data[defaultAirfield]['metar'];

@@ -37,8 +37,9 @@
 			</div>
 		</div>
 		<div class="row" style="border-right:2px solid white">
-			<div class="col-sm-1 atis_code h-100" id="atis_code"></div>
-			<div class="col-sm-11">
+			<div id="atis_container" class="col-sm-1 atis_container h-100"><div id="atis_label_arrival" class="atis_label">Arrival</div><div class="atis_code h-100" id="atis_code"></div></div>
+			<div id="atis_container_departure" class="col-sm-1 atis_container h-100"><div class="atis_label">Departure</div><div class="atis_code h-100" id="atis_code_d"></div></div>
+			<div id="second_row" class="col-sm-10">
 				<div class="row">
 					<div class="col-sm-12 text_grid" id="metar"></div>
 				</div>
