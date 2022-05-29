@@ -25,6 +25,8 @@ define('USE_DB', false);
 define('BUG_REPORTING', true);
 // Set to true if traffic management module is available
 define('TRAFFIC_MANAGEMENT', false);
+// Set to true if airspace explorer module is available
+define('AIRSPACE_EXPLORER', false);
 // URL for production site
 define('PROD_URL', 'ztlarcc.org');
 // Grant admin priveleges (optional, enter CID). Grants 1 user admin priveleges without being an ARTCC staff member.
