@@ -79,7 +79,7 @@ foreach($feed['pilots'] as $sortie) {
 			$PColor = '#00FF00';
 		}
 		elseif($sortie['flight_plan']['arrival'] == $_REQUEST['afld']) {
-			$PColor = '#FFFF00';
+			$PColor = 'red'; //'#FFFF00';
 		}	
 		else {
 			$PColor = '#FF0000';
