@@ -31,8 +31,10 @@ class Security extends VATSIM_Connect {
 	public function init_sso() { // Start the SSO sequence
 		session_start();
 		$_SESSION["vids_authenticated"] = false;
-		$this->access_token(); // Verify or get a token
-		$this->user_data(); // Use token to authenticate and get user data
+		if(!$_SESSION['access_token']) { // Prevents SSO sequence if it has already occurred this session
+			$this->access_token(); // Verify or get a token
+			$this->user_data(); // Use token to authenticate and get user data
+		}
 		$this->authorize(); // Use user data to verify system authorization (call VATUSA API)
 		$this->write_access_log(); // Write access attempt to logfile
 	}
