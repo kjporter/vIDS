@@ -18,8 +18,8 @@ include_once "vars/sso_variables.php";
 
 class Security extends VATSIM_Connect {
 	
-	private $blacklisted = false;
-	private $whitelisted = false;
+	private $rejectlisted = false;
+	private $allowlisted = false;
 	private $alert_text = "";
 	private $alert_style = "";
 	private $valid_auth = false;
@@ -42,25 +42,25 @@ class Security extends VATSIM_Connect {
 	private function authorize() {
 		$this->dump = "";
 		if(isset($this->userData_json['data']['vatsim']['rating']['id'])) {
-			// Check to see if the user is blacklisted before authorizing them
-			//$blacklisted = false;
+			// Check to see if the user is rejectlisted before authorizing them
+			//$rejectlisted = false;
 			$this->dump .= "Checking to see if user is authorized... <br/>";
-			//$blacklist = "data/blacklist.dat";
-			//if(file_exists($blacklist)) {
-			//	if(strpos(file_get_contents($blacklist),$this->userData_json['data']['cid']) !== false) {
-				if(strpos(data_read('blacklist.dat','string'),$this->userData_json['data']['cid']) !== false) {
-					$this->blacklisted = true;
-					$this->dump .= "User blacklisted :(<br/>";
+			//$rejectlist = "data/rejectlist.dat";
+			//if(file_exists($rejectlist)) {
+			//	if(strpos(file_get_contents($rejectlist),$this->userData_json['data']['cid']) !== false) {
+				if(strpos(data_read('rejectlist.dat','string'),$this->userData_json['data']['cid']) !== false) {
+					$this->rejectlisted = true;
+					$this->dump .= "User rejectlisted :(<br/>";
 				}
-				elseif(strpos(data_read('whitelist.dat','string'),$this->userData_json['data']['cid']) !== false) {
-					$this->whitelisted = true;
-					$this->dump .= "User whitelisted :)<br/>";
+				elseif(strpos(data_read('allowlist.dat','string'),$this->userData_json['data']['cid']) !== false) {
+					$this->allowlisted = true;
+					$this->dump .= "User allowlisted :)<br/>";
 				}				
 				
 			//}
 			// We've got the user data from the API, check to make sure they have a valid controller rating (> 0)
 			//$dump .= "<br/>Controller rating: " . $userData_json['vatsim']['rating']['id'];
-			if(!$this->blacklisted && (($this->userData_json['data']['vatsim']['rating']['id']>0)||$this->whitelisted)) { // The user logging in is at least an observer
+			if(!$this->rejectlisted && (($this->userData_json['data']['vatsim']['rating']['id']>0)||$this->allowlisted)) { // The user logging in is at least an observer
 				$this->dump .= "User authorized :)<br/>";
 				// Check the VATUSA API to see if the user is a controller at THIS facility before granting access
 				// *Note* this API call will only work for facilities within the VATUSA region
@@ -72,7 +72,7 @@ class Security extends VATSIM_Connect {
 				curl_setopt($cu,CURLOPT_SSL_VERIFYPEER,false); // There is no reason to verify the SSL certificate, skip this
 				$roster = curl_exec($cu); // Execute CURL
 				curl_close($cu);
-				if((strpos($roster,$this->userData_json['data']['cid']) !== false)||(strpos($this->sso_vars['sso_endpoint'],"dev") !== false)||$this->whitelisted) { // Does the CID exist in the roster JSON... OR are we using the dev endpoint (fake CIDs) OR are they whitelisted?
+				if((strpos($roster,$this->userData_json['data']['cid']) !== false)||(strpos($this->sso_vars['sso_endpoint'],"dev") !== false)||$this->allowlisted) { // Does the CID exist in the roster JSON... OR are we using the dev endpoint (fake CIDs) OR are they allowlisted?
 					$this->dump .= "User is a home or visiting controller!<br/>";
 					$this->valid_auth = true;
 					$_SESSION["vids_authenticated"] = true;
@@ -99,7 +99,7 @@ class Security extends VATSIM_Connect {
 					$this->alert_style = "alert alert-danger alert-visible";						
 				}
 			}
-			elseif($blacklisted) {
+			elseif($rejectlisted) {
 				$this->alert_text = "Your access to this system has been revoked. Contact a member of your ARTCC staff.";
 				$this->alert_style = "alert alert-danger alert-visible";				
 			}
@@ -128,7 +128,7 @@ class Security extends VATSIM_Connect {
 		if(isset($this->userData_json['data'])) {
 		$log_str = "[" . date("YmdHis") . "] CID " . $this->userData_json['data']['cid'] . "/" . $this->userData_json['data']['personal']['name_full'] . ": Login attempt ";
 		$log_str .= $this->valid_auth ? 'successful' : 'failed';
-		$log_str .= $this->blacklisted ? ' - blacklisted' : '';
+		$log_str .= $this->rejectlisted ? ' - rejectlisted' : '';
 		$log_str .= " (" . $_SERVER['REMOTE_ADDR'] . ")";
 		// Write action to logfile **Note: logfiles go to both the file AND the database when the db is in use
 		file_put_contents("data/access.log",$log_str . "\n",FILE_APPEND);
