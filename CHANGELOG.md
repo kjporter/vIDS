@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/kjporter/vIDS/compare/v1.2.2...v1.2.3) (2022-08-27)
+
+
+### Fix
+
+* IAP slow-load issue ([95979a5](https://github.com/kjporter/vIDS/commit/95979a58afac0ab705b137f2e39c744819afcabc))
+
 ## [1.2.2](https://github.com/kjporter/vIDS/compare/v1.2.1...v1.2.2) (2022-08-24)
 
 
