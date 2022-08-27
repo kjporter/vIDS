@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/kjporter/vIDS/compare/v1.2.3...v1.2.4) (2022-08-27)
+
+
+### Fix
+
+* Authentication bug ([ae778e2](https://github.com/kjporter/vIDS/commit/ae778e2cdf4428a0c626e80ba1fa805e8def0ea8))
+
 ## [1.2.3](https://github.com/kjporter/vIDS/compare/v1.2.2...v1.2.3) (2022-08-27)
 
 
