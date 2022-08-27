@@ -1281,22 +1281,22 @@ include_once "vars/user_modals.php"; // User-defined modal content moved here
 				<div class="row">
 					<div class="col-lg-3">
 						<h4>Approaches</h4>
-						<ul id="PROC_iap">
+						<ul id="PROC_iap" style="padding:0;">
 						</ul>
 					</div>
 					<div class="col-lg-3">
 						<h4>Departures</h4>
-						<ul id="PROC_dp">
+						<ul id="PROC_dp" style="padding:0;">
 						</ul>
 					</div>
 					<div class="col-lg-3">
 						<h4>Arrivals</h4>
-						<ul id="PROC_star">
+						<ul id="PROC_star" style="padding:0;">
 						</ul>
 					</div>
 					<div class="col-lg-3">
 						<h4>Misc</h4>
-						<ul id="PROC_misc">
+						<ul id="PROC_misc" style="padding:0;">
 						</ul>
 					</div>
 				</div>

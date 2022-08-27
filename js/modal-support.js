@@ -311,7 +311,8 @@ function loadProc(afld) { // Calls FAA data class, retrieves JSON, and serves it
 				document.getElementById("PROC_load").innerHTML = "<span id=\"RDY_" + afld + "\"></span>";				
 			}
 		};
-		xhttp.open("GET", "faa_data.php?afld_id=" + afld, true); 
+		//xhttp.open("GET", "faa_data.php?afld_id=" + afld, true);
+		xhttp.open("GET", "avi_api.php?afld_id=" + afld, true); 
 		xhttp.send();
 	} 	
 }
