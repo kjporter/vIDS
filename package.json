@@ -1,6 +1,6 @@
 {
   "name": "@kjporter/vIDS",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "virtual Information Display System",
   "main": "index.php",
   "private": true,

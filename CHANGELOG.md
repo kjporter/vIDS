@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/kjporter/vIDS/compare/v1.2.4...v1.2.5) (2022-10-04)
+
+
+### Fix
+
+* corrected session invalidation error ([455158a](https://github.com/kjporter/vIDS/commit/455158aa13b136b7c7a8ca16d5c69aa44f7a32b5))
+
 ## [1.2.4](https://github.com/kjporter/vIDS/compare/v1.2.3...v1.2.4) (2022-08-27)
 
 
