@@ -642,10 +642,16 @@ function stopVideo(id) {
 			saveConfiguration('afld',afld_config_str);
 			var arrivals = getSelectValues(document.getElementById("arr_rwy")).toString();
 			var departures = getSelectValues(document.getElementById("dep_rwy")).toString();
-			saveConfiguration('flow','\n' + document.getElementById("flow").value + '\n' + arrivals + '\n' + departures);
+			if(document.getElementById("flow").value.length > 0 && arrivals.length > 0 && departures.length > 0) {
+				saveConfiguration('flow','\n' + document.getElementById("flow").value + '\n' + arrivals + '\n' + departures);
+			}
+			else {
+				valid = false;
+				valid_str += "- Unable to set flow/runways. Ensure you have departure and arrival types selected\n";
+			}
 			saveConfiguration('cic',document.getElementById("CIC_text").value);
 		}
-		else {
+		if(!valid) {
 			alert('Please fix the following errors: \n' + valid_str);
 		}
 	}
