@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/kjporter/vIDS/compare/v1.2.5...v1.2.6) (2022-10-04)
+
+
+### Fix
+
+* added protection to rwy fields ([6b233ee](https://github.com/kjporter/vIDS/commit/6b233ee3d9c1ec7b0ab379a4ffedd1accd694096))
+
 ## [1.2.5](https://github.com/kjporter/vIDS/compare/v1.2.4...v1.2.5) (2022-10-04)
 
 
