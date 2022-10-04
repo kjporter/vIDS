@@ -16,6 +16,11 @@ include_once "vatsim_connect.php";
 include_once "data_management.php";	
 include_once "vars/sso_variables.php";
 
+if(!isset($db)) {
+	// Start DB connection and select the DB
+	$db = new MySQL_db(fetch_my_url(),$db_variables);
+}
+
 class Security extends VATSIM_Connect {
 	
 	private $rejectlisted = false;
@@ -27,19 +32,24 @@ class Security extends VATSIM_Connect {
 	private $full_name = "";
 	private $user_rating = "";
 	private $vatsim_cid = "";
+	private $auth_cookie = "vidsAuth";
+	private $auth_cookie_token = null;
+	private $persistent_login_duration = 86400 * 30; // 86400 = 1 day
 	
 	public function init_sso() { // Start the SSO sequence
 		session_start();
 		$_SESSION["vids_authenticated"] = false;
-		//if(!$_SESSION['access_token']) { // Prevents SSO sequence if it has already occurred this session
+		if(!$this->handleCookie()) { // Prevents SSO sequence if user has a valid cookie
+			//echo "VATSIM CONNECT AUTH";
 			$this->access_token(); // Verify or get a token
 			$this->user_data(); // Use token to authenticate and get user data
-		//}
+		}
 		$this->authorize(); // Use user data to verify system authorization (call VATUSA API)
 		$this->write_access_log(); // Write access attempt to logfile
 	}
 	
 	private function authorize() {
+		//echo "VATUSA API PULL";
 		$this->dump = "";
 		if(isset($this->userData_json['data']['vatsim']['rating']['id'])) {
 			// Check to see if the user is rejectlisted before authorizing them
@@ -75,6 +85,7 @@ class Security extends VATSIM_Connect {
 				if((strpos($roster,$this->userData_json['data']['cid']) !== false)||(strpos($this->sso_vars['sso_endpoint'],"dev") !== false)||$this->allowlisted) { // Does the CID exist in the roster JSON... OR are we using the dev endpoint (fake CIDs) OR are they allowlisted?
 					$this->dump .= "User is a home or visiting controller!<br/>";
 					$this->valid_auth = true;
+					$this->setAuthCookie($this->auth_cookie_token);
 					$_SESSION["vids_authenticated"] = true;
 					$_SESSION["cid"] = $this->userData_json['data']['cid']; // Added 1/25/22 for passage to plugins for logging purposes
 					if(isset($this->userData_json['data']['personal']['name_full'])) { // This shouldn't really be necessary, but it prevents an error when the full name isn't available
@@ -99,7 +110,7 @@ class Security extends VATSIM_Connect {
 					$this->alert_style = "alert alert-danger alert-visible";						
 				}
 			}
-			elseif($rejectlisted) {
+			elseif($this->rejectlisted) {
 				$this->alert_text = "Your access to this system has been revoked. Contact a member of your ARTCC staff.";
 				$this->alert_style = "alert alert-danger alert-visible";				
 			}
@@ -136,6 +147,56 @@ class Security extends VATSIM_Connect {
 			data_save('access.log',$log_str . "\n",false);
 		}
 		}
+	}
+
+	private function handleCookie($destroy=false) { // Handles persistent login cookie
+		if(!$destroy) {
+			// Check for cookie, if found extend exp and return true
+			if(isset($_COOKIE[$this->auth_cookie])) {
+				$result = $GLOBALS['db']->query("SELECT token,userData FROM authUser WHERE expires_at > now()");
+				if($GLOBALS['db']->row_exists($result)) { // Cookie token matches value in DB, then set user variables, update cookie, and return true
+					//echo "COOKIE FOUND: ";
+					$res_assoc = $GLOBALS['db']->fetch_assoc($result);
+					// Set user vars
+					$this->auth_cookie_token = $res_assoc['token'];
+					//echo $res_assoc['token'];
+					$this->userData_json = json_decode($res_assoc['userData'],true);
+					//echo "USER DATA: " . $res_assoc['userData'];
+					// Update cookie expiration
+					//$this->setAuthCookie($_COOKIE[$this->auth_cookie]); //NO! This should be done in the authorize function
+					return true;
+				}
+				//echo "ERROR - NO MATCHING DB TOKEN!";
+			}
+			//echo "ERROR - COOKIE NOT FOUND!";
+			return false;
+		}
+		else { // Logout... set cookie exp to a date in the past
+			$this->setAuthCookie($this->access_token,true);
+			return false;
+		}
+	}
+
+	private function setAuthCookie($val,$destroy=false) {
+		//echo "SETTING AUTH COOKIE $val";
+		$cookieExpire = time() + $this->persistent_login_duration;
+		if($destroy) {
+			$cookieExpire = time() - 1000; // set time in the past
+		}
+		$cookieExpireSQL = date('Y-m-d H:i:s',$cookieExpire);
+		$queryStr = "UPDATE authUser SET expires_at = '$cookieExpireSQL', updated_at = now() WHERE token = '$val'";
+		if($val==null) {
+			$val = hash('sha256', time() . 'vids'); // Generate token
+			$json = json_encode($this->userData_json);
+			$queryStr = "INSERT INTO authUser VALUES ('$val','$json','$cookieExpireSQL',now(),now())";
+		}
+		$GLOBALS['db']->query($queryStr);
+		//echo $GLOBALS['db']->error();
+		setcookie($this->auth_cookie,$val,$cookieExpire,"/");
+	}
+
+	public function logout() {
+		$this->handleCookie(true);
 	}
 }
 ?>
