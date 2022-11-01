@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/kjporter/vIDS/compare/v1.2.6...v1.2.7) (2022-11-01)
+
+
+### Fix
+
+* cookie auth error ([840eb99](https://github.com/kjporter/vIDS/commit/840eb990907cdc7d95d6eabda98c0cb25821dc5a))
+
 ## [1.2.6](https://github.com/kjporter/vIDS/compare/v1.2.5...v1.2.6) (2022-10-04)
 
 
