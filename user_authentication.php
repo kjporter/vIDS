@@ -153,7 +153,7 @@ class Security extends VATSIM_Connect {
 		if(!$destroy) {
 			// Check for cookie, if found extend exp and return true
 			if(isset($_COOKIE[$this->auth_cookie])) {
-				$result = $GLOBALS['db']->query("SELECT token,userData FROM authUser WHERE expires_at > now()");
+				$result = $GLOBALS['db']->query("SELECT token,userData FROM authUser WHERE token = " . $_COOKIE[$this->auth_cookie] . "AND expires_at > now()");
 				if($GLOBALS['db']->row_exists($result)) { // Cookie token matches value in DB, then set user variables, update cookie, and return true
 					//echo "COOKIE FOUND: ";
 					$res_assoc = $GLOBALS['db']->fetch_assoc($result);
