@@ -725,7 +725,7 @@ include_once "vars/user_modals.php"; // User-defined modal content moved here
                         <div class="form-group">
                             <label for="time">Time</label>
                             <input type="text" id="time" class="form-control" placeholder="0000">
-							<small id="timeHelp" class="form-text text-muted">When conditions occurred or were encountered (Zulu), leave blank for current time</small>
+							<small id="timeHelp" class="form-text text-muted">When conditions occurred or were encountered (Zulu), LEAVE BLANK for current time</small>
 							</select>
                         </div>
                         <div class="form-group">
