@@ -29,6 +29,8 @@ define('TRAFFIC_MANAGEMENT', false);
 define('AIRSPACE_EXPLORER', false);
 // URL for production site
 define('PROD_URL', 'ztlarcc.org');
+// API KEY for SimTraffic PIREPs
+define('ST_PIREP_API_KEY', '');
 // Grant admin priveleges (optional, enter CID). Grants 1 user admin priveleges without being an ARTCC staff member.
 define('ACONST', 999);
 // Identifier for the overarching facility (normally the ARTCC). Ex: ZTL

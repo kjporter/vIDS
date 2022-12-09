@@ -160,7 +160,7 @@
 			</div>
 		</div>
 		<div class="row" style="border-bottom:0px">
-			<div class="col-sm-12"><span class="cell_header">PIREPs</span><div onclick="clearStyle(this);""><textarea id="PIREP_info" class="txt_low" rows="3" readonly></textarea></div></div>
+			<div class="col-sm-12"><span class="cell_header">PIREPs</span>&nbsp;<a href="https://pirep.simtraffic.net/" target="_blank"><i class="fas fa-map"></i></a><div onclick="clearStyle(this);""><textarea id="PIREP_info" class="txt_low" rows="3" readonly></textarea></div></div>
 		</div>	
 	</div>
 	<div class="col-sm-4">

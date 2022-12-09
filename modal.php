@@ -719,13 +719,13 @@ include_once "vars/user_modals.php"; // User-defined modal content moved here
                         <div class="form-group">
                             <label for="location">Location</label>
                             <input type="text" id="location" class="form-control" placeholder="<?php echo DEFAULT_AFLD_ID; ?>">
-							<small id="locationHelp" class="form-text text-muted">Use Airport or NAVAID identifiers only</small>
+							<small id="locationHelp" class="form-text text-muted">Use Airport, NAVAID, or fix identifiers only (no lat/long)</small>
 							</select>
                         </div>
                         <div class="form-group">
                             <label for="time">Time</label>
                             <input type="text" id="time" class="form-control" placeholder="0000">
-							<small id="timeHelp" class="form-text text-muted">When conditions occurred or were encountered (Zulu)</small>
+							<small id="timeHelp" class="form-text text-muted">When conditions occurred or were encountered (Zulu), leave blank for current time</small>
 							</select>
                         </div>
                         <div class="form-group">
@@ -743,7 +743,11 @@ include_once "vars/user_modals.php"; // User-defined modal content moved here
                         <div class="form-group">
                             <label for="conditions">Flight Conditions/Remarks</label>
                             <textarea id="conditions" class="form-control" rows="3"></textarea>
-							<small id="conditionsHelp" class="form-text text-muted">Enter weather conditions (turbulence, icing, windshear) here</small>
+							<small id="conditionsHelp" class="form-text text-muted">Enter weather conditions (turbulence, icing, windshear) here</small><br>
+							<small id="conditionsHelp1" class="form-text text-muted">For turbulence, use these codes: TB (CAT|CHOP|LLWS|MWAVE) (NEG|SMTH-LGT|LGT|LGT-MOD|MOD|MOD-SEV|SEV|SEV-EXTM|EXTM) (ISOL|OCNL|CONT)<br>
+							Example: TB CAT LGT OCNL</small><br>
+							<small id="conditionsHelp2" class="form-text text-muted">For icing, use these codes: IC (RIME|CLEAR|MIXED) (NEG|NEGclr|TRC|TRC-LGT|LGT|LGT-MOD|MOD|MOD-SEV|HVY|SEV)<br>
+							Example: IC MIXED MOD</small>
 							</select>
                         </div>
                     </form>

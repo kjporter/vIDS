@@ -23,7 +23,7 @@
 		else {
 			document.getElementById("location").classList.add("is-valid");
 		}
-		if(document.getElementById("time").value.length < 4) {
+		if((document.getElementById("time").value.length > 1)&&(document.getElementById("time").value.length != 4)) {
 			valid = false;
 			document.getElementById("time").classList.add("is-invalid");
 		}
@@ -68,11 +68,81 @@
 			}
 			$('#PIREP').modal('toggle');
 			saveConfiguration('pirep',pirep_string.replace('/RM','/R')); // String replace deals with the /RM HTTP server error
+			sendPirepToSTApi(pirep_string); // Sends the PIREP to ST API
 			document.getElementById("pirep_entry").reset();
 			clearPirepValidation();
 		}
 	}
-	
+
+	function sendPirepToSTApi(pirep_string) {
+		// Location lookup
+		//location = latLonLookupST_API(document.getElementById("location").value);
+		// Parse condiitons field
+		let conditions = document.getElementById("conditions").value;
+		let turb_type = turb_intensity = turb_frequency = ice_type = ice_intensity = '';
+		let turb_arr = conditions.match(/(TB)\s\w*\s\w*\s\w*/g);
+		if(Array.isArray(turb_arr)) {
+			let turb_part = turb_arr[0].split(' ');
+			turb_type = turb_part[0];
+			turb_intensity = turb_part[1];
+			turb_frequency = turb_part[2];
+		}
+		let ice_arr = conditions.match(/(IC)\s\w*\s\w*/g);
+		if(Array.isArray(ice_arr)) {
+			let ice_part = ice_arr[0].split(' ');
+			ice_type = ice_part[0];
+			ice_intensity = ice_part[1];
+		}		
+		// Create observation time
+		const today = new Date();
+		const yyyy = today.getUTCFullYear();
+		let mm = today.getUTCMonth() + 1; // Months start at 0!
+		let dd = today.getUTCDate();
+		if (dd < 10) dd = '0' + dd;
+		if (mm < 10) mm = '0' + mm;
+		let observationDate = yyyy + '-' + mm + '-' + dd + ' ';
+		if(document.getElementById("time").value != '') {
+			var observationDateTime = observationDate + document.getElementById("time").value.substr(0,2) + ':' + document.getElementById("time").value.substr(2,2) + ':00';
+		}
+		else { // Time now
+			var observationDateTime = observationDate + today.getUTCHours() + ':' + today.getUTCMinutes() + ':' + today.getUTCSeconds();
+		}
+		// Build PIREP JSON
+		let pirep = {	'position' : document.getElementById("location").value.toUpperCase(),
+						'data' : {
+							'observation_time' : observationDateTime,
+							'latitude' : null,
+							'longitude' : null,
+							'raw_text' : pirep_string,
+							'aircraft_ref' : document.getElementById("aircraft").value,
+							'altitude_ft_msl' : document.getElementById("altitude").value,
+							'sky_cover' : '', // Not implemented
+							'cloud_base_ft' : '', // Not implemented
+							'turbulence_type' : turb_type,
+							'turbulence_intensity' : turb_intensity,
+							'turbulence_frequency' : turb_frequency,
+							'icing_type' : ice_type,
+							'icing_intensity' : ice_intensity,
+							'visibility_statute_mi' : '', // Not implemented
+							'wx_string' : '', // Not implemented
+							'temp_c' : '', // Not implemented
+							'wind_dir_degrees' : '', // Not implemented
+							'wind_speed_k' : '', // Not implemented
+							'wind_gust_kt' : '', // Not implemented
+							'pirep_type' : document.getElementById("urgency").value	
+						}
+		};
+		var xhttp;
+		xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "https://pirep.simtraffic.net/api/index.php?api_key=" + simTrafficPirepKey + "&pirep=" + JSON.stringify(pirep), true);
+		xhttp.send();		
+	}
+/*
+	function latLonLookupST_API(location_id) {
+		let location = {'latitude' : 0, 'longitude' : 0};
+		return location;
+	}
+*/	
 	function clearPirepValidation() { // Resets PIREP validation tooltips
 		var fields = new Array("location","time","altitude","aircraft","conditions");
 		for(var x=0;x<fields.length;x++) {

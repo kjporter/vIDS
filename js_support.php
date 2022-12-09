@@ -55,6 +55,7 @@ function js_globals() { // Translates PHP globals into JS globals
 	global $flow_override;
 	global $rwy_flows;
 	$js_globals = "	const defaultAirfield = '" . DEFAULT_AFLD_ICAO . "';
+					const simTrafficPirepKey = '" . ST_PIREP_API_KEY . "';
 					const positions = new Array('" . implode("','",array_unique(array_merge($positions[0][1],$positions[1][1],$positions[2][1],$positions[3][1],$positions[4][1],$positions[5][1],$positions[6][1],$positions[7][1]))) . "');
 					const underlying_fields = new Array('" . implode("','",$satellites) . "');
 					const departure_gates = new Array('" . implode("','",$departure_gates) . "');
