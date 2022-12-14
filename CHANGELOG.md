@@ -1,3 +1,11 @@
+## [1.3.1](https://github.com/kjporter/vIDS/compare/v1.3.0...v1.3.1) (2022-12-14)
+
+
+### Fix
+
+* corrects db query bug ([2560eb4](https://github.com/kjporter/vIDS/commit/2560eb429a6325a10bdad2b78ac73ce4e686aa0e))
+* toggles cache buster ([8b4e46d](https://github.com/kjporter/vIDS/commit/8b4e46dfaab8100f5f7558dc7b2250766a901771))
+
 ## [1.2.7](https://github.com/kjporter/vIDS/compare/v1.2.6...v1.2.7) (2022-11-01)
 
 
