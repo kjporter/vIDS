@@ -32,11 +32,14 @@ function get_version() { // Fetches software version from package.json and retur
 }
 
 function auto_version($file) { // Used to version files and bust CloudFlare's caching system for JS
-  if(strpos($file, '/') !== 0 || !file_exists($_SERVER['DOCUMENT_ROOT'] . $file))
-    return $file;
+	if(CACHE_BUSTER) {
+  		if(strpos($file, '/') !== 0 || !file_exists($_SERVER['DOCUMENT_ROOT'] . $file))
+    		return $file;
 
-  $mtime = filemtime($_SERVER['DOCUMENT_ROOT'] . $file);
-  return preg_replace('{\\.([^./]+)$}', ".$mtime.\$1", $file);
+  		$mtime = filemtime($_SERVER['DOCUMENT_ROOT'] . $file);
+  		return preg_replace('{\\.([^./]+)$}', ".$mtime.\$1", $file);
+	}
+	return $file;
 }
 
 // Cachebuster for JS on Cloudflare

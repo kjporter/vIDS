@@ -21,6 +21,8 @@
 define('DEBUG', false);
 // Set persistent storage mode. False = stores data in .dat files on server. True = stores data in database.
 define('USE_DB', false);
+// Toggle cache buster mode - true adds a stamp to static resources to prevent server-side caching
+define('CACHE_BUSTER', true);
 // Enable bug reporting system for users (stores reported bugs in rss feed)
 define('BUG_REPORTING', true);
 // Set to true if traffic management module is available
