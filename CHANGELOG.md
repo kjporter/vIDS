@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/kjporter/vIDS/compare/v1.3.1...v1.3.2) (2022-12-23)
+
+
+### Fix
+
+* syntax error ([e98095d](https://github.com/kjporter/vIDS/commit/e98095d33e9efc9f43e1d388f5142c28f80538c3))
+
 ## [1.3.1](https://github.com/kjporter/vIDS/compare/v1.3.0...v1.3.1) (2022-12-14)
 
 
