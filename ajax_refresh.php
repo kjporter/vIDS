@@ -196,7 +196,15 @@ foreach($airfields as $afld) {
 		}
 	}
 */
-	if(!$afld_data['atis_online'] || !isset($afld_data['atis_online'])) { // vATIS is offline or not found in status array... set fields appropriately
+
+	$atis_unavailable = false;
+	if(!isset($afld_data['atis_online'])) {
+		$atis_unavailable = true;
+	}
+	elseif(!$afld_data['atis_online']) {
+		$atis_unavailable = true;
+	}
+	if($atis_unavailable) { // vATIS is offline or not found in status array... set fields appropriately
 		$afld_data['atis_online'] = 0;
 		$afld_data['atis_code'] = "--";
 		$afld_data['traffic_flow'] = "OFFLINE";
