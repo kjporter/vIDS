@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/kjporter/vIDS/compare/v1.3.2...v1.3.3) (2023-01-10)
+
+
+### Fix
+
+* SimTraffic link ([accab3f](https://github.com/kjporter/vIDS/commit/accab3f7a5248559e44b06c5000872b952a197c4))
+
 ## [1.3.2](https://github.com/kjporter/vIDS/compare/v1.3.1...v1.3.2) (2022-12-23)
 
 
