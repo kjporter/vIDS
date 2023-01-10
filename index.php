@@ -155,11 +155,9 @@ else {
 	}	
 	print "	</div>
 			<div class=\"col-lg-6 menu_button\"><br/>
-			<a onclick=\"launchMulti();\" class=\"btn btn-lg btn-block btn-primary\"><i class=\"fas fa-compress-arrows-alt fa-lg\"></i><br/>Multi-Airfield<br/>IDS</a><br/>";
-	if (TRAFFIC_MANAGEMENT) {
-		print "	<a href=\"traffic.php\" target=\"_blank\" class=\"btn btn-lg btn-block btn-primary\"><i class=\"fas fa-traffic-light fa-lg\"></i><br/>Traffic Management<br/>Tools</a><br/>";
-	}
-	print " <a onclick=\"showAboutHelp();\" class=\"btn btn-lg btn-block btn-primary\"><i class=\"far fa-life-ring fa-lg\"></i><br/>Help<br/>& About</a><br/>
+			<a onclick=\"launchMulti();\" class=\"btn btn-lg btn-block btn-primary\"><i class=\"fas fa-compress-arrows-alt fa-lg\"></i><br/>Multi-Airfield<br/>IDS</a><br/>
+			<a href=\"https://simtraffic.net\" target=\"_blank\" class=\"btn btn-lg btn-block btn-primary\"><i class=\"fas fa-traffic-light fa-lg\"></i><br/>Traffic Management<br/>Tools</a><br/>
+			<a onclick=\"showAboutHelp();\" class=\"btn btn-lg btn-block btn-primary\"><i class=\"far fa-life-ring fa-lg\"></i><br/>Help<br/>& About</a><br/>
 			<br/>
 			</div>
 			</div>";

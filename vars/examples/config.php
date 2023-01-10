@@ -25,8 +25,6 @@ define('USE_DB', false);
 define('CACHE_BUSTER', true);
 // Enable bug reporting system for users (stores reported bugs in rss feed)
 define('BUG_REPORTING', true);
-// Set to true if traffic management module is available
-define('TRAFFIC_MANAGEMENT', false);
 // Set to true if airspace explorer module is available
 define('AIRSPACE_EXPLORER', false);
 // URL for production site
