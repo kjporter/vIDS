@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/kjporter/vIDS/compare/v1.3.3...v1.3.4) (2023-01-21)
+
+
+### Fix
+
+* adds PIREP RB, fixes altitude ([e2441cb](https://github.com/kjporter/vIDS/commit/e2441cb2260a61341fc5690273d60449351e5e3d))
+
 ## [1.3.3](https://github.com/kjporter/vIDS/compare/v1.3.2...v1.3.3) (2023-01-10)
 
 
