@@ -107,6 +107,14 @@
 		else { // Time now
 			var observationDateTime = observationDate + today.getUTCHours() + ':' + today.getUTCMinutes() + ':' + today.getUTCSeconds();
 		}
+		// Format altitude
+		let altitude_str = document.getElementById("altitude").value;
+		if(altitude_str.substring(0,2) == 'FL') {
+			altitude_num = parseInt(altitude_str.substring(2)) * 100;
+		}
+		else {
+			altitude_num = document.getElementById("altitude").value.parseInt();
+		}
 		// Build PIREP JSON
 		let pirep = {	'position' : document.getElementById("location").value.toUpperCase(),
 						'data' : {
@@ -115,7 +123,7 @@
 							'longitude' : null,
 							'raw_text' : pirep_string,
 							'aircraft_ref' : document.getElementById("aircraft").value,
-							'altitude_ft_msl' : document.getElementById("altitude").value,
+							'altitude_ft_msl' : altitude_num, //document.getElementById("altitude").value,
 							'sky_cover' : '', // Not implemented
 							'cloud_base_ft' : '', // Not implemented
 							'turbulence_type' : turb_type,

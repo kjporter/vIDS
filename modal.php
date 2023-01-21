@@ -719,7 +719,7 @@ include_once "vars/user_modals.php"; // User-defined modal content moved here
                         <div class="form-group">
                             <label for="location">Location</label>
                             <input type="text" id="location" class="form-control" placeholder="<?php echo DEFAULT_AFLD_ID; ?>">
-							<small id="locationHelp" class="form-text text-muted">Use Airport, NAVAID, or fix identifiers only (no lat/long)</small>
+							<small id="locationHelp" class="form-text text-muted">Use Airport, NAVAID, and fixes (no lat/long).&nbsp;<span class="badge badge-primary">New!</span> Bearing/range cuts may be entered off of a NAVAID or fix in the format XXXBBBRRR (ex. ATL090100). You must enter all 6-digits of the bearing and range.</small>
 							</select>
                         </div>
                         <div class="form-group">
