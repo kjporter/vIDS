@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/kjporter/vIDS/compare/v1.3.4...v1.3.5) (2023-01-21)
+
+
+### Fix
+
+* minor update to description ([a234dcb](https://github.com/kjporter/vIDS/commit/a234dcb4da4c1962314054a5bafeac21416af599))
+
 ## [1.3.4](https://github.com/kjporter/vIDS/compare/v1.3.3...v1.3.4) (2023-01-21)
 
 
