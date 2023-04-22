@@ -1,3 +1,10 @@
+## [1.3.6](https://github.com/kjporter/vIDS/compare/v1.3.5...v1.3.6) (2023-04-22)
+
+
+### Fix
+
+* Adds API endpoints for TMU Notices ([e3c73dc](https://github.com/kjporter/vIDS/commit/e3c73dcdbe474138ac14f7f9aef3e60b56b0b326))
+
 ## [1.3.5](https://github.com/kjporter/vIDS/compare/v1.3.4...v1.3.5) (2023-01-21)
 
 
