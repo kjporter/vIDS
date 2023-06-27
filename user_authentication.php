@@ -188,7 +188,8 @@ class Security extends VATSIM_Connect {
 		if($val==null) {
 			$val = hash('sha256', time() . 'vids'); // Generate token
 			$json = json_encode($this->userData_json);
-			$queryStr = "INSERT INTO authUser VALUES ('$val','$json','$cookieExpireSQL',now(),now())";
+			$json_esc = str_replace("'","''",$json); // Shane O'Neill error bugfix!
+			$queryStr = "INSERT INTO authUser VALUES ('$val','$json_esc','$cookieExpireSQL',now(),now())";
 		}
 		$GLOBALS['db']->query($queryStr);
 		//echo $GLOBALS['db']->error();
