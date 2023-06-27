@@ -1,3 +1,10 @@
+## [1.3.7](https://github.com/kjporter/vIDS/compare/v1.3.6...v1.3.7) (2023-06-27)
+
+
+### Fix
+
+* Corrects login error ([48492dc](https://github.com/kjporter/vIDS/commit/48492dcffc23356da7a1150d2499728512b9782e))
+
 ## [1.3.6](https://github.com/kjporter/vIDS/compare/v1.3.5...v1.3.6) (2023-04-22)
 
 
