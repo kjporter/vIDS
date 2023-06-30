@@ -1,3 +1,10 @@
+## [1.3.8](https://github.com/kjporter/vIDS/compare/v1.3.7...v1.3.8) (2023-06-30)
+
+
+### Fix
+
+* Adds session variable to support ASX ([996c19a](https://github.com/kjporter/vIDS/commit/996c19a83563a06a3aeeae731e82a18e41cb6ab9))
+
 ## [1.3.7](https://github.com/kjporter/vIDS/compare/v1.3.6...v1.3.7) (2023-06-27)
 
 
