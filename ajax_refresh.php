@@ -361,9 +361,11 @@ foreach($airfields as $afld) {
 //				if(array_key_exists($rwy,$afld_data['rvr'])) {
 //					$rvr_val = $afld_data['rvr'][$rwy];
 //				}
-				if(array_key_exists($rwy,$rvr_detail['RWY'])) {
-					$rvr_val = $rvr_detail['RWY'][$rwy]['WORST'];
-				}				
+				if(is_array($rwy)) {
+					if(array_key_exists($rwy,$rvr_detail['RWY'])) {
+						$rvr_val = $rvr_detail['RWY'][$rwy]['WORST'];
+					}				
+				}
 			$rvr_disp[] = "RY$rwy $rvr_val";
 			}
 		}
