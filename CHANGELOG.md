@@ -1,3 +1,10 @@
+## [1.3.9](https://github.com/kjporter/vIDS/compare/v1.3.8...v1.3.9) (2023-08-08)
+
+
+### Fix
+
+* Adds null variable protection ([0abb50a](https://github.com/kjporter/vIDS/commit/0abb50a832b427d10e9a8c273d0bb119679ced31))
+
 ## [1.3.8](https://github.com/kjporter/vIDS/compare/v1.3.7...v1.3.8) (2023-06-30)
 
 
