@@ -14,9 +14,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.2.0
+          node-version: "lts/*"
       - name: Install semantic-release extra plugins
-        run: npm install --save-dev @semantic-release/changelog @semantic-release/git conventional-changelog-eslint
+        run: npm install --save-dev semantic-release @semantic-release/changelog @semantic-release/git conventional-changelog-eslint
       - name: Release        
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
