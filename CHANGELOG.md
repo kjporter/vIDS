@@ -1,3 +1,12 @@
+## [1.3.10](https://github.com/kjporter/vIDS/compare/v1.3.9...v1.3.10) (2023-10-28)
+
+
+### Fix
+
+* Corrects access/reject list bug ([5007410](https://github.com/kjporter/vIDS/commit/5007410d9528b1f35aed2cd5b9931cd2826650bf))
+* Updates NWS METAR/TAF endpoint ([95c6b4c](https://github.com/kjporter/vIDS/commit/95c6b4cdd0fd09beba653632affbcd03b2c90cc3))
+* Updates ROTG chart for ATL ([43e6a68](https://github.com/kjporter/vIDS/commit/43e6a689a3f8edfec497ff332ac68f83c104b985))
+
 ## [1.3.9](https://github.com/kjporter/vIDS/compare/v1.3.8...v1.3.9) (2023-08-08)
 
 
