@@ -35,7 +35,7 @@ if($_GET['function'] == 'accesslist_remove') {
 		unset($accesslist[array_search($_GET['cid'],$accesslist)]);
 		$accesslist = implode("\n", $accesslist);
 		//file_put_contents("data/blacklist.dat",$blacklist);
-		data_save($_GET['list'] . 'list.dat',$blacklist,true);
+		data_save($_GET['list'] . 'list.dat',$accesslist,true);
 		echo 'success';
 	}
 }

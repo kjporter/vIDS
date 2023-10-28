@@ -58,11 +58,11 @@ class Security extends VATSIM_Connect {
 			//$rejectlist = "data/rejectlist.dat";
 			//if(file_exists($rejectlist)) {
 			//	if(strpos(file_get_contents($rejectlist),$this->userData_json['data']['cid']) !== false) {
-				if(strpos(data_read('rejectlist.dat','string'),$this->userData_json['data']['cid']) !== false) {
+				if(strpos(data_read('blacklist.dat','string'),$this->userData_json['data']['cid']) !== false) {
 					$this->rejectlisted = true;
 					$this->dump .= "User rejectlisted :(<br/>";
 				}
-				elseif(strpos(data_read('allowlist.dat','string'),$this->userData_json['data']['cid']) !== false) {
+				elseif(strpos(data_read('whitelist.dat','string'),$this->userData_json['data']['cid']) !== false) {
 					$this->allowlisted = true;
 					$this->dump .= "User allowlisted :)<br/>";
 				}				
