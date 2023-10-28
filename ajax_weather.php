@@ -18,7 +18,7 @@
 	$station = $_GET['icao'];
 	// Fetch METAR
 
-	$url = "https://www.aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=" . strtoupper($station) . "&hoursBeforeNow=1";
+	$url = "https://aviationweather.gov/cgi-bin/data/dataserver.php?dataSource=metars&requestType=retrieve&format=xml&stationString=" . strtoupper($station) . "&hoursBeforeNow=1";
 	$cu = curl_init();
 	curl_setopt($cu,CURLOPT_URL,$url);
 	curl_setopt($cu,CURLOPT_RETURNTRANSFER,true);
@@ -30,7 +30,7 @@
 	$metar =  $xml->data->METAR->raw_text;
 
 	// Fetch TAF
-	$url = "https://www.aviationweather.gov/adds/dataserver_current/httpparam?dataSource=tafs&requestType=retrieve&format=xml&stationString=" . strtoupper($station) . "&hoursBeforeNow=1";
+	$url = "https://aviationweather.gov/cgi-bin/data/dataserver.php?dataSource=tafs&requestType=retrieve&format=xml&stationString=" . strtoupper($station) . "&hoursBeforeNow=1";
 	$cu = curl_init();
 	curl_setopt($cu,CURLOPT_URL,$url);
 	curl_setopt($cu,CURLOPT_RETURNTRANSFER,true);
