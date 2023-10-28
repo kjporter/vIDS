@@ -260,7 +260,7 @@
 				}?>
 			</ul>
 		</div>
-		<a href="#WX" data-remote="https://www.aviationweather.gov/taf/data?ids=katl&format=decoded&metars=on&date=&submit=Get+TAF+data" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal" data-target="#WX" onClick="fetchWeather('K<?php echo DEFAULT_AFLD_ID; ?>');"><i class="fas fa-cloud fa-lg"></i><br/>WX</a>
+		<a href="#WX" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal" data-target="#WX" onClick="fetchWeather('K<?php echo DEFAULT_AFLD_ID; ?>');"><i class="fas fa-cloud fa-lg"></i><br/>WX</a>
 		<a href="#RECAT" class="btn btn-lg btn-primary" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-plane-arrival fa-lg"></i><br/>RECAT</a>
 		<a href="#FREQS" class="btn btn-lg btn-primary template_local" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-broadcast-tower fa-lg"></i><br/>FREQS</a>
 		<a href="#aFREQS" class="btn btn-lg btn-primary template_a80" data-toggle="modal" data-bs-toggle="modal"><i class="fas fa-broadcast-tower fa-lg"></i><br/>FREQS</a>
