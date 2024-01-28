@@ -40,7 +40,7 @@ function fetch_rvr($station,$reply_raw_data=true,$ajax_reply=true) {	// Fetch RV
 		curl_close($cu);
 		$rvr_table = strpos($rvr,"<strong>");
 		$rvr_array = null;
-		if($rvr_table != false) {
+		if(($rvr_table != false)&&(strpos($rvr,"Current Data Unavailable") == false)) {
 			$rvr_table = substr($rvr,$rvr_table,strpos($rvr,"</table></font>") + 15 - $rvr_table); // Extract RVR table
 			$begin_links = strpos($rvr_table,"<a href");
 			$end_links = strpos($rvr_table,"<pre></pre>") + 11;
