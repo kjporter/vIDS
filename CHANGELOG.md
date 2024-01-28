@@ -1,3 +1,14 @@
+## [1.3.11](https://github.com/kjporter/vIDS/compare/v1.3.10...v1.3.11) (2024-01-28)
+
+
+### chore
+
+* Removes stale NWS dataserver call ([aedeba3](https://github.com/kjporter/vIDS/commit/aedeba3285fccd5631b347e27b1c010321182080))
+
+### Fix
+
+* Corrects RVR freeze bug ([8e507b9](https://github.com/kjporter/vIDS/commit/8e507b9a7fadd640eb04faf4c280e035fe95002f))
+
 ## [1.3.10](https://github.com/kjporter/vIDS/compare/v1.3.9...v1.3.10) (2023-10-28)
 
 
