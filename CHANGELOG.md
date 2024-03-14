@@ -1,3 +1,10 @@
+## [1.3.12](https://github.com/kjporter/vIDS/compare/v1.3.11...v1.3.12) (2024-03-14)
+
+
+### Fix
+
+* Corrects RVR display ([568cfb8](https://github.com/kjporter/vIDS/commit/568cfb87c8929119a69e18843e10d76f7623147b))
+
 ## [1.3.11](https://github.com/kjporter/vIDS/compare/v1.3.10...v1.3.11) (2024-01-28)
 
 
