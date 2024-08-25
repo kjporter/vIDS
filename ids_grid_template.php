@@ -255,6 +255,7 @@
 			<a href="#" class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" href="#"><i class="fas fa-home fa-lg"></i><br/>HOME</a>
 			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 				<li><a href="#" onclick="returnToLanding('local_ids');">Return to menu</a></li>
+				<li><a href="#" onclick="swapLocalTracon();">Swap Local/TRACON View</a></li>
 				<?php if(BUG_REPORTING) {
 					print "<li><a href=\"#BUG\" data-toggle=\"modal\">Report a bug</li></li>";
 				}?>

@@ -42,6 +42,16 @@
 		setDynamicMargin();
 		acknowledgeChanges(); // Clear change acknowledge (if user was monitoring multi and decided to switch displays)
 	}
+
+	function swapLocalTracon() { // Quickly swaps local/tracon views
+		let template = document.getElementById("display_template").value;
+		if(template == "local") {
+			showLocalIDS("a80");
+		}
+		else {
+			showLocalIDS("local");
+		}
+	}
 	
 function saveControllerEdit() {
 	var editFields = document.getElementsByClassName("controllerEdit");
