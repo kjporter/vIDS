@@ -1,3 +1,11 @@
+## [1.3.13](https://github.com/kjporter/vIDS/compare/v1.3.12...v1.3.13) (2024-08-25)
+
+
+### Fix
+
+* Add quickswap menu option ([eaa4d77](https://github.com/kjporter/vIDS/commit/eaa4d77ea92b75315822e0ec86b8edfe77232756))
+* Update ZTL logo ([94b3869](https://github.com/kjporter/vIDS/commit/94b3869c27c4b27e2cb81cc511abcb0a5cff819f))
+
 ## [1.3.12](https://github.com/kjporter/vIDS/compare/v1.3.11...v1.3.12) (2024-03-14)
 
 
