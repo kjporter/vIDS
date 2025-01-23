@@ -51,7 +51,7 @@ A traffic management plug-in is currently under development for vIDS. At this ti
 
 ## Questions/Contact:
 The best way to get in touch with the development team is via our Discord. Feel free to ask support and setup questions in the General channel.
-https://discord.gg/FXdT8jtd
+https://discord.gg/DQACZhBTQ4
 
 Thanks for your interest in vIDS!
 
