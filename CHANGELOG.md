@@ -1,3 +1,10 @@
+## [1.3.14](https://github.com/kjporter/vIDS/compare/v1.3.13...v1.3.14) (2025-02-01)
+
+
+### Fix
+
+* Handles vATIS encoding bug ([d2ab1a6](https://github.com/kjporter/vIDS/commit/d2ab1a6f6da12c2acffc15a24306c2ebc90675d7))
+
 ## [1.3.13](https://github.com/kjporter/vIDS/compare/v1.3.12...v1.3.13) (2024-08-25)
 
 
