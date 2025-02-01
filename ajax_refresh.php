@@ -154,8 +154,8 @@ foreach($airfields as $afld) {
 				$atis_found = true;
 				$afld_data['multi_atis'] = true;
 				$afld_data['atis_online'] = $atis_found;
-				$afld_data['atis_code'] = $atis_arr['atis_code'];
-				$afld_data['atis_code_dep'] = $atis_dep['atis_code'];
+				$afld_data['atis_code'] = atis_code($atis_arr); //$atis_arr['atis_code'];
+				$afld_data['atis_code_dep'] = atis_code($atis_dep); //$atis_dep['atis_code'];
 				$afld_data['atis_text'] = implode(" ",$atis_arr['text_atis']) . ' ' . implode(" ",$atis_dep['text_atis']);
 			}
 			else { // Singular ATIS at an airfield
@@ -166,7 +166,7 @@ foreach($airfields as $afld) {
 				$afld_data['dep_rwys'] = null; // Added to fix error on 6/9
 				if ($atis['atis_code'] != null) { // ATIS code null protect from malformed vATIS messages
 					$afld_data['atis_online'] = $atis_found;
-					$afld_data['atis_code'] = $atis['atis_code'];
+					$afld_data['atis_code'] = atis_code($atis); //$atis['atis_code'];
 					$afld_data['atis_text'] = implode(" ",$atis['text_atis']);	
 				}
 			}
@@ -657,4 +657,16 @@ function curl_request($url,$timeout_limit=false,$ssl_required=false) { // Simpli
 
 function isJSON($string){ // Check to verify that string is a JSON
    return is_string($string) && is_array(json_decode($string, true)) ? true : false;
+}
+
+function atis_code($atis) { // Refines ATIS code due to v.40 coding/datafeed errors
+	if ($atis['atis_code'] != '') {
+		return $atis['atis_code'];
+	}
+	elseif (is_array($atis['text_atis'])) {
+		if(preg_match("/INFO\s\w{1}/", $atis['text_atis'][0], $match)) {
+			return substr($match[0], -1);
+		}
+	}
+	return '--';
 }
